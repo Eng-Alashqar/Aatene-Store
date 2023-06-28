@@ -87,7 +87,7 @@
                                 <div class="menu-item pt-5">
                                     <!--begin:Menu content-->
                                     <div class="menu-content">
-                                        <span class="menu-heading fw-bold text-uppercase fs-6">ادارة الاعدادات</span>
+                                        <span class="menu-heading fw-bold text-uppercase fs-6"> ادارة المتاجر والمستخدمين</span>
                                     </div>
                                     <!--end:Menu content-->
                                 </div>
@@ -103,12 +103,13 @@
                                                 <span class="path3"></span>
                                             </i>
                                         </span>
-                                        <span class="menu-title fs-2">الملفات الشخصية </span>
+                                        <span class="menu-title fs-2">إدارة المتاجر  </span>
                                         <span class="menu-arrow"></span>
                                     </span>
                                     <!--end:Menu link-->
                                     <!--begin:Menu sub-->
                                     <div class="menu-sub menu-sub-accordion">
+                                        <x-elements.sidebar-li-sub-menu route="admin.stores.index" title="قائمة المتاجر"/>
                                         <!--begin:Menu item-->
                                         <div class="menu-item">
                                             <!--begin:Menu link-->
@@ -117,7 +118,20 @@
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
-                                                <span class="menu-title fs-5">نظرة عامة</span>
+                                                <span class="menu-title fs-5"> اضافة متجر جديد</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                        </div>
+                                        <!--end:Menu item-->
+                                        <!--begin:Menu item-->
+                                        <div class="menu-item">
+                                            <!--begin:Menu link-->
+                                            <a class="menu-link"
+                                                href="../../demo1/dist/pages/user-profile/overview.html">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title fs-5"> طلبات فتح متجر</span>
                                             </a>
                                             <!--end:Menu link-->
                                         </div>
@@ -126,10 +140,6 @@
                                     <!--end:Menu sub-->
                                 </div>
                                 <!--end:Menu item-->
-
-
-
-
                             </div>
                             <!--end::Menu-->
                         </div>

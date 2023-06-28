@@ -15,19 +15,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 /*
-Route::get('/dashboard', function () {
-    return view('admin.index');
-//    return User::create([
-//         'name'=>'mohammad',
-//         'email'=>'alashqar2002@gmail.com',
-//         'password'=>Hash::make('password'),
-//         'status'=>'active',
-//         'user_type'=>'super_administrator',
-//         'last_active_at'=>now(),
-//     ]);
+Route::get('/nn', function () {
+    // return view('admin.index');
+   return User::create([
+        'name'=>'mohammad',
+        'email'=>'alashqar2002@gmail.com',
+        'password'=>Hash::make('password'),
+        'status'=>'active',
+        'user_type'=>'super_administrator',
+        'last_active_at'=>now(),
+    ]);
 
-})->middleware('auth');
+});
 */
+Route::get('/', function () {
+return view('welcome');
+});
 
 require __DIR__.'/admin.php';
 require __DIR__.'/store.php';
