@@ -35,7 +35,7 @@ class StoreController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $this->storeService->store($request->validated(),$request->hasFile('image') ? $request->file('image') : null);
+        $this->storeService->store($request->validated());
         return back()->with($this->storeService->getMessage('تمت العملية بنجاح','success'));
     }
 

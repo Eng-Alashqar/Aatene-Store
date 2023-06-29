@@ -19,11 +19,13 @@ class StoreService
         return $this->storeRepository->getStoresWithPaginate();
     }
 
-    public function store($params,$file = null)
+    public function store($params)
     {
-        if($file){
-         $path = PhotoUpload::upload($file);
-         $params['image'] = $path;
+        if($params['logo'] && $params['cover']){
+            $params['logo_slug'] = $params['logo']->getClientOriginalName();
+            $params['cover_slug'] = $params['cover']->getClientOriginalName();
+            $params['logo'] = PhotoUpload::upload($params['logo']);
+            $params['cover'] = PhotoUpload::upload($params['cover']);
         }
         return $this->storeRepository->store($params);
     }

@@ -48,7 +48,7 @@
                             <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu"
                                 data-kt-menu="true" data-kt-menu-expand="false">
                                 <!--begin:Menu item-->
-                                <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+                                <div data-kt-menu-trigger="click" class="menu-item ">
                                     <!--begin:Menu link-->
                                     <span class="menu-link">
                                         <span class="menu-icon">
@@ -64,11 +64,12 @@
                                     </span>
                                     <!--end:Menu link-->
                                     <!--begin:Menu sub-->
-                                    <div class="menu-sub menu-sub-accordion">
+                                    <div @class(['menu-sub',' menu-sub-accordion ', 'here show menu-accordion' => Route::is('admin.home')])>
+
                                         <!--begin:Menu item-->
                                         <div class="menu-item">
                                             <!--begin:Menu link-->
-                                            <a class="menu-link active" href="../../demo1/dist/index.html">
+                                            <a @class(['menu-link', 'active' =>  Route::is('admin.home')]) href="{{ route('admin.home') }}">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
@@ -108,21 +109,11 @@
                                     </span>
                                     <!--end:Menu link-->
                                     <!--begin:Menu sub-->
-                                    <div class="menu-sub menu-sub-accordion">
+                                    <div
+                                    @class(['menu-sub',' menu-sub-accordion', ' here show menu-accordion' => Route::is('admin.stores.index') || Route::is('admin.stores.create')])>
                                         <x-elements.sidebar-li-sub-menu route="admin.stores.index" title="قائمة المتاجر"/>
-                                        <!--begin:Menu item-->
-                                        <div class="menu-item">
-                                            <!--begin:Menu link-->
-                                            <a class="menu-link"
-                                                href="../../demo1/dist/pages/user-profile/overview.html">
-                                                <span class="menu-bullet">
-                                                    <span class="bullet bullet-dot"></span>
-                                                </span>
-                                                <span class="menu-title fs-5"> اضافة متجر جديد</span>
-                                            </a>
-                                            <!--end:Menu link-->
-                                        </div>
-                                        <!--end:Menu item-->
+                                        <x-elements.sidebar-li-sub-menu route="admin.stores.create" title="إضافة متجر "/>
+
                                         <!--begin:Menu item-->
                                         <div class="menu-item">
                                             <!--begin:Menu link-->

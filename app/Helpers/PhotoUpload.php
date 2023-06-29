@@ -9,7 +9,7 @@ class PhotoUpload
 
     public static function upload($image, $dir = 'uploads', $disk = 'public')
     {
-        $name = rand() . time() . $image->getClientOriginalName();
+        $name =  time().'_'. $image->getClientOriginalName();
         $path = $image->storeAs("$dir", $name, $disk);
         return $path;
     }

@@ -1,4 +1,4 @@
-  @props(['lable','back_url','current','previews'])
+  @props([ 'back_url', 'current', 'previews'])
   <!--begin::Toolbar-->
   <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
       <!--begin::Toolbar container-->
@@ -6,14 +6,12 @@
           <!--begin::Page title-->
           <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
               <!--begin::Title-->
-              <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">ادارة
-                 {{$lable}}</h1>
               <!--end::Title-->
               <!--begin::Breadcrumb-->
-              <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+              <ul class="breadcrumb breadcrumb-separatorless  fs-2 my-0 pt-1">
                   <!--begin::Item-->
-                  <li class="breadcrumb-item text-muted">
-                      <a href="{{ route($back_url) }}" class="text-muted text-hover-primary"> {{ $previews }}</a>
+                  <li class="breadcrumb-item ">
+                      <a href="{{ route($back_url) }}" class=" text-hover-primary"> {{ $previews }}</a>
                   </li>
                   <!--end::Item-->
                   <!--begin::Item-->
@@ -22,7 +20,7 @@
                   </li>
                   <!--end::Item-->
                   <!--begin::Item-->
-                  <li class="breadcrumb-item text-muted">{{ $current }}</li>
+                  <li class="breadcrumb-item ">{{ $current }}</li>
                   <!--end::Item-->
               </ul>
               <!--end::Breadcrumb-->

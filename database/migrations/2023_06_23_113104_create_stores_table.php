@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             // $table->string('logo_image')->nullable();
             // $table->string('cover_image')->nullable();
-            $table->enum('status',['open','close'])->default('open');
+            $table->enum('status',['active','inactive'])->default('active');
             $table->float('rating')->default(0);
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();

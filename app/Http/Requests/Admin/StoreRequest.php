@@ -26,17 +26,19 @@ class StoreRequest extends FormRequest
 
         if ($this->method() === 'POST') {
             $rules = [
-                'image' => ['required', 'image', 'mimes:png,jpg,webm,jpeg,webp'],
+                'logo' => ['required', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
+                'cover' => ['required', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
                 'name' => ['required', 'string', 'max:100', 'unique:stores,name'],
                 'description' => ['required', 'string', 'max:64000'],
-                'status' => ['required', 'in:open,close'],
+                'status' => ['required', 'in:active,inactive'],
             ];
         } elseif ($this->method() === 'PUT' || $this->method() === 'PATCH') {
             $rules = [
-                'image' => ['nullable', 'image', 'mimes:png,jpg,webm,jpeg,webp'],
+                'logo' => ['nullable', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
+                'cover' => ['nullable', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
                 'name' => ['required', 'string', 'max:100', "unique:stores,name,$id"],
                 'description' => ['required', 'string', 'max:64000'],
-                'status' => ['required', 'in:open,close'],
+                'status' => ['required', 'in:active,inactive'],
             ];
         } elseif ($this->method() === 'DELETE') {
             # code...
@@ -48,7 +50,8 @@ class StoreRequest extends FormRequest
     public function messages()
     {
         return [
-            'image' => ['nullable' => 'الصورة (اختياري).','required' => 'الصورة مطلوبة.', 'image' => 'يجب أن تكون الملف المحمل صورة.', 'mimes' => 'صيغة الملف يجب أن تكون png، jpg، webm، jpeg، أو webp.'],
+            'logo' => ['nullable' => 'الصورة (اختياري).','required' => 'صورة اللوغو مطلوبة.', 'image' => 'يجب أن تكون الملف المحمل صورة.', 'mimes' => 'صيغة الملف يجب أن تكون png، jpg، webm، jpeg، أو webp.'],
+            'cover' => ['nullable' => 'الصورة (اختياري).','required' => 'صورة اللافتة مطلوبة.', 'image' => 'يجب أن تكون الملف المحمل صورة.', 'mimes' => 'صيغة الملف يجب أن تكون png، jpg، webm، jpeg، أو webp.'],
             'name' => ['required' => 'الاسم مطلوب.', 'string' => 'يجب أن يكون الاسم نصًا.', 'max' => 'الاسم يجب أن يحتوي على 100 حرف كحد أقصى.', 'unique' => 'الاسم موجود بالفعل.'],
             'description' => ['required' => 'الوصف مطلوب.', 'string' => 'يجب أن يكون الوصف نصًا.', 'max' => 'الوصف يجب أن يحتوي على 64000 حرف كحد أقصى.'],
             'status' => ['required' => 'الحالة مطلوبة.', 'in' => 'الحالة يجب أن تكون مفتوحة أو مغلقة.'],

@@ -20,7 +20,11 @@ class StoreRepository
 
     public function store($params)
     {
-        return $this->store->create($params);
+        $store =  $this->store->create($params);
+        $store->storeImage($params['logo'],$params['logo_slug'],'logo');
+        $store->storeImage($params['cover'],$params['cover_slug'],'cover');
+        return $store;
+
     }
 
     public function getById($id)
