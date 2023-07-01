@@ -26,7 +26,9 @@ class User extends Authenticatable
         'role_name',
         'last_active_at',
         'status',
-        'store_id',
+        'phone_number',
+        'gold_coins',
+
     ];
 
     /**

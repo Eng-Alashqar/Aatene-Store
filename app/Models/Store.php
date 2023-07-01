@@ -25,12 +25,15 @@ class Store extends Model
     public function getStatusArAttribute()
     {
         switch ($this->status) {
-            case 'open':
+            case 'active':
                 return 'متجر فعال';
                 break;
-            case 'close':
-                return 'متجر مغلق ';
+            case 'pending':
+                return 'متجر معلق ';
                 break;
-        }
+                case 'inactive':
+                    return 'متجر مغلق ';
+                    break;
+            }
     }
 }

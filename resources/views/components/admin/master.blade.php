@@ -133,6 +133,7 @@
                 "showMethod": "fadeIn",
                 "hideMethod": "fadeOut"
             };
+            
             @foreach ($errors->all() as $error )
             toastr.error("{{ $error }}");
             @endforeach

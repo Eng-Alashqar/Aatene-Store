@@ -15,7 +15,7 @@ class StoreRepository
 
     public function getStoresWithPaginate($count = 7)
     {
-        return $this->store->paginate($count);
+        return $this->store->latest()->paginate($count);
     }
 
     public function store($params)

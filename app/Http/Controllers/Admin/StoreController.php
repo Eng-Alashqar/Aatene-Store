@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreRequest;
+use App\Models\Admin\Region;
+use App\Models\User;
 use App\Services\Admin\StoreService;
 use Illuminate\Http\Request;
 
@@ -19,6 +21,7 @@ class StoreController extends Controller
     public function index()
     {
         $stores = $this->storeService->get();
+
         return view('admin.stores.index', compact('stores'));
     }
 
@@ -27,7 +30,9 @@ class StoreController extends Controller
      */
     public function create()
     {
-        return view('admin.stores.create');
+        $users = User::get();
+        $regions = Region::get();
+        return view('admin.stores.create',compact('users','regions'));
     }
 
     /**
@@ -36,7 +41,7 @@ class StoreController extends Controller
     public function store(StoreRequest $request)
     {
         $this->storeService->store($request->validated());
-        return back()->with($this->storeService->getMessage('تمت العملية بنجاح','success'));
+        return back()->with(['notification'=>'تمت الاضافة بنجاح']);
     }
 
     /**
@@ -65,7 +70,7 @@ class StoreController extends Controller
     public function update(StoreRequest $request,$id)
     {
         $this->storeService->update($id,$request->validated());
-        return to_route('admin.stores.index')->with($this->storeService->getMessage('تمت العملية بنجاح','success'));
+        return to_route('admin.stores.index')->with(['notification'=>'تمت العملية بنجاح']);
     }
 
     /**

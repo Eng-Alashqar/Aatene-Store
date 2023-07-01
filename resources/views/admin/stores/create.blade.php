@@ -88,33 +88,31 @@
                                     <div class="mb-5">
                                         <label for="user_id" class="required form-label"> صاحب المتجر </label>
                                         <select name="user_id"
-                                            class="form-select form-select-solid @error('user_id')
+                                        dir="rtl" class="form-select form-select-solid @error('user_id')
                                         is-invalid
                                         @enderror"
                                             data-control="select2" data-placeholder="اختر صاحب هذا  المتجر">
                                             <option></option>
-                                            <option value="1">قىاثفس 1</option>
-                                            <option value="2">فاشثفسفا 2</option>
-                                            <option value="2">ثشاشث 2</option>
-                                            <option value="2">فاف 2</option>
-                                        </select>
+                                            @foreach ( $users as $user )
+                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
 
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="mb-5">
                                         <label for="name" class="required form-label">المدن المدعوة </label>
                                         <select
-                                            class="form-select form-select-solid @error('regions')
+                                        dir="rtl"    class="form-select form-select-solid @error('regions')
                                         is-invalid
                                         @enderror"
                                             data-control="select2" data-close-on-select="false"
                                             data-placeholder="اختر الدول التي يدعمها متجرك" multiple="multiple"
                                             name="regions[]">
                                             <option></option>
-                                            <option value="1">قىاثفس 1</option>
-                                            <option value="2">فاشثفسفا 2</option>
-                                            <option value="2">ثشاشث 2</option>
-                                            <option value="2">فاف 2</option>
-                                            <option value="2">Option 2</option>
+                                            @foreach ( $regions as $region )
+                                            <option value="{{ $region->id }}">{{ $region->name }}</option>
+
+                                            @endforeach
                                         </select>
 
                                     </div>
@@ -134,7 +132,7 @@
                                 <!--begin::Footer-->
                                 <div class="card-footer py-3">
                                     <button class="btn btn-primary  btn-sm w-150px">حفظ</button>
-                                    <a class="btn btn-danger  btn-sm  w-150px">عودة</a>
+                                    <a href="{{ route('admin.stores.index') }}" class="btn btn-danger  btn-sm  w-150px">عودة</a>
                                 </div>
                                 <!--begin::Footer-->
                             </div>
@@ -155,7 +153,9 @@
         <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
         <!--end::Vendors Javascript-->
         <script>
-            
+        @if (session()->has('notification'))
+            toastr.success("{{ session('notification') }}");
+        @endif
         </script>
     @endpush
 </x-admin.master>

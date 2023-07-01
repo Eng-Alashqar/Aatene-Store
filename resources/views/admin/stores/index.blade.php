@@ -47,11 +47,9 @@
                                         @foreach ($stores as $store)
                                             <tr>
                                                 <td>
-
                                                     <div class="text-dark fw-bold text-hover-primary mb-1 me-5 ps-4 fs-6">
                                                         {{ $loop->iteration }}
                                                     </div>
-
                                                 </td>
                                                 <td>
                                                     <div class="d-flex align-items-center">

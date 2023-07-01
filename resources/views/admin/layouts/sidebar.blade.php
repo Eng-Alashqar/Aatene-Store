@@ -59,7 +59,7 @@
                                                 <span class="path4"></span>
                                             </i>
                                         </span>
-                                        <span class="menu-title fs-2">لوحة القيادة</span>
+                                        <span class="menu-title ">لوحة القيادة</span>
                                         <span class="menu-arrow"></span>
                                     </span>
                                     <!--end:Menu link-->
@@ -104,7 +104,7 @@
                                                 <span class="path3"></span>
                                             </i>
                                         </span>
-                                        <span class="menu-title fs-2">إدارة المتاجر  </span>
+                                        <span class="menu-title ">إدارة المتاجر  </span>
                                         <span class="menu-arrow"></span>
                                     </span>
                                     <!--end:Menu link-->

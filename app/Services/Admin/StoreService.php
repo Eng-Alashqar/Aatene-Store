@@ -45,10 +45,7 @@ class StoreService
         return $this->storeRepository->delete($id);
     }
 
-    public function getMessage($text,$type)
-    {
-        return ['message'=>$text,'alert-type'=>$type];
-    }
+
 
     public function ajaxResponse()
     {

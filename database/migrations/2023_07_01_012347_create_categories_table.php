@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stores', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description')->nullable();
-            $table->enum('status',['active','pending','inactive'])->default('pending');
-            $table->float('rating')->default(0);
-            $table->enum('level',[1,2,3,4,5])->default(1);
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('parent_id')
+            ->nullable()
+            ->constrained('categories','id')
+            ->nullOnDelete();
+            $table->enum('status',['active','archive']);
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('stores');
+        Schema::dropIfExists('categories');
     }
 };

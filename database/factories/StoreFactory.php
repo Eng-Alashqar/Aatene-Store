@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -17,11 +18,13 @@ class StoreFactory extends Factory
      */
     public function definition(): array
     {
-        $name = fake()->name() ;
+        $name = fake()->name();
         return [
             'name' =>$name ,
             'slug' =>Str::slug($name),
             'description'=> fake()->paragraph(),
+            'user_id' => User::inRandomOrder()->first()->id,
+            // 'status'=> 'inactive'
         ];
     }
 }

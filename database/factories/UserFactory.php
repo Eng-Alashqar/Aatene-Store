@@ -25,10 +25,12 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => Hash::make('password'), // password
             'remember_token' => Str::random(10),
-            'user_type'=> array_rand(['customer','store_manager','super_administrator'],1),
+            'user_type'=> 'store_manager',
             'last_active_at' => now(),
-            'store_id' => Store::inRandomOrder()->first()->id,
-            'status'=>array_rand(['active','inactive','blocked'],1),
+            'status'=>'inactive',
+            'phone_number'=>'0598518618',
+            'gold_coins'=>rand()
+
         ];
     }
 
