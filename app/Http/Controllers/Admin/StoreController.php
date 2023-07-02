@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreRequest;
-use App\Models\Admin\Region;
 use App\Models\User;
-use App\Services\Admin\StoreService;
+use App\Models\Admin\Region;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Services\Admin\StoreService;
+use App\Http\Requests\Admin\StoreRequest;
+use Symfony\Component\HttpFoundation\Response;
 
 class StoreController extends Controller
 {
     private $storeService;
-    public function __construct(StoreService $storeService) {
+    public function __construct(StoreService $storeService)
+    {
         $this->storeService = $storeService;
     }
     /**
@@ -21,7 +23,6 @@ class StoreController extends Controller
     public function index()
     {
         $stores = $this->storeService->get();
-
         return view('admin.stores.index', compact('stores'));
     }
 
@@ -32,7 +33,7 @@ class StoreController extends Controller
     {
         $users = User::get();
         $regions = Region::get();
-        return view('admin.stores.create',compact('users','regions'));
+        return view('admin.stores.create', compact('users', 'regions'));
     }
 
     /**
@@ -41,16 +42,28 @@ class StoreController extends Controller
     public function store(StoreRequest $request)
     {
         $this->storeService->store($request->validated());
-        return back()->with(['notification'=>'تمت الاضافة بنجاح']);
+        return back()->with(['notification' => 'تمت الاضافة بنجاح']);
     }
 
+    public function pending()
+    {
+        $stores = $this->storeService->getPendingStores();
+        return view('admin.stores.pending',compact('stores'));
+    }
+
+    public function accept($id)
+    {
+        $this->storeService->acceptStore($id);
+        return back()->with(['notification' => 'تمت الاضافة بنجاح']);
+    }
     /**
      * Display the specified resource.
      */
     public function show($id)
     {
-        return view('admin.stores.show',[
-            'store'=>$this->storeService->getById($id)
+        dd($id);
+        return view('admin.stores.show', [
+            'store' => $this->storeService->getById($id)
         ]);
     }
 
@@ -59,18 +72,18 @@ class StoreController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.stores.edit',[
-            'store'=>$this->storeService->getById($id)
+        return view('admin.stores.edit', [
+            'store' => $this->storeService->getById($id)
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreRequest $request,$id)
+    public function update(StoreRequest $request, $id)
     {
-        $this->storeService->update($id,$request->validated());
-        return to_route('admin.stores.index')->with(['notification'=>'تمت العملية بنجاح']);
+        $this->storeService->update($id, $request->validated());
+        return to_route('admin.stores.index')->with(['notification' => 'تمت العملية بنجاح']);
     }
 
     /**
@@ -78,7 +91,19 @@ class StoreController extends Controller
      */
     public function destroy(string $id)
     {
-        $this->storeService->delete($id);
-        return back()->with($this->storeService->ajaxResponse());
+        $isDeleted = $this->storeService->delete($id);
+        if ($isDeleted) {
+            return response()->json([
+                'title' => 'تم حذف العنصر',
+                'text' => 'تم حذف العنصر بنجاح',
+                'icon' => 'success'
+            ], Response::HTTP_OK);
+        } else {
+            return response()->json([
+                'title' => 'حدث خطأ في عملية الحذف',
+                'text' => 'فشلت عملية الحذف',
+                'icon' => 'error'
+            ], Response::HTTP_BAD_REQUEST);
+        }
     }
 }

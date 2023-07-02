@@ -19,8 +19,14 @@ class StoreService
         return $this->storeRepository->getStoresWithPaginate();
     }
 
+    public function getPendingStores()
+    {
+        return $this->storeRepository->getPendingStoresWithPaginate();
+    }
+
     public function store($params)
     {
+        // dd($params);
         if($params['logo'] && $params['cover']){
             $params['logo_slug'] = $params['logo']->getClientOriginalName();
             $params['cover_slug'] = $params['cover']->getClientOriginalName();
@@ -40,15 +46,13 @@ class StoreService
         return $this->storeRepository->update($id, $params);
     }
 
+    public function acceptStore($id)
+    {
+        return $this->storeRepository->acceptStore($id);
+    }
+
     public function delete($id)
     {
         return $this->storeRepository->delete($id);
-    }
-
-
-
-    public function ajaxResponse()
-    {
-
     }
 }

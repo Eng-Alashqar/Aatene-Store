@@ -15,7 +15,12 @@ class StoreRepository
 
     public function getStoresWithPaginate($count = 7)
     {
-        return $this->store->latest()->paginate($count);
+        return $this->store->latest()->accepted()->paginate($count);
+    }
+
+    public function getPendingStoresWithPaginate($count = 10)
+    {
+        return $this->store->latest()->pending()->paginate($count);
     }
 
     public function store($params)
@@ -23,19 +28,26 @@ class StoreRepository
         $store =  $this->store->create($params);
         $store->storeImage($params['logo'],$params['logo_slug'],'logo');
         $store->storeImage($params['cover'],$params['cover_slug'],'cover');
+        $store->regions()->sync($params['regions']);
         return $store;
 
     }
 
     public function getById($id)
     {
-        return $this->store->first($id);
+        return $this->store->find($id);
     }
 
     public function update($id, $params)
     {
         $store = $this->getById($id);
-        return  $store->update($params);
+        return  $store->update(['status'=>$params['status']]);
+    }
+
+    public function acceptStore($id)
+    {
+        $store = $this->getById($id);
+        return  $store->update(['is_accepted'=>true]);
     }
 
     public function delete($id)

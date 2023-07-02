@@ -9,14 +9,15 @@
             }
         </style>
         <!--begin::Image input-->
-        <div class="image-input image-input-empty" data-kt-image-input="true">
+        <div class="image-input image-input-empty " data-kt-image-input="true">
             <!--begin::Image preview wrapper-->
-            <div class="image-input-wrapper image-input-placeholder w-125px h-125px"></div>
+            <div class="image-input-wrapper image-input-placeholder w-125px h-125px "></div>
             <!--end::Image preview wrapper-->
 
             <!--begin::Edit button-->
             <label class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
-                data-kt-image-input-action="change" data-bs-toggle="tooltip" data-bs-dismiss="click" title="Change {{ $name }}">
+                data-kt-image-input-action="change" data-bs-toggle="tooltip" data-bs-dismiss="click"
+                title="Change {{ $name }}">
                 <i class="ki-duotone ki-pencil fs-6"><span class="path1"></span><span class="path2"></span></i>
 
                 <!--begin::Inputs-->

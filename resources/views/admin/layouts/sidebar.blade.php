@@ -113,20 +113,7 @@
                                     @class(['menu-sub',' menu-sub-accordion', ' here show menu-accordion' => Route::is('admin.stores.index') || Route::is('admin.stores.create')])>
                                         <x-elements.sidebar-li-sub-menu route="admin.stores.index" title="قائمة المتاجر"/>
                                         <x-elements.sidebar-li-sub-menu route="admin.stores.create" title="إضافة متجر "/>
-
-                                        <!--begin:Menu item-->
-                                        <div class="menu-item">
-                                            <!--begin:Menu link-->
-                                            <a class="menu-link"
-                                                href="../../demo1/dist/pages/user-profile/overview.html">
-                                                <span class="menu-bullet">
-                                                    <span class="bullet bullet-dot"></span>
-                                                </span>
-                                                <span class="menu-title fs-5"> طلبات فتح متجر</span>
-                                            </a>
-                                            <!--end:Menu link-->
-                                        </div>
-                                        <!--end:Menu item-->
+                                        <x-elements.sidebar-li-sub-menu route="admin.stores.pending" title="طلبات فتح متجر"/>
                                     </div>
                                     <!--end:Menu sub-->
                                 </div>

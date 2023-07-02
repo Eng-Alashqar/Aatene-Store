@@ -70,59 +70,70 @@
                                 <!--begin::Body-->
                                 <div class="card-body py-3">
                                     <div class="mb-5">
-                                        <label for="name" class="required form-label">اسم المتجر</label>
-                                        <input type="text" name="name" id="name"
-                                            class="form-control form-control-solid @error('name')
-                                        is-invalid
-                                        @enderror"
-                                            placeholder="ادخل اسم للمتجر" value="{{ old('name') }}" />
+                                        <x-form.input-with-lable lable="اسم المتجر" name="name"
+                                            placeholder="ادخل اسم للمتجر" />
                                     </div>
                                     <div class="mb-5">
-                                        <label for="description" class="required form-label">وصف المتجر</label>
-                                        <textarea rows="1" id="description" name="description"
-                                            class="form-control form-control-solid @error('description')
-                                        is-invalid
-                                        @enderror"
-                                            placeholder="ادخل وصف للمتجر"> </textarea>
+                                        <x-form.textarea-with-lable lable="وصف المتجر" name="description"
+                                            placeholder="ادخل وصف للمتجر" />
                                     </div>
                                     <div class="mb-5">
-                                        <label for="user_id" class="required form-label"> صاحب المتجر </label>
-                                        <select name="user_id"
-                                        dir="rtl" class="form-select form-select-solid @error('user_id')
-                                        is-invalid
-                                        @enderror"
-                                            data-control="select2" data-placeholder="اختر صاحب هذا  المتجر">
+                                        <x-form.lable lable="صاحب المتجر" />
+                                        <select  name="user_id" dir="rtl"
+                                            data-control="select2" @class([
+                                                'form-select',
+                                                'form-select-solid ',
+                                                'is-invalid' => $errors->has('user_id'),
+                                            ])
+                                            data-placeholder="اختر صاحب هذا المتجر">
                                             <option></option>
-                                            @foreach ( $users as $user )
-                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
-
+                                            @foreach ($users as $user)
+                                                <option value="{{ $user->id }}" @selected(old('user_id') == $user->id)>
+                                                    {{ $user->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="mb-5">
-                                        <label for="name" class="required form-label">المدن المدعوة </label>
-                                        <select
-                                        dir="rtl"    class="form-select form-select-solid @error('regions')
-                                        is-invalid
-                                        @enderror"
-                                            data-control="select2" data-close-on-select="false"
-                                            data-placeholder="اختر الدول التي يدعمها متجرك" multiple="multiple"
-                                            name="regions[]">
+                                        <x-form.lable lable="المدن المدعوة" />
+                                        <select  name="regions[]" dir="rtl"
+                                            data-control="select2" @class([
+                                                'form-select',
+                                                'form-select-solid ',
+                                                'is-invalid' => $errors->has('regions'),
+                                            ]) data-
+                                            placeholder="اختر الدول التي يدعمها متجرك" data-close-on-select="false"
+                                            multiple="multiple">
                                             <option></option>
-                                            @foreach ( $regions as $region )
-                                            <option value="{{ $region->id }}">{{ $region->name }}</option>
-
+                                            @foreach ($regions as $region)
+                                                <option value="{{ $region->id }}"
+                                                    @if (old('regions') && in_array($region->id, old('regions'))) selected @endif>
+                                                    {{ $region->name }}</option>
                                             @endforeach
                                         </select>
+                                    </div>
 
+                                    <div class="mb-5">
+                                        <x-form.lable lable="حالة المتجر" />
+
+                                        <select data-control="select2" name="status" @class([
+                                            'form-select',
+                                            'form-select-solid ',
+                                            'is-invalid' => $errors->has('status'),
+                                        ])
+                                            placeholder="اختر حالة هذا المتجر">
+                                            <option value="active" @selected(old('status') == 'active')>متجر نشط</option>
+                                            <option value="inactive" @selected(old('status') == 'inactive')> متجر في اجازة
+                                            </option>
+                                            <option value="blocked" @selected(old('status') == 'blocked')>متجر محظور</option>
+                                        </select>
                                     </div>
                                     <div class="mb-5">
-                                        <label for="name" class="required form-label">حالة المتجر </label>
+                                        <label for="name" class="required form-label">تفعيل هذا المتجر </label>
                                         <div
                                             class="form-check form-switch form-check-custom form-check-success form-check-solid ">
-                                            <input class="form-check-input" name="status" type="checkbox"
-                                                value="active" checked id="status" />
-                                            <label class="form-check-label" for="status">
+                                            <input class="form-check-input" name="is_accepted" type="checkbox"
+                                                @checked(old('is_accepted') == '1') id="is_accepted" value="1" />
+                                            <label class="form-check-label" for="is_accepted">
                                                 تفعيل المتجر
                                             </label>
                                         </div>
@@ -132,7 +143,8 @@
                                 <!--begin::Footer-->
                                 <div class="card-footer py-3">
                                     <button class="btn btn-primary  btn-sm w-150px">حفظ</button>
-                                    <a href="{{ route('admin.stores.index') }}" class="btn btn-danger  btn-sm  w-150px">عودة</a>
+                                    <a href="{{ route('admin.stores.index') }}"
+                                        class="btn btn-danger  btn-sm  w-150px">عودة</a>
                                 </div>
                                 <!--begin::Footer-->
                             </div>
@@ -152,10 +164,10 @@
         <!--begin::Vendors Javascript(used for this page only)-->
         <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
         <!--end::Vendors Javascript-->
-        <script>
-        @if (session()->has('notification'))
-            toastr.success("{{ session('notification') }}");
-        @endif
-        </script>
+        {{-- <script>
+            @if (session()->has('notification'))
+                toastr.success("{{ session('notification') }}");
+            @endif
+        </script> --}}
     @endpush
 </x-admin.master>

@@ -133,10 +133,15 @@
                 "showMethod": "fadeIn",
                 "hideMethod": "fadeOut"
             };
-            
+
             @foreach ($errors->all() as $error )
             toastr.error("{{ $error }}");
             @endforeach
+    </script>
+      <script>
+        @if (session()->has('notification'))
+            toastr.success("{{ session('notification') }}");
+        @endif
     </script>
     <!--end::Custom Javascript-->
     @stack('scripts')

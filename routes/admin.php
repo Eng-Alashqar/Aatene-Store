@@ -9,4 +9,6 @@ Route::prefix('/administrator')->name('admin.')->middleware(['auth','user-type:s
         return view('admin.index');
         })->name('home');
     Route::resource('stores',StoreController::class);
+    Route::get('stores-pending',[StoreController::class,'pending'])->name('stores.pending');
+    Route::post('stores-accept/{id}',[StoreController::class,'accept'])->name('stores.accept');
 });

@@ -20,7 +20,7 @@ class StoreRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
-    public function rules($id = null): array
+    public function rules(): array
     {
         $rules = [];
 
@@ -30,15 +30,15 @@ class StoreRequest extends FormRequest
                 'cover' => ['required', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
                 'name' => ['required', 'string', 'max:100', 'unique:stores,name'],
                 'description' => ['required', 'string', 'max:64000'],
-                'status' => ['required', 'in:active,inactive'],
+                'status' => ['required', 'in:active,blocked,inactive'],
+                'is_accepted' => ['sometimes', 'boolean'],
+                'user_id'=> ['required', 'exists:users,id'],
+                'regions'=> ['required', 'exists:regions,id'],
+
             ];
         } elseif ($this->method() === 'PUT' || $this->method() === 'PATCH') {
             $rules = [
-                'logo' => ['nullable', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
-                'cover' => ['nullable', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
-                'name' => ['required', 'string', 'max:100', "unique:stores,name,$id"],
-                'description' => ['required', 'string', 'max:64000'],
-                'status' => ['required', 'in:active,inactive'],
+                'status' => ['required', 'in:active,blocked,inactive'],
             ];
         } elseif ($this->method() === 'DELETE') {
             # code...
@@ -54,7 +54,11 @@ class StoreRequest extends FormRequest
             'cover' => ['nullable' => 'الصورة (اختياري).','required' => 'صورة اللافتة مطلوبة.', 'image' => 'يجب أن تكون الملف المحمل صورة.', 'mimes' => 'صيغة الملف يجب أن تكون png، jpg، webm، jpeg، أو webp.'],
             'name' => ['required' => 'الاسم مطلوب.', 'string' => 'يجب أن يكون الاسم نصًا.', 'max' => 'الاسم يجب أن يحتوي على 100 حرف كحد أقصى.', 'unique' => 'الاسم موجود بالفعل.'],
             'description' => ['required' => 'الوصف مطلوب.', 'string' => 'يجب أن يكون الوصف نصًا.', 'max' => 'الوصف يجب أن يحتوي على 64000 حرف كحد أقصى.'],
-            'status' => ['required' => 'الحالة مطلوبة.', 'in' => 'الحالة يجب أن تكون مفتوحة أو مغلقة.'],
+            'status' => ['required' => 'الحالة مطلوبة.', 'in' => 'الحالة يجب أن تكون مفعلة أو في اجازة او محظورة.'],
+            'is_accepted' => ['sometimes' => 'قبول اضافة المتجر مطلوبة.', 'boolean' => 'الموافقة يجب أن تكون قبول أو رفض.'],
+            'user_id'=>['required' => 'حقل  المستخدم مطلوب.', 'exists' => 'هذا المستخدم غير موجود اختر مستخدم حقيقي.',],
+            'regions'=>['required' => 'المناطق المدعومة مطلوبة .', 'exists' => 'هذه المناطق غير موجود اختر مناطق مدرجة.']
+
         ];
     }
 }

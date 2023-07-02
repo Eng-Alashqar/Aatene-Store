@@ -25,9 +25,9 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => Hash::make('password'), // password
             'remember_token' => Str::random(10),
-            'user_type'=> 'store_manager',
+            'user_type'=> 'super_administrator',
             'last_active_at' => now(),
-            'status'=>'inactive',
+            'status'=>'active',
             'phone_number'=>'0598518618',
             'gold_coins'=>rand()
 

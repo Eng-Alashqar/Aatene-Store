@@ -24,7 +24,7 @@ class StoreFactory extends Factory
             'slug' =>Str::slug($name),
             'description'=> fake()->paragraph(),
             'user_id' => User::inRandomOrder()->first()->id,
-            // 'status'=> 'inactive'
+            'is_accepted'=> false
         ];
     }
 }

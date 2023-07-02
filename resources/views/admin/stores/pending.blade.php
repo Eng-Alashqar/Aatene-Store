@@ -4,7 +4,7 @@
         <!--begin::Content wrapper-->
         <div class="d-flex flex-column flex-column-fluid">
             <!--begin::Toolbar-->
-            <x-elements.toolbar back_url="admin.home" previews="الرئيسية" current="قائمة المتاجر" />
+            <x-elements.toolbar back_url="admin.home" previews="الرئيسية" current=" قائمة المتاجر التي تحتاج موافقة" />
             <!--end::Toolbar-->
             <!--begin::Content-->
             <div id="kt_app_content" class="app-content flex-column-fluid">
@@ -19,10 +19,6 @@
                                 <span class="text-muted mt-1 fw-semibold fs-7">اكثر من {{ $stores->total() }}
                                     متجر</span>
                             </h3>
-                            <div class="card-toolbar">
-                                <a href="{{ route('admin.stores.create') }}" class="btn btn-sm btn-light-primary fs-3">
-                                    <i class="ki-duotone ki-plus "></i>اضافة متجر </a>
-                            </div>
                         </div>
                         <!--end::Header-->
                         <!--begin::Body-->
@@ -37,7 +33,6 @@
                                             <th class="ps-4 min-w-50px rounded-start">#</th>
                                             <th class="min-w-325px">المتجر</th>
                                             <th class="min-w-200px">صاحب المتجر</th>
-                                            <th class="min-w-150px">الحالة</th>
                                             <th class="min-w-200px text-end rounded-end px-5">العمليات</th>
                                         </tr>
                                     </thead>
@@ -73,28 +68,19 @@
                                                     <div class="text-dark fw-bold  d-block mb-1 fs-6">
                                                         {{ $store->user->name }}</div>
                                                 </td>
-                                                <td>
-                                                    <span
-                                                        class="badge badge-light-primary fs-7 fw-bold">{{ $store->status_ar }}</span>
-                                                </td>
                                                 <td class="text-end">
-                                                    <a href="{{ route('admin.stores.edit', $store->id) }}"
-                                                        class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                                        <i class="ki-duotone ki-pencil fs-2">
-                                                            <span class="path1"></span>
-                                                            <span class="path2"></span>
-                                                        </i>
-                                                    </a>
                                                     <a onclick="confirmDestroy({{ $store->id }}, this)"
-                                                        class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
-                                                        <i class="ki-duotone ki-trash fs-2">
-                                                            <span class="path1"></span>
-                                                            <span class="path2"></span>
-                                                            <span class="path3"></span>
-                                                            <span class="path4"></span>
-                                                            <span class="path5"></span>
-                                                        </i>
+                                                        class="btn btn-bg-danger text-white btn-sm me-1">
+                                                        حذف المتجر (طلب مرفوض)
                                                     </a>
+                                                    <form action="{{ route('admin.stores.accept', $store->id) }}"
+                                                        method="POST" class="d-inline ">
+                                                        @csrf
+                                                        <button type="submit"
+                                                            class="btn btn-bg-primary text-white btn-sm">
+                                                            قبول
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -127,5 +113,6 @@
         <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
         <!--end::Vendors Javascript-->
         <x-elements.delete-script name="stores" />
+      
     @endpush
 </x-admin.master>

@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description')->nullable();
-            $table->enum('status',['active','pending','inactive'])->default('pending');
+            $table->boolean('is_accepted')->default(false);
+            $table->enum('status',['active','blocked','inactive'])->default('active');
             $table->float('rating')->default(0);
             $table->enum('level',[1,2,3,4,5])->default(1);
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();

@@ -23,18 +23,17 @@ trait HasPhoto
 
     public function updateImage($src,$slug,$type = 'photo')
     {
-        if($this->photo)
-        {
-            $this->photo->delete();
-        }
+        $this->deleteImage();
         $this->storeImage($src,$slug,$type);
     }
 
     public function deleteImage()
     {
-        if($this->photo)
+        if($this->photo()->count() >= 1)
         {
-            $this->photo->delete();
+            foreach($this->photo()->get() as $photo){
+                $photo->delete();
+            }
         }
     }
 
