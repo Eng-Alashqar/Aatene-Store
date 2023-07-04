@@ -5,6 +5,7 @@
             text: "انت تريد حذف هذا العنصر!",
             icon: 'warning',
             showCancelButton: true,
+            cancelButtonText: 'الغاء',
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'اجل ,احذفه!'

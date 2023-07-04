@@ -26,7 +26,7 @@ class StoreController extends Controller
 
         $request = request()->query();
         $count = request()->query('count');
-        $stores = $this->storeService->get($count,$request);
+        $stores = $this->storeService->get($count??7,$request);
         return view('admin.stores.index', compact('stores'));
     }
 

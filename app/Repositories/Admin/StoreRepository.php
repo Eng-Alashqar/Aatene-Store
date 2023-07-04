@@ -36,7 +36,7 @@ class StoreRepository
 
     public function getById($id)
     {
-        return $this->store->find($id);
+        return $this->store->findOrFail($id);
     }
 
     public function update($id, $params)

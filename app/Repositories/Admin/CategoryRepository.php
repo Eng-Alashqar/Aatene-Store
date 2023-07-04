@@ -33,7 +33,7 @@ class CategoryRepository
 
     public function getById($id)
     {
-        return $this->category->find($id);
+        return $this->category->findOrFail($id);
     }
 
     public function update($id, $params)

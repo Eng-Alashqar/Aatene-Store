@@ -18,7 +18,7 @@ class CategoryController extends Controller
     {
         $request = request()->query();
         $count = request()->query('count');
-        $categories = $this->categoryService->get($count,$request);
+        $categories = $this->categoryService->get($count??7,$request);
         return view('admin.categories.index',compact('categories'));
     }
 
