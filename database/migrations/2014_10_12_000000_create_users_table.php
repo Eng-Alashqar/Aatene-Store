@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('phone_number')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('role_name')->nullable();
+            $table->json('role_name')->nullable();
             $table->enum('user_type',['customer','store_manager','super_administrator'])->default('customer');
             $table->enum('status',['active','inactive','blocked'])->default('active');
             $table->double('gold_coins')->default(0);

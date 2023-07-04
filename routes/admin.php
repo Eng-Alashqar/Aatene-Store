@@ -16,5 +16,7 @@ Route::prefix('/administrator')->name('admin.')->middleware(['auth','user-type:s
     Route::resource('categories',CategoryController::class);
     Route::resource('users',StoreController::class);
     Route::resource('regions',RegionController::class);
+    Route::resource('roles',RegionController::class);
+    Route::resource('permissions',RegionController::class);
 
 });

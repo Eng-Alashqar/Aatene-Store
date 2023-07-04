@@ -242,16 +242,16 @@
                 <!--end:Menu item-->
 
                 <!--begin:Menu item-->
-                <x-elements.sidebar-menu-item lable="إدارة الأدوار " index="admin.categories.index"
-                    create="admin.categories.create">
+                <x-elements.sidebar-menu-item lable="إدارة الأدوار " index="admin.roles.index"
+                    create="admin.roles.create">
                     <x-slot name="icon">
                         <i class="ki-duotone ki-key-square fs-2">
                             <i class="path1"></i>
                             <i class="path2"></i>
                         </i>
                     </x-slot>
-                    <x-elements.sidebar-li-sub-menu route="admin.categories.index" title="قائمة الأدوار" />
-                    <x-elements.sidebar-li-sub-menu route="admin.categories.create" title="إضافة دور" />
+                    <x-elements.sidebar-li-sub-menu route="admin.roles.index" title="قائمة الأدوار" />
+                    <x-elements.sidebar-li-sub-menu route="admin.roles.create" title="إضافة دور" />
                 </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
 

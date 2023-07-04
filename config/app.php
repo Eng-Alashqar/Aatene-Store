@@ -21,7 +21,7 @@ return [
 
     'version' => env('APP_VERSION', '0.0.0'),
 
-    
+
     'description' => env('APP_DESCRIPTION', 'Laravel'),
 
     /*
@@ -174,7 +174,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\FortifyServiceProvider::class
+        App\Providers\FortifyServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
     ])->toArray(),
 
     /*
