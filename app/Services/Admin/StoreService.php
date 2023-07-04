@@ -14,9 +14,9 @@ class StoreService
         $this->storeRepository = $storeRepository;
     }
 
-    public function get($filters)
+    public function get($count,$filters)
     {
-        return $this->storeRepository->getStoresWithPaginate(7,$filters);
+        return $this->storeRepository->getStoresWithPaginate($count,$filters);
     }
 
     public function getPendingStores()

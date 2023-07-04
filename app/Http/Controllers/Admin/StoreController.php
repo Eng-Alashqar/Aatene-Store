@@ -23,7 +23,10 @@ class StoreController extends Controller
     public function index()
     {
         $request = request()->query();
-        $stores = $this->storeService->get($request);
+
+        $request = request()->query();
+        $count = request()->query('count');
+        $stores = $this->storeService->get($count,$request);
         return view('admin.stores.index', compact('stores'));
     }
 
