@@ -31,19 +31,4 @@ class StoreObserver
         //
     }
 
-    /**
-     * Handle the Store "restored" event.
-     */
-    public function restored(Store $store): void
-    {
-        //
-    }
-
-    /**
-     * Handle the Store "force deleted" event.
-     */
-    public function forceDeleted(Store $store): void
-    {
-        //
-    }
 }

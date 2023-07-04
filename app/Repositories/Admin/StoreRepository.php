@@ -3,6 +3,7 @@
 namespace App\Repositories\Admin;
 
 use App\Models\Store;
+use Illuminate\Http\Request;
 
 class StoreRepository
 {
@@ -13,9 +14,9 @@ class StoreRepository
         $this->store = $store;
     }
 
-    public function getStoresWithPaginate($count = 7)
+    public function getStoresWithPaginate($count = 7,$filters = null)
     {
-        return $this->store->latest()->accepted()->paginate($count);
+        return $this->store->latest()->accepted()->filter($filters)->paginate($count);
     }
 
     public function getPendingStoresWithPaginate($count = 10)

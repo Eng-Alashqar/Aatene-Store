@@ -20,7 +20,32 @@ class Store extends Model
     {
         static::observe(StoreObserver::class);
     }
+    public function scopeFilter(Builder $builder,$filters)
+    {
+        $params = array_merge([
+            'search'=>null,
+            'status'=>null,
+            'level'=>null,
 
+        ],$filters);
+
+        $builder->when($params['search'],function($builder , $value){
+            $builder->where('name','like',"%$value%");
+        });
+
+        $builder->when($params['status'],function($builder,$value){
+            $builder->where('status','=',$value);
+        });
+
+        $builder->when($params['level'],function($builder,$value){
+            $builder->where('level','=',$value);
+        });
+        /*
+        $builder->whereHas('regions',function($builder,$value){
+            $builder->where('id',$value);
+            });*/
+    }
+    
     public function scopeActive(Builder $builder)
     {
         $builder->where('status', 'active')->where('is_accepted', true);

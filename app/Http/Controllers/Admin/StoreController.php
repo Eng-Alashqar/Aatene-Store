@@ -22,7 +22,8 @@ class StoreController extends Controller
      */
     public function index()
     {
-        $stores = $this->storeService->get();
+        $request = request()->query();
+        $stores = $this->storeService->get($request);
         return view('admin.stores.index', compact('stores'));
     }
 
@@ -61,7 +62,6 @@ class StoreController extends Controller
      */
     public function show($id)
     {
-        dd($id);
         return view('admin.stores.show', [
             'store' => $this->storeService->getById($id)
         ]);

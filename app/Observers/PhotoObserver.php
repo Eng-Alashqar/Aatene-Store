@@ -26,7 +26,7 @@ class PhotoObserver
     /**
      * Handle the Photo "deleted" event.
      */
-    public function deleted(Photo $photo): void
+    public function deleting(Photo $photo): void
     {
         $is_exist = Photo::where('src',$photo->src)->exists();
         if($is_exist){
