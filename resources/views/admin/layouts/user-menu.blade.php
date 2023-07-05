@@ -17,13 +17,15 @@
                     <img alt="Logo" src="{{ asset('assets/media/avatars/300-1.jpg') }}" />
                 </div>
                 <!--end::Avatar-->
-                <!--begin::Username-->
+               @auth
+                   <!--begin::Username-->
                 <div class="d-flex flex-column">
                     <div class="fw-bold d-flex align-items-center fs-5">{{ Auth::user()->name }}</div>
                     <a href="#"
                         class="fw-semibold text-muted text-hover-primary fs-7">{{ Auth::user()->email }}</a>
                 </div>
                 <!--end::Username-->
+               @endauth
             </div>
         </div>
         <!--end::Menu item-->

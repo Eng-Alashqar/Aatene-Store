@@ -23,7 +23,7 @@ class CategoryFactory extends Factory
             'name' =>$name ,
             'slug' =>Str::slug($name),
             'description'=> fake()->paragraph(),
-            'parent_id' => Category::inRandomOrder()->first()->id,
+            'parent_id' => Category::inRandomOrder()->first()->id ?? null,
             'status'=> 'active'
         ];
     }
