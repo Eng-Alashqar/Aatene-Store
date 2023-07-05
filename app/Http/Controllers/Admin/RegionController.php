@@ -75,18 +75,7 @@ class RegionController extends Controller
     public function destroy(string $id)
     {
         $isDeleted = $this->regionService->delete($id);
-        if ($isDeleted) {
-            return response()->json([
-                'title' => 'تم حذف العنصر',
-                'text' => 'تم حذف العنصر بنجاح',
-                'icon' => 'success'
-            ], Response::HTTP_OK);
-        } else {
-            return response()->json([
-                'title' => 'حدث خطأ في عملية الحذف',
-                'text' => 'فشلت عملية الحذف',
-                'icon' => 'error'
-            ], Response::HTTP_BAD_REQUEST);
-        }
+        return $this->deleteAjaxResponse($isDeleted);
+
     }
 }

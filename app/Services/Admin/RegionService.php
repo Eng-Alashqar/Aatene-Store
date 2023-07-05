@@ -3,8 +3,9 @@
 namespace App\Services\Admin;
 
 use App\Repositories\Admin\RegionRepository;
+use App\Services\ServiceInterface;
 
-class RegionService
+class RegionService implements ServiceInterface
 {
     private $regionRepository;
     public function __construct(RegionRepository $regionRepository)
@@ -16,7 +17,7 @@ class RegionService
     public function get($count, $filters)
     {
         $count = (int) $count;
-        return $this->regionRepository->getRegionsWithPaginate($count, $filters);
+        return $this->regionRepository->getWithPaginate($count, $filters);
     }
 
     public function getAllRegions()

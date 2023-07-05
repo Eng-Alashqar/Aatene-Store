@@ -3,15 +3,16 @@
 namespace App\Repositories\Admin;
 
 use App\Models\Admin\Region;
+use App\Repositories\RepositoryInterface;
 
-class RegionRepository
+class RegionRepository implements RepositoryInterface
 {
     private $region;
     public function __construct(Region $region)
     {
         $this->region = $region;
     }
-    public function getRegionsWithPaginate($count, $filters)
+    public function getWithPaginate($count, $filters)
     {
         $count = (int) $count;
         return $this->region->latest()->filter($filters)->paginate($count);

@@ -84,7 +84,7 @@
                     </a>
                     <!--end::Logo-->
                     <!--begin::Title-->
-                    <h2 class="text-white fw-normal m-0 fs-1">متجر اعطيني لعرض المنتجات وفتح المتاجر واضافة الاعلانات</h2>
+                    <h2 class="text-white fw-normal m-0 fs-1">{{ config('app.description') }}</h2>
                     <!--end::Title-->
                 </div>
                 <!--begin::Aside-->

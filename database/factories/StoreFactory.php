@@ -24,7 +24,8 @@ class StoreFactory extends Factory
             'slug' =>Str::slug($name),
             'description'=> fake()->paragraph(),
             'user_id' => User::inRandomOrder()->first()->id,
-            'is_accepted'=> false
+            'is_accepted'=> fake()->randomElement([true,false]),
+            'status'=> fake()->randomElement(['active', 'inactive', 'blocked']),
         ];
     }
 }

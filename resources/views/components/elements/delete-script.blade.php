@@ -1,3 +1,4 @@
+@props(['name','reload'=>false])
 <script>
     function confirmDestroy(id, reference) {
         Swal.fire({
@@ -21,8 +22,15 @@
             .then(function(response) {
                 // handle success
                 console.log(response);
-                reference.closest('tr').remove();
+                if(reference.closest('tr')){
+                    reference.closest('tr').remove();
+                }
                 showMessage(response.data)
+                setTimeout(() => {
+                    @if($reload)
+                window.location.reload();
+                @endif
+                }, 1500);
             })
             .catch(function(error) {
                 // handle error

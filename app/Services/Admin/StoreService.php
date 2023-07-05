@@ -5,8 +5,9 @@ namespace App\Services\Admin;
 use App\Helpers\PhotoUpload;
 use App\Models\Store;
 use App\Repositories\Admin\StoreRepository;
+use App\Services\ServiceInterface;
 
-class StoreService
+class StoreService implements ServiceInterface
 {
     private $storeRepository;
     public function __construct(StoreRepository $storeRepository)
@@ -16,7 +17,7 @@ class StoreService
 
     public function get($count,$filters)
     {
-        return $this->storeRepository->getStoresWithPaginate($count,$filters);
+        return $this->storeRepository->getWithPaginate($count,$filters);
     }
 
     public function getPendingStores()
