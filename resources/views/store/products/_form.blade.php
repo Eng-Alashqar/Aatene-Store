@@ -39,7 +39,7 @@
                         class="form-select form-select-solid @error('user_id')
                         is-invalid
                         @enderror"
-                        data-control="select2" data-placeholder="ينتمي إلى أي فئة">
+                        data-control="select2" data-placeholder="اضافة قسم">
                         <option></option>
                         @foreach (App\Models\Admin\Category::all() as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -47,22 +47,6 @@
                     </select>
                 </div>
                 <!--end::Input group-->
-                <!--begin::Button-->
-                <a href="../../demo1/dist/apps/ecommerce/catalog/add-category.html"
-                    class="btn btn-light-primary btn-sm mb-10">
-                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
-                    <span class="svg-icon svg-icon-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none">
-                            <rect opacity="0.5" x="11" y="18" width="12" height="2"
-                                rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                            <rect x="6" y="11" width="12" height="2" rx="1"
-                                fill="currentColor" />
-                        </svg>
-                    </span>
-                    <!--end::Svg Icon-->انشاء فئة جديدة
-                </a>
-                <!--end::Button-->
                 <!--begin::Input group-->
                 <!--begin::Label-->
                 <label class="form-label d-block">كلمات البحث</label>
@@ -98,12 +82,13 @@
                         placeholder="ادخل اسم للمتجر" value="{{ old('name') }}" />
                 </div>
                 <div class="mb-5">
-                    <label for="description" class="required form-label">وصف المنتج</label>
-                    <textarea rows="4" id="description" name="description"
+                     <label for="description" class="required form-label">وصف المنتج</label>
+
+                    <div id="kt_docs_quill_basic" name="description"
                         class="form-control form-control-solid @error('description')
                         is-invalid
-                        @enderror"
-                        placeholder="ادخل وصف المنتج"> </textarea>
+                        @enderror" >
+                    </div>
                 </div>
             </div>
             <!--begin::Body-->
@@ -224,9 +209,9 @@
                                 @enderror"
                             data-control="select2" data-hide-search="true" data-placeholder="اختر خيار">
                             <option></option>
-                            <option value="published">تم النشر</option>
-                            <option value="draft">مسودة</option>
-                            <option value="archived">مؤرشف</option>
+                            <option value="published" @selected(request('status') === 'published')>تم النشر</option>
+                            <option value="draft" @selected(request('status') === 'draft')>مسودة</option>
+                            <option value="archived" @selected(request('status') === 'archive')>مؤرشف</option>
                         </select>
                     </div>
                     <div class="mb-5">

@@ -7,12 +7,13 @@ use App\Http\Requests\Shared\ProductRequest;
 use App\Models\Product;
 use App\Services\Shared\ProductService;
 use Illuminate\Http\Request;
-
+use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
 {
     private ProductService $productService;
-    public function __construct(ProductService $productService){
+    public function __construct(ProductService $productService)
+    {
         $this->productService = $productService;
     }
 
@@ -40,9 +41,10 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $this->productService->store($request->validated());
-        return redirect()->back()->with(
-            $this->productService->getMessage('success', 'تم اضافة منتج جديد')
-        );
+        // return redirect()->back()->with(
+        //     $this->productService->getMessage('success', 'تم اضافة منتج جديد')
+        // );
+        return redirect()->back()->with(['notification' => 'تم اضافة منتج جديد']);
     }
 
     /**
@@ -69,12 +71,13 @@ class ProductController extends Controller
     public function update(ProductRequest $request, $id)
     {
         $this->productService->update($id, $request->validated);
-        return redirect()->back()->with(
-            $this->productService->getMessage(
-                'success',
-                'تم تعديل بينانات المنتج بنجاح'
-            )
-        );
+        // return redirect()->back()->with(
+        //     $this->productService->getMessage(
+        //         'success',
+        //         'تم تعديل بينانات المنتج بنجاح'
+        //     )
+        // );
+        return redirect()->back()->with(['notification' => 'تم تعديل بينانات المنتج بنجاح']);
     }
 
     /**
@@ -82,7 +85,19 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $this->productService->delete($id);
-        return redirect()->back()->with($this->productService->ajaxResponse());
+        $isDeleted = $this->productService->delete($id);
+        if ($isDeleted) {
+            return response()->json([
+                'title' => 'تم حذف العنصر',
+                'text' => 'تم حذف العنصر بنجاح',
+                'icon' => 'success'
+            ], Response::HTTP_OK);
+        } else {
+            return response()->json([
+                'title' => 'حدث خطأ في عملية الحذف',
+                'text' => 'فشلت عملية الحذف',
+                'icon' => 'error'
+            ], Response::HTTP_BAD_REQUEST);
+        }
     }
 }

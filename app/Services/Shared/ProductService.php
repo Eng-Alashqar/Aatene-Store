@@ -2,6 +2,7 @@
 
 namespace App\Services\Shared;
 
+use App\Helpers\PhotoUpload;
 use App\Repositories\Shared\ProductRepository;
 
 class ProductService
@@ -18,6 +19,10 @@ class ProductService
 
     public function store($params)
     {
+        if($params['image']){
+            $params['image_slug'] = $params['image']->getClientOriginalName();
+            $params['image'] = PhotoUpload::upload($params['image']);
+        }
         return $this->productRepo->store($params);
     }
 

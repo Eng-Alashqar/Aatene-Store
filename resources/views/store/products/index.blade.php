@@ -148,16 +148,14 @@
                                                 </td>
                                                 <td>
                                                     <span
-                                                        class="badge badge-light-primary fs-7 fw-bold">{{ $product->status }}</span>
+                                                        class="badge @if ($product->status === 'published') badge-light-success
+                                                            @elseif ($product->status === 'draft') badge-light-warning
+                                                            @else badge-light-danger @endif fs-7 fw-bold"
+                                                        >{{ $product->status }}
+                                                    </span>
                                                 </td>
                                                 <td class="text-end">
-                                                    <a href="#"
-                                                        class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                                        <i class="ki-duotone ki-switch fs-2">
-                                                            <span class="path1"></span>
-                                                            <span class="path2"></span>
-                                                        </i>
-                                                    </a>
+                                                    {{-- <a href="{{ route('admin.products.edit', $product->id) }}" --}}
                                                     <a href="#"
                                                         class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                                         <i class="ki-duotone ki-pencil fs-2">
@@ -165,7 +163,7 @@
                                                             <span class="path2"></span>
                                                         </i>
                                                     </a>
-                                                    <a href="#"
+                                                    <a onclick="confirmDestroy({{ $product->id }}, this)"
                                                         class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                                                         <i class="ki-duotone ki-trash fs-2">
                                                             <span class="path1"></span>
@@ -211,5 +209,6 @@
         <!--begin::Vendors Javascript(used for this page only)-->
         <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
         <!--end::Vendors Javascript-->
+        <x-elements.delete-script name="products" />
     @endpush
 </x-admin.master>

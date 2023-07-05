@@ -11,7 +11,7 @@ class ProductRepository implements PanelRepository
 
     public function getWithPaginate($count = 7)
     {
-        return $this->product->paginate($count);
+        return $this->product->with(['category', 'store'])->paginate($count);
     }
 
     public function store($params)
