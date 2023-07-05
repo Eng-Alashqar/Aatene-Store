@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Admin\Category;
+use App\Observers\ProductObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -15,6 +16,11 @@ class Product extends Model
     protected $fillable = [
         'name', 'slug', 'description', 'price', 'quantity', 'is_available', 'release_date', 'status', 'category_id'
     ];
+
+    public static function booted()
+    {
+        static::observe(ProductObserver::class);
+    }
 
     public function category()
     {
@@ -34,6 +40,11 @@ class Product extends Model
     public function variants() : HasMany
     {
         return $this->hasMany(Variant::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }
 
