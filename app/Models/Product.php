@@ -21,6 +21,12 @@ class Product extends Model
     {
         static::observe(ProductObserver::class);
     }
+    
+    public function store()
+    {
+        return $this->belongsTo(Store::class, 'store_id', 'id')
+        ->withDefault();
+    }
 
     public function category()
     {

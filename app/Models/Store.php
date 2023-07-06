@@ -45,7 +45,7 @@ class Store extends Model
             $builder->where('id',$value);
             });*/
     }
-    
+
     public function scopeActive(Builder $builder)
     {
         $builder->where('status', 'active')->where('is_accepted', true);
@@ -66,6 +66,11 @@ class Store extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'store_id', 'id');
     }
 
     public function regions()
