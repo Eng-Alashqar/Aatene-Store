@@ -27,6 +27,7 @@ class CategoryFactory extends Factory
             'description'=> fake()->paragraph(),
             'parent_id' => $category ? $category->id : null,
             'status'=> fake()->randomElement(['active', 'archive'])
+
         ];
     }
 }

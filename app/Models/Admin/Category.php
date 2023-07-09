@@ -55,6 +55,11 @@ class Category extends Model
         return $this->hasMany(Category::class, 'parent_id');
     }
 
+    public function products()
+    {
+        return $this->hasMany(Products::class);
+    }
+
     public function ancestors()
     {
         return $this->parent()->with('ancestors');
