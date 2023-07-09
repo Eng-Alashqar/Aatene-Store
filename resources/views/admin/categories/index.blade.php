@@ -23,7 +23,8 @@
                                                 class="ki-duotone ki-magnifier fs-3 text-gray-500 position-absolute top-50 translate-middle ms-6"><span
                                                     class="path1"></span><span class="path2"></span></i>
                                             <input type="text" class="form-control form-control-solid ps-10"
-                                                name="search" value="{{ request()->query('search') }}" placeholder="ابحث هنا... ">
+                                                name="search" value="{{ request()->query('search') }}"
+                                                placeholder="ابحث هنا... ">
                                         </div>
                                         <!--end::Input group-->
                                         <!--begin::Actions-->
@@ -38,13 +39,13 @@
                                             <!--end::Select-->
                                             <!--begin::Select-->
                                             <select name="count" data-control="select2" data-hide-search="true"
-                                            data-placeholder="العدد"
-                                            class="form-select form-select-sm border-body bg-body w-150px me-5" >
-                                            <option value="7" @selected(request()->query('count') == 7)>7</option>
-                                            <option value="15" @selected(request()->query('count') == 15)> 15</option>
-                                            <option value="25" @selected(request()->query('count') == 25)> 25</option>
-                                            <option value="50" @selected(request()->query('count') == 50)> 50</option>
-                                            <option value="100" @selected(request()->query('count') == 100)> 100</option>
+                                                data-placeholder="العدد"
+                                                class="form-select form-select-sm border-body bg-body w-150px me-5">
+                                                <option value="7" @selected(request()->query('count') == 7)>7</option>
+                                                <option value="15" @selected(request()->query('count') == 15)> 15</option>
+                                                <option value="25" @selected(request()->query('count') == 25)> 25</option>
+                                                <option value="50" @selected(request()->query('count') == 50)> 50</option>
+                                                <option value="100" @selected(request()->query('count') == 100)> 100</option>
                                             </select>
                                             <!--end::Select-->
                                         </div>
@@ -85,11 +86,12 @@
                                     <thead>
                                         <tr class="fw-bold text-muted bg-light fs-5">
                                             <th class="ps-4 min-w-50px rounded-start">#</th>
-                                            <th class="min-w-325px">القسم</th>
+                                            <th class="min-w-225px">القسم</th>
                                             <th class="min-w-100px">القسم الاساسي</th>
-                                            <th class="min-w-100px">عدد المنتجات</th>
-                                            <th class="min-w-100px">الحالة</th>
-                                            <th class="min-w-200px text-end rounded-end px-5">العمليات</th>
+                                            <th class="min-w-50px">عدد المنتجات</th>
+                                            <th class="min-w-50px">الحالة</th>
+                                            <th class="min-w-100px">التاريخ</th>
+                                            <th class="min-w-100px text-end rounded-end px-5">العمليات</th>
                                         </tr>
                                     </thead>
                                     <!--end::Table head-->
@@ -111,8 +113,8 @@
                                                                 class="lozad rounded mw-100" alt="" />
                                                         </div>
                                                         <div class="d-flex justify-content-start flex-column">
-                                                            <div
-                                                                class="text-dark fw-bold  mb-1 fs-6">{{ $category->name }}
+                                                            <div class="text-dark fw-bold  mb-1 fs-6">
+                                                                {{ $category->name }}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -124,12 +126,16 @@
                                                 </td>
                                                 <td>
                                                     <div class="text-dark fw-bold  d-block mb-1 fs-6">
-                                                        {{-- {{ $category->prodcuts->count() }} --}}
+                                                        {{ $category->prodcuts }}
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <span
                                                         class="badge badge-light-primary fs-7 fw-bold">{{ $category->status_ar }}</span>
+                                                </td>
+                                                <td>
+                                                    <span
+                                                        class="fs-5 fw-bold">{{ $category->created_at->format('Y/m/d') }}</span>
                                                 </td>
                                                 <td class="text-end">
                                                     <a href="{{ route('admin.categories.edit', $category->id) }}"

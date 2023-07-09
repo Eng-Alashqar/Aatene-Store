@@ -3,9 +3,10 @@
 namespace App\Repositories\Admin;
 
 use App\Models\Store;
+use App\Repositories\RepositoryInterface;
 use Illuminate\Http\Request;
 
-class StoreRepository
+class StoreRepository implements RepositoryInterface
 {
     private $store;
 
@@ -14,7 +15,7 @@ class StoreRepository
         $this->store = $store;
     }
 
-    public function getStoresWithPaginate($count = 7,$filters = null)
+    public function getWithPaginate($count = 7,$filters = null)
     {
         return $this->store->latest()->accepted()->filter($filters)->paginate($count);
     }
@@ -36,7 +37,7 @@ class StoreRepository
 
     public function getById($id)
     {
-        return $this->store->find($id);
+        return $this->store->findOrFail($id);
     }
 
     public function update($id, $params)

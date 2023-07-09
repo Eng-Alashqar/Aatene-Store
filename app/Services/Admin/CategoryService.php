@@ -5,8 +5,9 @@ namespace App\Services\Admin;
 use App\Helpers\PhotoUpload;
 use App\Models\Admin\Category;
 use App\Repositories\Admin\CategoryRepository;
+use App\Services\ServiceInterface;
 
-class CategoryService
+class CategoryService implements ServiceInterface
 {
     private $categoryRepository;
     public function __construct(CategoryRepository $categoryRepository) {
@@ -17,7 +18,7 @@ class CategoryService
     public function get($count,$filters)
     {
         $count = (int) $count;
-        return $this->categoryRepository->getCategoriesWithPaginate($count,$filters);
+        return $this->categoryRepository->getWithPaginate($count,$filters);
     }
 
     public function getParentCategories()

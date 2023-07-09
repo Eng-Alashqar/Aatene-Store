@@ -3,8 +3,9 @@
 namespace App\Repositories\Admin;
 
 use App\Models\Admin\Category;
+use App\Repositories\RepositoryInterface;
 
-class CategoryRepository
+class CategoryRepository implements RepositoryInterface
 {
 
     private $category;
@@ -13,7 +14,7 @@ class CategoryRepository
         $this->category = $category;
     }
 
-    public function getCategoriesWithPaginate($count = 7,$filters = null)
+    public function getWithPaginate($count = 7,$filters = null)
     {
         return $this->category->latest()->with(['parent','children','ancestors'])->filter($filters)->paginate($count);
     }
@@ -33,7 +34,7 @@ class CategoryRepository
 
     public function getById($id)
     {
-        return $this->category->find($id);
+        return $this->category->findOrFail($id);
     }
 
     public function update($id, $params)
