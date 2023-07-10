@@ -4,7 +4,7 @@
         <!--begin::Content wrapper-->
         <div class="d-flex flex-column flex-column-fluid">
             <!--begin::Toolbar-->
-            <x-elements.toolbar back_url="admin.home" previews="الرئيسية" current="قائمة المتاجر" />
+            <x-elements.toolbar back_url="dashboard.home" previews="الرئيسية" current="قائمة الوظائف" />
             <!--end::Toolbar-->
             <!--begin::Content-->
             <div id="kt_app_content" class="app-content flex-column-fluid">
@@ -15,14 +15,14 @@
                         <!--begin::Header-->
                         <div class="card-header border-0 pt-5">
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bold fs-3 mb-1">قائمة المنتجات</span>
-                                <span class="text-muted mt-1 fw-semibold fs-7">اكثر من {{ $products->total() }}
-                                    منتج</span>
+                                <span class="card-label fw-bold fs-3 mb-1">قائمة الوظائف</span>
+                                <span class="text-muted mt-1 fw-semibold fs-7">اكثر من {{ $jobs->total() }}
+                                    وظيفة</span>
                             </h3>
                             <div class="card-toolbar">
-                                <a href="{{ route('dashboard.products.create') }}"
+                                <a href="{{ route('dashboard.jobs.create') }}"
                                     class="btn btn-sm btn-light-primary fs-3">
-                                    <i class="ki-duotone ki-plus "></i>اضافة منتج </a>
+                                    <i class="ki-duotone ki-plus "></i>اضافة وظيفة </a>
                             </div>
                         </div>
                         <!--end::Header-->
@@ -38,8 +38,8 @@
                                             <th class="ps-4 min-w-50px rounded-start">#</th>
                                             <th class="min-w-150px">اسم الشركة</th>
                                             <th class="min-w-200px">العنوان الوظيفي</th>
-                                            <th class="min-w-70px">الموقع</th>
-                                            <th class="min-w-100px">طبيعة العمل</th>
+                                            <th class="min-w-100px">الموقع</th>
+                                            <th class="min-w-150px">طبيعة العمل</th>
                                             <th class="min-w-100px">نوع العمل</th>
                                             <th class="min-w-100px">الراتب</th>
                                             <th class="min-w-100px text-end rounded-end px-5">العمليات</th>
@@ -98,7 +98,7 @@
                                                         {{ $job->salary }}</div>
                                                 </td>
                                                 <td class="text-end">
-                                                    {{-- <a href="{{ route('admin.jobs.edit', $job->id) }}" --}}
+                                                    {{-- <a href="{{ route('dashboard.jobs.edit', $job->id) }}" --}}
                                                     <a href="#"
                                                         class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                                         <i class="ki-duotone ki-pencil fs-2">
@@ -119,8 +119,8 @@
                                                 </td>
                                             </tr>
                                         @empty
-                                            <td colspan="7"
-                                                class="text-dark fw-bold text-hover-primary d-block mb-1 fs-6">
+                                            <td colspan="8"
+                                                class="text-primary fw-bold text-center mb-1 fs-6">
                                                 لا يوجد وظائف، انقر على اضافة وظيفة لاضافة وظيفة جديدة
                                             </td>
                                         @endforelse
@@ -152,6 +152,6 @@
         <!--begin::Vendors Javascript(used for this page only)-->
         <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
         <!--end::Vendors Javascript-->
-        <x-elements.delete-script name="products" />
+        <x-elements.delete-script name="jobs" />
     @endpush
 </x-admin.master>

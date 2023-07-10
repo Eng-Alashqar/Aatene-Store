@@ -18,7 +18,7 @@ class ProductRepository implements PanelRepository
     {
         $params['store_id'] = auth()->user()->id;
         $product = $this->product->create($params);
-        $product->storeImage($params['image'], $params['image_slug'], 'photo');
+        // $product->storeImage($params['image'], $params['image_slug'], 'photo');
         return $product;
     }
 

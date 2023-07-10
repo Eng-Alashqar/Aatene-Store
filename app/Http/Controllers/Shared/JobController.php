@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Shared;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Shared\JobRequest;
 use App\Services\Shared\JobService;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class JobController extends Controller
 {
@@ -31,9 +33,10 @@ class JobController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(JobRequest $request)
     {
-        //
+        $this->jobService->store($request->validated());
+        return redirect()->back()->with(['notification' => 'تم اضافة وظيفة جديدة بنجاح']);
     }
 
     /**
@@ -41,7 +44,8 @@ class JobController extends Controller
      */
     public function show(string $id)
     {
-        //
+
+        return view('store.jobs.show', ['job' => $this->jobService->getById($id)]);
     }
 
     /**
@@ -49,7 +53,9 @@ class JobController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('store.jobs.edit', [
+            'job' => $this->jobService->getById($id)
+        ]);
     }
 
     /**
@@ -57,7 +63,8 @@ class JobController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $this->jobService->update($id, $request->validated);
+        return redirect()->back()->with(['notification' => 'تم تعديل بينانات المنتج بنجاح']);
     }
 
     /**
@@ -65,6 +72,19 @@ class JobController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $isDeleted = $this->jobService->delete($id);
+        if ($isDeleted) {
+            return response()->json([
+                'title' => 'تم حذف العنصر',
+                'text' => 'تم حذف العنصر بنجاح',
+                'icon' => 'success'
+            ], Response::HTTP_OK);
+        } else {
+            return response()->json([
+                'title' => 'حدث خطأ في عملية الحذف',
+                'text' => 'فشلت عملية الحذف',
+                'icon' => 'error'
+            ], Response::HTTP_BAD_REQUEST);
+        }
     }
 }

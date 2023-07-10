@@ -70,12 +70,6 @@ class ProductController extends Controller
     public function update(ProductRequest $request, $id)
     {
         $this->productService->update($id, $request->validated);
-        // return redirect()->back()->with(
-        //     $this->productService->getMessage(
-        //         'success',
-        //         'تم تعديل بينانات المنتج بنجاح'
-        //     )
-        // );
         return redirect()->back()->with(['notification' => 'تم تعديل بينانات المنتج بنجاح']);
     }
 

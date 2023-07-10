@@ -17,7 +17,7 @@ class Product extends Model
     // protected $guarded = [];
 
     protected $fillable = [
-        'name', 'slug', 'description', 'price', 'quantity', 'is_available', 'release_date', 'status', 'category_id', 'store_id' 
+        'name', 'slug', 'description', 'price', 'quantity', 'is_available', 'release_date', 'status', 'category_id', 'store_id'
     ];
 
     public static function booted()
@@ -29,8 +29,7 @@ class Product extends Model
 
     public function store()
     {
-        return $this->belongsTo(Store::class, 'store_id', 'id')
-        ->withDefault(['store_id' => auth()->user->id]);
+        return $this->belongsTo(Store::class, 'store_id', 'id');
     }
 
     public function category()

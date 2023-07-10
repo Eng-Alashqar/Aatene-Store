@@ -4,7 +4,7 @@
         <!--begin::Content wrapper-->
         <div class="d-flex flex-column flex-column-fluid">
             <!--begin::Toolbar-->
-            <x-elements.toolbar back_url="admin.home" previews="الرئيسية" current="قائمة المتاجر" />
+            <x-elements.toolbar back_url="dashboard.home" previews="الرئيسية" current="قائمة المتاجر" />
             <!--end::Toolbar-->
             <!--begin::Content-->
             <div id="kt_app_content" class="app-content flex-column-fluid">
@@ -148,8 +148,8 @@
                                                 </td>
                                                 <td>
                                                     <span
-                                                        class="badge @if ($product->status === '') badge-light-success
-                                                            @elseif ($product->status === 'draft') badge-light-warning
+                                                        class="badge @if ($product->status === 'new') badge-light-success
+                                                            @elseif ($product->status === 'updated') badge-light-warning
                                                             @else badge-light-danger @endif fs-7 fw-bold"
                                                         >{{ $product->status }}
                                                     </span>
@@ -177,7 +177,7 @@
                                             </tr>
                                         @empty
                                             <td colspan="7"
-                                                class="text-dark fw-bold text-hover-primary d-block mb-1 fs-6">
+                                                class="text-primary fw-bold text-center mb-1 fs-6">
                                                 لا يوجد منتجات، انقر على اضافة منتج لاضافة منتج جديد
                                             </td>
                                         @endforelse

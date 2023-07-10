@@ -5,16 +5,16 @@
         <!--begin::Content wrapper-->
         <div class="d-flex flex-column flex-column-fluid">
             <!--begin::Toolbar-->
-            <x-elements.toolbar lable="ادارة المنتجات" back_url="admin.stores.index" previews="قائمة المنتجات"
-                current="إضافة منتج" />
+            <x-elements.toolbar lable="ادارة الوظائف" back_url="admin.stores.index" previews="قائمة الوظائف"
+                current="إضافة وظيفة" />
             <!--end::Toolbar-->
             <!--begin::Content-->
             <div id="kt_app_content" class="app-content flex-column-fluid">
                 <!--begin::Content container-->
                 <div id="kt_app_content_container" class="app-container container-xxl">
-                    <form action="{{ route('dashboard.products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('dashboard.jobs.update', $job->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        @include('store.products._form', ['button_label' => 'تعديل المنتج'])
+                        @include('store.jobs._form', ['button_label' => 'تحديث'])
                     </form>
                 </div>
                 <!--end::Content container-->
