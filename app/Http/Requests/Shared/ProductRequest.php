@@ -49,7 +49,7 @@ class ProductRequest extends FormRequest
             'description.required' => 'وصف المنتج مطلوب',
             'description.string' => 'وصف المنتج يجب ان يكون نص',
             'price.required' => 'الرجاء ادخال سعر المنتج',
-            'price.numeric' => 'سعر المنتج يجب ان يكون قيمو عددية',
+            'price.numeric' => 'سعر المنتج يجب ان يكون قيمة عددية',
             'price.min' => 'يجب ان يكون السعر على الأقل :min',
             'quantity.required' => 'الرجاء ادخال كمية المنتج',
             'quantity.integer' => 'كمية المنتج يجب ان يكون رقما',

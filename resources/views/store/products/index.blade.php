@@ -148,7 +148,7 @@
                                                 </td>
                                                 <td>
                                                     <span
-                                                        class="badge @if ($product->status === 'published') badge-light-success
+                                                        class="badge @if ($product->status === '') badge-light-success
                                                             @elseif ($product->status === 'draft') badge-light-warning
                                                             @else badge-light-danger @endif fs-7 fw-bold"
                                                         >{{ $product->status }}
