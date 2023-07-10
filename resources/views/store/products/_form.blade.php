@@ -34,15 +34,16 @@
             <div class="card-body pt-0">
                 <!--begin::Input group-->
                 <div class="mb-5">
-                    <label for="user_id" class="required form-label">تصنيف المنتج</label>
-                    <select name="user_id" dir="rtl"
-                        class="form-select form-select-solid @error('user_id')
-                        is-invalid
-                        @enderror"
-                        data-control="select2" data-placeholder="اضافة قسم">
+                    <label class="required form-label">تصنيف المنتج</label>
+                    <select name="category_id" dir="rtl" class="form-select" data-control="select2"
+                        data-placeholder="اضافة قسم">
                         <option></option>
-                        @foreach (App\Models\Admin\Category::all() as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @foreach ($categories as $category)
+                            <optgroup label="{{ $category->name }}">
+                                @foreach ($category->children as $child)
+                                    <option value="{{ $child->id }}">{{ $child->name }}</option>
+                                @endforeach
+                            </optgroup>
                         @endforeach
                     </select>
                 </div>
@@ -82,12 +83,9 @@
                         placeholder="ادخل اسم للمتجر" value="{{ old('name') }}" />
                 </div>
                 <div class="mb-5">
-                     <label for="description" class="required form-label">وصف المنتج</label>
+                    <label for="description" class="required form-label">وصف المنتج</label>
 
-                    <div id="kt_docs_quill_basic" name="description"
-                        class="form-control form-control-solid @error('description')
-                        is-invalid
-                        @enderror" >
+                    <div id="kt_docs_quill_basic" name="description" class="form-control form-control-solid">
                     </div>
                 </div>
             </div>
@@ -113,8 +111,7 @@
                     <div id="kt_ecommerce_add_product_options">
                         <!--begin::Form group-->
                         <div class="form-group">
-                            <div data-repeater-list="kt_ecommerce_add_product_options"
-                                class="d-flex flex-column gap-3">
+                            <div data-repeater-list="kt_ecommerce_add_product_options" class="d-flex flex-column gap-3">
                                 <div data-repeater-item="" class="form-group d-flex flex-wrap gap-5">
                                     <!--begin::Select2-->
                                     <div class="w-100 w-md-200px">
@@ -209,9 +206,9 @@
                                 @enderror"
                             data-control="select2" data-hide-search="true" data-placeholder="اختر خيار">
                             <option></option>
-                            <option value="published" @selected(request('status') === 'published')>تم النشر</option>
-                            <option value="draft" @selected(request('status') === 'draft')>مسودة</option>
-                            <option value="archived" @selected(request('status') === 'archive')>مؤرشف</option>
+                            <option value="updated" @selected(request('status') === 'updated')>محدَّث</option>
+                            <option value="new" @selected(request('status') === 'new')>جديد</option>
+                            <option value="expired" @selected(request('status') === 'expired')>منتهي</option>
                         </select>
                     </div>
                     <div class="mb-5">

@@ -27,7 +27,7 @@ class ProductFactory extends Factory
             'quantity' => fake()->randomNumber(2),
             'is_available' => fake()->boolean,
             'release_date' => fake()->date(),
-            'status' => fake()->randomElement(['draft', 'published', 'archived']),
+            'status' => fake()->randomElement(['updated', 'new', 'expired']),
             'category_id' => function () {
                 return Category::inRandomOrder()->first()->id;
             },

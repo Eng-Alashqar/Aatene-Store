@@ -5,17 +5,15 @@ namespace App\Http\Controllers\Shared;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Shared\ProductRequest;
 use App\Models\Product;
+use App\Services\Admin\CategoryService;
 use App\Services\Shared\ProductService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
 {
-    private ProductService $productService;
-    public function __construct(ProductService $productService)
-    {
-        $this->productService = $productService;
-    }
+
+    public function __construct(private ProductService $productService, private CategoryService $categoryService) {}
 
     /**
      * Display a listing of the resource.
@@ -32,7 +30,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('store.products.create');
+        $categories = $this->categoryService->getParentCategories();
+        return view('store.products.create', compact('categories'));
     }
 
     /**

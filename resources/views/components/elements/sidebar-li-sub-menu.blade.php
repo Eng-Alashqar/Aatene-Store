@@ -1,7 +1,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a  @class(['menu-link','active' => Route::is($route) ])
+    <a @class(['menu-link','active' => Route::is($route) ])
         href="{{ route($route) }}">
         <span class="menu-bullet">
             <span class="bullet bullet-dot"></span>

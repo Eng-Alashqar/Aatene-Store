@@ -15,15 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->string('image')->nullable();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->float('price');
             $table->float('compare_price')->nullable();
             $table->integer('quantity')->default(0);
             $table->float('rating')->default(0);
             $table->boolean('is_available')->default(true);
             $table->date('release_date')->nullable();
-            $table->enum('status', ['draft', 'published', 'archived'])->default('draft');
+            $table->enum('status', ['updated', 'new', 'expired'])->default('new');
             $table->foreignId('category_id')
                 ->constrained('categories')
                 ->cascadeOnDelete();

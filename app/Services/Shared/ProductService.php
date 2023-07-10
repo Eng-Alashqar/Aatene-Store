@@ -8,7 +8,8 @@ use App\Repositories\Shared\ProductRepository;
 class ProductService
 {
     private ProductRepository $productRepo;
-    public function __construct(ProductRepository $productRepo){
+    public function __construct(ProductRepository $productRepo)
+    {
         $this->productRepo = $productRepo;
     }
 
@@ -19,12 +20,13 @@ class ProductService
 
     public function store($params)
     {
-        if($params['image']){
+        if ($params['image'] && is_file($params['image'])) {
             $params['image_slug'] = $params['image']->getClientOriginalName();
             $params['image'] = PhotoUpload::upload($params['image']);
         }
         return $this->productRepo->store($params);
     }
+
 
     public function getById($id)
     {
@@ -38,7 +40,7 @@ class ProductService
 
     public function delete($id)
     {
-       return $this->productRepo->delete($id);
+        return $this->productRepo->delete($id);
     }
 
     public function getMessage($type, $message)

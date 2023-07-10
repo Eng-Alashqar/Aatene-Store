@@ -68,12 +68,12 @@
     <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
         <!--begin::Page-->
         <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
-            @include('admin.layouts.header')
+            @include('store.layouts.header')
             <!--begin::Wrapper-->
             <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
-                @include('admin.layouts.sidebar')
+                @include('store.layouts.sidebar')
                 {{$slot}}
-            </div>
+            </div>  
             <!--end::Wrapper-->
         </div>
         <!--end::Page-->

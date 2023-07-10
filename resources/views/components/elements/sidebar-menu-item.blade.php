@@ -1,3 +1,4 @@
+   @props(['customClass' => 'menu-title fs-6', 'lable', 'index', 'icon', 'create'])
    <!--begin:Menu item-->
    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
        <!--begin:Menu link-->
@@ -5,7 +6,7 @@
            <span class="menu-icon">
                {{ $icon }}
            </span>
-           <span class="menu-title fs-6">{{ $lable }}</span>
+           <span class="{{ $customClass }}">{{ $lable }}</span>
            <span class="menu-arrow"></span>
        </span>
        <!--end:Menu link-->
@@ -20,3 +21,7 @@
        <!--end:Menu sub-->
    </div>
    <!--end:Menu item-->
+
+   @if ($customClass)
+
+   @endif

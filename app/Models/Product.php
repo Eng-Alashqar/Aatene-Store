@@ -8,24 +8,29 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
     use HasFactory;
 
+    // protected $guarded = [];
+
     protected $fillable = [
-        'name', 'slug', 'description', 'price', 'quantity', 'is_available', 'release_date', 'status', 'category_id'
+        'name', 'slug', 'description', 'price', 'quantity', 'is_available', 'release_date', 'status', 'category_id', 'store_id' 
     ];
 
     public static function booted()
     {
-        static::observe(ProductObserver::class);
+        static::creating(function(Product $product) {
+            $product->slug = Str::slug($product->name);
+        });
     }
-    
+
     public function store()
     {
         return $this->belongsTo(Store::class, 'store_id', 'id')
-        ->withDefault();
+        ->withDefault(['store_id' => auth()->user->id]);
     }
 
     public function category()
