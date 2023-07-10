@@ -81,16 +81,16 @@
                                                 <td>
                                                     <span
                                                         class="badge @if ($job->place === 'office') badge-light-success
-                                                            @else badge-light-warning @endif fs-7 fw-bold"
-                                                            >{{ $job->place }}
+                                                            @else badge-light-info @endif fs-7 fw-bold"
+                                                            >{{ ($job->place === 'office') ? 'من مقر الشركة' : 'عمل عن بعد' }}
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <span
                                                         class="badge @if ($job->type === 'full-time') badge-light-success
-                                                            @elseif ($job->type === 'part-time') badge-light-warning
+                                                            @elseif ($job->type === 'part-time') badge-light-primary
                                                             @else badge-light-info @endif fs-7 fw-bold"
-                                                            >{{ $job->type }}
+                                                            >@if($job->type === 'full-time') دوام كامل @elseif($job->type === 'part-time') دوام جزئي @else نظام القطعة @endif
                                                     </span>
                                                 </td>
                                                 <td>

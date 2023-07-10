@@ -133,7 +133,7 @@
                         placeholder="العنوان الوظيفي" value="{{ old('title') }}" />
                 </div>
                 <div class="mb-5">
-                    <label for="description" class="required form-label">وصف الوظيفة</label>
+                    <label for="description" class="form-label">وصف الوظيفة</label>
 
                     <div id="kt_docs_quill_basic" name="description"
                         class="form-control form-control-solid @error('description')
@@ -190,12 +190,12 @@
                             placeholder="الراتب" value="{{ old('salary') }}" />
                     </div>
                     <div class="mb-5">
-                        <label for="deadline" class="required form-label">الراتب</label>
+                        <label for="deadline" class="required form-label">الموعد النهائي</label>
                         <input type="date" name="deadline" id="deadline"
                             class="form-control form-control-solid @error('deadline')
                                     is-invalid
                                 @enderror"
-                            placeholder="الراتب" value="{{ old('deadline') }}" />
+                            placeholder="الموعد النهائي" value="{{ old('deadline') }}" />
                     </div>
                 </div>
             </div>
