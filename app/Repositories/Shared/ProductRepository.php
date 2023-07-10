@@ -24,12 +24,12 @@ class ProductRepository implements PanelRepository
 
     public function getById($id)
     {
-        return $this->product->first($id);
+        return $this->product->findORFail($id);
     }
 
     public function update($id, $params)
     {
-        $product = $this->getById($id)->update($params);
+        $product = $this->getById($id)->update((array) $params);
         return $product;
     }
 

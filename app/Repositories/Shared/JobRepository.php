@@ -6,7 +6,9 @@ use App\Models\Job;
 
 class JobRepository implements PanelRepository
 {
-    public function __construct(private Job $job){}
+    public function __construct(private Job $job)
+    {
+    }
 
     public function getWithPaginate($count = 7)
     {
@@ -21,12 +23,14 @@ class JobRepository implements PanelRepository
 
     public function getById($id)
     {
-        return $this->job->first($id);
+        return $this->job->findOrFail($id);
     }
 
     public function update($id, $params)
     {
-        $job = $this->getById($id)->update($params);
+        $job = $this->getById($id);
+        $job->update((array)$params);
+
         return $job;
     }
 

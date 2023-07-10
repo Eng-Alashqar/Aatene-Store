@@ -93,7 +93,7 @@
                         class="form-control form-control-solid @error('company')
                                     is-invalid
                                 @enderror"
-                        placeholder="اسم الشركة" value="{{ old('company') }}" />
+                        placeholder="اسم الشركة" value="{{ $job->company }}" />
                 </div>
                  <div class="mb-5">
                     <label for="location" class="required form-label">مكان الشركة</label>
@@ -101,7 +101,7 @@
                         class="form-control form-control-solid @error('location')
                                     is-invalid
                                 @enderror"
-                        placeholder="مكان الشركة" value="{{ old('location') }}" />
+                        placeholder="مكان الشركة" value="{{ $job->location }}" />
                 </div>
                 {{-- <label class="form-label d-block">كلمات البحث</label>
                 <input id="kt_ecommerce_add_product_tags" name="tag" class="form-control mb-2" value="" /> --}}
@@ -118,7 +118,7 @@
             <!--begin::Header-->
             <div class="card-header border-0 ">
                 <h3 class="card-title align-items-start flex-column">
-                    <span class="card-label fw-bold fs-3 mb-1"> إضافة وظيفة</span>
+                    <span class="card-label fw-bold fs-3 mb-1">الوظيفة</span>
                 </h3>
             </div>
             <!--end::Header-->
@@ -130,7 +130,7 @@
                         class="form-control form-control-solid @error('title')
                             is-invalid
                             @enderror"
-                        placeholder="العنوان الوظيفي" value="{{ old('title') }}" />
+                        placeholder="العنوان الوظيفي" value="{{ old('title', $job->title) }}" />
                 </div>
                 <div class="mb-5">
                     <label for="description" class="form-label">وصف الوظيفة</label>
@@ -138,7 +138,7 @@
                     <div id="kt_docs_quill_basic" name="description"
                         class="form-control form-control-solid @error('description')
                         is-invalid
-                        @enderror">
+                        @enderror"> {{ old('description', $job->description) }}
                     </div>
                 </div>
             </div>
@@ -164,8 +164,8 @@
                                 @enderror"
                             data-control="select2" data-hide-search="true" data-placeholder="اختر خيار">
                             <option></option>
-                            <option value="office" @selected(request('place') === 'office')>العمل من مقر الشركة</option>
-                            <option value="remotly" @selected(request('place') === 'remotly')>عمل عن بعد</option>
+                            <option value="office" @selected(old('place', $job->place) === 'office')>العمل من مقر الشركة</option>
+                            <option value="remotly" @selected(old('place', $job->place) === 'remotly')>عمل عن بعد</option>
                         </select>
                     </div>
                     <div class="mb-5">
@@ -176,9 +176,9 @@
                                 @enderror"
                             data-control="select2" data-hide-search="true" data-placeholder="اختر خيار">
                             <option></option>
-                            <option value="full-time" @selected(request('type') === 'full-time')>دوام كامل</option>
-                            <option value="part-time" @selected(request('type') === 'part-time')>دوام جزئي</option>
-                            <option value="piece" @selected(request('type') === 'piece')>بالقطعة</option>
+                            <option value="full-time" @selected(old('type', $job->type) === 'full-time')>دوام كامل</option>
+                            <option value="part-time" @selected(old('type', $job->type) === 'part-time')>دوام جزئي</option>
+                            <option value="piece" @selected(old('type', $job->type) === 'piece')>بالقطعة</option>
                         </select>
                     </div>
                     <div class="mb-5">
@@ -187,7 +187,7 @@
                             class="form-control form-control-solid @error('salary')
                                     is-invalid
                                 @enderror"
-                            placeholder="الراتب" value="{{ old('salary') }}" />
+                            placeholder="الراتب" value="{{ old('salary', $job->salary) }}" />
                     </div>
                     <div class="mb-5">
                         <label for="deadline" class="required form-label">الموعد النهائي</label>
@@ -195,7 +195,7 @@
                             class="form-control form-control-solid @error('deadline')
                                     is-invalid
                                 @enderror"
-                            placeholder="الموعد النهائي" value="{{ old('deadline') }}" />
+                            placeholder="الموعد النهائي" value="{{ old('deadline', $job->deadline) }}" />
                     </div>
                 </div>
             </div>

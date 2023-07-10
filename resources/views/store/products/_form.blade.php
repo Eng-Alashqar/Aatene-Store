@@ -41,7 +41,8 @@
                         @foreach ($categories as $category)
                             <optgroup label="{{ $category->name }}">
                                 @foreach ($category->children as $child)
-                                    <option value="{{ $child->id }}">{{ $child->name }}</option>
+                                    <option value="{{ $child->id }}" @selected(old('category_id', $product->category_id) === $child->id)>{{ $child->name }}
+                                    </option>
                                 @endforeach
                             </optgroup>
                         @endforeach
@@ -80,12 +81,13 @@
                         class="form-control form-control-solid @error('name')
                             is-invalid
                             @enderror"
-                        placeholder="ادخل اسم للمتجر" value="{{ old('name') }}" />
+                        placeholder="ادخل اسم للمتجر" value="{{ old('name', $product->name) }}" />
                 </div>
                 <div class="mb-5">
                     <label for="description" class="required form-label">وصف المنتج</label>
 
                     <div id="kt_docs_quill_basic" name="description" class="form-control form-control-solid">
+                        {{ old('description', $product->description) }}
                     </div>
                 </div>
             </div>
@@ -206,9 +208,9 @@
                                 @enderror"
                             data-control="select2" data-hide-search="true" data-placeholder="اختر خيار">
                             <option></option>
-                            <option value="updated" @selected(request('status') === 'updated')>محدَّث</option>
-                            <option value="new" @selected(request('status') === 'new')>جديد</option>
-                            <option value="expired" @selected(request('status') === 'expired')>منتهي</option>
+                            <option value="updated" @selected(old('status', $product->status) === 'updated')>محدَّث</option>
+                            <option value="new" @selected(old('status', $product->status) === 'new')>جديد</option>
+                            <option value="expired" @selected(old('status', $product->status) === 'expired')>منتهي</option>
                         </select>
                     </div>
                     <div class="mb-5">
@@ -217,7 +219,7 @@
                             class="form-control form-control-solid @error('quantity')
                                     is-invalid
                                 @enderror"
-                            placeholder="الكمية" value="{{ old('quantity') }}" />
+                            placeholder="الكمية" value="{{ old('quantity', $product->quantity) }}" />
                     </div>
                     <div class="mb-5">
                         <label for="price" class="required form-label">السعر</label>
@@ -225,7 +227,7 @@
                             class="form-control form-control-solid @error('price')
                                     is-invalid
                                 @enderror"
-                            placeholder="السعر" value="{{ old('price') }}" />
+                            placeholder="السعر" value="{{ old('price', $product->price) }}" />
                     </div>
                 </div>
             </div>

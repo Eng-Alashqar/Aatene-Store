@@ -1,3 +1,4 @@
+@props(['name', 'dashboard' => 'administrator'])
 <script>
     function confirmDestroy(id, reference) {
         Swal.fire({
@@ -16,7 +17,7 @@
     }
 
     function destroy(id, reference) {
-        axios.delete('/administrator/{{ $name }}/' + id)
+        axios.delete('/{{ $dashboard }}/{{ $name }}/' + id)
             .then(function(response) {
                 // handle success
                 console.log(response);

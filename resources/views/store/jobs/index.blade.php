@@ -98,8 +98,7 @@
                                                         {{ $job->salary }}</div>
                                                 </td>
                                                 <td class="text-end">
-                                                    {{-- <a href="{{ route('dashboard.jobs.edit', $job->id) }}" --}}
-                                                    <a href="#"
+                                                    <a href="{{ route('dashboard.jobs.edit', $job->id) }}"
                                                         class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                                         <i class="ki-duotone ki-pencil fs-2">
                                                             <span class="path1"></span>
@@ -152,6 +151,6 @@
         <!--begin::Vendors Javascript(used for this page only)-->
         <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
         <!--end::Vendors Javascript-->
-        <x-elements.delete-script name="jobs" />
+        <x-elements.delete-script name="jobs" dashboard="dashboard" />
     @endpush
 </x-admin.master>

@@ -13,7 +13,9 @@ use Symfony\Component\HttpFoundation\Response;
 class ProductController extends Controller
 {
 
-    public function __construct(private ProductService $productService, private CategoryService $categoryService) {}
+    public function __construct(private ProductService $productService, private CategoryService $categoryService)
+    {
+    }
 
     /**
      * Display a listing of the resource.
@@ -30,8 +32,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = $this->categoryService->getParentCategories();
-        return view('store.products.create', compact('categories'));
+        return view('store.products.create', [
+            'categories' => $this->categoryService->getParentCategories(),
+            'prodcut' => new Product()
+        ]);
     }
 
     /**
@@ -60,6 +64,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         return view('store.products.edit', [
+            'categories' => $this->categoryService->getParentCategories(),
             'product' => $this->productService->getById($id)
         ]);
     }

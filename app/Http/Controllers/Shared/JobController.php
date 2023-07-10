@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Shared;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Shared\JobRequest;
+use App\Models\Job;
 use App\Services\Shared\JobService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,7 +28,7 @@ class JobController extends Controller
      */
     public function create()
     {
-        return view('store.jobs.create');
+        return view('store.jobs.create', ['job' => new Job()]);
     }
 
     /**

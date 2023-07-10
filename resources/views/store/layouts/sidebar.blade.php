@@ -41,8 +41,7 @@
         <div id="kt_app_sidebar_menu_wrapper" class="app-sidebar-wrapper hover-scroll-overlay-y my-5"
             data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-height="auto"
             data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer"
-            data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px"
-            data-kt-scroll-save-state="true">
+            data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px" data-kt-scroll-save-state="true">
             <!--begin::Menu-->
             <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu"
                 data-kt-menu="true" data-kt-menu-expand="false">
@@ -230,30 +229,30 @@
     </div>
     <!--end::sidebar menu-->
     <!--begin::Footer-->
+    <div class="" id="kt_app_sidebar_footer">
+        <div class="pt-2 pb-6 px-6">
+            <a href="{{ route('dashboard.topics.create') }}"
+                class="btn btn-flex flex-center justify-content-around btn-custom btn-primary overflow-hidden text-nowrap px-0 h-40px w-100"
+                data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click">
+                <span class="btn-label fs-3">كتابة موضوع</span>
+                <i class="ki-duotone ki-document btn-icon fs-1 m-0">
+                    <span class="path1"></span>
+                    <span class="path2"></span>
+                </i>
+            </a>
+        </div>
 
-    <div class="pt-2 pb-6 px-6">
-        <a href="{{ route('dashboard.topics.create') }}"
-            class="btn btn-flex flex-center justify-content-around btn-custom btn-primary overflow-hidden text-nowrap px-0 h-40px w-100"
-            data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click">
-            <span class="btn-label fs-3">كتابة موضوع</span>
-            <i class="ki-duotone ki-document btn-icon fs-1 m-0">
-                <span class="path1"></span>
-                <span class="path2"></span>
-            </i>
-        </a>
-    </div>
-
-    <div class="app-sidebar-footer flex-column-auto pt-2 pb-6 px-6" id="kt_app_sidebar_footer">
-
-        <a href="https://preview.keenthemes.com/html/metronic/docs"
-            class="btn btn-flex flex-center btn-custom btn-primary overflow-hidden text-nowrap px-0 h-40px w-100"
-            data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click">
-            <span class="btn-label fs-4">الدعم الفني</span>
-            <i class="ki-duotone ki-document btn-icon fs-2 m-0">
-                <span class="path1"></span>
-                <span class="path2"></span>
-            </i>
-        </a>
+        <div class="app-sidebar-footer pt-2 pb-6 px-6">
+            <a href="https://preview.keenthemes.com/html/metronic/docs"
+                class="btn btn-flex flex-center btn-custom btn-primary overflow-hidden text-nowrap px-0 h-40px w-100"
+                data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click">
+                <span class="btn-label fs-4">الدعم الفني</span>
+                <i class="ki-duotone ki-document btn-icon fs-2 m-0">
+                    <span class="path1"></span>
+                    <span class="path2"></span>
+                </i>
+            </a>
+        </div>
     </div>
     <!--end::Footer-->
 </div>
