@@ -72,7 +72,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="text-dark fw-bold text-hover-primary d-block mb-1 fs-6">
-                                                        {{ $product->name }}</div>
+                                                        {{ $product->category->name }}</div>
                                                 </td>
                                                 <td>
                                                     <div class="text-dark fw-bold text-hover-primary d-block mb-1 fs-6">
@@ -149,9 +149,11 @@
                                                 <td>
                                                     <span
                                                         class="badge @if ($product->status === 'new') badge-light-success
-                                                            @elseif ($product->status === 'updated') badge-light-warning
+                                                            @elseif ($product->status === 'updated') badge-light-primary
                                                             @else badge-light-danger @endif fs-7 fw-bold"
-                                                        >{{ $product->status }}
+                                                        >@if($product->status === 'new') جديد
+                                                        @elseif($product->status === 'updated') محدث
+                                                        @else منتهي @endif
                                                     </span>
                                                 </td>
                                                 <td class="text-end">

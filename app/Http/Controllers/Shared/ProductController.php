@@ -34,7 +34,7 @@ class ProductController extends Controller
     {
         return view('store.products.create', [
             'categories' => $this->categoryService->getParentCategories(),
-            'prodcut' => new Product()
+            'product' => new Product()
         ]);
     }
 

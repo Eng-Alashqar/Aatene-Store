@@ -135,11 +135,11 @@
                 <div class="mb-5">
                     <label for="description" class="form-label">وصف الوظيفة</label>
 
-                    <div id="kt_docs_quill_basic" name="description"
+                    <textarea id="kt_docs_quill_basic" name="description"
                         class="form-control form-control-solid @error('description')
                         is-invalid
                         @enderror"> {{ old('description', $job->description) }}
-                    </div>
+                    </textarea>
                 </div>
             </div>
             <!--begin::Body-->

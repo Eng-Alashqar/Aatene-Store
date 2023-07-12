@@ -22,8 +22,8 @@
                 <div class="mb-5">
                     <label for="content" class="required form-label">الموضوع</label>
 
-                    <div id="kt_docs_quill_basic" name="content" class="form-control form-control-solid">
-                    </div>
+                    <textarea id="kt_docs_quill_basic" name="content" class="form-control form-control-solid">
+                    </textarea>
                 </div>
             </div>
             <!--begin::Body-->

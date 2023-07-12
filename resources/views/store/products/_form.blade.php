@@ -86,9 +86,9 @@
                 <div class="mb-5">
                     <label for="description" class="required form-label">وصف المنتج</label>
 
-                    <div id="kt_docs_quill_basic" name="description" class="form-control form-control-solid">
+                    <textarea id="kt_docs_quill_basic" name="description" class="form-control form-control-solid">
                         {{ old('description', $product->description) }}
-                    </div>
+                    </textarea>
                 </div>
             </div>
             <!--begin::Body-->
