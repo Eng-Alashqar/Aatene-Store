@@ -3,7 +3,6 @@
 namespace App\Services\Admin;
 
 use App\Helpers\PhotoUpload;
-use App\Models\Store;
 use App\Repositories\Admin\StoreRepository;
 use App\Services\ServiceInterface;
 
@@ -40,6 +39,11 @@ class StoreService implements ServiceInterface
     public function getById($id)
     {
         return $this->storeRepository->getById($id);
+    }
+
+    public function getByUserId($id)
+    {
+        return $this->storeRepository->getByUserId($id);
     }
 
     public function update($id, $params)

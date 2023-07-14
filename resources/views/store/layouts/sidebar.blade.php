@@ -11,8 +11,8 @@
                                 class="h-50px app-sidebar-logo-default" />
                             <img alt="Logo" src="{{ asset('assets/media/aatene-logo.png') }}"
                                 class="h-20px app-sidebar-logo-minimize" /> --}}
-                                <x-images.logo-light-lg/>
-                                <x-images.logo-light/>
+                            <x-images.logo-light-lg />
+                            <x-images.logo-light />
                         </a>
                         <!--end::Logo image-->
                         <!--begin::Sidebar toggle-->
@@ -87,45 +87,31 @@
                                 <div class="menu-item pt-5">
                                     <!--begin:Menu content-->
                                     <div class="menu-content">
-                                        <span class="menu-heading fw-bold text-uppercase fs-6">ادارة الاعدادات</span>
+                                        <span class="menu-heading fw-bold text-uppercase fs-6"> المتاجر
+                                            والمستخدمين</span>
                                     </div>
                                     <!--end:Menu content-->
                                 </div>
                                 <!--end:Menu item-->
+                                <div class="separator separator-dashed mx-lg-5 mt-2 mb-6"></div>
+
                                 <!--begin:Menu item-->
-                                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                    <!--begin:Menu link-->
-                                    <span class="menu-link">
-                                        <span class="menu-icon">
-                                            <i class="ki-duotone ki-address-book fs-2">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
-                                        <span class="menu-title fs-2">الملفات الشخصية </span>
-                                        <span class="menu-arrow"></span>
-                                    </span>
-                                    <!--end:Menu link-->
-                                    <!--begin:Menu sub-->
-                                    <div class="menu-sub menu-sub-accordion">
-                                        <!--begin:Menu item-->
-                                        <div class="menu-item">
-                                            <!--begin:Menu link-->
-                                            <a class="menu-link"
-                                                href="../../demo1/dist/pages/user-profile/overview.html">
-                                                <span class="menu-bullet">
-                                                    <span class="bullet bullet-dot"></span>
-                                                </span>
-                                                <span class="menu-title fs-5">نظرة عامة</span>
-                                            </a>
-                                            <!--end:Menu link-->
-                                        </div>
-                                        <!--end:Menu item-->
-                                    </div>
-                                    <!--end:Menu sub-->
-                                </div>
-                                <!--end:Menu item-->
+                                <x-elements.sidebar-menu-item lable="إدارة المتاجر " index="dashboard.products.index"
+                                    create="dashboard.products.create">
+                                    <x-slot name="icon">
+                                        <i class="ki-duotone ki-shop fs-2">
+                                            <i class="path1"></i>
+                                            <i class="path2"></i>
+                                            <i class="path3"></i>
+                                            <i class="path4"></i>
+                                            <i class="path5"></i>
+                                        </i>
+                                    </x-slot>
+                                    <x-elements.sidebar-li-sub-menu route="dashboard.products.index"
+                                        title="قائمة المتاجر" />
+                                    <x-elements.sidebar-li-sub-menu route="dashboard.products.create"
+                                        title="إضافة متجر " />
+                                </x-elements.sidebar-menu-item>
 
 
 

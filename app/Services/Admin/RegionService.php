@@ -7,12 +7,7 @@ use App\Services\ServiceInterface;
 
 class RegionService implements ServiceInterface
 {
-    private $regionRepository;
-    public function __construct(RegionRepository $regionRepository)
-    {
-        $this->regionRepository = $regionRepository;
-    }
-
+    public function __construct(private RegionRepository $regionRepository){}
 
     public function get($count, $filters)
     {

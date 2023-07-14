@@ -1,13 +1,14 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\FaqsController;
 use App\Http\Controllers\Admin\RegionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\StoreController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::prefix('/administrator')->name('admin.')->middleware(['auth','user-type:store_manager,customer'])->group(function(){
+Route::prefix('/administrator')->name('admin.')->middleware(['auth:admin'])->group(function(){
     Route::get('/',function(){
         return view('admin.index');
         })->name('home');
@@ -19,5 +20,6 @@ Route::prefix('/administrator')->name('admin.')->middleware(['auth','user-type:s
     Route::resource('regions',RegionController::class);
     Route::resource('roles',RoleController::class);
     Route::resource('permissions',RegionController::class);
+    Route::resource('faqs',FaqsController::class);
 
 });

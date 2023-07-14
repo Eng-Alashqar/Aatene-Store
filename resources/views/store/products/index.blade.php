@@ -1,4 +1,4 @@
-<x-admin.master>
+<x-store.master>
     <!--begin::Main-->
     <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
         <!--begin::Content wrapper-->
@@ -150,8 +150,7 @@
                                                     <span
                                                         class="badge @if ($product->status === 'published') badge-light-success
                                                             @elseif ($product->status === 'draft') badge-light-warning
-                                                            @else badge-light-danger @endif fs-7 fw-bold"
-                                                        >{{ $product->status }}
+                                                            @else badge-light-danger @endif fs-7 fw-bold">{{ $product->status }}
                                                     </span>
                                                 </td>
                                                 <td class="text-end">
@@ -210,5 +209,6 @@
         <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
         <!--end::Vendors Javascript-->
         <x-elements.delete-script name="products" />
+
     @endpush
-</x-admin.master>
+    </x-admin.master>

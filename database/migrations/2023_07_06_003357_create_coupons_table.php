@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('coupons', function (Blueprint $table) {
             $table->id();
             $table->string('code');
-            $table->float('descount_amount')->nullable();
+            $table->enum('type',['percent','fixed'])->default('fixed');
+            $table->float('discount_amount')->nullable();
             $table->timestamps();
         });
     }

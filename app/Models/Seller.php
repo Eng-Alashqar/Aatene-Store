@@ -2,23 +2,16 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
-use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Notifications\Notifiable;
+use App\Traits\HasPhoto;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class Seller extends User
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory , Notifiable , HasApiTokens , HasPhoto;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         'email',
@@ -26,6 +19,7 @@ class User extends Authenticatable
         'last_active_at',
         'status',
         'phone_number',
+        'gold_coins',
 
     ];
 
@@ -49,5 +43,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-
+    public function store()
+    {
+        return $this->belongsTo(Store::class);
+    }
 }

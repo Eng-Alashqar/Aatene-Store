@@ -2,15 +2,15 @@
 
 namespace App\Observers;
 
-use App\Models\Product;
 use Illuminate\Support\Str;
+use App\Models\Store\Product;
 
 class ProductObserver
 {
     /**
      * Handle the Product "created" event.
      */
-    public function created(Product $product): void
+    public function creating(Product $product): void
     {
         $product->slug = Str::slug($product->name);
     }
@@ -18,7 +18,7 @@ class ProductObserver
     /**
      * Handle the Product "updated" event.
      */
-    public function updated(Product $product): void
+    public function updating(Product $product): void
     {
         $product->slug = Str::slug($product->name);
     }

@@ -7,10 +7,7 @@ use App\Repositories\Shared\ProductRepository;
 
 class ProductService
 {
-    private ProductRepository $productRepo;
-    public function __construct(ProductRepository $productRepo){
-        $this->productRepo = $productRepo;
-    }
+    public function __construct(private ProductRepository $productRepo){}
 
     public function get()
     {
@@ -46,7 +43,5 @@ class ProductService
         return ['type' => $type, 'message' => $message];
     }
 
-    public function ajaxResponse()
-    {
-    }
+
 }

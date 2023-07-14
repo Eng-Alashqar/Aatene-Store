@@ -33,4 +33,4 @@ return view('welcome');
 });
 
 require __DIR__.'/admin.php';
-require __DIR__.'/store.php';
+require __DIR__.'/seller.php';

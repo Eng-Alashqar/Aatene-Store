@@ -322,7 +322,7 @@
                     <x-elements.sidebar-li-sub-menu route="admin.categories.index" title="قائمة طلبات الدعم" />
                     <x-elements.sidebar-li-sub-menu route="admin.categories.create"
                         title="قائمة الابلاغات والتقارير" />
-                    <x-elements.sidebar-li-sub-menu route="admin.categories.create" title="إضافة اسئلة شائعة" />
+                    <x-elements.sidebar-li-sub-menu route="admin.faqs.index" title=" اسئلة شائعة" />
                 </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
                 <!--begin:Menu item-->

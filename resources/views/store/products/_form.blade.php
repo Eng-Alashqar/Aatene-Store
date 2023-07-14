@@ -1,24 +1,7 @@
 <div class="d-flex flex-column flex-lg-row">
     <!--begin::Aside column-->
     <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
-        <!--begin::banner for store-->
-        <div class="card card-flush py-4">
-            <!--begin::Card header-->
-            <div class="card-header">
-                <!--begin::Card title-->
-                <div class="required card-title">
-                    <h2>صورة المنتج</h2>
-                </div>
-                <!--end::Card title-->
-            </div>
-            <!--end::Card header-->
-            <!--begin::Card body-->
-            <div class="card-body text-center pt-0">
-                <x-elements.logo-image-input name="image" />
-            </div>
-            <!--end::Card body-->
-        </div>
-        <!--end::banner for store-->
+
         <!--begin::Category & tags-->
         <div class="card card-flush py-4">
             <!--begin::Card header-->
@@ -41,9 +24,9 @@
                         @enderror"
                         data-control="select2" data-placeholder="اضافة قسم">
                         <option></option>
-                        @foreach (App\Models\Admin\Category::all() as $category)
+                        {{-- @foreach (App\Models\Admin\Category::all() as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endforeach
+                        @endforeach --}}
                     </select>
                 </div>
                 <!--end::Input group-->
@@ -73,6 +56,7 @@
             <!--end::Header-->
             <!--begin::Body-->
             <div class="card-body py-3">
+
                 <div class="mb-5">
                     <label for="name" class="required form-label">اسم المنتج</label>
                     <input type="text" name="name" id="name"
@@ -82,14 +66,47 @@
                         placeholder="ادخل اسم للمتجر" value="{{ old('name') }}" />
                 </div>
                 <div class="mb-5">
-                     <label for="description" class="required form-label">وصف المنتج</label>
+                    <label for="description" class="required form-label">وصف المنتج</label>
 
                     <div id="kt_docs_quill_basic" name="description"
                         class="form-control form-control-solid @error('description')
                         is-invalid
-                        @enderror" >
+                        @enderror">
                     </div>
                 </div>
+            </div>
+            <!--begin::Body-->
+        </div>
+        <div class="card card-flush py-4 ">
+            <!--begin::Header-->
+            <div class="card-header border-0 ">
+                <h3 class="card-title align-items-start flex-column">
+                    <span class="card-label fw-bold fs-3 mb-1"> إضافة الوسائط</span>
+                </h3>
+            </div>
+            <!--end::Header-->
+            <!--begin::Body-->
+            <div class="card-body py-3">
+                <!--begin::Input group-->
+                <div class="fv-row">
+                    <!--begin::Dropzone-->
+                    <div class="dropzone" id="kt_dropzonejs_example_1">
+                        <!--begin::Message-->
+                        <div class="dz-message needsclick">
+                            <i class="ki-duotone ki-file-up fs-3x text-primary"><span class="path1"></span><span
+                                    class="path2"></span></i>
+                            <!--begin::Info-->
+                            <div class="ms-4">
+                                <h3 class="fs-5 fw-bold text-gray-900 mb-1">قم بإسقاط الملفات هنا أو انقر للتحميل.
+                                </h3>
+                                <span class="fs-7 fw-semibold text-gray-400">تحميل ما يصل إلى 10 ملفات</span>
+                            </div>
+                            <!--end::Info-->
+                        </div>
+                    </div>
+                    <!--end::Dropzone-->
+                </div>
+                <!--end::Input group-->
             </div>
             <!--begin::Body-->
         </div>
@@ -104,77 +121,57 @@
             <!--end::Card header-->
             <!--begin::Card body-->
             <div class="card-body pt-0">
-                <!--begin::Input group-->
-                <div class="" data-kt-ecommerce-catalog-add-product="auto-options">
-                    <!--begin::Label-->
-                    <label class="form-label">اضافة متغير</label>
-                    <!--end::Label-->
-                    <!--begin::Repeater-->
-                    <div id="kt_ecommerce_add_product_options">
-                        <!--begin::Form group-->
-                        <div class="form-group">
-                            <div data-repeater-list="kt_ecommerce_add_product_options"
-                                class="d-flex flex-column gap-3">
-                                <div data-repeater-item="" class="form-group d-flex flex-wrap gap-5">
-                                    <!--begin::Select2-->
-                                    <div class="w-100 w-md-200px">
-                                        <select class="form-select" name="product_option"
-                                            data-placeholder="Select a variation"
-                                            data-kt-ecommerce-catalog-add-product="product_option">
+                <!--begin::Repeater-->
+                <div id="Variants">
+                    <!--begin::Form group-->
+                    <div class="form-group">
+                        <div data-repeater-list="Variants">
+                            <div data-repeater-item>
+                                <div class="form-group row mb-5">
+                                    <div class="col-md-3">
+                                        <label class="form-label">اشر على الخيارات:</label>
+                                        <select class="form-select" data-kt-repeater="select2"
+                                            data-placeholder="اشر على الخيارات" name="attribute">
                                             <option></option>
-                                            <option value="color">اللون</option>
-                                            <option value="size">الحجم</option>
-                                            <option value="material">المادة</option>
-                                            <option value="style">الشكل</option>
+                                            <option value="Size">الحجم</option>
+                                            <option value="Color">اللون</option>
+                                            <option value="material">مادة</option>
+                                            <option value="style">نمط</option>
+                                            <option value="type">نوع</option>
                                         </select>
                                     </div>
-                                    <!--end::Select2-->
-                                    <!--begin::Input-->
-                                    <input type="text" class="form-control mw-100 w-200px"
-                                        name="product_option_value" placeholder="المتغير" />
-                                    <!--end::Input-->
-                                    <button type="button" data-repeater-delete=""
-                                        class="btn btn-sm btn-icon btn-light-danger">
-                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr088.svg-->
-                                        <span class="svg-icon svg-icon-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" fill="none">
-                                                <rect opacity="0.5" x="7.05025" y="15.5356" width="12"
-                                                    height="2" rx="1"
-                                                    transform="rotate(-45 7.05025 15.5356)" fill="currentColor" />
-                                                <rect x="8.46447" y="7.05029" width="12" height="2"
-                                                    rx="1" transform="rotate(45 8.46447 7.05029)"
-                                                    fill="currentColor" />
-                                            </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->
-                                    </button>
+                                    <div class="col-md-4">
+                                        <label class="form-label">القيمة:</label>
+                                        <input class="form-control" data-kt-repeater="tagify" value=""
+                                            name="value" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a href="javascript:;" data-repeater-delete
+                                            class="btn btn-flex btn-sm btn-light-danger mt-3 mt-md-9">
+                                            <i class="ki-duotone ki-trash fs-3"><span class="path1"></span><span
+                                                    class="path2"></span><span class="path3"></span><span
+                                                    class="path4"></span><span class="path5"></span></i>
+                                            حذف
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <!--end::Form group-->
-                        <!--begin::Form group-->
-                        <div class="form-group mt-5">
-                            <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary">
-                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
-                                <span class="svg-icon svg-icon-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="11" y="18" width="12"
-                                            height="2" rx="1" transform="rotate(-90 11 18)"
-                                            fill="currentColor" />
-                                        <rect x="6" y="11" width="12" height="2"
-                                            rx="1" fill="currentColor" />
-                                    </svg>
-                                </span>
-                                <!--end::Svg Icon-->اضافة متغير آخر
-                            </button>
-                        </div>
-                        <!--end::Form group-->
                     </div>
-                    <!--end::Repeater-->
+                    <!--end::Form group-->
+
+                    <!--begin::Form group-->
+                    <div class="form-group">
+                        <a href="javascript:;" data-repeater-create class="btn btn-flex btn-light-primary">
+                            <i class="ki-duotone ki-plus fs-3"></i>
+                            إضافة
+                        </a>
+                    </div>
+                    <!--end::Form group-->
                 </div>
-                <!--end::Input group-->
+                <!--end::Repeater-->
+
+
             </div>
             <!--end::Card header-->
         </div>
@@ -239,7 +236,7 @@
             <!--begin::Button-->
             <button type="submit" id="kt_ecommerce_add_product_submit" class="btn btn-primary">
                 <span class="indicator-label">{{ $button_label ?? 'حفظ التغيرات' }} </span>
-                <span class="indicator-progress">Please wait...
+                <span class="indicator-progress">انتظر لوسمحت...
                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
             </button>
             <!--end::Button-->
