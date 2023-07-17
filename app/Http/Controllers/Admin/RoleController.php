@@ -10,10 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RoleController extends Controller
 {
-    private $roleService;
-    public function __construct(RoleService $roleService) {
-        $this->roleService = $roleService;
-    }
+    public function __construct(private RoleService $roleService) {}
     public function index()
     {
         $filters = request()->query();

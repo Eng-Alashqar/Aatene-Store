@@ -8,11 +8,7 @@ use App\Services\ServiceInterface;
 
 class StoreService implements ServiceInterface
 {
-    private $storeRepository;
-    public function __construct(StoreRepository $storeRepository)
-    {
-        $this->storeRepository = $storeRepository;
-    }
+    public function __construct(private StoreRepository $storeRepository){}
 
     public function get($count,$filters)
     {

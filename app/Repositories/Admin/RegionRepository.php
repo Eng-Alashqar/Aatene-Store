@@ -14,8 +14,7 @@ class RegionRepository implements RepositoryInterface
     }
     public function getWithPaginate($count, $filters)
     {
-        $count = (int) $count;
-        return $this->region->latest()->filter($filters)->paginate($count);
+        return $this->region->latest()->filter($filters)->paginate((int) $count);
     }
 
     public function all()

@@ -13,7 +13,7 @@ class StoreRepository implements RepositoryInterface
 
     public function getWithPaginate($count = 7,$filters = null)
     {
-        return $this->store->latest()->accepted()->filter($filters)->paginate($count);
+        return $this->store->latest()->accepted()->filter($filters)->paginate((int) $count);
     }
 
     public function getPendingStoresWithPaginate($count = 10)

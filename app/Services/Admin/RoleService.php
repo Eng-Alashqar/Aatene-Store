@@ -7,13 +7,10 @@ use App\Services\ServiceInterface;
 
 class RoleService implements ServiceInterface
 {
-    private $roleRepository;
-    public function __construct(RoleRepository $roleRepository)
-    {
-        $this->roleRepository = $roleRepository;
-    }
 
-    public function get($count, $filters)
+    public function __construct(private RoleRepository $roleRepository){}
+
+    public function get($count = null, $filters = null)
     {
         return $this->roleRepository->all();
     }

@@ -9,13 +9,7 @@ use App\Repositories\RepositoryInterface;
 
 class RoleRepository implements RepositoryInterface
 {
-    private $role;
-    private $permission;
-
-    public function __construct(Role $role,Permission $permission) {
-        $this->role =$role->where('id','<>',1);
-        $this->permission =$permission;
-    }
+    public function __construct(private Role $role, private Permission $permission) {}
 
     public function getWithPaginate($count, $filters)
     {
@@ -24,7 +18,7 @@ class RoleRepository implements RepositoryInterface
 
     public function all()
     {
-        return $this->role->with(['users','permissions'])->get();
+        return $this->role->where('name','<>','الأدمن')->with(['users','permissions'])->get();
     }
 
     public function getById($id)
@@ -48,7 +42,7 @@ class RoleRepository implements RepositoryInterface
     public function store($params)
     {
         DB::beginTransaction();
-        $role = $this->role->create(['name' => $params['name']]);
+        $role = $this->role->create(['name' => $params['name'],'guard_name'=>'admin']);
         $created = $role->syncPermissions($params['permission_ids']);
         DB::commit();
         DB::rollback();
@@ -60,7 +54,7 @@ class RoleRepository implements RepositoryInterface
     public function update($id, $params)
     {
         DB::beginTransaction();
-        $role = $this->getById($id)->update(['name' => $params['name']]);
+        $role = $this->getById($id)->update(['name' => $params['name'],'guard_name'=>'admin']);
         $this->getById($id)->syncPermissions($params['permission_ids']);
         DB::commit();
         DB::rollback();

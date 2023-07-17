@@ -228,16 +228,16 @@
                 <div class="separator separator-dashed mx-lg-5 mt-2 mb-6"></div>
 
                 <!--begin:Menu item-->
-                <x-elements.sidebar-menu-item lable="إدارة الموظفين " index="admin.categories.index"
-                    create="admin.categories.create">
+                <x-elements.sidebar-menu-item lable="إدارة الموظفين " index="admin.admins.index"
+                    create="admin.admins.create">
                     <x-slot name="icon">
                         <i class="ki-duotone ki-security-user fs-2">
                             <i class="path1"></i>
                             <i class="path2"></i>
                         </i>
                     </x-slot>
-                    <x-elements.sidebar-li-sub-menu route="admin.categories.index" title="قائمة الموظفين" />
-                    <x-elements.sidebar-li-sub-menu route="admin.categories.create" title="إضافة موظف" />
+                    <x-elements.sidebar-li-sub-menu route="admin.admins.index" title="قائمة الموظفين" />
+                    <x-elements.sidebar-li-sub-menu route="admin.admins.create" title="إضافة موظف" />
                 </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
 

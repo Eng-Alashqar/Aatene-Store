@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\FaqsController;
 use App\Http\Controllers\Admin\RegionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\StoreController;
+use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -21,5 +22,6 @@ Route::prefix('/administrator')->name('admin.')->middleware(['auth:admin'])->gro
     Route::resource('roles',RoleController::class);
     Route::resource('permissions',RegionController::class);
     Route::resource('faqs',FaqsController::class);
+    Route::resource('admins',AdminController::class);
 
 });

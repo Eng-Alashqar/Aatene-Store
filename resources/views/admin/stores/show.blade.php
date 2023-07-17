@@ -52,14 +52,14 @@
                                                         <span class="path1"></span>
                                                         <span class="path2"></span>
                                                         <span class="path3"></span>
-                                                    </i>{{ $store->user->name }}</a>
+                                                    </i>{{ $store->seller->name }}</a>
 
                                                 <a href="#"
                                                     class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
                                                     <i class="ki-duotone ki-sms fs-4 me-1">
                                                         <span class="path1"></span>
                                                         <span class="path2"></span>
-                                                    </i>{{ $store->user->email }}</a>
+                                                    </i>{{ $store->seller->email }}</a>
                                             </div>
                                             <!--end::Info-->
                                         </div>

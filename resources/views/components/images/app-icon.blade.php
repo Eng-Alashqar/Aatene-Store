@@ -1,1 +1,1 @@
-<link rel="shortcut icon" href="{{ asset('assets/media/aatene-logo.png') }}" />
+<link rel="shortcut icon" href="{{ asset('assets/medica/aatene-logo.png') }}" />

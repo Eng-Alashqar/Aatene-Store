@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasPhoto;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Laravel\Sanctum\HasApiTokens;
@@ -11,6 +12,12 @@ use Spatie\Permission\Traits\HasRoles;
 class Admin extends User
 {
     use HasFactory,HasApiTokens,HasPhoto,HasRoles;
+
+    public function scopeExceptAuthUser(Builder $builder)
+    {
+        $id = request()->user()->id;
+        $builder->where('id','<>', $id);
+    }
 
     protected $fillable = [
         'name',
@@ -44,5 +51,18 @@ class Admin extends User
         'role_name'=>'array',
     ];
 
-
+    public function getStatusArAttribute()
+    {
+        switch ($this->status) {
+            case 'active':
+                return 'مستخدم نشط';
+                break;
+            case 'blocked':
+                return 'مستخدم محظور ';
+                break;
+            case 'inactive':
+                return 'مستخدم في اجازة ';
+                break;
+        }
+    }
 }
