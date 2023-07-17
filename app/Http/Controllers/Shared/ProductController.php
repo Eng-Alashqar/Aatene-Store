@@ -41,12 +41,10 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProductRequest $request)
+    public function store(Request $request)
     {
+        dd($request->all());
         $this->productService->store($request->validated());
-        // return redirect()->back()->with(
-        //     $this->productService->getMessage('success', 'تم اضافة منتج جديد')
-        // );
         return redirect()->back()->with(['notification' => 'تم اضافة منتج جديد']);
     }
 
@@ -84,18 +82,6 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $isDeleted = $this->productService->delete($id);
-        if ($isDeleted) {
-            return response()->json([
-                'title' => 'تم حذف العنصر',
-                'text' => 'تم حذف العنصر بنجاح',
-                'icon' => 'success'
-            ], Response::HTTP_OK);
-        } else {
-            return response()->json([
-                'title' => 'حدث خطأ في عملية الحذف',
-                'text' => 'فشلت عملية الحذف',
-                'icon' => 'error'
-            ], Response::HTTP_BAD_REQUEST);
-        }
+        return $this->deleteAjaxResponse($isDeleted);
     }
 }

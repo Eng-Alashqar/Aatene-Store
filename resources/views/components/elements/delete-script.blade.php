@@ -1,4 +1,6 @@
-@props(['name', 'dashboard' => 'administrator'])
+
+@props(['name','reload'=>false, 'dashboard'=>'administrator'])
+
 <script>
     function confirmDestroy(id, reference) {
         Swal.fire({
@@ -6,6 +8,7 @@
             text: "انت تريد حذف هذا العنصر!",
             icon: 'warning',
             showCancelButton: true,
+            cancelButtonText: 'الغاء',
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'اجل ,احذفه!'
@@ -21,8 +24,15 @@
             .then(function(response) {
                 // handle success
                 console.log(response);
-                reference.closest('tr').remove();
+                if(reference.closest('tr')){
+                    reference.closest('tr').remove();
+                }
                 showMessage(response.data)
+                setTimeout(() => {
+                    @if($reload)
+                window.location.reload();
+                @endif
+                }, 1500);
             })
             .catch(function(error) {
                 // handle error

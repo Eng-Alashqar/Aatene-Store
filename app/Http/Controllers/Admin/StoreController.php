@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Seller;
 use App\Models\User;
 use App\Models\Admin\Region;
+use App\Services\Admin\RegionService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\Admin\StoreService;
@@ -12,11 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class StoreController extends Controller
 {
-    private $storeService;
-    public function __construct(StoreService $storeService)
-    {
-        $this->storeService = $storeService;
-    }
+    public function __construct(private StoreService $storeService, private RegionService $regionService){}
     /**
      * Display a listing of the resource.
      */
@@ -26,7 +24,7 @@ class StoreController extends Controller
 
         $request = request()->query();
         $count = request()->query('count');
-        $stores = $this->storeService->get($count,$request);
+        $stores = $this->storeService->get($count??7,$request);
         return view('admin.stores.index', compact('stores'));
     }
 
@@ -35,8 +33,8 @@ class StoreController extends Controller
      */
     public function create()
     {
-        $users = User::get();
-        $regions = Region::get();
+        $users = Seller::get();
+        $regions = $this->regionService->getAllRegions();
         return view('admin.stores.create', compact('users', 'regions'));
     }
 
@@ -95,18 +93,6 @@ class StoreController extends Controller
     public function destroy(string $id)
     {
         $isDeleted = $this->storeService->delete($id);
-        if ($isDeleted) {
-            return response()->json([
-                'title' => 'تم حذف العنصر',
-                'text' => 'تم حذف العنصر بنجاح',
-                'icon' => 'success'
-            ], Response::HTTP_OK);
-        } else {
-            return response()->json([
-                'title' => 'حدث خطأ في عملية الحذف',
-                'text' => 'فشلت عملية الحذف',
-                'icon' => 'error'
-            ], Response::HTTP_BAD_REQUEST);
-        }
+        return $this->deleteAjaxResponse($isDeleted);
     }
 }

@@ -19,12 +19,14 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         $name = fake()->name();
+        $category = Category::inRandomOrder()->first();
+
         return [
             'name' =>$name ,
-            'slug' =>Str::slug($name),
             'description'=> fake()->paragraph(),
-            'parent_id' => Category::inRandomOrder()->first()->id ?? null,
-            'status'=> 'active'
+            'parent_id' => $category ? $category->id : null,
+            'status'=> fake()->randomElement(['active', 'archive'])
+
         ];
     }
 }

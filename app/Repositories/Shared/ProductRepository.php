@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Shared;
 
-use App\Models\Product;
+use App\Models\Store\Product;
 use App\Repositories\Shared\PanelRepository;
 
 class ProductRepository implements PanelRepository

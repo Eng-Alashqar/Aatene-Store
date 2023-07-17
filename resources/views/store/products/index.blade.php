@@ -1,4 +1,4 @@
-<x-admin.master>
+<x-store.master>
     <!--begin::Main-->
     <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
         <!--begin::Content wrapper-->
@@ -210,6 +210,6 @@
         <!--begin::Vendors Javascript(used for this page only)-->
         <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
         <!--end::Vendors Javascript-->
-        <x-elements.delete-script name="products" dashboard="dashboard" />
+        <x-elements.delete-script name="products" />
     @endpush
-</x-admin.master>
+    </x-admin.master>

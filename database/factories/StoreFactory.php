@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Seller;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,13 +18,13 @@ class StoreFactory extends Factory
      */
     public function definition(): array
     {
-        $name = fake()->name();
+        $name = fake()->unique()->name();
         return [
             'name' =>$name ,
-            'slug' =>Str::slug($name),
             'description'=> fake()->paragraph(),
-            'user_id' => User::inRandomOrder()->first()->id,
-            'is_accepted'=> false
+            'location'=> fake()->address(),
+            'is_accepted'=> fake()->randomElement([true,false]),
+            'status'=> fake()->randomElement(['active', 'inactive', 'blocked']),
         ];
     }
 }

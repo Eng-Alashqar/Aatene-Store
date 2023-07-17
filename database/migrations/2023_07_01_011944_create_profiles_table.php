@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('profiles', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->id();
+            $table->morphs('userable');
             $table->string('first_name');
             $table->string('last_name');
             $table->date('birthday')->nullable();
@@ -23,13 +24,8 @@ return new class extends Migration
             $table->string('postal_code')->nullable();
             $table->char('country',2);
             $table->char('locale',2)->default('ar');
-            $table->foreignId('region_id')
-            ->nullable()
-            ->constrained('regions')
-            ->nullOnDelete();
             $table->timestamps();
 
-            $table->primary('user_id');
         });
     }
 

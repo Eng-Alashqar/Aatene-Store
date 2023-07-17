@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Store;
 
 use App\Models\Admin\Category;
 use App\Models\Store;
@@ -18,23 +18,18 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        $name = fake()->word;
+        $name = fake()->unique()->name();
         return [
             'name' => $name,
-            'slug' => Str::slug($name),
             'description' => fake()->sentence,
             'price' => fake()->randomFloat(2, 10, 100),
             'quantity' => fake()->randomNumber(2),
             'is_available' => fake()->boolean,
-            'release_date' => fake()->date(),
-            'status' => fake()->randomElement(['updated', 'new', 'expired']),
-            'category_id' => function () {
-                return Category::inRandomOrder()->first()->id;
-            },
-            'store_id' => function () {
-                return Store::inRandomOrder()->first()->id;
-            },
-            'image' => fake()->imageUrl(),
+
+            'featured' => fake()->boolean,
+            'status' => fake()->randomElement(['draft', 'published', 'archived']),
+            'category_id' =>  Category::inRandomOrder()->first()->id,
+            'store_id' =>  Store::inRandomOrder()->first()->id,
         ];
     }
 }

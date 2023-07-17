@@ -14,7 +14,7 @@ class Store extends Model
 {
     use HasFactory, HasPhoto;
 
-    protected $fillable = ['name', 'slug', 'description', 'status', 'is_accepted', 'rating', 'level', 'user_id',];
+    protected $fillable = ['name', 'slug','location', 'description', 'status', 'is_accepted', 'rating', 'level','block_reason'];
 
     public static function  booted()
     {
@@ -30,7 +30,7 @@ class Store extends Model
         ],$filters);
 
         $builder->when($params['search'],function($builder , $value){
-            $builder->where('name','like',"%$value%");
+            $builder->where('name','like',"%$value%")->orWhere('description','like',"%$value%");
         });
 
         $builder->when($params['status'],function($builder,$value){
@@ -63,9 +63,9 @@ class Store extends Model
     }
 
 
-    public function user()
+    public function seller()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(Seller::class)->withDefault(['name'=>'لايوجد حاليا']);
     }
 
     public function products()
@@ -113,4 +113,5 @@ class Store extends Model
                 break;
         }
     }
+
 }

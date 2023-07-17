@@ -53,7 +53,7 @@ class CategoryRequest extends FormRequest
             'image.image' => 'يجب أن يكون الملف ملف صورة.',
             'image.mimes' => 'يجب أن يكون الملف من نوع: png, jpg, webm, jpeg, webp.',
             'image.max' => 'يجب ألا يتجاوز حجم الملف 1 ميجابايت.',
-            'image.required' => 'الملف مطلوب.',
+            'image.required' => 'الصورة مطلوب.',
             'name.required' => 'الاسم مطلوب.',
             'name.string' => 'يجب أن يكون الاسم نصًا.',
             'name.max' => 'يجب ألا يتجاوز الاسم 100 حرف.',

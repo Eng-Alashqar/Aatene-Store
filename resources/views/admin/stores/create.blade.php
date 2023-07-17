@@ -78,17 +78,21 @@
                                             placeholder="ادخل وصف للمتجر" />
                                     </div>
                                     <div class="mb-5">
+                                        <x-form.input-with-lable lable="عنوان المتجر" name="location"
+                                                                 placeholder="ادخل عنوان للمتجر" />
+                                    </div>
+                                    <div class="mb-5">
                                         <x-form.lable lable="صاحب المتجر" />
-                                        <select  name="user_id" dir="rtl"
+                                        <select  name="seller_id" dir="rtl"
                                             data-control="select2" @class([
                                                 'form-select',
                                                 'form-select-solid ',
-                                                'is-invalid' => $errors->has('user_id'),
+                                                'is-invalid' => $errors->has('seller_id'),
                                             ])
                                             data-placeholder="اختر صاحب هذا المتجر">
                                             <option></option>
                                             @foreach ($users as $user)
-                                                <option value="{{ $user->id }}" @selected(old('user_id') == $user->id)>
+                                                <option value="{{ $user->id }}" @selected(old('seller_id') == $user->id)>
                                                     {{ $user->name }}</option>
                                             @endforeach
                                         </select>
@@ -122,9 +126,7 @@
                                         ])
                                             placeholder="اختر حالة هذا المتجر">
                                             <option value="active" @selected(old('status') == 'active')>متجر نشط</option>
-                                            <option value="inactive" @selected(old('status') == 'inactive')> متجر في اجازة
-                                            </option>
-                                            <option value="blocked" @selected(old('status') == 'blocked')>متجر محظور</option>
+                                            <option value="blocked" @selected(old('status') == 'blocked')   >متجر محظور</option>
                                         </select>
                                     </div>
                                     <div class="mb-5">

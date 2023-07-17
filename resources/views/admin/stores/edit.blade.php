@@ -5,7 +5,7 @@
         <!--begin::Content wrapper-->
         <div class="d-flex flex-column flex-column-fluid">
             <!--begin::Toolbar-->
-            <x-elements.toolbar lable="ادارة المتاجر" back_url="admin.stores.index" previews="قائمة المتاجر"
+            <x-elements.toolbar back_url="admin.stores.index" previews="قائمة المتاجر"
                 current="تعديل  متجر {{ $store->name }}" />
             <!--end::Toolbar-->
             <!--begin::Content-->
@@ -39,10 +39,13 @@
                                         ])
                                             placeholder="اختر حالة هذا المتجر">
                                             <option value="active" @selected($store->status == 'active')>متجر نشط</option>
-                                            <option value="inactive" @selected($store->status == 'inactive')> متجر في اجازة
-                                            </option>
                                             <option value="blocked" @selected($store->status == 'blocked')>متجر محظور</option>
                                         </select>
+                                    </div>
+
+                                    <div class="mb-5">
+                                        <x-form.textarea-with-lable lable=" ملاحظة" name="block_reason"
+                                                                    placeholder="ادخل السبب او الاملاحظة " :value="$store->block_reason" />
                                     </div>
                                 </div>
                                 <!--begin::Body-->

@@ -65,6 +65,7 @@ class Category extends Model
         return $this->parent()->with('ancestors');
     }
 
+
     public function getStatusArAttribute()
     {
         switch($this->status){

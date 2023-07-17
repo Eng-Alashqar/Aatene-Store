@@ -3,20 +3,17 @@
 namespace App\Repositories\Admin;
 
 use App\Models\Store;
+use App\Repositories\RepositoryInterface;
 use Illuminate\Http\Request;
 
-class StoreRepository
+class StoreRepository implements RepositoryInterface
 {
-    private $store;
 
-    public function __construct(Store $store)
-    {
-        $this->store = $store;
-    }
+    public function __construct(private Store $store){}
 
-    public function getStoresWithPaginate($count = 7,$filters = null)
+    public function getWithPaginate($count = 7,$filters = null)
     {
-        return $this->store->latest()->accepted()->filter($filters)->paginate($count);
+        return $this->store->latest()->accepted()->filter($filters)->paginate((int) $count);
     }
 
     public function getPendingStoresWithPaginate($count = 10)
@@ -36,14 +33,19 @@ class StoreRepository
 
     public function getById($id)
     {
-        return $this->store->find($id);
+        return $this->store->findOrFail($id);
+    }
+
+    public function getByUserId($id)
+    {
+        return $this->store->where('user_id',$id)->firstOrFail();
     }
 
     public function update($id, $params)
     {
         $store = $this->getById($id);
-        return  $store->update(['status'=>$params['status']]);
-    }
+        return  $store->update([$params]);
+}
 
     public function acceptStore($id)
     {

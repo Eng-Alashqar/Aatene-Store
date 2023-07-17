@@ -5,7 +5,8 @@ use App\Http\Controllers\Shared\ProductController;
 use App\Http\Controllers\Shared\TopicController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('/dashboard')->name('dashboard.')->middleware(['auth', 'user-type:super_administrator,customer'])->group(function () {
+
+Route::prefix('/dashboard')->name('dashboard.')->middleware(['auth:seller'])->group(function () {
     Route::get('/', function () {
         return view('store.index');
     })->name('home');

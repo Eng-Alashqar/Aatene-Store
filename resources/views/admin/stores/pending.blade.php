@@ -66,7 +66,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="text-dark fw-bold  d-block mb-1 fs-6">
-                                                        {{ $store->user->name }}</div>
+                                                        {{ $store->seller->name }}</div>
                                                 </td>
                                                 <td class="text-end">
                                                     <a onclick="confirmDestroy({{ $store->id }}, this)"
@@ -113,6 +113,6 @@
         <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
         <!--end::Vendors Javascript-->
         <x-elements.delete-script name="stores" />
-      
+
     @endpush
 </x-admin.master>
