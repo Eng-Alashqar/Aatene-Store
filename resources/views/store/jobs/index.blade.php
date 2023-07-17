@@ -1,4 +1,4 @@
-<x-admin.master>
+<x-store.master>
     <!--begin::Main-->
     <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
         <!--begin::Content wrapper-->
@@ -153,4 +153,4 @@
         <!--end::Vendors Javascript-->
         <x-elements.delete-script name="jobs" dashboard="dashboard" />
     @endpush
-</x-admin.master>
+</x-store.master>
