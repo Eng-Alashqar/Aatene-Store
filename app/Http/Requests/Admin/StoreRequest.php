@@ -31,11 +31,10 @@ class StoreRequest extends FormRequest
                 'name' => ['required', 'string', 'max:100', 'unique:stores,name'],
                 'description' => ['required', 'string', 'max:64000'],
                 'location' => ['required', 'string', 'max:64000'],
-                'status' => ['required', 'in:active,blocked,inactive'],
+                'status' => ['sometimes', 'in:active,inactive'],
                 'is_accepted' => ['sometimes', 'boolean'],
                 'seller_id'=> ['required', 'exists:sellers,id'],
                 'regions'=> ['required', 'exists:regions,id'],
-
             ];
         } elseif ($this->method() === 'PUT' || $this->method() === 'PATCH') {
             $rules = [
@@ -57,7 +56,7 @@ class StoreRequest extends FormRequest
             'cover' => ['nullable' => 'الصورة (اختياري).','required' => 'صورة اللافتة مطلوبة.', 'image' => 'يجب أن تكون الملف المحمل صورة.', 'mimes' => 'صيغة الملف يجب أن تكون png، jpg، webm، jpeg، أو webp.'],
             'name' => ['required' => 'الاسم مطلوب.', 'string' => 'يجب أن يكون الاسم نصًا.', 'max' => 'الاسم يجب أن يحتوي على 100 حرف كحد أقصى.', 'unique' => 'الاسم موجود بالفعل.'],
             'description' => ['required' => 'الوصف مطلوب.', 'string' => 'يجب أن يكون الوصف نصًا.', 'max' => 'الوصف يجب أن يحتوي على 64000 حرف كحد أقصى.'],
-            'status' => ['required' => 'الحالة مطلوبة.', 'in' => 'الحالة يجب أن تكون مفعلة أو في اجازة او محظورة.'],
+            'status' => ['required' => 'الحالة مطلوبة.', 'in' => 'الحالة يجب أن تكون مفعلة أو في اجازة .'],
             'is_accepted' => ['sometimes' => 'قبول اضافة المتجر مطلوبة.', 'boolean' => 'الموافقة يجب أن تكون قبول أو رفض.'],
             'seller_id'=>['required' => 'حقل  المستخدم مطلوب.', 'exists' => 'هذا المستخدم غير موجود اختر مستخدم حقيقي.',],
             'regions'=>['required' => 'المناطق المدعومة مطلوبة .', 'exists' => 'هذه المناطق غير موجود اختر مناطق مدرجة.'],

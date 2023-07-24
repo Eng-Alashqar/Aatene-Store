@@ -2,6 +2,7 @@
 
 namespace App\Models\Scopes;
 
+use App\Models\Seller;
 use App\Services\Admin\StoreService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -15,11 +16,18 @@ class StoreScope implements Scope
     public function apply(Builder $builder, Model $model): void
     {
         $user = request()->user();
-        $store = app()->make(StoreService::class)->getByUserId($user->id);
-        if($user && $user->type == 'store_manager' && $store)
+        // $store = app()->make(StoreService::class)->getByUserId($user->id);
+        // if($user && $user->type == 'store_manager' && $store)
+        // {
+        //     $builder->where('store_id',$store->id);
+        // }
+
+        if($user instanceof Seller)
         {
-            $builder->where('store_id',$store->id);
+            $builder->where('store_id',$user->store_id);
         }
+
+
 
     }
 }

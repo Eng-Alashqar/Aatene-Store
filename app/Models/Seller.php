@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use App\Traits\HasPhoto;
-use Illuminate\Foundation\Auth\User;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Foundation\Auth\User;
+use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Seller extends User
+class Seller extends User implements JWTSubject
 {
     use HasFactory , Notifiable , HasApiTokens , HasPhoto;
 
@@ -47,4 +48,28 @@ class Seller extends User
     {
         return $this->belongsTo(Store::class);
     }
+
+      /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier() {
+        return $this->getKey();
+    }
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims() {
+        return [];
+    }
+
+
+    public function profile()
+    {
+        return $this->morphOne(Profile::class,'userable');
+    }
+
 }

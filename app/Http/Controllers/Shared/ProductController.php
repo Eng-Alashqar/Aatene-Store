@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Shared;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Shared\ProductRequest;
-use App\Models\Product;
+use App\Models\Store\Product;
 use App\Services\Admin\CategoryService;
 use App\Services\Shared\ProductService;
 use Illuminate\Http\Request;

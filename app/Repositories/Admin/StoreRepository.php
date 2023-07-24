@@ -8,8 +8,10 @@ use Illuminate\Http\Request;
 
 class StoreRepository implements RepositoryInterface
 {
-
-    public function __construct(private Store $store){}
+    private $store;
+    public function __construct(){
+        $this->store = new Store;
+    }
 
     public function getWithPaginate($count = 7,$filters = null)
     {
@@ -36,10 +38,6 @@ class StoreRepository implements RepositoryInterface
         return $this->store->findOrFail($id);
     }
 
-    public function getByUserId($id)
-    {
-        return $this->store->where('user_id',$id)->firstOrFail();
-    }
 
     public function update($id, $params)
     {

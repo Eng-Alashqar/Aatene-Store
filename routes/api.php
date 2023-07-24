@@ -3,6 +3,9 @@
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\StoreController;
+use App\Http\Controllers\Auth\Seller\SellerAuthController;
+use App\Http\Controllers\Auth\User\UserAuthController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,10 +20,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::get('products', ProductController::class);
-Route::get('categories', CategoryController::class);
-Route::get('stores', StoreController::class);
+
+require __DIR__.'/api/auth.php';
+require __DIR__.'/api/seller.php';
+require __DIR__.'/api/user.php';
+
+
+

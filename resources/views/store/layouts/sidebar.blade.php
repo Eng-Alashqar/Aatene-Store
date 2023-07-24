@@ -84,7 +84,7 @@
                 </div>
                 <!--end:Menu item-->
                 <div class="separator separator-dashed mx-lg-5 mt-2 mb-6"></div> --}}
-{{--
+
                 <!--begin:Menu item-->
                 <x-elements.sidebar-menu-item lable="إدارة المنتجات" customClass="menu-title fs-4"
                     index="dashboard.products.index" create="dashboard.products.create">
@@ -104,21 +104,22 @@
                     <x-elements.sidebar-li-sub-menu route="dashboard.products.create" title="إضافة منتج جديد" />
                 </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
-
-                <!--begin:Menu item-->
-                <x-elements.sidebar-menu-item lable="إدارة اعلانات الموقع" customClass="menu-title fs-4"
-                    index="dashboard.products.index" create="dashboard.products.create">
-                    <x-slot name="icon">
-                        <i class="ki-duotone ki-chart-line-star fs-2">
-                            <i class="path1"></i>
-                            <i class="path2"></i>
-                            <i class="path3"></i>
-                        </i>
-                    </x-slot>
-                    <x-elements.sidebar-li-sub-menu route="dashboard.products.index" title="متابعة الاعلانات" />
-                    <x-elements.sidebar-li-sub-menu route="dashboard.products.create" title="إضافة اعلان " />
-                </x-elements.sidebar-menu-item>
-                <!--end:Menu item--> --}}
+                {{--
+                                <!--begin:Menu item-->
+                                <x-elements.sidebar-menu-item lable="إدارة اعلانات الموقع" customClass="menu-title fs-4"
+                                    index="dashboard.products.index" create="dashboard.products.create">
+                                    <x-slot name="icon">
+                                        <i class="ki-duotone ki-chart-line-star fs-2">
+                                            <i class="path1"></i>
+                                            <i class="path2"></i>
+                                            <i class="path3"></i>
+                                        </i>
+                                    </x-slot>
+                                    <x-elements.sidebar-li-sub-menu route="dashboard.products.index" title="متابعة الاعلانات" />
+                                    <x-elements.sidebar-li-sub-menu route="dashboard.products.create" title="إضافة اعلان " />
+                                </x-elements.sidebar-menu-item>
+                                <!--end:Menu item-->
+                --}}
 
 
                 <!--begin:Menu item-->
@@ -152,23 +153,24 @@
                     <x-elements.sidebar-li-sub-menu route="dashboard.jobs.create" title="إضافة وظيفة " />
                 </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
-{{--
-                <!--begin:Menu item-->
-                <x-elements.sidebar-menu-item lable="إدارة اعلانات الموقع" customClass="menu-title fs-4"
-                    index="admin.stores.index" create="admin.stores.create">
-                    <x-slot name="icon">
-                        <i class="ki-duotone ki-chart-line-star fs-2">
-                            <i class="path1"></i>
-                            <i class="path2"></i>
-                            <i class="path3"></i>
-                        </i>
-                    </x-slot>
-                    <x-elements.sidebar-li-sub-menu route="admin.stores.index" title="متابعة الاعلانات" />
-                    <x-elements.sidebar-li-sub-menu route="admin.stores.create" title="إضافة اعلان " />
-                </x-elements.sidebar-menu-item>
-                <!--end:Menu item--> --}}
+            {{--
+                            <!--begin:Menu item-->
+                            <x-elements.sidebar-menu-item lable="إدارة اعلانات الموقع" customClass="menu-title fs-4"
+                                index="admin.stores.index" create="admin.stores.create">
+                                <x-slot name="icon">
+                                    <i class="ki-duotone ki-chart-line-star fs-2">
+                                        <i class="path1"></i>
+                                        <i class="path2"></i>
+                                        <i class="path3"></i>
+                                    </i>
+                                </x-slot>
+                                <x-elements.sidebar-li-sub-menu route="admin.stores.index" title="متابعة الاعلانات" />
+                                <x-elements.sidebar-li-sub-menu route="admin.stores.create" title="إضافة اعلان " />
+                            </x-elements.sidebar-menu-item>
+                            <!--end:Menu item-->
+            --}}
 
-                {{-- <!--begin:Menu item-->
+            {{-- <!--begin:Menu item-->
                 <div class="menu-item pt-5">
                     <!--begin:Menu content-->
                     <div class="menu-content">
@@ -178,41 +180,43 @@
                 </div>
                 <!--end:Menu item-->
 
-                <div class="separator separator-dashed mx-lg-5 mt-2 mb-6"></div> --}}
-{{--
-                <!--begin:Menu item-->
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                    <!--begin:Menu link-->
-                    <span class="menu-link">
-                        <span class="menu-icon">
-                            <i class="ki-duotone ki-address-book fs-2">
-                                <span class="path1"></span>
-                                <span class="path2"></span>
-                                <span class="path3"></span>
-                            </i>
-                        </span>
-                        <span class="menu-title fs-4">الملفات الشخصية </span>
-                        <span class="menu-arrow"></span>
-                    </span>
-                    <!--end:Menu link-->
-                    <!--begin:Menu sub-->
-                    <div class="menu-sub menu-sub-accordion">
-                        <!--begin:Menu item-->
-                        <div class="menu-item">
-                            <!--begin:Menu link-->
-                            <a class="menu-link" href="../../demo1/dist/pages/user-profile/overview.html">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
+                <div class="separator separator-dashed mx-lg-5 mt-2 mb-6"></div>
+            --}}
+            {{--
+                            <!--begin:Menu item-->
+                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                <!--begin:Menu link-->
+                                <span class="menu-link">
+                                    <span class="menu-icon">
+                                        <i class="ki-duotone ki-address-book fs-2">
+                                            <span class="path1"></span>
+                                            <span class="path2"></span>
+                                            <span class="path3"></span>
+                                        </i>
+                                    </span>
+                                    <span class="menu-title fs-4">الملفات الشخصية </span>
+                                    <span class="menu-arrow"></span>
                                 </span>
-                                <span class="menu-heading fs-5">نظرة عامة</span>
-                            </a>
-                            <!--end:Menu link-->
-                        </div>
-                        <!--end:Menu item-->
-                    </div>
-                    <!--end:Menu sub-->
-                </div>
-                <!--end:Menu item--> --}}
+                                <!--end:Menu link-->
+                                <!--begin:Menu sub-->
+                                <div class="menu-sub menu-sub-accordion">
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" href="../../demo1/dist/pages/user-profile/overview.html">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-heading fs-5">نظرة عامة</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                </div>
+                                <!--end:Menu sub-->
+                            </div>
+                            <!--end:Menu item-->
+            --}}
             </div>
             <!--end::Menu-->
         </div>
@@ -233,17 +237,7 @@
             </a>
         </div>
 
-        <div class="app-sidebar-footer pt-2 pb-6 px-6">
-            <a href="https://preview.keenthemes.com/html/metronic/docs"
-                class="btn btn-flex flex-center btn-custom btn-primary overflow-hidden text-nowrap px-0 h-40px w-100"
-                data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click">
-                <span class="btn-label fs-4">الدعم الفني</span>
-                <i class="ki-duotone ki-document btn-icon fs-2 m-0">
-                    <span class="path1"></span>
-                    <span class="path2"></span>
-                </i>
-            </a>
-        </div>
+
     </div>
     <!--end::Footer-->
 </div>

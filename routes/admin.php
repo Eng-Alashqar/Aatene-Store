@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('/administrator')->name('admin.')->middleware(['auth:admin'])->group(function(){
-    Route::get('/',function(){
+    Route::get('/home',function(){
         return view('admin.index');
         })->name('home');
     Route::resource('stores',StoreController::class);
