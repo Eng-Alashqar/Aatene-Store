@@ -62,10 +62,10 @@ class JobController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(JobRequest $request, string $id)
     {
-        $this->jobService->update($id, $request->validated);
-        return redirect()->back()->with(['notification' => 'تم تعديل بينانات المنتج بنجاح']);
+        $this->jobService->update($id, $request->validated());
+        return redirect()->route('store.jobs.index')->with(['notification' => 'تم تعديل بينانات المنتج بنجاح']);
     }
 
     /**

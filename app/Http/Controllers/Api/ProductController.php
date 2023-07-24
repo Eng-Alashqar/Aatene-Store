@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
-use App\Models\Product;
+use App\Models\Store\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller

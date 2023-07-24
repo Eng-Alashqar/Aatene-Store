@@ -23,5 +23,4 @@ Route::prefix('/administrator')->name('admin.')->middleware(['auth:admin'])->gro
     Route::resource('permissions',RegionController::class);
     Route::resource('faqs',FaqsController::class);
     Route::resource('admins',AdminController::class);
-
 });

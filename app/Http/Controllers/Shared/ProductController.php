@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Shared;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Shared\ProductRequest;
-use App\Models\Product;
+use App\Models\Store\Product;
 use App\Services\Admin\CategoryService;
 use App\Services\Shared\ProductService;
 use Illuminate\Http\Request;
@@ -41,9 +41,9 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $this->productService->store($request->validated());
         return redirect()->back()->with(['notification' => 'تم اضافة منتج جديد']);
     }
@@ -73,7 +73,7 @@ class ProductController extends Controller
     public function update(ProductRequest $request, $id)
     {
         $this->productService->update($id, $request->validated);
-        return redirect()->back()->with(['notification' => 'تم تعديل بينانات المنتج بنجاح']);
+        return redirect()->route('store.products.index')->with(['notification' => 'تم تعديل بينانات المنتج بنجاح']);
     }
 
     /**
