@@ -44,14 +44,9 @@ return [
             'driver' => 'session',
             'provider' => 'sellers',
         ],
-        'user_api' => [
+        'user' => [
             'driver' => 'jwt',
             'provider' => 'users',
-            'hash' => false,
-        ],
-        'seller_api' => [
-            'driver' => 'jwt',
-            'provider' => 'sellers',
             'hash' => false,
         ],
     ],

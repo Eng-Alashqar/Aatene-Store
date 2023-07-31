@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Models\Chat\Conversation;
+use App\Models\Chat\Message;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -15,6 +17,15 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public function conversations()
+    {
+        return $this->morphToMany(Conversation::class, 'initiator', 'participants')->latest();
+    }
+
+    public function sentMessages()
+    {
+        $this->morphedByMany(Message::class,'sender');
+    }
 
     public function profile()
     {

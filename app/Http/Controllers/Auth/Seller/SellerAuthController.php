@@ -1,11 +1,14 @@
 <?php
+
 namespace App\Http\Controllers\Auth\Seller;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\Seller\SellerResource;
+use App\Models\Seller;
 use Illuminate\Http\Request;
 use App\Services\Admin\StoreService;
-use App\Services\Api\Auth\Seller\LoginService;
-use App\Services\Api\Auth\Seller\RegisterService;
+use App\Services\Api\Auth\LoginService;
+use App\Services\Api\Auth\RegisterService;
 
 
 
@@ -16,9 +19,12 @@ class SellerAuthController extends Controller
      *
      * @return void
      */
-    public function __construct(private StoreService $storeService) {
-        $this->middleware('auth:seller_api', ['except' => ['login', 'register']]);
+    public function __construct(private StoreService $storeService)
+    {
+        $this->middleware('auth:seller', ['except' => ['login', 'register']]);
     }
+
+
     /**
      * Get a JWT via given credentials.
      *
@@ -26,7 +32,7 @@ class SellerAuthController extends Controller
      */
     public function login(Request $request)
     {
-        return  (new LoginService())->login($request);
+        return (new LoginService('seller'))->login($request);
     }
     /**
      * Register a User.
@@ -35,26 +41,16 @@ class SellerAuthController extends Controller
      */
     public function register(Request $request)
     {
-        return  (new RegisterService())->register($request);
-    }
-
-    /**
-     * Create Store .
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function createStore(Request $request)
-    {
-        return  (new RegisterService())->register($request);
+        return (new RegisterService(new Seller,SellerResource::class))->register($request);
     }
     /**
      * Log the user out (Invalidate the token).
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function singOut()
+    public function logout()
     {
-        auth()->guard('seller_api')->logout();
+        auth()->guard('seller')->logout();
         return response()->json(['message' => 'تسجيل خروج المستخدم بنجاح']);
     }
     /**
@@ -64,7 +60,7 @@ class SellerAuthController extends Controller
      */
     public function userProfile()
     {
-        return response()->json(auth('seller_api')->user()->profile);
+        return response()->json(auth('seller')->user()->profile);
     }
 
     /**
@@ -74,6 +70,6 @@ class SellerAuthController extends Controller
      */
     public function userStore()
     {
-        return response()->json(auth('seller_api')->user()->store);
+        return response()->json(auth('seller')->user()->store);
     }
 }

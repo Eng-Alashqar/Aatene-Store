@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\Api\Auth\Seller;
+namespace App\Services\Api\Auth;
 
-use App\Http\Requests\Seller\LoginRequest;
+use App\Http\Requests\Api\LoginRequest;
 use App\Http\Resources\Api\Seller\SellerResource;
 use App\Models\Seller;
 use Illuminate\Support\Facades\Validator;
@@ -12,19 +12,19 @@ use Symfony\Component\HttpFoundation\Response;
 class LoginService
 {
 
-    private $model;
-    public function __construct()
+    private $guard;
+    public function __construct($guard)
     {
-        $this->model  = new Seller;
+        $this->guard  = $guard;
     }
 
     public function createNewToken($token)
     {
-        $user = auth()->guard('seller')->user();
+        $user = auth()->guard($this->guard)->user();
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' =>120,
+            'expires_in' => 120,
             'user' => new SellerResource($user)
         ]);
     }
@@ -38,11 +38,9 @@ class LoginService
             return response()->json(['errors' => $validator->errors()], Response::HTTP_BAD_REQUEST);
         }
         $data = $validator->validated();
-        if (!$token = auth()->guard('seller')->attempt($data)) {
+        if (!$token = auth()->guard($this->guard)->attempt($data)) {
             return response()->json(['message' => 'Unauthorize'], Response::HTTP_UNAUTHORIZED);
         }
         return $this->createNewToken($token);
-
-
     }
 }

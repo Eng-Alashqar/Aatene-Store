@@ -2,16 +2,42 @@
 
 namespace App\Models;
 
+use App\Models\Chat\Conversation;
+use App\Models\Chat\Message;
 use App\Traits\HasPhoto;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class Admin extends User
+class Admin extends User implements JWTSubject
 {
     use HasFactory,HasApiTokens,HasPhoto,HasRoles;
+
+    public function initiatorConversations()
+    {
+        return $this->morphMany(Conversation::class,'initiator');
+    }
+
+    public function ParticipantConversations()
+    {
+        return $this->morphMany(Conversation::class,'participant');
+    }
+
+
+    public function getConversationsAttribute(){
+        $conversations1 = $this->initiatorConversations;
+        $conversations2 = $this->ParticipantConversations;
+        $conversations = array($conversations1,$conversations2);
+        return $conversations;
+    }
+
+    public function sentMessages()
+    {
+        $this->morphedByMany(Message::class,'userable');
+    }
 
     public function scopeExceptAuthUser(Builder $builder)
     {
@@ -64,5 +90,22 @@ class Admin extends User
                 return 'مستخدم في اجازة ';
                 break;
         }
+    }
+
+      /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier() {
+        return $this->getKey();
+    }
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims() {
+        return [];
     }
 }

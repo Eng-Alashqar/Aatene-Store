@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Seller;
+namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,7 +24,7 @@ class RegisterRequest extends FormRequest
         return [
             'first_name' => ['required','string', 'between:2,100'],
             'last_name' => ['required','string', 'between:2,100'],
-            'email' => ['required','string','email','max:100','unique:sellers','unique:users,email'],
+            'email' => ['required','string','email','max:100','unique:sellers,email','unique:users,email'],
             'password' => 'required|string|confirmed|min:6',
             'phone_number'=>['required','numeric'],
             'birthday'=>['nullable','date', 'before:today'],

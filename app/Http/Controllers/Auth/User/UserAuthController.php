@@ -2,10 +2,11 @@
 namespace App\Http\Controllers\Auth\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\User\UserResource;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Services\Api\Auth\User\LoginService;
-use App\Services\Api\Auth\User\RegisterService;
+use App\Services\Api\Auth\LoginService;
+use App\Services\Api\Auth\RegisterService;
 
 
 
@@ -17,7 +18,7 @@ class UserAuthController extends Controller
      * @return void
      */
     public function __construct() {
-        $this->middleware('auth:user_api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:user', ['except' => ['login', 'register']]);
     }
     /**
      * Get a JWT via given credentials.
@@ -26,7 +27,7 @@ class UserAuthController extends Controller
      */
     public function login(Request $request)
     {
-        return  (new LoginService())->login($request);
+        return  (new LoginService('user'))->login($request);
     }
     /**
      * Register a User.
@@ -35,7 +36,7 @@ class UserAuthController extends Controller
      */
     public function register(Request $request)
     {
-        return  (new RegisterService())->register($request);
+        return  (new RegisterService(new User,UserResource::class))->register($request);
     }
 
     /**
@@ -43,9 +44,9 @@ class UserAuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function singOut()
+    public function logout()
     {
-        auth()->guard('user_api')->logout();
+        auth()->guard('user')->logout();
         return response()->json(['message' => 'تسجيل خروج المستخدم بنجاح']);
     }
     /**
@@ -55,7 +56,7 @@ class UserAuthController extends Controller
      */
     public function userProfile()
     {
-        return response()->json(auth('user_api')->user()->profile);
+        return response()->json(auth('user')->user()->profile);
     }
 
 }

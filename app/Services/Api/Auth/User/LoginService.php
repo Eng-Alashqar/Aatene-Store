@@ -24,7 +24,7 @@ class LoginService
             'token_type' => 'bearer',
             'expires_in' => config('jwt.ttl'),
             'user' => new UserResource($user)
-        ]);
+                ]);
     }
 
     public function login($request)
