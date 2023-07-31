@@ -1,26 +1,60 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\API;
 
-use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Store\Products\StoreProductRequest;
+use App\Http\Requests\Store\Products\UpdateProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Store\Product;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Display a listing of the resource.
      */
-    public function __invoke(Request $request)
+    public function index()
     {
-        $products = Product::all();
+        $products = ProductResource::collection(Product::paginate());
+        return response()->json($products);
+    }
 
-        if (!$products) {
-            return ApiResponse::sendResponse(200, 'Products Not Found', []);
-        }
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreProductRequest $request)
+    {
+        $product = new ProductResource(Product::create($request->all()));
+        return response()->json($product, 201, [
+            "Location" => route('products.show', $product->id),
+        ]);
+    }
 
-        return ApiResponse::sendResponse(200, 'Products Retrieved Successfully', ProductResource::collection($products));
+    /**
+     * Display the specified resource.
+     */
+    public function show(Product $product)
+    {
+        return new ProductResource($product);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateProductRequest $request, Product $product)
+    {
+        $product->update($request->all());
+        return response()->json($product, 201, [
+            'location' => route('products.show', $product->id),
+        ]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Product $product)
+    {
+        $product->delete();
+        return ['message' => 'The product deleted successfully'];
     }
 }

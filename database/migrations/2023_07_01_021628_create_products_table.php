@@ -22,7 +22,6 @@ return new class extends Migration
             $table->float('rating')->default(0);
             $table->boolean('featured')->default(true);
             $table->boolean('is_available')->default(true);
-
             $table->enum('status', ['draft', 'active', 'archived'])->default('draft');
             $table->double('visits_count')->default(0);
             $table->foreignId('category_id')

@@ -5,6 +5,7 @@ namespace App\Models\Store;
 use App\Models\Store;
 use App\Traits\HasPhoto;
 use App\Models\Admin\Category;
+use App\Models\Favorite;
 use App\Models\Scopes\StoreScope;
 use App\Observers\ProductObserver;
 use Illuminate\Database\Eloquent\Model;
@@ -55,6 +56,11 @@ class Product extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
     }
 }
 

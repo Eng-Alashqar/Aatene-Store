@@ -14,31 +14,31 @@ class Store extends Model
 {
     use HasFactory, HasPhoto;
 
-    protected $fillable = ['name', 'slug','location', 'description', 'status', 'is_accepted', 'rating', 'level','block_reason'];
+    protected $fillable = ['name', 'slug', 'location', 'description', 'status', 'is_accepted', 'rating', 'level', 'block_reason'];
 
     public static function  booted()
     {
         static::observe(StoreObserver::class);
     }
-    public function scopeFilter(Builder $builder,$filters)
+    public function scopeFilter(Builder $builder, $filters)
     {
         $params = array_merge([
-            'search'=>null,
-            'status'=>null,
-            'level'=>null,
+            'search' => null,
+            'status' => null,
+            'level' => null,
 
-        ],$filters);
+        ], $filters);
 
-        $builder->when($params['search'],function($builder , $value){
-            $builder->where('name','like',"%$value%")->orWhere('description','like',"%$value%");
+        $builder->when($params['search'], function ($builder, $value) {
+            $builder->where('name', 'like', "%$value%")->orWhere('description', 'like', "%$value%");
         });
 
-        $builder->when($params['status'],function($builder,$value){
-            $builder->where('status','=',$value);
+        $builder->when($params['status'], function ($builder, $value) {
+            $builder->where('status', '=', $value);
         });
 
-        $builder->when($params['level'],function($builder,$value){
-            $builder->where('level','=',$value);
+        $builder->when($params['level'], function ($builder, $value) {
+            $builder->where('level', '=', $value);
         });
         /*
         $builder->whereHas('regions',function($builder,$value){
@@ -65,7 +65,7 @@ class Store extends Model
 
     public function seller()
     {
-        return $this->hasOne(Seller::class)->withDefault(['name'=>'لايوجد حاليا']);
+        return $this->hasOne(Seller::class)->withDefault(['name' => 'لايوجد حاليا']);
     }
 
     public function products()
@@ -76,6 +76,11 @@ class Store extends Model
     public function regions()
     {
         return $this->belongsToMany(Region::class, 'store_region', 'store_id', 'region_id', 'id', 'id');
+    }
+
+    public function followers()
+    {
+        return $this->hasMany(Follower::class, 'store_id');
     }
 
     public function getStatusArAttribute()
@@ -113,5 +118,4 @@ class Store extends Model
                 break;
         }
     }
-
 }
