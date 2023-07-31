@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\FavoriteController;
 use App\Http\Controllers\API\FollowerController;
 use App\Http\Controllers\Api\ProductController;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['api', 'check_password'])->group(function () {
     Route::apiResource('/products', ProductController::class);
+    Route::get('/categories', CategoryController::class);
 
     Route::prefix('/favorites')->group(function () {
         Route::get('/', [FavoriteController::class, 'index']);
@@ -31,6 +33,4 @@ Route::middleware(['api', 'check_password'])->group(function () {
 
     Route::post('store/{store}/follow', [FollowerController::class, 'follow'])->name('store.follow');
     Route::delete('store/{store}/unfollow', [FollowerController::class, 'unfollow'])->name('store.unfollow');
-
-
 });

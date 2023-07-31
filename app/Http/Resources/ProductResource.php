@@ -22,7 +22,7 @@ class ProductResource extends JsonResource
             'quantity' => $this->quantity,
             'is_available' => $this->is_available,
             'store_id' => new StoreResourse($this->store),
-            'category_id' => new CateogryResourse($this->category),
+            'category_id' => new CategoryResource($this->category),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
