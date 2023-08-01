@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
+        'guard' => 'seller',
+        'passwords' => 'sellers',
     ],
 
     /*
@@ -45,10 +45,11 @@ return [
             'driver' => 'session',
             'provider' => 'sellers',
         ],
+        'user' => [
+            'driver' => 'jwt',
 
-        'web' => [
-            'driver' => 'session',
             'provider' => 'users',
+            'hash' => false,
         ],
     ],
 

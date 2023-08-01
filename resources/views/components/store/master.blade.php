@@ -8,7 +8,7 @@
     <title>{{ config('app.name') }} | {{ config('app.description') }}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <x-images.app-icon/>
+    <x-images.app-icon />
     <!--begin::Fonts(mandatory for all pages)-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <!--end::Fonts-->
@@ -31,14 +31,13 @@
     <style>
         html {
             direction: rtl;
-            font-family: 'Tajawal', sans-serif
-            !important;
-            font-size: 14px!important;
-        }
-        body{
-            font-family: "Tajawal", sans-serif !important;
+            font-family: 'Tajawal', sans-serif !important;
+            font-size: 14px !important;
         }
 
+        body {
+            font-family: "Tajawal", sans-serif !important;
+        }
     </style>
 </head>
 <!--end::Head-->
@@ -77,8 +76,8 @@
             <!--begin::Wrapper-->
             <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
                 @include('store.layouts.sidebar')
-                {{$slot}}
-            </div>  
+                {{ $slot }}
+            </div>
             <!--end::Wrapper-->
         </div>
         <!--end::Page-->

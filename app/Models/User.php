@@ -4,8 +4,11 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Models\Chat\Conversation;
+use App\Models\Chat\Message;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,6 +17,22 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    public function conversations()
+    {
+        return $this->morphToMany(Conversation::class, 'initiator', 'participants')->latest();
+    }
+
+    public function sentMessages()
+    {
+        $this->morphedByMany(Message::class,'sender');
+    }
+
+    public function profile()
+    {
+        return $this->morphOne(Profile::class,'userable');
+    }
+
 
     /**
      * The attributes that are mass assignable.
@@ -75,8 +94,9 @@ class User extends Authenticatable implements JWTSubject
      *
      * @return array
      */
-    public function getJWTCustomClaims()
-    {
+
+    public function getJWTCustomClaims() {
         return [];
     }
+
 }

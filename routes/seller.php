@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('/dashboard')->name('dashboard.')->middleware(['auth:seller'])->group(function () {
-    Route::get('/', function () {
+    Route::get('/home', function () {
         return view('store.index');
     })->name('home');
     Route::resource('products', ProductController::class);

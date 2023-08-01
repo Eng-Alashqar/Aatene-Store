@@ -8,7 +8,10 @@ use App\Services\ServiceInterface;
 
 class StoreService implements ServiceInterface
 {
-    public function __construct(private StoreRepository $storeRepository){}
+    private $storeRepository;
+    public function __construct(){
+        $this->storeRepository = new StoreRepository;
+    }
 
     public function get($count,$filters)
     {
@@ -35,11 +38,6 @@ class StoreService implements ServiceInterface
     public function getById($id)
     {
         return $this->storeRepository->getById($id);
-    }
-
-    public function getByUserId($id)
-    {
-        return $this->storeRepository->getByUserId($id);
     }
 
     public function update($id, $params)

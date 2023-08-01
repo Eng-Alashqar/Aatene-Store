@@ -69,5 +69,7 @@ class Kernel extends HttpKernel
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
         'check_password' => \App\Http\Middleware\CheckPassword::class
+        // 'jwt.auth' => \App\Http\Middleware\JwtMiddleware::class,
+        'ChangeToJwtDriver'=>\App\Http\Middleware\ChangeGuardConfigDriverToJwtMiddleware::class
     ];
 }

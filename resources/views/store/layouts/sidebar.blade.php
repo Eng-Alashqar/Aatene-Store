@@ -6,33 +6,23 @@
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
         <!--begin::Logo image-->
         <a href="{{ url('/') }}">
-            {{-- <img alt="Logo" src="{{ asset('assets/media/aatene-logo.png') }}"
-                class="h-50px app-sidebar-logo-default" />
-            <img alt="Logo" src="{{ asset('assets/media/aatene-logo.png') }}"
-                class="h-20px app-sidebar-logo-minimize" /> --}}
             <x-images.logo-light-lg />
             <x-images.logo-light />
         </a>
         <!--end::Logo image-->
         <!--begin::Sidebar toggle-->
         <!--begin::Minimized sidebar setup:
-            if (isset($_COOKIE["sidebar_minimize_state"]) && $_COOKIE["sidebar_minimize_state"] === "on") {
-                1. "src/js/layout/sidebar.js" adds "sidebar_minimize_state" cookie value to save the sidebar minimize state.
-                2. Set data-kt-app-sidebar-minimize="on" attribute for body tag.
-                3. Set data-kt-toggle-state="active" attribute to the toggle element with "kt_app_sidebar_toggle" id.
-                4. Add "active" class to to sidebar toggle element with "kt_app_sidebar_toggle" id.
-            }
-        -->
-        <div id="kt_app_sidebar_toggle"
-            class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary body-bg h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"
-            data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"
-            data-kt-toggle-name="app-sidebar-minimize">
-            <i class="ki-duotone ki-double-left fs-2 rotate-180">
-                <span class="path1"></span>
-                <span class="path2"></span>
-            </i>
-        </div>
-        <!--end::Sidebar toggle-->
+
+                        <div id="kt_app_sidebar_toggle"
+                            class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary body-bg h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"
+                            data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"
+                            data-kt-toggle-name="app-sidebar-minimize">
+                            <i class="ki-duotone ki-double-left fs-2 rotate-180">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                        </div>
+                        <!--end::Sidebar toggle-->
     </div>
     <!--end::Logo-->
     <!--begin::sidebar menu-->
@@ -84,7 +74,7 @@
                     <!--end:Menu sub-->
                 </div>
                 <!--end:Menu item-->
-                <!--begin:Menu item-->
+                {{-- <!--begin:Menu item-->
                 <div class="menu-item pt-5">
                     <!--begin:Menu content-->
                     <div class="menu-content">
@@ -93,7 +83,7 @@
                     <!--end:Menu content-->
                 </div>
                 <!--end:Menu item-->
-                <div class="separator separator-dashed mx-lg-5 mt-2 mb-6"></div>
+                <div class="separator separator-dashed mx-lg-5 mt-2 mb-6"></div> --}}
 
                 <!--begin:Menu item-->
                 <x-elements.sidebar-menu-item lable="المنتجات" customClass="menu-title fs-4"
@@ -115,6 +105,7 @@
                 </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
 
+
                 <!--begin:Menu item-->
                 <x-elements.sidebar-menu-item lable="الخدمات" customClass="menu-title fs-4"
                     index="dashboard.services.index" create="dashboard.services.create">
@@ -129,6 +120,24 @@
                     <x-elements.sidebar-li-sub-menu route="dashboard.services.create" title="إضافة خدمة جديدة" />
                 </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
+
+                {{--
+                                <!--begin:Menu item-->
+                                <x-elements.sidebar-menu-item lable="إدارة اعلانات الموقع" customClass="menu-title fs-4"
+                                    index="dashboard.products.index" create="dashboard.products.create">
+                                    <x-slot name="icon">
+                                        <i class="ki-duotone ki-chart-line-star fs-2">
+                                            <i class="path1"></i>
+                                            <i class="path2"></i>
+                                            <i class="path3"></i>
+                                        </i>
+                                    </x-slot>
+                                    <x-elements.sidebar-li-sub-menu route="dashboard.products.index" title="متابعة الاعلانات" />
+                                    <x-elements.sidebar-li-sub-menu route="dashboard.products.create" title="إضافة اعلان " />
+                                </x-elements.sidebar-menu-item>
+                                <!--end:Menu item-->
+                --}}
+
 
 
                 <!--begin:Menu item-->
@@ -198,6 +207,7 @@
                 <!--end:Menu item-->
 
                 <!--begin:Menu item-->
+
                 <div class="menu-item pt-5">
                     <!--begin:Menu content-->
                     <div class="menu-content">
@@ -208,40 +218,42 @@
                 <!--end:Menu item-->
 
                 <div class="separator separator-dashed mx-lg-5 mt-2 mb-6"></div>
-
-                <!--begin:Menu item-->
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                    <!--begin:Menu link-->
-                    <span class="menu-link">
-                        <span class="menu-icon">
-                            <i class="ki-duotone ki-address-book fs-2">
-                                <span class="path1"></span>
-                                <span class="path2"></span>
-                                <span class="path3"></span>
-                            </i>
-                        </span>
-                        <span class="menu-title fs-4">الملفات الشخصية </span>
-                        <span class="menu-arrow"></span>
-                    </span>
-                    <!--end:Menu link-->
-                    <!--begin:Menu sub-->
-                    <div class="menu-sub menu-sub-accordion">
-                        <!--begin:Menu item-->
-                        <div class="menu-item">
-                            <!--begin:Menu link-->
-                            <a class="menu-link" href="../../demo1/dist/pages/user-profile/overview.html">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
+            --}}
+            {{--
+                            <!--begin:Menu item-->
+                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                <!--begin:Menu link-->
+                                <span class="menu-link">
+                                    <span class="menu-icon">
+                                        <i class="ki-duotone ki-address-book fs-2">
+                                            <span class="path1"></span>
+                                            <span class="path2"></span>
+                                            <span class="path3"></span>
+                                        </i>
+                                    </span>
+                                    <span class="menu-title fs-4">الملفات الشخصية </span>
+                                    <span class="menu-arrow"></span>
                                 </span>
-                                <span class="menu-heading fs-5">نظرة عامة</span>
-                            </a>
-                            <!--end:Menu link-->
-                        </div>
-                        <!--end:Menu item-->
-                    </div>
-                    <!--end:Menu sub-->
-                </div>
-                <!--end:Menu item-->
+                                <!--end:Menu link-->
+                                <!--begin:Menu sub-->
+                                <div class="menu-sub menu-sub-accordion">
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" href="../../demo1/dist/pages/user-profile/overview.html">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-heading fs-5">نظرة عامة</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                </div>
+                                <!--end:Menu sub-->
+                            </div>
+                            <!--end:Menu item-->
+            --}}
             </div>
             <!--end::Menu-->
         </div>
@@ -262,17 +274,7 @@
             </a>
         </div>
 
-        <div class="app-sidebar-footer pt-2 pb-6 px-6">
-            <a href="https://preview.keenthemes.com/html/metronic/docs"
-                class="btn btn-flex flex-center btn-custom btn-primary overflow-hidden text-nowrap px-0 h-40px w-100"
-                data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click">
-                <span class="btn-label fs-4">الدعم الفني</span>
-                <i class="ki-duotone ki-document btn-icon fs-2 m-0">
-                    <span class="path1"></span>
-                    <span class="path2"></span>
-                </i>
-            </a>
-        </div>
+
     </div>
     <!--end::Footer-->
 </div>

@@ -16,13 +16,11 @@ class PhotoUpload
 
     public function uploadImages($images, $dir, $disk = 'public')
     {
-        $data_images = array();
-        $x = 0;
+        $data_images = [];
         foreach ($images as $image) {
             $name = rand() . time() . $image->getClientOriginalName();
             $path = $image->storeAs("$dir", $name, $disk);
-            $data_images[$x] = $path;
-            $x++;
+            $data_images[] = $path;
         }
         return $data_images;
     }

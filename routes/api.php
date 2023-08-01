@@ -4,6 +4,12 @@ use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\FavoriteController;
 use App\Http\Controllers\API\FollowerController;
 use App\Http\Controllers\Api\ProductController;
+
+use App\Http\Controllers\Api\StoreController;
+use App\Http\Controllers\Auth\Seller\SellerAuthController;
+use App\Http\Controllers\Auth\User\UserAuthController;
+use App\Http\Controllers\AuthController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,3 +40,13 @@ Route::middleware(['api', 'check_password'])->group(function () {
     Route::post('store/{store}/follow', [FollowerController::class, 'follow'])->name('store.follow');
     Route::delete('store/{store}/unfollow', [FollowerController::class, 'unfollow'])->name('store.unfollow');
 });
+
+
+require __DIR__.'/api/auth.php';
+require __DIR__.'/api/seller.php';
+require __DIR__.'/api/user.php';
+require __DIR__.'/api/chat.php';
+
+
+
+
