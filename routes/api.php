@@ -1,7 +1,10 @@
 <?php
 
-use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\FavoriteController;
+use App\Http\Controllers\API\FollowerController;
 use App\Http\Controllers\Api\ProductController;
+
 use App\Http\Controllers\Api\StoreController;
 use App\Http\Controllers\Auth\Seller\SellerAuthController;
 use App\Http\Controllers\Auth\User\UserAuthController;
@@ -24,11 +27,26 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+Route::middleware(['api', 'check_password'])->group(function () {
+    Route::apiResource('/products', ProductController::class);
+    Route::get('/categories', CategoryController::class);
+
+    Route::prefix('/favorites')->group(function () {
+        Route::get('/', [FavoriteController::class, 'index']);
+        Route::post('/', [FavoriteController::class, 'store']);
+        Route::delete('/{favorite}', [FavoriteController::class, 'destroy']);
+    });
+
+    Route::post('store/{store}/follow', [FollowerController::class, 'follow'])->name('store.follow');
+    Route::delete('store/{store}/unfollow', [FollowerController::class, 'unfollow'])->name('store.unfollow');
+});
+
 
 require __DIR__.'/api/auth.php';
 require __DIR__.'/api/seller.php';
 require __DIR__.'/api/user.php';
 require __DIR__.'/api/chat.php';
+
 
 
 

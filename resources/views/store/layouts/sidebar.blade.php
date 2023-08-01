@@ -78,7 +78,7 @@
                 <div class="menu-item pt-5">
                     <!--begin:Menu content-->
                     <div class="menu-content">
-                        <span class="menu-heading fw-bold text-uppercase fs-3">المتجر الالكتروني</span>
+                        <span class="menu-heading fw-bold text-uppercase fs-3">المنتجات والخدمات </span>
                     </div>
                     <!--end:Menu content-->
                 </div>
@@ -86,7 +86,7 @@
                 <div class="separator separator-dashed mx-lg-5 mt-2 mb-6"></div> --}}
 
                 <!--begin:Menu item-->
-                <x-elements.sidebar-menu-item lable="إدارة المنتجات" customClass="menu-title fs-4"
+                <x-elements.sidebar-menu-item lable="المنتجات" customClass="menu-title fs-4"
                     index="dashboard.products.index" create="dashboard.products.create">
                     <x-slot name="icon">
                         <i class="ki-duotone ki-call fs-2">
@@ -104,6 +104,23 @@
                     <x-elements.sidebar-li-sub-menu route="dashboard.products.create" title="إضافة منتج جديد" />
                 </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
+
+
+                <!--begin:Menu item-->
+                <x-elements.sidebar-menu-item lable="الخدمات" customClass="menu-title fs-4"
+                    index="dashboard.services.index" create="dashboard.services.create">
+                    <x-slot name="icon">
+                        <i class="ki-duotone ki-chart-line-star fs-2">
+                            <i class="path1"></i>
+                            <i class="path2"></i>
+                            <i class="path3"></i>
+                        </i>
+                    </x-slot>
+                    <x-elements.sidebar-li-sub-menu route="dashboard.services.index" title="عرض الخدمات" />
+                    <x-elements.sidebar-li-sub-menu route="dashboard.services.create" title="إضافة خدمة جديدة" />
+                </x-elements.sidebar-menu-item>
+                <!--end:Menu item-->
+
                 {{--
                                 <!--begin:Menu item-->
                                 <x-elements.sidebar-menu-item lable="إدارة اعلانات الموقع" customClass="menu-title fs-4"
@@ -122,12 +139,12 @@
                 --}}
 
 
+
                 <!--begin:Menu item-->
                 <div class="menu-item pt-5">
                     <!--begin:Menu content-->
                     <div class="menu-content">
-                        <span class="menu-heading fw-bold text-uppercase fs-3"> نظام الوظائف
-                            والإعلانات</span>
+                        <span class="menu-heading fw-bold text-uppercase fs-3">الوظائف والإعلانات</span>
                     </div>
                     <!--end:Menu content-->
                 </div>
@@ -135,8 +152,8 @@
                 <div class="separator separator-dashed mx-lg-5 mt-2 mb-6"></div>
 
                 <!--begin:Menu item-->
-                <x-elements.sidebar-menu-item lable="إدارة اعلانات الوظائف" customClass="menu-title fs-4"
-                    index="admin.stores.index" create="admin.stores.create">
+                <x-elements.sidebar-menu-item lable="الوظائف" customClass="menu-title fs-4" index="dashbaord.jobs.index"
+                    create="dashboard.jobs.create">
                     <x-slot name="icon">
                         <i class="ki-duotone ki-call fs-2">
                             <i class="path1"></i>
@@ -149,28 +166,48 @@
                             <i class="path8"></i>
                         </i>
                     </x-slot>
-                    <x-elements.sidebar-li-sub-menu route="dashboard.jobs.index" title="متابعة الوظائف " />
-                    <x-elements.sidebar-li-sub-menu route="dashboard.jobs.create" title="إضافة وظيفة " />
+                    <x-elements.sidebar-li-sub-menu route="dashboard.jobs.index" title="متابعة الوظائف" />
+                    <x-elements.sidebar-li-sub-menu route="dashboard.jobs.create" title="إضافة وظيفة" />
                 </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
-            {{--
-                            <!--begin:Menu item-->
-                            <x-elements.sidebar-menu-item lable="إدارة اعلانات الموقع" customClass="menu-title fs-4"
-                                index="admin.stores.index" create="admin.stores.create">
-                                <x-slot name="icon">
-                                    <i class="ki-duotone ki-chart-line-star fs-2">
-                                        <i class="path1"></i>
-                                        <i class="path2"></i>
-                                        <i class="path3"></i>
-                                    </i>
-                                </x-slot>
-                                <x-elements.sidebar-li-sub-menu route="admin.stores.index" title="متابعة الاعلانات" />
-                                <x-elements.sidebar-li-sub-menu route="admin.stores.create" title="إضافة اعلان " />
-                            </x-elements.sidebar-menu-item>
-                            <!--end:Menu item-->
-            --}}
 
-            {{-- <!--begin:Menu item-->
+                <!--begin:Menu item-->
+                <x-elements.sidebar-menu-item lable="المدونة" customClass="menu-title fs-4"
+                    index="dashbaord.blogs.index" create="dashbaord.blogs.create">
+                    <x-slot name="icon">
+                        <i class="ki-duotone ki-call fs-2">
+                            <i class="path1"></i>
+                            <i class="path2"></i>
+                            <i class="path3"></i>
+                            <i class="path4"></i>
+                            <i class="path5"></i>
+                            <i class="path6"></i>
+                            <i class="path7"></i>
+                            <i class="path8"></i>
+                        </i>
+                    </x-slot>
+                    <x-elements.sidebar-li-sub-menu route="dashboard.blogs.index" title="المدونات" />
+                    <x-elements.sidebar-li-sub-menu route="dashboard.blogs.create" title="تدوين" />
+                </x-elements.sidebar-menu-item>
+                <!--end:Menu item-->
+
+                <!--begin:Menu item-->
+                <x-elements.sidebar-menu-item lable="اعلانات الموقع" customClass="menu-title fs-4"
+                    index="admin.stores.index" create="admin.stores.create">
+                    <x-slot name="icon">
+                        <i class="ki-duotone ki-chart-line-star fs-2">
+                            <i class="path1"></i>
+                            <i class="path2"></i>
+                            <i class="path3"></i>
+                        </i>
+                    </x-slot>
+                    <x-elements.sidebar-li-sub-menu route="admin.stores.index" title="متابعة الاعلانات" />
+                    <x-elements.sidebar-li-sub-menu route="admin.stores.create" title="إضافة اعلان " />
+                </x-elements.sidebar-menu-item>
+                <!--end:Menu item-->
+
+                <!--begin:Menu item-->
+
                 <div class="menu-item pt-5">
                     <!--begin:Menu content-->
                     <div class="menu-content">

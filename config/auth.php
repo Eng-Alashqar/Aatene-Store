@@ -40,12 +40,14 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+
         'seller' => [
             'driver' => 'session',
             'provider' => 'sellers',
         ],
         'user' => [
             'driver' => 'jwt',
+
             'provider' => 'users',
             'hash' => false,
         ],

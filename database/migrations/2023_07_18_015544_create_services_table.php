@@ -11,19 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->float('price');
-            $table->float('compare_price')->nullable();
-            $table->integer('quantity')->default(0);
-            $table->float('rating')->default(0);
-            $table->boolean('featured')->default(true);
-            $table->boolean('is_available')->default(true);
-            $table->enum('status', ['draft', 'active', 'archived'])->default('draft');
-            $table->double('visits_count')->default(0);
+            $table->boolean('active')->default(true);
+            $table->integer('duration')->nullable();
+            $table->string('location')->nullable();
             $table->foreignId('category_id')
                 ->nullable()
                 ->constrained('categories')
@@ -40,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('services');
     }
 };

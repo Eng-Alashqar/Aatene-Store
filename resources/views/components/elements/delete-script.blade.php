@@ -11,7 +11,7 @@
             cancelButtonText: 'الغاء',
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'اجل ,احذفه!'
+            confirmButtonText: 'حذف'
         }).then((result) => {
             if (result.isConfirmed) {
                 destroy(id, reference);

@@ -14,7 +14,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class Admin extends User implements JWTSubject
 {
-    use HasFactory,HasApiTokens,HasPhoto,HasRoles;
+    use HasFactory, HasApiTokens, HasPhoto, HasRoles;
 
     public function initiatorConversations()
     {
@@ -42,7 +42,7 @@ class Admin extends User implements JWTSubject
     public function scopeExceptAuthUser(Builder $builder)
     {
         $id = request()->user()->id;
-        $builder->where('id','<>', $id);
+        $builder->where('id', '<>', $id);
     }
 
     protected $fillable = [
@@ -74,8 +74,28 @@ class Admin extends User implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
-        'role_name'=>'array',
+        'role_name' => 'array',
     ];
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 
     public function getStatusArAttribute()
     {
