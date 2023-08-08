@@ -11,8 +11,8 @@ class FollowerController extends Controller
 {
     public function follow(Store $store)
     {
-        // $user = auth()->user;
-        $user = User::find(1);
+        $user = auth()->user;
+        // $user = User::find(1);
 
         // Check if the user is not already following the store
         if (!$user->followers()->where('store_id', $store->id)->exists()) {
@@ -21,7 +21,6 @@ class FollowerController extends Controller
                 'store_id' => $store->id
             ]);
             $follower->save();
-
             return response()->json(['message' => 'You are now following the store.']);
         }
 
@@ -30,8 +29,8 @@ class FollowerController extends Controller
 
     public function unfollow(Store $store)
     {
-        // $user = auth()->user;
-        $user = User::find(1);
+        $user = auth()->user;
+        // $user = User::find(1);
 
         // Find the follower entry and delete it if it exists
         $follower = $user->followers()->where('store_id', $store->id)->first();

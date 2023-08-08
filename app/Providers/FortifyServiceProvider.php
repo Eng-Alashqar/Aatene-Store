@@ -31,13 +31,13 @@ class FortifyServiceProvider extends ServiceProvider
         if ($request->is('administrator/*')) {
             config()->set('fortify.guard', 'admin');
             config()->set('fortify.passwords', 'admins');
-            config()->set('fortify.home', '/administrator');
+            config()->set('fortify.home', '/administrator/home');
             config()->set('fortify.prefix', '/administrator');
         }
         if ($request->is('dashboard/*')) {
             config()->set('fortify.guard', 'seller');
             config()->set('fortify.passwords', 'sellers');
-            config()->set('fortify.home', '/dashboard');
+            config()->set('fortify.home', '/dashboard/home');
             config()->set('fortify.prefix', '/dashboard');
         }
     }

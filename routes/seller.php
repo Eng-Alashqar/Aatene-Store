@@ -13,6 +13,7 @@ Route::prefix('/dashboard')->name('dashboard.')->middleware(['auth:seller'])->gr
         return view('store.index');
     })->name('home');
     Route::resource('products', ProductController::class);
+    Route::post('products/images/upload', [ProductController::class,'upload'])->name('product_images');
     Route::prefix('/topics')->name('topics.')->group(function () {
         Route::get('/create', [TopicController::class, 'create'])->name('create');
         Route::post('', [TopicController::class, 'store'])->name('store');

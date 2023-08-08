@@ -13,11 +13,19 @@
             <div id="kt_app_content" class="app-content flex-column-fluid">
                 <!--begin::Content container-->
                 <div id="kt_app_content_container" class="app-container container-xxl">
-                    <form action="{{ route('dashboard.products.store') }}" method="POST" enctype="multipart/form-data"
-                        id="my-form">
-                        @csrf
-                        @include('store.products._form', ['button_label' => 'اضافة المنتج'])
-                    </form>
+                    <!--begin::Main column-->
+                    <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
+
+                        <form action="{{ route('dashboard.products.store') }}" id="form-create" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" name="files" id="files-uploaded">
+                            @include('store.products._form', ['button_label' => 'اضافة المنتج'])
+                        </form>
+
+                    </div>
+                    <!--end::Main column-->
+
                 </div>
                 <!--end::Content container-->
             </div>
@@ -29,8 +37,11 @@
     <!--end:::Main-->
     @push('scripts')
         <script src="{{ asset('assets/js/custom/apps/ecommerce/catalog/save-product.js') }}"></script>
-
-
+        <script>
+            @if (session()->has('notification'))
+                toastr.success("{{ session('notification') }}");
+            @endif
+        </script>
         <script>
             var toolbarOptions = [
                 ['bold', 'italic', 'underline', 'strike'], // toggled buttons
@@ -80,22 +91,67 @@
 
             quill.format('align', 'right');
             quill.format('direction', 'rtl');
-        </script>
-
-        <script>
-            @if (session()->has('notification'))
-                toastr.success("{{ session('notification') }}");
-            @endif
-        </script>
-        <script>
-            var myDropzone = new Dropzone("#kt_dropzonejs_example_1", {
-                url: "{{ route('dashboard.products.store') }}", // Set the url for your upload script location
-                paramName: "file", // The name that will be used to transfer the file
-                maxFiles: 10,
-                maxFilesize: 10, // MB
-                addRemoveLinks: true,
-                autoProcessQueue: false
+            let formSubmitHandler = document.getElementById('form-create');
+            let textarea = document.getElementById('description');
+            formSubmitHandler.addEventListener("submit", (event) => {
+                event.preventDefault();
+                textarea.value = quill.root.innerHTML;
+                formSubmitHandler.submit();
             });
+        </script>
+        <script>
+            // Dropzone.autoDiscover = false;
+
+            var myDropzone = new Dropzone("#kt_dropzonejs_example_1", {
+                url: "{{ route('dashboard.product_images') }}",
+                paramName: "files",
+                maxFiles: 5,
+                maxFilesize: 1,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                acceptedFiles: ".jpeg,.jpg,.png,.gif",
+                addRemoveLinks: true,
+                removedfile: function(file) {
+                    var name = file.upload.filename;
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        type: 'POST',
+                        url:"{{ route('dashboard.product_images.delete') }}",
+                        data: {
+                            filename: name
+                        },
+                        success: function(data) {
+                            console.log("File has been successfully removed!!");
+                        },
+                        error: function(e) {
+                            console.log(e);
+                        }
+                    });
+                    var fileRef;
+                    return (fileRef = file.previewElement) != null ?
+                        fileRef.parentNode.removeChild(file.previewElement) : void 0;
+                },
+                success: function(file, response) {
+                    // console.log(response);
+                    var filesUploaded = [];
+                    // Retrieve existing files from Local Storage if any
+                    var existingFiles = localStorage.getItem("filesUploaded");
+                    if (existingFiles) {
+                        filesUploaded = JSON.parse(existingFiles);
+                    }
+                    // Add the latest file response to the array
+                    filesUploaded.push(response.data);
+                    // Save the updated array back to Local Storage
+                    localStorage.setItem("filesUploaded", JSON.stringify(filesUploaded));
+                    document.querySelector('#files-uploaded').value = localStorage.getItem("filesUploaded");
+                    console.log(document.querySelector('#files-uploaded').value);
+                }
+            });
+            localStorage.removeItem("filesUploaded");
+            console.log("Local Storage data cleared.");
         </script>
         <script src="{{ asset('assets/plugins/custom/formrepeater/formrepeater.bundle.js') }}"></script>
         <script>

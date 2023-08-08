@@ -26,6 +26,12 @@ class CategoryService implements ServiceInterface
         return $this->categoryRepository->getParentCategoriesWithChildrenRelation();
     }
 
+    public function getAllCategories()
+    {
+        return $this->categoryRepository->getAllCategories();
+    }
+
+
     public function store($params)
     {
         if($params['image'] && is_file($params['image'])){

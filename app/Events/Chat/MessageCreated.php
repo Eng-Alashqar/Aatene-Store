@@ -44,4 +44,9 @@ class MessageCreated implements ShouldBroadcast
             new PresenceChannel('Chat.'.$other_user->id),
         ];
     }
+
+    public function toBroadcast()
+    {
+
+    }
 }

@@ -18,7 +18,10 @@ class CategoryRepository implements RepositoryInterface
     {
         return $this->category->latest()->with(['parent','children','ancestors'])->filter($filters)->paginate($count);
     }
-
+    public function getAllCategories()
+    {
+        return $this->category->latest()->with(['parent','children','ancestors'])->get();
+    }
     public function getParentCategoriesWithChildrenRelation()
     {
         return $this->category->latest()->whereNull('parent_id')->with(['children'])->get();

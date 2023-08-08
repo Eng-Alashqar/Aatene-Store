@@ -7,9 +7,11 @@
     <base href="" />
     <title>{{ config('app.name') }} | {{ config('app.description') }}</title>
     <meta charset="utf-8" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <x-images.app-icon />
     <!--begin::Fonts(mandatory for all pages)-->
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <!--end::Fonts-->
     <!--begin::Vendor Stylesheets(used for this page only)-->
@@ -27,6 +29,10 @@
     <link href="{{ asset('assets/plugins/global/plugins.bundle.rtl.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/style.bundle.rtl.css') }}" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
+        rel="stylesheet">
     @stack('styles')
     <style>
         html {
@@ -39,6 +45,7 @@
             font-family: "Tajawal", sans-serif !important;
         }
     </style>
+
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -107,6 +114,36 @@
     <!--end::Global Javascript Bundle-->
     <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
     <!--end::Vendors Javascript-->
+    <!--begin::Custom Javascript(used for this page only)-->
+    <script src="{{ asset('assets/js/widgets.bundle.js') }}"></script>
+    <script>
+        toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toastr-top-left",
+                "preventDuplicates": true,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+
+            @foreach ($errors->all() as $error )
+            toastr.error("{{ $error }}");
+            @endforeach
+    </script>
+      <script>
+        @if (session()->has('notification'))
+            toastr.success("{{ session('notification') }}");
+        @endif
+    </script>
     @stack('scripts')
     <!--end::Javascript-->
 </body>

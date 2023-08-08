@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Shared;
 
+use App\Helpers\PhotoUpload;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Shared\ProductRequest;
 use App\Models\Store\Product;
@@ -33,17 +34,17 @@ class ProductController extends Controller
     public function create()
     {
         return view('store.products.create', [
-            'categories' => $this->categoryService->getParentCategories(),
-            'product' => new Product()
+            'categories' => $this->categoryService->getAllCategories(),
+            'product' => new Product
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProductRequest $request)
+    public function store(Request $request)
     {
-        // dd($request->all());
+        dd($request->all());
         $this->productService->store($request->validated());
         return redirect()->back()->with(['notification' => 'تم اضافة منتج جديد']);
     }
@@ -83,5 +84,12 @@ class ProductController extends Controller
     {
         $isDeleted = $this->productService->delete($id);
         return $this->deleteAjaxResponse($isDeleted);
+    }
+
+    public function upload(Request $request){
+        $file = $request->file('files');
+            $photo_obj['photo_slug'] = $file->getClientOriginalName();
+            $photo_obj['photo'] = PhotoUpload::upload($file);
+        return response()->json(['data'=>$photo_obj],201);
     }
 }

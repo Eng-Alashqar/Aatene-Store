@@ -35,16 +35,12 @@
                 <!--begin::Input group-->
                 <div class="mb-5">
                     <label class="required form-label">تصنيف الخدمة</label>
-                    <select name="category_id" dir="rtl" class="form-select" data-control="select2"
+                    <select name="category_id" class="form-select" data-control="select2"
                         data-placeholder="اضافة قسم">
                         <option></option>
                         @foreach ($categories as $category)
-                            <optgroup label="{{ $category->name }}">
-                                @foreach ($category->children as $child)
-                                    <option value="{{ $child->id }}" @selected(old('category_id', $service->category_id) === $child->id)>{{ $child->name }}
+                                    <option value="{{ $category->id }}" @selected(old('category_id', $service->category_id) === $category->id)>{{ $category->name }}
                                     </option>
-                                @endforeach
-                            </optgroup>
                         @endforeach
                     </select>
                 </div>
@@ -85,10 +81,7 @@
                 </div>
                 <div class="mb-5">
                     <label for="description" class="required form-label">وصف الخدمة</label>
-
-                    <textarea id="kt_docs_quill_basic" name="description" class="form-control form-control-solid">
-                        {{ old('description', $service->description) }}
-                    </textarea>
+                    <textarea  name="description" class="form-control form-control-solid">{{ old('description', $service->description) }}</textarea>
                 </div>
             </div>
             <!--begin::Body-->

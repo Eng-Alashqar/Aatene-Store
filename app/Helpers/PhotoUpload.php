@@ -7,14 +7,14 @@ use Illuminate\Support\Facades\Storage;
 class PhotoUpload
 {
 
-    public static function upload($image, $dir = 'uploads', $disk = 'public')
+    public static function upload($image, $dir = 'uploads', $disk = 's3')
     {
         $name =  time().'_'. $image->getClientOriginalName();
         $path = $image->storeAs("$dir", $name, $disk);
         return $path;
     }
 
-    public function uploadImages($images, $dir, $disk = 'public')
+    public static function uploadImages($images, $dir = 'uploads', $disk = 's3')
     {
         $data_images = [];
         foreach ($images as $image) {

@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 use App\Models\Photo;
+use Illuminate\Support\Facades\Storage;
+
 trait HasPhoto
 {
     public static function bootHasPhoto()
@@ -45,6 +47,7 @@ trait HasPhoto
         {
             return 'https://t4.ftcdn.net/jpg/04/70/29/97/240_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
         }
-        return asset('storage/'.$photo->src);
+        $url = Storage::disk('s3')->temporaryUrl($photo->src,now()->minutes(120));
+        return $url;
     }
 }

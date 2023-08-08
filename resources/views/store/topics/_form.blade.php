@@ -21,9 +21,9 @@
                 </div>
                 <div class="mb-5">
                     <label for="content" class="required form-label">الموضوع</label>
-
-                    <textarea id="kt_docs_quill_basic" name="content" class="form-control form-control-solid">
-                    </textarea>
+                    <textarea  name="content" class="form-control form-control-solid @error('title')
+                    is-invalid
+                    @enderror"">{{ old('content') }}</textarea>
                 </div>
             </div>
             <!--begin::Body-->

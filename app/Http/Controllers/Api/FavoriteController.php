@@ -13,11 +13,11 @@ class FavoriteController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        // $user = $request->user();
+        $user = auth()->user();
         // $favorites = $user->favorites()->get();
-        $user = User::find(11);
+        // $user = User::find(11);
         $favorites = $user->favorites;
 
         return response()->json(FavoriteResource::collection($favorites));
@@ -28,9 +28,9 @@ class FavoriteController extends Controller
      */
     public function store(Request $request)
     {
-        // $user = $request->user();
+        $user = $request->user();
         $favorite = new Favorite([
-            'user_id' => $request->input('user_id'),
+            'user_id' => ($user && $user instanceof User) ? $user->id : $request->input('user_id'),
             'product_id' => $request->input('product_id'),
         ]);
         $favorite->save();

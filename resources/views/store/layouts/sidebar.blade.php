@@ -11,18 +11,17 @@
         </a>
         <!--end::Logo image-->
         <!--begin::Sidebar toggle-->
-        <!--begin::Minimized sidebar setup:
-
-                        <div id="kt_app_sidebar_toggle"
-                            class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary body-bg h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"
-                            data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"
-                            data-kt-toggle-name="app-sidebar-minimize">
-                            <i class="ki-duotone ki-double-left fs-2 rotate-180">
-                                <span class="path1"></span>
-                                <span class="path2"></span>
-                            </i>
-                        </div>
-                        <!--end::Sidebar toggle-->
+        <!--begin::Minimized sidebar setup:-->
+        <div id="kt_app_sidebar_toggle"
+            class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary body-bg h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"
+            data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"
+            data-kt-toggle-name="app-sidebar-minimize">
+            <i class="ki-duotone ki-double-left fs-2 rotate-180">
+                <span class="path1"></span>
+                <span class="path2"></span>
+            </i>
+        </div>
+        <!--end::Sidebar toggle-->
     </div>
     <!--end::Logo-->
     <!--begin::sidebar menu-->
@@ -74,7 +73,7 @@
                     <!--end:Menu sub-->
                 </div>
                 <!--end:Menu item-->
-                {{-- <!--begin:Menu item-->
+                <!--begin:Menu item-->
                 <div class="menu-item pt-5">
                     <!--begin:Menu content-->
                     <div class="menu-content">
@@ -83,7 +82,7 @@
                     <!--end:Menu content-->
                 </div>
                 <!--end:Menu item-->
-                <div class="separator separator-dashed mx-lg-5 mt-2 mb-6"></div> --}}
+                <div class="separator separator-dashed mx-lg-5 mt-2 mb-6"></div>
 
                 <!--begin:Menu item-->
                 <x-elements.sidebar-menu-item lable="المنتجات" customClass="menu-title fs-4"
@@ -120,26 +119,6 @@
                     <x-elements.sidebar-li-sub-menu route="dashboard.services.create" title="إضافة خدمة جديدة" />
                 </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
-
-                {{--
-                                <!--begin:Menu item-->
-                                <x-elements.sidebar-menu-item lable="إدارة اعلانات الموقع" customClass="menu-title fs-4"
-                                    index="dashboard.products.index" create="dashboard.products.create">
-                                    <x-slot name="icon">
-                                        <i class="ki-duotone ki-chart-line-star fs-2">
-                                            <i class="path1"></i>
-                                            <i class="path2"></i>
-                                            <i class="path3"></i>
-                                        </i>
-                                    </x-slot>
-                                    <x-elements.sidebar-li-sub-menu route="dashboard.products.index" title="متابعة الاعلانات" />
-                                    <x-elements.sidebar-li-sub-menu route="dashboard.products.create" title="إضافة اعلان " />
-                                </x-elements.sidebar-menu-item>
-                                <!--end:Menu item-->
-                --}}
-
-
-
                 <!--begin:Menu item-->
                 <div class="menu-item pt-5">
                     <!--begin:Menu content-->
@@ -191,23 +170,8 @@
                 </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
 
+                {{--
                 <!--begin:Menu item-->
-                <x-elements.sidebar-menu-item lable="اعلانات الموقع" customClass="menu-title fs-4"
-                    index="admin.stores.index" create="admin.stores.create">
-                    <x-slot name="icon">
-                        <i class="ki-duotone ki-chart-line-star fs-2">
-                            <i class="path1"></i>
-                            <i class="path2"></i>
-                            <i class="path3"></i>
-                        </i>
-                    </x-slot>
-                    <x-elements.sidebar-li-sub-menu route="admin.stores.index" title="متابعة الاعلانات" />
-                    <x-elements.sidebar-li-sub-menu route="admin.stores.create" title="إضافة اعلان " />
-                </x-elements.sidebar-menu-item>
-                <!--end:Menu item-->
-
-                <!--begin:Menu item-->
-
                 <div class="menu-item pt-5">
                     <!--begin:Menu content-->
                     <div class="menu-content">
@@ -216,10 +180,7 @@
                     <!--end:Menu content-->
                 </div>
                 <!--end:Menu item-->
-
                 <div class="separator separator-dashed mx-lg-5 mt-2 mb-6"></div>
-            --}}
-            {{--
                             <!--begin:Menu item-->
                             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                 <!--begin:Menu link-->
@@ -253,7 +214,7 @@
                                 <!--end:Menu sub-->
                             </div>
                             <!--end:Menu item-->
-            --}}
+                --}}
             </div>
             <!--end::Menu-->
         </div>
@@ -273,8 +234,6 @@
                 </i>
             </a>
         </div>
-
-
     </div>
     <!--end::Footer-->
 </div>

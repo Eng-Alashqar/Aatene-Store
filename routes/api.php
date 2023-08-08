@@ -5,11 +5,7 @@ use App\Http\Controllers\API\FavoriteController;
 use App\Http\Controllers\API\FollowerController;
 use App\Http\Controllers\Api\ProductController;
 
-use App\Http\Controllers\Api\StoreController;
-use App\Http\Controllers\Auth\Seller\SellerAuthController;
-use App\Http\Controllers\Auth\User\UserAuthController;
-use App\Http\Controllers\AuthController;
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,9 +23,9 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::middleware(['api', 'check_password'])->group(function () {
+Route::middleware(['api', 'check_password','auth:user'])->group(function () {
     Route::apiResource('/products', ProductController::class);
-    Route::get('/categories', CategoryController::class);
+    Route::get('/categories', [CategoryController::class,'index']);
 
     Route::prefix('/favorites')->group(function () {
         Route::get('/', [FavoriteController::class, 'index']);
