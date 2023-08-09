@@ -186,6 +186,7 @@
                 }
             });
         </script>
+        <x-elements.delete-script name="products" dashboard="dashboard" />
     @endpush
 
 </x-store.master>

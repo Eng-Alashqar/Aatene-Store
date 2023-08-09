@@ -7,6 +7,8 @@ use App\Http\Requests\Store\Products\StoreProductRequest;
 use App\Http\Requests\Store\Products\UpdateProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Store\Product;
+use App\Notifications\ReportProductNotification;
+use Illuminate\Support\Facades\Request;
 
 class ProductController extends Controller
 {
@@ -56,5 +58,15 @@ class ProductController extends Controller
     {
         $product->delete();
         return ['message' => 'The product deleted successfully'];
+    }
+
+    public function reportProduct(Product $product, Request $request)
+    {
+        $store = $product->store;
+        $reportMessage = $request->input('report_message');
+
+        $store->user->notify(new ReportProductNotification("Reported Product: {$product->name}", $reportMessage));
+
+        return response()->json(['message' => 'Product reported successfully']);
     }
 }

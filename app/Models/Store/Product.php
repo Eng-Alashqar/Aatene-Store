@@ -62,5 +62,10 @@ class Product extends Model
     {
         return $this->hasMany(Favorite::class);
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }
 

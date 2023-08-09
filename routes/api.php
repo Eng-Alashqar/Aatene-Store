@@ -35,6 +35,18 @@ Route::middleware(['api', 'check_password','auth:user'])->group(function () {
 
     Route::post('store/{store}/follow', [FollowerController::class, 'follow'])->name('store.follow');
     Route::delete('store/{store}/unfollow', [FollowerController::class, 'unfollow'])->name('store.unfollow');
+    Route::apiResource('/stores', StoreController::class);
+
+    Route::post('orders/{product}', [OrderController::class, 'store']);
+    Route::delete('orders/{order}', [OrderController::class, 'destroy']);
+    Route::get('orders/{order}', [OrderController::class, 'show']);
+    Route::get('orders', [OrderController::class, 'index']);
+
+    Route::post('/products/{product}/report', [ProductController::class, 'reportProduct']);
+    Route::post('/stores/{store}/report', [StoreController::class, 'reportStore']);
+
+    Route::apiResource('profiles', ProfileController::class);
+
 });
 
 

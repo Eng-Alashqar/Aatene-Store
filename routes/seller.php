@@ -21,4 +21,7 @@ Route::prefix('/dashboard')->name('dashboard.')->middleware(['auth:seller'])->gr
     Route::resource('jobs', JobController::class);
     Route::resource('services', ServiceController::class);
     Route::resource('blogs', BlogController::class);
+
+    Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
+
 });

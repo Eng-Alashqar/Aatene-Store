@@ -19,6 +19,8 @@ class StoreResourse extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'level' => $this->level,
+            'status' => $this->status,
+            'rating' => $this->rating,
         ];
     }
 }

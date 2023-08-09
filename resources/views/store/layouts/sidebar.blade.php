@@ -103,7 +103,19 @@
                     <x-elements.sidebar-li-sub-menu route="dashboard.products.create" title="إضافة منتج جديد" />
                 </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
-
+                <!--begin:Menu item-->
+                <x-elements.sidebar-menu-item lable="المبيعات" customClass="menu-title fs-4"
+                    index="dashboard.orders.index" create="">
+                    <x-slot name="icon">
+                        <i class="ki-duotone ki-chart-line-star fs-2">
+                            <i class="path1"></i>
+                            <i class="path2"></i>
+                            <i class="path3"></i>
+                        </i>
+                    </x-slot>
+                    <x-elements.sidebar-li-sub-menu route="dashboard.orders.index" title="الطلبات" />
+                    {{-- <x-elements.sidebar-li-sub-menu route="dashboard.orders.create" title="إضافة خدمة جديدة" /> --}}
+                </x-elements.sidebar-menu-item>
 
                 <!--begin:Menu item-->
                 <x-elements.sidebar-menu-item lable="الخدمات" customClass="menu-title fs-4"
@@ -131,8 +143,8 @@
                 <div class="separator separator-dashed mx-lg-5 mt-2 mb-6"></div>
 
                 <!--begin:Menu item-->
-                <x-elements.sidebar-menu-item lable="الوظائف" customClass="menu-title fs-4" index="dashbaord.jobs.index"
-                    create="dashboard.jobs.create">
+                <x-elements.sidebar-menu-item lable="الوظائف" customClass="menu-title fs-4"
+                    index="dashbaord.jobs.index" create="dashboard.jobs.create">
                     <x-slot name="icon">
                         <i class="ki-duotone ki-call fs-2">
                             <i class="path1"></i>

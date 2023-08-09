@@ -23,7 +23,7 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'description' => ['string'],
+            'description' => ['required','string'],
             'price' => ['required', 'numeric', 'min:0'],
             'quantity' => ['required', 'integer', 'min:0'],
             'is_available' => ['boolean'],
@@ -33,5 +33,5 @@ class StoreProductRequest extends FormRequest
             'store_id' => ['exists:stores,id'],
             'image' => ['sometimes', 'required', 'image', 'mimes:jpeg,jpg,png', 'max:2048'],
         ];
-    }
+    }   
 }
