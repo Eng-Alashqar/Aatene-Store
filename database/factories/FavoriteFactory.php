@@ -3,11 +3,11 @@
 namespace Database\Factories;
 
 use App\Models\Store\Product;
-use App\Models\User;
+use App\Models\Users\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Favorite>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Store\Favorite>
  */
 class FavoriteFactory extends Factory
 {

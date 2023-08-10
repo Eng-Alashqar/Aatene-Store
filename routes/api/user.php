@@ -3,7 +3,7 @@
 use App\Http\Controllers\API\FavoriteController;
 use App\Http\Controllers\API\OrderController;
 use App\Http\Controllers\API\ProfileController;
-use App\Http\Controllers\Admin\StoreController;
+use App\Http\Controllers\Store\StoreController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\ProductController;
 use Illuminate\Support\Facades\Route;

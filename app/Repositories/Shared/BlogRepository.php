@@ -2,9 +2,8 @@
 
 namespace App\Repositories\Shared;
 
-use App\Models\Store\Blog;
+use App\Models\MultimediaHub\Blog;
 use App\Repositories\RepositoryInterface;
-use Illuminate\Http\Request;
 
 class BlogRepository implements RepositoryInterface
 {

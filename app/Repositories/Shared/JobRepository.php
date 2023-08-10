@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Shared;
 
-use App\Models\Job;
+use App\Models\MultimediaHub\Job;
 
 class JobRepository implements PanelRepository
 {

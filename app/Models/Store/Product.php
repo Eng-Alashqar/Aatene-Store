@@ -2,16 +2,17 @@
 
 namespace App\Models\Store;
 
-use App\Models\Store;
-use App\Traits\HasPhoto;
-use App\Models\Admin\Category;
-use App\Models\Favorite;
 use App\Models\Scopes\StoreScope;
-use App\Observers\ProductObserver;
+use App\Models\Store\Comment;
+use App\Models\Store\Product\Order;
+use App\Models\Store\Rating;
+use App\Models\Store\Tag;
+use App\Observers\Store\ProductObserver;
+use App\Traits\HasPhoto;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {

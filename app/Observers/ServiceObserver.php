@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Models\Store\Service;
+use App\Models\MultimediaHub\Service;
 use Illuminate\Support\Str;
 
 class ServiceObserver

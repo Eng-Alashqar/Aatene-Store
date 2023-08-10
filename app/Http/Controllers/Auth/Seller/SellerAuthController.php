@@ -4,12 +4,11 @@ namespace App\Http\Controllers\Auth\Seller;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\Seller\SellerResource;
-use App\Models\Seller;
-use Illuminate\Http\Request;
-use App\Services\Admin\StoreService;
+use App\Models\Users\Seller;
+use App\Services\Store\StoreService;
 use App\Services\Api\Auth\LoginService;
 use App\Services\Api\Auth\RegisterService;
-
+use Illuminate\Http\Request;
 
 
 class SellerAuthController extends Controller

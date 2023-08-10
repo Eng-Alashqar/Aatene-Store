@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Store;
-use App\Models\Admin\Region;
+use App\Models\Store\Store;
+use App\Models\Region;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

@@ -2,10 +2,10 @@
 
 namespace Database\Factories\Store;
 
-use App\Models\Admin\Category;
-use App\Models\Store;
+use App\Models\Store\Category;
+use App\Models\Store\Store;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
  */

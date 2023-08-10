@@ -2,12 +2,11 @@
 
 namespace Database\Factories\Admin;
 
-use Illuminate\Support\Str;
-use App\Models\Admin\Category;
+use App\Models\Store\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Admin\Category>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Store\Category>
  */
 class CategoryFactory extends Factory
 {

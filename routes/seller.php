@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\Shared\BlogController;
-use App\Http\Controllers\Shared\JobController;
-use App\Http\Controllers\Shared\ProductController;
-use App\Http\Controllers\Shared\ServiceController;
-use App\Http\Controllers\Shared\TopicController;
+use App\Http\Controllers\MultimediaHub\BlogController;
+use App\Http\Controllers\MultimediaHub\JobController;
+use App\Http\Controllers\MultimediaHub\ServiceController;
+use App\Http\Controllers\MultimediaHub\TopicController;
+use App\Http\Controllers\Store\ProductController;
 use Illuminate\Support\Facades\Route;
 
 

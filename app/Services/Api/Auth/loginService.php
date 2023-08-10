@@ -4,7 +4,6 @@ namespace App\Services\Api\Auth;
 
 use App\Http\Requests\Api\LoginRequest;
 use App\Http\Resources\Api\Seller\SellerResource;
-use App\Models\Seller;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 

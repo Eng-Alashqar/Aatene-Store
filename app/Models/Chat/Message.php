@@ -3,10 +3,8 @@
 namespace App\Models\Chat;
 
 use App\Models\Chat\Recipient;
-use App\Models\Chat\Conversation;
-use App\Models\Seller;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {

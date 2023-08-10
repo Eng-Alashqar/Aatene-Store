@@ -2,8 +2,7 @@
 
 namespace App\Repositories\Shared;
 
-use App\Models\Store\Service;
-use App\Repositories\Shared\PanelRepository;
+use App\Models\MultimediaHub\Service;
 
 class ServiceRepository implements PanelRepository
 {

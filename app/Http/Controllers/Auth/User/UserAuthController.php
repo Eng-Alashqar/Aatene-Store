@@ -3,11 +3,10 @@ namespace App\Http\Controllers\Auth\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\User\UserResource;
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Models\Users\User;
 use App\Services\Api\Auth\LoginService;
 use App\Services\Api\Auth\RegisterService;
-
+use Illuminate\Http\Request;
 
 
 class UserAuthController extends Controller

@@ -3,13 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Admin;
-use App\Models\Favorite;
-use App\Models\User;
-use Illuminate\Support\Str;
+use App\Models\Store\Favorite;
+use App\Models\Users\Admin;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
@@ -20,12 +18,12 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        \App\Models\User::factory(10)->create();
-        \App\Models\Admin::factory(10)->create();
-        \App\Models\Store::factory(10)->create();
-        \App\Models\Seller::factory(10)->create();
-        \App\Models\Admin\Region::factory(10)->create();
-        \App\Models\Admin\Category::factory(10)->create();
+        \App\Models\Users\User::factory(10)->create();
+        \App\Models\Users\Admin::factory(10)->create();
+        \App\Models\Store\Store::factory(10)->create();
+        \App\Models\Users\Seller::factory(10)->create();
+        \App\Models\Region::factory(10)->create();
+        \App\Models\Store\Category::factory(10)->create();
         Favorite::factory(20)->create();
         // DB::table('store_region')->factory('storeRegionFactory', 1000)->create();
         $role = Role::first();
@@ -43,7 +41,7 @@ class DatabaseSeeder extends Seeder
         // $user->assignRole([$role->id]);
 
 
-        \App\Models\User::factory()->create([
+        \App\Models\Users\User::factory()->create([
             'name' => 'alaa',
             'email' => 'user@gmail.com',
             'email_verified_at' => now(),
@@ -55,7 +53,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        \App\Models\Seller::factory()->create([
+        \App\Models\Users\Seller::factory()->create([
             'name' => 'alaa',
             'email' => 'seller@gmail.com',
             'email_verified_at' => now(),

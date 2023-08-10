@@ -2,8 +2,7 @@
 
 namespace App\Models\Scopes;
 
-use App\Models\Seller;
-use App\Services\Admin\StoreService;
+use App\Models\Users\Seller;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;

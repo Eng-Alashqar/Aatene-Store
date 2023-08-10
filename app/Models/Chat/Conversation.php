@@ -2,15 +2,10 @@
 
 namespace App\Models\Chat;
 
-use App\Models\Admin;
-use App\Models\Chat\Message;
 use App\Models\Chat\Participant;
-use App\Models\Seller;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Eloquent\Model;
 
 class Conversation extends Model
 {

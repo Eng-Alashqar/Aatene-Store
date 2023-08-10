@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Store;
+use App\Models\Store\Store;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Seller>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Users\Seller>
  */
 class SellerFactory extends Factory
 {

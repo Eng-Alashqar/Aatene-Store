@@ -2,12 +2,10 @@
 
 namespace App\Actions\Fortify;
 
-use App\Models\Admin;
-use App\Models\Seller;
-use App\Models\User;
+use App\Models\Users\Admin;
+use App\Models\Users\Seller;
+use App\Models\Users\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 
 class Authentication
 {

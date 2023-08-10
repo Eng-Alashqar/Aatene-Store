@@ -3,11 +3,13 @@
 namespace App\Repositories\Shared;
 
 use App\Models\Store\Product;
-use App\Repositories\Shared\PanelRepository;
 
 class ProductRepository implements PanelRepository
 {
-    public function __construct(private Product $product){}
+    private  $product;
+    public function __construct(){
+        $this->product =  new Product;
+    }
 
     public function getWithPaginate($count = 7)
     {

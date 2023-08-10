@@ -2,9 +2,9 @@
 
 namespace App\Services\Api\Auth\User;
 
-use App\Http\Requests\User\RegisterRequest;
+use App\Http\Requests\Users\User\RegisterRequest;
 use App\Http\Resources\Api\User\UserResource;
-use App\Models\User;
+use App\Models\Users\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;

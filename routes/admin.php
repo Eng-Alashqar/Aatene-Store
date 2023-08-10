@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\FaqsController;
-use App\Http\Controllers\Admin\RegionController;
-use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\StoreController;
-use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Store\CategoryController;
+use App\Http\Controllers\Store\FaqsController;
+use App\Http\Controllers\Store\RegionController;
+use App\Http\Controllers\Store\StoreController;
+use App\Http\Controllers\Users\AdminController;
+use App\Http\Controllers\Users\RoleController;
 use Illuminate\Support\Facades\Route;
 
 

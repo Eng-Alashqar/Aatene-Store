@@ -4,8 +4,8 @@ namespace App\Services\Api\Auth\Seller;
 
 use App\Http\Requests\Seller\RegisterRequest;
 use App\Http\Resources\Api\Seller\SellerResource;
-use App\Models\Seller;
-use App\Services\Admin\StoreService;
+use App\Models\Users\Seller;
+use App\Services\Store\StoreService;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;

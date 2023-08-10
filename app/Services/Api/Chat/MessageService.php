@@ -3,15 +3,13 @@
 namespace App\Services\Api\Chat;
 
 use App\Http\Requests\Chat\MessageRequest;
-use App\Models\Admin;
 use App\Models\Chat\Conversation;
-use App\Models\Seller;
-use App\Models\User;
+use App\Models\Users\Admin;
+use App\Models\Users\Seller;
+use App\Models\Users\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
-
-use function PHPUnit\Framework\isNull;
 
 class MessageService
 {
