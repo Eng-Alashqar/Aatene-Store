@@ -26,11 +26,5 @@
     </div>
     <!--end:::Main-->
 
-    @push('scripts')
-        <script>
-            @if (session()->has('notification'))
-                toastr.success("{{ session('notification') }}");
-            @endif
-        </script>
-    @endpush
+
 </x-store.master>

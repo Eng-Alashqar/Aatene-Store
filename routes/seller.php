@@ -14,6 +14,8 @@ Route::prefix('/dashboard')->name('dashboard.')->middleware(['auth:seller'])->gr
     })->name('home');
     Route::resource('products', ProductController::class);
     Route::post('products/images/upload', [ProductController::class,'upload'])->name('product_images');
+    Route::post('products/images/delete', [ProductController::class,'deleteImage'])->name('product_images.delete');
+
     Route::prefix('/topics')->name('topics.')->group(function () {
         Route::get('/create', [TopicController::class, 'create'])->name('create');
         Route::post('', [TopicController::class, 'store'])->name('store');
@@ -22,6 +24,6 @@ Route::prefix('/dashboard')->name('dashboard.')->middleware(['auth:seller'])->gr
     Route::resource('services', ServiceController::class);
     Route::resource('blogs', BlogController::class);
 
-    Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('orders', [App\Http\Controllers\Store\OrderController::class, 'index'])->name('orders.index');
 
 });

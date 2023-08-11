@@ -19,7 +19,7 @@ var KTAppEcommerceSaveProduct = (function () {
                 )
                 .forEach((e) => {
                     $(e).hasClass("select2-hidden-accessible") ||
-                        $(e).select2({ minimumResultsForSearch: -1 });
+                    $(e).select2({ minimumResultsForSearch: -1 });
                 });
         };
     return {
@@ -31,17 +31,17 @@ var KTAppEcommerceSaveProduct = (function () {
             ].forEach((e) => {
                 let t = document.querySelector(e);
                 t &&
-                    (t = new Quill(e, {
-                        modules: {
-                            toolbar: [
-                                [{ header: [1, 2, !1] }],
-                                ["bold", "italic", "underline"],
-                                ["image", "code-block"],
-                            ],
-                        },
-                        placeholder: "Type your text here...",
-                        theme: "snow",
-                    }));
+                (t = new Quill(e, {
+                    modules: {
+                        toolbar: [
+                            [{ header: [1, 2, !1] }],
+                            ["bold", "italic", "underline"],
+                            ["image", "code-block"],
+                        ],
+                    },
+                    placeholder: "Type your text here...",
+                    theme: "snow",
+                }));
             }),
                 [
                     "#kt_ecommerce_add_product_category",
@@ -49,22 +49,22 @@ var KTAppEcommerceSaveProduct = (function () {
                 ].forEach((e) => {
                     const t = document.querySelector(e);
                     t &&
-                        new Tagify(t, {
-                            whitelist: [
-                                "new",
-                                "trending",
-                                "sale",
-                                "discounted",
-                                "selling fast",
-                                "last 10",
-                            ],
-                            dropdown: {
-                                maxItems: 20,
-                                classname: "tagify__inline__suggestions",
-                                enabled: 0,
-                                closeOnSelect: !1,
-                            },
-                        });
+                    new Tagify(t, {
+                        whitelist: [
+                            "new",
+                            "trending",
+                            "sale",
+                            "discounted",
+                            "selling fast",
+                            "last 10",
+                        ],
+                        dropdown: {
+                            maxItems: 20,
+                            classname: "tagify__inline__suggestions",
+                            enabled: 0,
+                            closeOnSelect: !1,
+                        },
+                    });
                 }),
                 (o = document.querySelector(
                     "#kt_ecommerce_add_product_discount_slider"
@@ -79,20 +79,20 @@ var KTAppEcommerceSaveProduct = (function () {
                 }),
                 o.noUiSlider.on("update", function (e, t) {
                     (a.innerHTML = Math.round(e[t])),
-                        t && (a.innerHTML = Math.round(e[t]));
+                    t && (a.innerHTML = Math.round(e[t]));
                 }),
                 e(),
-                // new Dropzone("#kt_ecommerce_add_product_media", {
-                //     url: "https://keenthemes.com/scripts/void.php",
-                //     paramName: "file",
-                //     maxFiles: 10,
-                //     maxFilesize: 10,
-                //     addRemoveLinks: !0,
-                //     accept: function (e, t) {
-                //         "wow.jpg" == e.name ? t("Naha, you don't.") : t();
-                //     },
-                // }),
-                // t(),
+                new Dropzone("#kt_ecommerce_add_product_media", {
+                    url: "https://keenthemes.com/scripts/void.php",
+                    paramName: "file",
+                    maxFiles: 10,
+                    maxFilesize: 10,
+                    addRemoveLinks: !0,
+                    accept: function (e, t) {
+                        "wow.jpg" == e.name ? t("Naha, you don't.") : t();
+                    },
+                }),
+                t(),
                 (() => {
                     const e = document.getElementById(
                             "kt_ecommerce_add_product_status"

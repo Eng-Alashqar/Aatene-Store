@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('conversation_id')->constrained('conversations')->cascadeOnDelete();
             $table->nullableMorphs('sender');
-            // $table->nullableMorphs('recipient');
+//            $table->nullableMorphs('recipient');
             $table->text('body');
             $table->enum('type',['text','attachment'])->default('text');
             $table->timestamp('read_at')->nullable();

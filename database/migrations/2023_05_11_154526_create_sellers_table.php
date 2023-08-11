@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('password');
             $table->enum('status',['active','inactive','blocked'])->default('active');
             $table->double('gold_coins')->default(0);
+            $table->boolean('is_primary')->default(false);
+            $table->text('block_reason')->nullable();
             $table->rememberToken();
             $table->timestamp('last_active_at')->nullable();
             $table->foreignId('store_id');

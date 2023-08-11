@@ -32,6 +32,6 @@ class TopicController extends Controller
         ]);
         $request->merge(['user_id' => auth()->user()->id]);
         $topic->create($request->all());
-        return redirect()->back()->with(['notification', '!تم تقديم رغباتك بنجاح، شكراً جزيلاً']);
+        return back()->with(['notification', '!تم تقديم رغباتك بنجاح، شكراً جزيلاً']);
     }
 }

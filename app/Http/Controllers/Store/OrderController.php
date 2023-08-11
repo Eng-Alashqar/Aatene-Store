@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Store;
 
 use App\Http\Controllers\Controller;
-use App\Models\Order\Order;
+use App\Models\Store\Order;
 
 class OrderController extends Controller
 {

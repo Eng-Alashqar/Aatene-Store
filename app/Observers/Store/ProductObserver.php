@@ -12,8 +12,9 @@ class ProductObserver
      */
     public function creating(Product $product): void
     {
-        $product->store_id = auth()->guard('seller')->user()->store_id;
-        $product->slug = Str::slug($product->name);
+        $user  = auth()->guard('seller')->user();
+        $product->store_id =  $user->store_id;
+        $product->slug = Str::slug($product->name).'-'.$user->store_id.'-'.time();
     }
 
     /**
@@ -21,8 +22,8 @@ class ProductObserver
      */
     public function updating(Product $product): void
     {
-        $product->store_id = auth()->guard('seller')->user()->store_id;
-        $product->slug = Str::slug($product->name);
+        $user  = auth()->guard('seller')->user();
+        $product->slug = Str::slug($product->name).'-'.$user->store_id.'-'.$product->id;
     }
 
     /**

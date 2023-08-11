@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
             $table->unsignedFloat('price');
             $table->unsignedBigInteger('quantity')->default(0);
-            $table->string('sku')->nullable();
             $table->timestamps();
         });
     }

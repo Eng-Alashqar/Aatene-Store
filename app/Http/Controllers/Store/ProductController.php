@@ -9,12 +9,17 @@ use App\Models\Store\Product;
 use App\Services\Store\CategoryService;
 use App\Services\Store\ProductService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
 {
-
-    public function __construct(private ProductService $productService, private CategoryService $categoryService)
+    private  $productService;
+    private  $categoryService;
+    public function __construct()
     {
+        $this->productService = new ProductService;
+        $this->categoryService = new CategoryService;
     }
 
     /**
@@ -39,9 +44,9 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        dd($request->all());
+
         $this->productService->store($request->validated());
         return redirect()->back()->with(['notification' => 'تم اضافة منتج جديد']);
     }
@@ -83,10 +88,15 @@ class ProductController extends Controller
         return $this->deleteAjaxResponse($isDeleted);
     }
 
-    public function upload(Request $request){
-        $file = $request->file('files');
-            $photo_obj['photo_slug'] = $file->getClientOriginalName();
-            $photo_obj['photo'] = PhotoUpload::upload($file);
-        return response()->json(['data'=>$photo_obj],201);
+    public function upload(Request $request)
+    {
+        return response()->json(['data'=>$this->productService->upload($request)],Response::HTTP_OK);
+    }
+
+    public function deleteImage(Request $request)
+    {
+        $file = $request->filename;
+        $isDeleted = Storage::disk('s3')->delete($file);
+        return response()->json(['isDeleted' => $isDeleted, 'path' => $file], Response::HTTP_OK);
     }
 }

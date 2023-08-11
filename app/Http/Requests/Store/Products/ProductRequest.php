@@ -23,15 +23,17 @@ class ProductRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'description' => ['string'],
+            'description' => ['required','string'],
+            'files'=>['required','string'],
             'price' => ['required', 'numeric', 'min:0'],
+            'compare_price' => ['required', 'numeric', 'min:0'],
             'quantity' => ['required', 'integer', 'min:0'],
-            'is_available' => ['boolean'],
-            'release_date' => ['nullable', 'date'],
-            'status' => ['required', 'in:updated,new,expired'],
+            'is_available' => ['nullable','boolean'],
+            'status' => ['required', 'in:active,draft,archived'],
             'category_id' => ['required', 'exists:categories,id'],
-            'store_id' => ['exists:stores,id'],
-            'image' => ['required', 'image', 'mimes:jpeg,jpg,png', 'max:2048'],
+            'tags' => ['nullable'],
+            'featured'=>['nullable','boolean'],
+            'options'=>['nullable'],
         ];
     }
 
@@ -55,10 +57,7 @@ class ProductRequest extends FormRequest
             'quantity.integer' => 'كمية المنتج يجب ان يكون رقما',
             'quantity.min' => 'يجب ان تكون الكمية على الأقل :min',
             'status.required' => 'مطلوب ادخال حالة المنتج',
-            'image.required' => 'يرجى رفع صورة للمنتج',
-            'image.image' => 'يجب ادخال صورة المنتج',
-            'image.mimes' => 'الصورة يجب ان تكون بامتداد jpeg او jpg او png.',
-            'image.max' => 'يجب أن لا يتعدى حجم الصورة :max كيلوبايت',
+
         ];
     }
 }

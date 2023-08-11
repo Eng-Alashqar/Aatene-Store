@@ -20,7 +20,7 @@ return new class extends Migration
             ->nullable()
             ->constrained('categories','id')
             ->nullOnDelete();
-            $table->enum('status',['active','archive']);
+            $table->enum('status',['active','archive'])->default('active');
             $table->timestamps();
         });
     }

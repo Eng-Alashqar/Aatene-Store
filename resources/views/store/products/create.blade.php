@@ -16,7 +16,7 @@
                     <!--begin::Main column-->
                     <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
 
-                        <form action="{{ route('dashboard.products.store') }}" id="form-create" method="POST"
+                   <form action="{{ route('dashboard.products.store') }}" id="form-create" method="POST"
                             enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="files" id="files-uploaded">
@@ -36,12 +36,7 @@
     </div>
     <!--end:::Main-->
     @push('scripts')
-        <script src="{{ asset('assets/js/custom/apps/ecommerce/catalog/save-product.js') }}"></script>
-        <script>
-            @if (session()->has('notification'))
-                toastr.success("{{ session('notification') }}");
-            @endif
-        </script>
+        <script src="{{ asset('assets/plugins/custom/formrepeater/formrepeater.bundle.js') }}"></script>
         <script>
             var toolbarOptions = [
                 ['bold', 'italic', 'underline', 'strike'], // toggled buttons
@@ -81,14 +76,12 @@
                 }],
 
             ];
-
             var quill = new Quill('#kt_docs_quill_basic', {
                 modules: {
                     toolbar: toolbarOptions
                 },
                 theme: 'snow'
             });
-
             quill.format('align', 'right');
             quill.format('direction', 'rtl');
             let formSubmitHandler = document.getElementById('form-create');
@@ -100,8 +93,6 @@
             });
         </script>
         <script>
-            // Dropzone.autoDiscover = false;
-
             var myDropzone = new Dropzone("#kt_dropzonejs_example_1", {
                 url: "{{ route('dashboard.product_images') }}",
                 paramName: "files",
@@ -113,8 +104,12 @@
                 acceptedFiles: ".jpeg,.jpg,.png,.gif",
                 addRemoveLinks: true,
                 removedfile: function(file) {
-                    var name = file.upload.filename;
-                    $.ajax({
+                    var filesUploaded = [];
+                    var existingFiles = localStorage.getItem("filesUploaded");
+                    if (existingFiles) {
+                        filesUploaded = JSON.parse(existingFiles);
+                    }
+                    var name = filesUploaded.find(photoObj => photoObj.photo_slug === file.upload.filename);                        $.ajax({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
@@ -123,51 +118,59 @@
                         data: {
                             filename: name
                         },
-                        success: function(data) {
-                            console.log("File has been successfully removed!!");
+                        success: function(response) {
+                            console.log(response)
+                            var filesUploaded = [];
+                            var existingFiles = localStorage.getItem("filesUploaded");
+                            if (existingFiles) {
+                                filesUploaded = JSON.parse(existingFiles);
+                            }
+                            var newArray = filesUploaded.filter((element) => element.photo != response.path.photo);
+                            localStorage.setItem("filesUploaded", JSON.stringify(newArray));
+                            document.querySelector('#files-uploaded').value = localStorage.getItem("filesUploaded");
+                            console.log(document.querySelector('#files-uploaded').value,newArray);
                         },
                         error: function(e) {
                             console.log(e);
                         }
+
                     });
                     var fileRef;
                     return (fileRef = file.previewElement) != null ?
                         fileRef.parentNode.removeChild(file.previewElement) : void 0;
+
                 },
                 success: function(file, response) {
-                    // console.log(response);
                     var filesUploaded = [];
-                    // Retrieve existing files from Local Storage if any
                     var existingFiles = localStorage.getItem("filesUploaded");
                     if (existingFiles) {
                         filesUploaded = JSON.parse(existingFiles);
                     }
-                    // Add the latest file response to the array
+                    let array =  JSON.stringify(document.querySelector('#files-uploaded').value);
+                    // if (array.length >=0 && ){
+                    //     array.forEach((file)=>{
+                    //         this.removedfile(file)
+                    //     });
+                    // }
                     filesUploaded.push(response.data);
-                    // Save the updated array back to Local Storage
                     localStorage.setItem("filesUploaded", JSON.stringify(filesUploaded));
                     document.querySelector('#files-uploaded').value = localStorage.getItem("filesUploaded");
                     console.log(document.querySelector('#files-uploaded').value);
                 }
             });
             localStorage.removeItem("filesUploaded");
-            console.log("Local Storage data cleared.");
-        </script>
-        <script src="{{ asset('assets/plugins/custom/formrepeater/formrepeater.bundle.js') }}"></script>
-        <script>
-            $('#Variants').repeater({
-                initEmpty: true,
 
+        </script>
+        <script>
+            $('#options').repeater({
+                initEmpty: true,
                 defaultValues: {
                     'text-input': 'foo'
                 },
-
                 show: function() {
                     $(this).slideDown();
                     // Re-init select2
                     $(this).find('[data-kt-repeater="select2"]').select2();
-
-
 
                     // Re-init tagify
                     new Tagify(this.querySelector('[data-kt-repeater="tagify"]'));
@@ -180,13 +183,12 @@
                 ready: function() {
                     // Init select2
                     $('[data-kt-repeater="select2"]').select2();
-
                     // Init Tagify
                     new Tagify(document.querySelector('[data-kt-repeater="tagify"]'));
                 }
             });
+            new Tagify(document.querySelector('#tags'));
         </script>
-        <x-elements.delete-script name="products" dashboard="dashboard" />
     @endpush
 
 </x-store.master>

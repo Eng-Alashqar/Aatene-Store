@@ -13,18 +13,23 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')
+            $table->foreignId('user_id')->nullable()
             ->constrained('users')
-            ->cascadeOnDelete();
-        $table->foreignId('product_id')
+            ->nullOnDelete();
+        $table->foreignId('product_id')->nullable()
             ->constrained('products')
-            ->cascadeOnDelete();
+            ->nullOnDelete();
         $table->foreignId('store_id')
             ->constrained('stores')
             ->cascadeOnDelete();
+        $table->string('name');
+        $table->double('total');
         $table->enum('status', ['completed', 'refunded', 'expired'])
             ->default('completed');
-                $table->timestamps();
+        $table->enum('payment_status', ['completed', 'pending'])
+                ->default('pending');
+        $table->unsignedSmallInteger('quantity')->default(1);
+        $table->timestamps();
         });
     }
 

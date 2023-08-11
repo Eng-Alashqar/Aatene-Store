@@ -2,13 +2,14 @@
 
 namespace App\Models\Store;
 
+use App\Models\MultimediaHub\Tag;
 use App\Models\Scopes\StoreScope;
 use App\Models\Store\Comment;
 use App\Models\Store\Product\Order;
 use App\Models\Store\Rating;
-use App\Models\Store\Tag;
 use App\Observers\Store\ProductObserver;
 use App\Traits\HasPhoto;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -28,6 +29,35 @@ class Product extends Model
         static::addGlobalScope('store' , new StoreScope());
         static::observe(ProductObserver::class);
     }
+
+    public function scopeFilter(Builder $builder, $filters)
+    {
+        $params = array_merge([
+            'search' => null,
+            'status' => null,
+
+        ], $filters);
+
+        $builder->when($params['search'], function ($builder, $value) {
+            $category_id = Category::query()->where('name', 'like', "%$value%")->first()->id;
+            $builder->where('name', 'like', "%$value%")
+                ->orWhere('description', 'like', "%$value%")
+                ->orWhere('rating', 'like', "%$value%")
+                ->orWhere('quantity', 'like', "%$value%")
+                ->orWhere('price', 'like', "%$value%")
+                ->orWhere('category_id', $category_id);
+        });
+
+        $builder->when($params['status'], function ($builder, $value) {
+            $builder->where('status', '=', $value);
+        });
+    }
+
+    public function scopeActive(Builder $builder)
+    {
+        $builder->where('status', 'active')->where('is_available', true);
+    }
+
 
     public function store()
     {
@@ -49,9 +79,9 @@ class Product extends Model
         return $this->morphMany(Rating::class, 'rateable');
     }
 
-    public function variants() : HasMany
+    public function options() : HasMany
     {
-        return $this->hasMany(Variant::class);
+        return $this->hasMany(ProductOptions::class);
     }
 
     public function comments()

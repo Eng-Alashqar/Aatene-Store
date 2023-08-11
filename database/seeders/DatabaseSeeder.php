@@ -21,10 +21,11 @@ class DatabaseSeeder extends Seeder
         \App\Models\Users\User::factory(10)->create();
         \App\Models\Users\Admin::factory(10)->create();
         \App\Models\Store\Store::factory(10)->create();
+
         \App\Models\Users\Seller::factory(10)->create();
         \App\Models\Region::factory(10)->create();
         \App\Models\Store\Category::factory(10)->create();
-        Favorite::factory(20)->create();
+//        Favorite::factory(20)->create();
         // DB::table('store_region')->factory('storeRegionFactory', 1000)->create();
         $role = Role::first();
         $user = Admin::factory()->create([

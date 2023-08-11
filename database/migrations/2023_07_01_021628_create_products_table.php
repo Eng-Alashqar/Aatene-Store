@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description');
-            $table->float('price');
-            $table->float('compare_price')->nullable();
+            $table->double('price');
+            $table->double('compare_price')->nullable();
             $table->integer('quantity')->default(0);
             $table->float('rating')->default(0);
             $table->boolean('featured')->default(true);

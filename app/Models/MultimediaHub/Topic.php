@@ -15,7 +15,7 @@ class Topic extends Model
     public static function booted ()
     {
         static::creating(function (Topic $topic) {
-            $topic->slug = Str::slug($topic->title);
+            $topic->slug = Str::slug($topic->title).'-'.time();
         });
     }
 }

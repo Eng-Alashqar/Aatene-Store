@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('content');
-            $table->foreignId('author_id')->constrained('users')->cascadeOnDelete();
-            $table->dateTime('publication_date')->nullable();
+            $table->foreignId('seller_id')->constrained('users')->cascadeOnDelete();
+            $table->dateTime('visits_count')->nullable();
             $table->enum('status', ['draft', 'published'])->default('draft');
             $table->timestamps();
         });

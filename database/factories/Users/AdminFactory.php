@@ -1,16 +1,16 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Users;
 
-use App\Models\Store\Store;
+use App\Models\Users\Admin;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Users\Seller>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Users\Admin>
  */
-class SellerFactory extends Factory
+class AdminFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -25,12 +25,10 @@ class SellerFactory extends Factory
             'email_verified_at' => now(),
             'password' => Hash::make('password'), // password
             'remember_token' => Str::random(10),
+            'super_admin'=> fake()->randomElement([0,1]),
             'last_active_at' => now(),
             'status'=>fake()->randomElement(['active', 'inactive', 'blocked']),
             'phone_number'=>'0598518618',
-            'gold_coins'=>rand(),
-            'store_id' => Store::inRandomOrder()->first()->id,
-
         ];
     }
 }

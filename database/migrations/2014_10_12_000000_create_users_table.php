@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('status',['active','inactive','blocked'])->default('active');
+            $table->text('block_reason')->nullable();
             $table->rememberToken();
             $table->timestamp('last_active_at')->nullable();
             $table->timestamps();
