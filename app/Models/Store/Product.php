@@ -113,5 +113,20 @@ class Product extends Model
     {
         return $this->hasMany(Order::class);
     }
+
+    public function getStatusArAttribute()
+    {
+        switch ($this->status) {
+            case 'active':
+                return ' نشط';
+                break;
+            case 'draft':
+                return ' مسودة ';
+                break;
+            case 'archived':
+                return 'مؤرشف';
+                break;
+        }
+    }
 }
 

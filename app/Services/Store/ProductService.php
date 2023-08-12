@@ -71,15 +71,20 @@ class ProductService
     public function update($id, $params)
     {
         $product  = $this->getById($id);
-        if (array_key_exists('files', $params) && $params['files']) {
+        if (array_key_exists('files', $params)) {
+            if ($product->photo()->count() >= 1) {
+                foreach ($product->photo()->get() as $photo) {
+                    $photo->delete();
+                }
+            }
             foreach (json_decode($params['files']) as $file) {
-                $product->updateImage($file->photo, $file->photo_slug, 'cover');
+                $product->storeImage($file->photo, $file->photo_slug, 'cover');
             }
         }
 
         if (array_key_exists('options', $params) && $params['options']) {
             foreach ($product->options()->get() as $option) {
-                    $option->delete();
+                $option->delete();
             }
             foreach ($params['options'] as $option) {
                 $product->options()->create($option);
