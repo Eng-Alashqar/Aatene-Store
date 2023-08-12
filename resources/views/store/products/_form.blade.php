@@ -54,11 +54,13 @@
                 </div>
                 <!--end::Input group-->
                 <!--end::Input group-->
+
                 <div class="mb-5">
                     <label for="name" class="required form-label">هل المنتج متوفر</label>
                     <div class="form-check form-switch form-check-custom form-check-success form-check-solid ">
-                        <input class="form-check-input" name="is_available" type="checkbox" value=""
-                            @checked(old('is_available')) id="is_available" />
+                        <input class="form-check-input"  name="is_available" type="checkbox" value="1"
+                            @checked(old('is_available')) id="is_available_checkbox" />
+                            <input type="hidden" name="is_available" id="is_available_input" value="0">
                         <label class="form-check-label" for="is_available">
                             متوفر
                         </label>
@@ -68,9 +70,11 @@
                 <div class="mb-5">
                     <label for="name" class="required form-label">هل المنتج مميز</label>
                     <div class="form-check form-switch form-check-custom form-check-success form-check-solid ">
-                        <input class="form-check-input" name="featured" type="checkbox" value=""
-                            @checked(old('featured')) id="featured" />
-                        <label class="form-check-label" for="featured">
+                        <input class="form-check-input" name="featured" type="checkbox" value="1"
+                            @checked(old('featured')) id="featured_checkbox" />
+                            <input type="hidden" name="featured" id="featured_input" value="0">
+
+                        <label class="form-check-label" for="is_available">
                             مميز
                         </label>
                     </div>

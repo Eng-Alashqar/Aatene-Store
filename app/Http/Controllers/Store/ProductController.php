@@ -75,7 +75,6 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, $id)
     {
-        dd($request->validated());
         $this->productService->update($id, $request->validated());
         return redirect()->route('dashboard.products.index')->with(['notification' => 'تم تعديل بينانات المنتج بنجاح']);
     }

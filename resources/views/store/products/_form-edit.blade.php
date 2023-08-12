@@ -57,8 +57,9 @@
                 <div class="mb-5">
                     <label for="name" class="required form-label">هل المنتج متوفر</label>
                     <div class="form-check form-switch form-check-custom form-check-success form-check-solid ">
-                        <input class="form-check-input" name="is_available" type="checkbox"
-                            @if($product->is_available) value="1" checked @else value="0"  @endif id="is_available" />
+                        <input class="form-check-input"  type="checkbox" value="1"
+                            @checked($product->is_available) id="is_available_checkbox" />
+                            <input type="hidden" name="is_available" id="is_available_input" value="{{ $product->is_available ? '1' : '0' }}">
                         <label class="form-check-label" for="is_available">
                             متوفر
                         </label>
@@ -68,8 +69,10 @@
                 <div class="mb-5">
                     <label for="name" class="required form-label">هل المنتج مميز</label>
                     <div class="form-check form-switch form-check-custom form-check-success form-check-solid ">
-                        <input class="form-check-input" name="featured" type="checkbox" 
-                            @if($product->featured) value="1" checked @else value="0"  @endif id="featured" />
+                        <input class="form-check-input"  type="checkbox" value="1"
+                            @checked($product->featured) id="featured_checkbox" />
+                            <input type="hidden" name="featured" id="featured_input" value="{{ $product->featured ? '1' : '0' }}">
+
                         <label class="form-check-label" for="is_available">
                             مميز
                         </label>

@@ -62,7 +62,7 @@
                                                              class="lozad rounded mw-100" alt=""/>
                                                     </div>
                                                     <div class="d-flex justify-content-start flex-column">
-                                                        <a href="#"
+                                                        <a href="{{ route('dashboard.products.show',$product->id) }}"
                                                            class="text-dark fw-bold text-hover-primary mb-1 fs-6">{{ $product->name }}
                                                         </a>
                                                     </div>

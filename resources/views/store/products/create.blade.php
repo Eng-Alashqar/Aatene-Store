@@ -189,6 +189,30 @@
             });
             new Tagify(document.querySelector('#tags'));
         </script>
+            <script>
+                const  checkbox = document.getElementById('is_available_checkbox');
+                const  isAvailable = document.getElementById('is_available_input');
+                // checkbox.value = 1;
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        isAvailable.value = '1';
+                    } else {
+                        isAvailable.value = '0';
+                    }
+                });
+            </script>
+            <script>
+                const  featured_checkbox = document.getElementById('featured_checkbox');
+                const  featured = document.getElementById('featured_input');
+                // checkbox.value = 1;
+                featured_checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        featured.value = '1';
+                    } else {
+                        featured.value = '0';
+                    }
+                });
+            </script>
     @endpush
 
 </x-store.master>
