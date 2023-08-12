@@ -21,20 +21,38 @@ class ProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'name' => ['required', 'string', 'max:255'],
-            'description' => ['required','string'],
-            'files'=>['required','string'],
-            'price' => ['required', 'numeric', 'min:0'],
-            'compare_price' => ['required', 'numeric', 'min:0'],
-            'quantity' => ['required', 'integer', 'min:0'],
-            'is_available' => ['nullable','boolean'],
-            'status' => ['required', 'in:active,draft,archived'],
-            'category_id' => ['required', 'exists:categories,id'],
-            'tags' => ['nullable'],
-            'featured'=>['nullable','boolean'],
-            'options'=>['nullable'],
-        ];
+        if ($this->method() === 'PUT') {
+            return [
+                'name' => ['required', 'string', 'max:255'],
+                'description' => ['required','string'],
+                'files'=>['nullable','string'],
+                'price' => ['required', 'numeric', 'min:0'],
+                'compare_price' => ['required', 'numeric', 'min:0'],
+                'quantity' => ['required', 'integer', 'min:0'],
+                'is_available' => ['nullable','boolean'],
+                'status' => ['required', 'in:active,draft,archived'],
+                'category_id' => ['required', 'exists:categories,id'],
+                'tags' => ['nullable'],
+                'featured'=>['nullable','boolean'],
+                'options'=>['nullable'],
+            ];
+        } else {
+            return [
+                'name' => ['required', 'string', 'max:255'],
+                'description' => ['required','string'],
+                'files'=>['required','string'],
+                'price' => ['required', 'numeric', 'min:0'],
+                'compare_price' => ['required', 'numeric', 'min:0'],
+                'quantity' => ['required', 'integer', 'min:0'],
+                'is_available' => ['nullable','boolean'],
+                'status' => ['required', 'in:active,draft,archived'],
+                'category_id' => ['required', 'exists:categories,id'],
+                'tags' => ['nullable'],
+                'featured'=>['nullable','boolean'],
+                'options'=>['nullable'],
+            ];
+        }
+
     }
 
     /**

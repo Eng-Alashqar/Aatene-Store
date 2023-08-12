@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
@@ -72,6 +73,20 @@ class Product extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class, 'product_tag', 'product_id', 'tag_id', 'id', 'id');
+    }
+
+    public function getImagesAttribute()
+    {
+        $photo = $this->photo()->get();
+        if(!$photo)
+        {
+            return 'https://t4.ftcdn.net/jpg/04/70/29/97/240_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
+        }
+        $url = [];
+        foreach ($photo as $image) {
+            $url[] = Storage::disk('s3')->temporaryUrl($image->src, now()->minutes(120));
+        }
+        return $url;
     }
 
     public function ratings() : MorphMany

@@ -42,7 +42,6 @@ trait HasPhoto
     public function getImageAttribute()
     {
         $photo = $this->photo;
-
         if(!$photo)
         {
             return 'https://t4.ftcdn.net/jpg/04/70/29/97/240_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';

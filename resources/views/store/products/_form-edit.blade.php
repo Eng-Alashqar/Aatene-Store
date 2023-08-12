@@ -25,7 +25,7 @@
                         data-control="select2" data-placeholder="اضافة قسم">
                         <option></option>
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}" @selected(old('category_id') === $category->id)>{{ $category->name }}
+                            <option value="{{ $category->id }}" @selected($product->category_id === $category->id)>{{ $category->name }}
                             </option>
                         @endforeach
                     </select>
@@ -40,25 +40,25 @@
                         @enderror"
                         data-control="select2" data-hide-search="true" data-placeholder="اختر خيار">
                         <option></option>
-                        <option value="active" @selected(old('status') === 'active')>فعال</option>
-                        <option value="draft" @selected(old('status') === 'draft')>مسودة</option>
-                        <option value="archived" @selected(old('status') === 'archived')>مؤرشف</option>
+                        <option value="active" @selected($product->status === 'active')>فعال</option>
+                        <option value="draft" @selected($product->status === 'draft')>مسودة</option>
+                        <option value="archived" @selected($product->status === 'archived')>مؤرشف</option>
                     </select>
                 </div>
                 <!--begin::Input group-->
 
                 <!--begin::Input group-->
                 <div class="my-5 fv-row">
-                    <x-form.input-with-lable type="number" lable=" الكمية" name="quantity"
-                        placeholder="ادخل  الكمية" />
+                    <x-form.input-with-lable type="number" lable=" الكمية" name="quantity" placeholder="ادخل  الكمية"
+                        :value="$product->quantity" />
                 </div>
                 <!--end::Input group-->
                 <!--end::Input group-->
                 <div class="mb-5">
                     <label for="name" class="required form-label">هل المنتج متوفر</label>
                     <div class="form-check form-switch form-check-custom form-check-success form-check-solid ">
-                        <input class="form-check-input" name="is_available" type="checkbox" value=""
-                            @checked(old('is_available')) id="is_available" />
+                        <input class="form-check-input" name="is_available" type="checkbox"
+                            @if($product->is_available) value="1" checked @else value="0"  @endif id="is_available" />
                         <label class="form-check-label" for="is_available">
                             متوفر
                         </label>
@@ -68,9 +68,9 @@
                 <div class="mb-5">
                     <label for="name" class="required form-label">هل المنتج مميز</label>
                     <div class="form-check form-switch form-check-custom form-check-success form-check-solid ">
-                        <input class="form-check-input" name="featured" type="checkbox" value=""
-                            @checked(old('featured')) id="featured" />
-                        <label class="form-check-label" for="featured">
+                        <input class="form-check-input" name="featured" type="checkbox" 
+                            @if($product->featured) value="1" checked @else value="0"  @endif id="featured" />
+                        <label class="form-check-label" for="is_available">
                             مميز
                         </label>
                     </div>
@@ -93,12 +93,13 @@
 
                 <!--begin::Input group-->
                 <div class="mb-10 fv-row">
-                    <x-form.input-with-lable lable=" السعر" name="price" placeholder="سعر المنتج" />
+                    <x-form.input-with-lable lable=" السعر" name="price" placeholder="سعر المنتج" :value="$product->price" />
                 </div>
                 <!--end::Input group-->
                 <!--begin::Input group-->
                 <div class="mb-10 fv-row">
-                    <x-form.input-with-lable lable=" سعر المقارنة" name="compare_price" placeholder="سعر المقارنة" />
+                    <x-form.input-with-lable lable=" سعر المقارنة" name="compare_price" placeholder="سعر المقارنة"
+                        :value="$product->compare_price" />
                 </div>
                 <!--end::Card header-->
             </div>
@@ -124,14 +125,14 @@
                         <!--begin::Body-->
                         <div class="card-body py-3">
                             <div class="mb-5">
-                                <x-form.input-with-lable lable="اسم المنتج" name="name"
-                                    placeholder="ادخل اسم المنتج" />
+                                <x-form.input-with-lable lable="اسم المنتج" name="name" placeholder="ادخل اسم المنتج"
+                                    :value="$product->name" />
                             </div>
                             <div class="mb-5">
                                 <label for="description" class="required form-label">وصف المنتج</label>
                                 <div id="kt_docs_quill_basic" name="description"
                                     class="form-control form-control-solid">
-                                    {!! old('description') !!}</div>
+                                    {!! $product->description !!}</div>
                                 <textarea name="description" id="description" style="display: none"></textarea>
                             </div>
                             <div class="mb-5">
@@ -141,7 +142,7 @@
                                 <!--begin::Input-->
                                 <input id="tags" name="tags"
                                     class="form-control @error('tag') is-invalid @enderror mb-2"
-                                    value="{{ old('tags') }}" />
+                                    value="{{ $product->tags()->pluck('name') }}" />
                                 <!--end::Input-->
                             </div>
                         </div>
@@ -212,7 +213,7 @@
                                     <!--begin::Form group-->
                                     <div class="form-group">
                                         <div data-repeater-list="options" class="d-flex flex-column gap-3">
-                                            @forelse ( [] as $option)
+                                            @forelse($product->options()->get() as $option)
                                                 <div data-repeater-item=""
                                                     class="form-group d-flex flex-wrap align-items-center gap-5">
                                                     <!--begin::Select2-->
@@ -220,13 +221,13 @@
                                                         <select class="form-select" name="attribute"
                                                             data-placeholder="اختر النوع" data-kt-repeater="select2">
                                                             <option></option>
-                                                            <option value="color" @selected($option['attribute'] === 'color')>اللون
+                                                            <option value="color" @selected($option->attribute === 'color')>اللون
                                                             </option>
-                                                            <option value="size" @selected($option['attribute'] === 'size')>الحجم
+                                                            <option value="size" @selected($option->attribute === 'size')>الحجم
                                                             </option>
-                                                            <option value="material" @selected($option['attribute'] === 'material')>
+                                                            <option value="material" @selected($option->attribute === 'material')>
                                                                 المادة</option>
-                                                            <option value="style" @selected($option['attribute'] === 'style')>التنسيق
+                                                            <option value="style" @selected($option->attribute === 'style')>التنسيق
                                                             </option>
                                                         </select>
                                                     </div>
@@ -235,11 +236,11 @@
                                                     <!--begin::Input-->
                                                     <input type="text" data-kt-repeater="tagify"
                                                         class="form-control mw-100 w-200px" name="value"
-                                                        placeholder="القيمة" value="{{ $option['value'] }}" />
+                                                        placeholder="القيمة" value="{{ $option->value }}" />
                                                     <!--begin::Input-->
                                                     <input type="number" class="form-control mw-100 w-200px"
                                                         name="price" placeholder="السعر" min="0"
-                                                        value="{{ $option['price'] }}" />
+                                                        value="{{ $option->price }}" />
                                                     <!--end::Input-->
                                                     <button type="button" data-repeater-delete=""
                                                         class="btn btn-sm btn-icon btn-light-danger">
@@ -250,42 +251,10 @@
                                                     </button>
                                                 </div>
                                             @empty
-                                                <div data-repeater-item=""
-                                                    class="form-group d-flex flex-wrap align-items-center gap-5">
-                                                    <!--begin::Select2-->
-                                                    <div class="w-100 w-md-200px">
-                                                        <select class="form-select" name="attribute"
-                                                            data-placeholder="اختر النوع" data-kt-repeater="select2">
-                                                            <option></option>
-                                                            <option value="color">اللون</option>
-                                                            <option value="size">الحجم</option>
-                                                            <option value="material">المادة</option>
-                                                            <option value="style">التنسيق</option>
-                                                        </select>
-                                                    </div>
-                                                    <!--end::Select2-->
-                                                    <!--begin::Input-->
-                                                    <input type="text" data-kt-repeater="tagify"
-                                                        class="form-control mw-100 w-200px" name="value"
-                                                        placeholder="القيمة" />
-                                                    <!--begin::Input-->
-                                                    <input type="number" class="form-control mw-100 w-200px"
-                                                        name="price" placeholder="السعر" min="0" />
-                                                    <!--end::Input-->
-                                                    <button type="button" data-repeater-delete=""
-                                                        class="btn btn-sm btn-icon btn-light-danger">
-                                                        <i class="ki-duotone ki-cross fs-1">
-                                                            <span class="path1"></span>
-                                                            <span class="path2"></span>
-                                                        </i>
-                                                    </button>
-                                                </div>
                                             @endforelse
-
                                         </div>
                                     </div>
                                     <!--end::Form group-->
-
                                     <!--begin::Form group-->
                                     <div class="form-group mt-5">
                                         <button type="button" data-repeater-create=""
@@ -306,7 +275,7 @@
                     <div class="d-flex justify-content-start gap-6">
                         <!--begin::Button-->
                         <button type="submit" id="kt_ecommerce_add_product_submit" class="btn btn-primary">
-                            <span class="indicator-label">{{ $button_label ?? 'حفظ التغيرات' }} </span>
+                            <span class="indicator-label">{{ 'حفظ التغيرات' }} </span>
                             <span class="indicator-progress">Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                         </button>

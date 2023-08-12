@@ -65,7 +65,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         return view('store.products.edit', [
-            'categories' => $this->categoryService->getParentCategories(),
+            'categories' => $this->categoryService->getAllCategories(),
             'product' => $this->productService->getById($id)
         ]);
     }
@@ -75,8 +75,9 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, $id)
     {
-        $this->productService->update($id, $request->validated);
-        return redirect()->route('store.products.index')->with(['notification' => 'تم تعديل بينانات المنتج بنجاح']);
+        dd($request->validated());
+        $this->productService->update($id, $request->validated());
+        return redirect()->route('dashboard.products.index')->with(['notification' => 'تم تعديل بينانات المنتج بنجاح']);
     }
 
     /**

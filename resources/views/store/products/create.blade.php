@@ -163,7 +163,7 @@
         </script>
         <script>
             $('#options').repeater({
-                initEmpty: true,
+                initEmpty:true,
                 defaultValues: {
                     'text-input': 'foo'
                 },
