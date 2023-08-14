@@ -933,8 +933,7 @@
                             <!--end::Tab content-->
                             <div class="d-flex justify-content-end">
                                 <!--begin::Button-->
-                                <a href="{{ route('dashboard.products.index') }}"
-                                    class="btn btn-primary ">رجوع</a>
+                                <a href="{{ route('dashboard.products.index') }}" class="btn btn-primary ">رجوع</a>
                                 <!--end::Button-->
                             </div>
                         </div>

@@ -23,6 +23,7 @@ class ProductRequest extends FormRequest
     {
         if ($this->method() === 'PUT') {
             return [
+                'image' => ['sometimes', 'required', 'image', 'mimes:jpeg,jpg,png', 'max:2048'],
                 'name' => ['required', 'string', 'max:255'],
                 'description' => ['required','string'],
                 'files'=>['nullable','string'],
@@ -38,6 +39,7 @@ class ProductRequest extends FormRequest
             ];
         } else {
             return [
+                'image' => ['required', 'required', 'image', 'mimes:jpeg,jpg,png', 'max:2048'],
                 'name' => ['required', 'string', 'max:255'],
                 'description' => ['required','string'],
                 'files'=>['required','string'],

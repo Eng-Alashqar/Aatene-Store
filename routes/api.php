@@ -3,9 +3,8 @@
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\FavoriteController;
 use App\Http\Controllers\API\FollowerController;
-use App\Http\Controllers\Api\ProductController;
-
-
+use App\Http\Controllers\API\Store\ProductController;
+use App\Http\Controllers\API\Store\StoreController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,8 +23,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::middleware(['api', 'check_password','auth:user'])->group(function () {
-    Route::apiResource('/products', ProductController::class);
-    Route::get('/categories', [CategoryController::class,'index']);
+
 
     Route::prefix('/favorites')->group(function () {
         Route::get('/', [FavoriteController::class, 'index']);
@@ -35,7 +33,6 @@ Route::middleware(['api', 'check_password','auth:user'])->group(function () {
 
     Route::post('store/{store}/follow', [FollowerController::class, 'follow'])->name('store.follow');
     Route::delete('store/{store}/unfollow', [FollowerController::class, 'unfollow'])->name('store.unfollow');
-    Route::apiResource('/stores', StoreController::class);
 
     Route::post('orders/{product}', [OrderController::class, 'store']);
     Route::delete('orders/{order}', [OrderController::class, 'destroy']);
@@ -47,6 +44,12 @@ Route::middleware(['api', 'check_password','auth:user'])->group(function () {
 
     Route::apiResource('profiles', ProfileController::class);
 
+});
+
+Route::middleware(['api'])->group(function (){
+    Route::apiResource('stores', StoreController::class);
+    Route::apiResource('/products', ProductController::class);
+    Route::get('/categories', [CategoryController::class,'index']);
 });
 
 

@@ -99,4 +99,8 @@ class ProductController extends Controller
         $isDeleted = Storage::disk('s3')->delete($file);
         return response()->json(['isDeleted' => $isDeleted, 'path' => $file], Response::HTTP_OK);
     }
+
+    public function variantsShow(){
+        return view('store.products.variants');
+    }
 }

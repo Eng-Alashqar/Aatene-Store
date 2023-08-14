@@ -9,6 +9,7 @@ use App\Models\Chat\Message;
 use App\Models\Loyalty\Follower;
 use App\Models\Store\Favorite;
 use App\Models\Profile;
+use App\Traits\HasPhoto;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -17,16 +18,24 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasPhoto;
 
-    public function conversations()
+
+    public function initiatorConversations()
     {
-        return $this->morphToMany(Conversation::class, 'initiator', 'participants')->latest();
+        return $this->morphMany(Conversation::class,'initiator');
     }
 
-    public function sentMessages()
+    public function ParticipantConversations()
     {
-        $this->morphedByMany(Message::class,'sender');
+        return $this->morphMany(Conversation::class,'participant');
+    }
+
+    public function getConversationsAttribute(){
+        $conversations1 = $this->initiatorConversations;
+        $conversations2 = $this->ParticipantConversations;
+        $conversations = array($conversations1,$conversations2);
+        return $conversations;
     }
 
     public function profile()

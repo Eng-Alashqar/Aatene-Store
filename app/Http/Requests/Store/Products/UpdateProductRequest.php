@@ -23,16 +23,16 @@ class UpdateProductRequest extends FormRequest
     {
         if ($this->method() === 'PUT') {
             return [
-                'name' => ['required', 'string', 'max:255'],
+                'name' => ['nullable', 'string', 'max:255'],
                 'description' => ['nullable', 'string'],
-                'price' => ['required', 'numeric', 'min:0'],
-                'quantity' => ['required', 'integer', 'min:0'],
+                'price' => ['nullable', 'numeric', 'min:0'],
+                'quantity' => ['nullable', 'integer', 'min:0'],
                 'is_available' => ['boolean'],
                 'release_date' => ['nullable', 'date'],
-                'status' => ['required', 'in:updated,new,expired'],
-                'category_id' => ['required', 'exists:categories,id'],
-                'store_id' => ['required', 'exists:stores,id'],
-                'image' => ['required', 'image', 'mimes:jpeg,jpg,png', 'max:2048'],
+                'status' => ['nullable', 'in:updated,new,expired'],
+                'category_id' => ['nullable', 'exists:categories,id'],
+                'store_id' => ['nullable', 'exists:stores,id'],
+                'image' => ['nullable', 'image', 'mimes:jpeg,jpg,png', 'max:2048'],
             ];
         } else {
             return [

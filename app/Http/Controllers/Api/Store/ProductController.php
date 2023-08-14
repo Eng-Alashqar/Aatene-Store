@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\Store;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Store\Products\StoreProductRequest;
@@ -12,12 +12,15 @@ use Illuminate\Support\Facades\Request;
 
 class ProductController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth:seller')->except('index');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $products = ProductResource::collection(Product::paginate());
+        $products = Product::paginate();
         return response()->json($products);
     }
 
@@ -45,7 +48,7 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        $product->update($request->all());
+        $product->update($request->validated());
         return response()->json($product, 201, [
             'location' => route('products.show', $product->id),
         ]);

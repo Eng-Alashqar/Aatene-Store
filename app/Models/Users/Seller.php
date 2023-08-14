@@ -17,21 +17,30 @@ class Seller extends User implements JWTSubject
 {
     use HasFactory , Notifiable , HasApiTokens , HasPhoto;
 
-    public function conversations()
+   
+
+    public function initiatorConversations()
     {
-        return $this->morphToMany(Conversation::class, 'initiator', 'participants');
+        return $this->morphMany(Conversation::class,'initiator');
+    }
+
+    public function ParticipantConversations()
+    {
+        return $this->morphMany(Conversation::class,'participant');
+    }
+
+    public function getConversationsAttribute(){
+        $conversations1 = $this->initiatorConversations;
+        $conversations2 = $this->ParticipantConversations;
+        $conversations = array($conversations1,$conversations2);
+        return $conversations;
     }
 
 
-    public function sentMessages()
-    {
-        $this->morphedByMany(Message::class,'sender');
-    }
-
-    public function receivedMessages()
-    {
-        return $this->morphToMany(Message::class,'userable','recipients');
-    }
+    // public function receivedMessages()
+    // {
+    //     return $this->morphToMany(Message::class,'userable','recipients');
+    // }
 
     protected $fillable = [
         'name',

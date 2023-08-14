@@ -30,11 +30,11 @@ class ProductService
             $product->storeImage($file->photo, $file->photo_slug, 'cover');
         }
 
-        if (array_key_exists('options', $params) && $params['options']) {
-            foreach ($params['options'] as $option) {
-                $product->options()->create($option);
-            }
-        }
+        // if (array_key_exists('options', $params) && $params['options']) {
+        //     foreach ($params['options'] as $option) {
+        //         $product->options()->create($option);
+        //     }
+        // }
 
         if (array_key_exists('tags', $params) && $params['tags']) {
             $tags_ids = $this->createTags($params['tags']);

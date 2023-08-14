@@ -2,6 +2,24 @@
 
     <!--begin::Aside column-->
     <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
+        <!--begin::banner for store-->
+        <div class="card card-flush py-4">
+            <!--begin::Card header-->
+            <div class="card-header">
+                <!--begin::Card title-->
+                <div class="required card-title">
+                    <h2> الصورة الاساسية</h2>
+                </div>
+                <!--end::Card title-->
+            </div>
+            <!--end::Card header-->
+            <!--begin::Card body-->
+            <div class="card-body text-center pt-0">
+                <x-elements.logo-image-input name="image" />
+            </div>
+            <!--end::Card body-->
+        </div>
+        <!--end::banner for store-->
         <!--begin::Category & tags-->
         <div class="card card-flush py-4">
             <!--begin::Card header-->
@@ -58,9 +76,9 @@
                 <div class="mb-5">
                     <label for="name" class="required form-label">هل المنتج متوفر</label>
                     <div class="form-check form-switch form-check-custom form-check-success form-check-solid ">
-                        <input class="form-check-input"  name="is_available" type="checkbox" value="1"
+                        <input class="form-check-input" name="is_available" type="checkbox" value="1"
                             @checked(old('is_available')) id="is_available_checkbox" />
-                            <input type="hidden" name="is_available" id="is_available_input" value="0">
+                        <input type="hidden" name="is_available" id="is_available_input" value="0">
                         <label class="form-check-label" for="is_available">
                             متوفر
                         </label>
@@ -72,7 +90,7 @@
                     <div class="form-check form-switch form-check-custom form-check-success form-check-solid ">
                         <input class="form-check-input" name="featured" type="checkbox" value="1"
                             @checked(old('featured')) id="featured_checkbox" />
-                            <input type="hidden" name="featured" id="featured_input" value="0">
+                        <input type="hidden" name="featured" id="featured_input" value="0">
 
                         <label class="form-check-label" for="is_available">
                             مميز
@@ -195,7 +213,7 @@
                     </div>
                     <!--end::Media-->
 
-                    <!--begin::Variations-->
+                    {{-- <!--begin::Variations-->
                     <div class="card card-flush py-4">
                         <!--begin::Card header-->
                         <div class="card-header">
@@ -216,7 +234,7 @@
                                     <!--begin::Form group-->
                                     <div class="form-group">
                                         <div data-repeater-list="options" class="d-flex flex-column gap-3">
-                                            @forelse ( [] as $option)
+                                            @forelse ([] as $option)
                                                 <div data-repeater-item=""
                                                     class="form-group d-flex flex-wrap align-items-center gap-5">
                                                     <!--begin::Select2-->
@@ -256,6 +274,11 @@
                                             @empty
                                                 <div data-repeater-item=""
                                                     class="form-group d-flex flex-wrap align-items-center gap-5">
+                                                    <!--begin::banner for store-->
+                                                    <div class="card card-flush py-4">
+                                                            <x-elements.logo-image-input name="image" style="width: 20px " />
+                                                    </div>
+                                                    <!--end::banner for store-->
                                                     <!--begin::Select2-->
                                                     <div class="w-100 w-md-200px">
                                                         <select class="form-select" name="attribute"
@@ -305,7 +328,7 @@
                         </div>
                         <!--end::Card header-->
                     </div>
-                    <!--end::Variations-->
+                    <!--end::Variations--> --}}
                     <!--begin::Buttons-->
                     <div class="d-flex justify-content-start gap-6">
                         <!--begin::Button-->

@@ -14,7 +14,9 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
-        'store_id', 'user_id', 'status', 'payment_status','product_id','name','total','status' ,'quantity'];
+        'store_id', 'user_id', 'status',
+        'payment_status','product_id','name'
+        ,'total','status' ,'quantity'];
 
     public function store()
     {
@@ -28,7 +30,7 @@ class Order extends Model
 
     public function products()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class)->withDefault(['name' => 'Product Deleted']);
     }
 
 

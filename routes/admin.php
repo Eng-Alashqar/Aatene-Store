@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Chat\ConversationController;
 use App\Http\Controllers\Store\CategoryController;
 use App\Http\Controllers\Store\FaqsController;
 use App\Http\Controllers\Store\RegionController;
 use App\Http\Controllers\Store\StoreController;
 use App\Http\Controllers\Users\AdminController;
 use App\Http\Controllers\Users\RoleController;
+use App\Models\Chat\Conversation;
 use Illuminate\Support\Facades\Route;
 
 
@@ -23,4 +25,7 @@ Route::prefix('/administrator')->name('admin.')->middleware(['auth:admin'])->gro
     Route::resource('permissions',RegionController::class);
     Route::resource('faqs',FaqsController::class);
     Route::resource('admins',AdminController::class);
+    Route::get('chat',[ConversationController::class,'index'])->name('chat.index');
+    Route::post('chat/search',[ConversationController::class,'search'])->name('chat.search');
+    Route::get('chat/show/{id}',[ConversationController::class,'show'])->name('chat.show');
 });

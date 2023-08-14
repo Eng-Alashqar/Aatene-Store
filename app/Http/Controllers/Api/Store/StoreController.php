@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\Store;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Store\StoreRequest;
@@ -13,12 +13,15 @@ use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth:user')->except('index');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $stores = StoreResourse::collection(Store::all());
+        $stores = Store::paginate();
         return response()->json($stores);
     }
 

@@ -13,6 +13,7 @@ Route::prefix('/dashboard')->name('dashboard.')->middleware(['auth:seller'])->gr
         return view('store.index');
     })->name('home');
     Route::resource('products', ProductController::class);
+    Route::get('products/variants', [ProductController::class,'variantsShow'])->name('variants');
     Route::post('products/images/upload', [ProductController::class,'upload'])->name('product_images');
     Route::post('products/images/delete', [ProductController::class,'deleteImage'])->name('product_images.delete');
 

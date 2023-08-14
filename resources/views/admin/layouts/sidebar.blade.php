@@ -127,6 +127,22 @@
 
                 </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
+                     <!--begin:Menu item-->
+                     <x-elements.sidebar-menu-item lable="إدارة المحادثات " index="admin.users.index"
+                     create="admin.users.create">
+                     <x-slot name="icon">
+                         <i class="ki-duotone ki-people fs-2">
+                             <i class="path1"></i>
+                             <i class="path2"></i>
+                             <i class="path3"></i>
+                             <i class="path4"></i>
+                             <i class="path5"></i>
+                         </i>
+                     </x-slot>
+                     <x-elements.sidebar-li-sub-menu route="admin.chat.index" title="قائمة المستخدمين" />
+
+                 </x-elements.sidebar-menu-item>
+                 <!--end:Menu item-->
                 <!--begin:Menu item-->
                 <div class="menu-item pt-5">
                     <!--begin:Menu content-->
