@@ -2,12 +2,15 @@
 
 namespace App\Models\Store;
 
+use App\Traits\HasPhoto;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Variant extends Model
 {
-    use HasFactory;
+    use HasFactory, HasPhoto;
+
+    protected $fillable = ['name','price','product_id'];
 
     public function products()
     {

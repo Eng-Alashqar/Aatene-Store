@@ -25,6 +25,7 @@ class Product extends Model
         'featured','visits_count','is_available','quantity', 'price', 'compare_price', 'rating', 'status'
         ];
 
+
     public static function booted()
     {
         static::addGlobalScope('store' , new StoreScope());
@@ -127,6 +128,11 @@ class Product extends Model
                 return 'مؤرشف';
                 break;
         }
+    }
+
+    public function variants()
+    {
+        return $this->hasMany(Variant::class);
     }
 }
 

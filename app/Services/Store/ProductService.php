@@ -5,6 +5,9 @@ namespace App\Services\Store;
 use App\Helpers\PhotoUpload;
 use App\Models\MultimediaHub\Tag;
 use App\Models\Store\Product;
+use App\Models\Store\Variant;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 
@@ -23,6 +26,11 @@ class ProductService
         return $this->product->filter($filters)->with(['category', 'store'])->latest()->paginate($count == 0 ? 7 : $count);
     }
 
+    public function getStoreRegions()
+    {
+        return  Auth::guard('seller')->user()->store->regions;
+    }
+
     public function store($params)
     {
         $product =  $this->product->create($params);
@@ -30,11 +38,25 @@ class ProductService
             $product->storeImage($file->photo, $file->photo_slug, 'cover');
         }
 
-        // if (array_key_exists('options', $params) && $params['options']) {
-        //     foreach ($params['options'] as $option) {
-        //         $product->options()->create($option);
-        //     }
-        // }
+        if (array_key_exists('options', $params) && $params['options']) {
+            foreach ($params['options'] as $option) {
+             $attribute =   DB::table('attributes')->where('name',$option['attribute'])->first();
+             foreach($option['options_value'] as $variant){
+               $variant =  $product->variant()->create([
+                    'name'=>$variant['value'],
+                    'price'=>$variant['price']
+                ]);
+                $variant->attribute()->sync();
+             }
+            }
+        }
+
+        if (array_key_exists('image', $params) && is_file($params['image'])) {
+            $file = $params['image'];
+            $photo_obj['photo_slug'] = $file->getClientOriginalName();
+            $photo_obj['photo'] = PhotoUpload::upload($file);
+            $product->storeImage($photo_obj['photo'],  $photo_obj['photo_slug'], 'main');
+        }
 
         if (array_key_exists('tags', $params) && $params['tags']) {
             $tags_ids = $this->createTags($params['tags']);

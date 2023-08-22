@@ -9,6 +9,7 @@ use App\Models\Store\Product;
 use App\Services\Store\CategoryService;
 use App\Services\Store\ProductService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -27,6 +28,7 @@ class ProductController extends Controller
      */
     public function index()
     {
+
         return view('store.products.index', [
             'products' => $this->productService->get()
         ]);
@@ -38,7 +40,8 @@ class ProductController extends Controller
     public function create()
     {
         return view('store.products.create', [
-            'categories' => $this->categoryService->getAllCategories()]);
+            'categories' => $this->categoryService->getParentCategories(), 'regions' => $this->productService->getStoreRegions()
+        ]);
     }
 
     /**
@@ -46,7 +49,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-
+        // dd($request->validated());
         $this->productService->store($request->validated());
         return redirect()->back()->with(['notification' => 'تم اضافة منتج جديد']);
     }
@@ -90,7 +93,7 @@ class ProductController extends Controller
 
     public function upload(Request $request)
     {
-        return response()->json(['data'=>$this->productService->upload($request)],Response::HTTP_OK);
+        return response()->json(['data' => $this->productService->upload($request)], Response::HTTP_OK);
     }
 
     public function deleteImage(Request $request)
@@ -100,7 +103,8 @@ class ProductController extends Controller
         return response()->json(['isDeleted' => $isDeleted, 'path' => $file], Response::HTTP_OK);
     }
 
-    public function variantsShow(){
+    public function variantsShow()
+    {
         return view('store.products.variants');
     }
 }

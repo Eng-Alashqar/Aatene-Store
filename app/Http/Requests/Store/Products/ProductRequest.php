@@ -36,10 +36,13 @@ class ProductRequest extends FormRequest
                 'tags' => ['nullable'],
                 'featured'=>['nullable','boolean'],
                 'options'=>['nullable'],
+                'region_id_.*'=>['required','exists:regions,id'],
+                'region_price_.*'=>['required']
+
             ];
         } else {
             return [
-                'image' => ['required', 'required', 'image', 'mimes:jpeg,jpg,png', 'max:2048'],
+                'image' => ['required', 'image', 'mimes:jpeg,jpg,png', 'max:2048'],
                 'name' => ['required', 'string', 'max:255'],
                 'description' => ['required','string'],
                 'files'=>['required','string'],
@@ -52,6 +55,9 @@ class ProductRequest extends FormRequest
                 'tags' => ['nullable'],
                 'featured'=>['nullable','boolean'],
                 'options'=>['nullable'],
+                'region_id_.*'=>['required','exists:regions,id'],
+                'region_price_.*'=>['required']
+
             ];
         }
 

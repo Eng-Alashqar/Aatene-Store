@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('attributes_variants', function (Blueprint $table) {
             $table->foreignId('variant_id')->constrained('variants')->cascadeOnDelete();
             $table->foreignId('attribute_id')->constrained('attributes');
-            $table->json('value');
+            $table->json('value')->nullable();
             $table->primary(['variant_id', 'attribute_id']);
         });
     }

@@ -30,7 +30,7 @@ class CategoryService implements ServiceInterface
 
     public function getParentCategories()
     {
-        return $this->category->latest()->whereNull('parent_id')->with(['children'])->get();
+        return $this->category->latest()->whereNull('parent_id')->with(['children','ancestors'])->get();
     }
 
     public function store($params)
