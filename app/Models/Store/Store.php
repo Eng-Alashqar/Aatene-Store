@@ -67,7 +67,7 @@ class Store extends Model
 
     public function seller()
     {
-        return $this->belongsTo(Seller::class)->withDefault(['name' => 'لايوجد حاليا']);
+        return $this->hasOne(Seller::class)->withDefault(['name' => 'لايوجد حاليا']);
     }
 
     public function products()
