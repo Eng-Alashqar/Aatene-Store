@@ -22,29 +22,27 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::middleware(['api', 'check_password','auth:user'])->group(function () {
+//Route::middleware(['api', 'check_password','auth:user'])->group(function () {
+//
+///*
+//    Route::prefix('/favorites')->group(function () {
+//        Route::get('/', [FavoriteController::class, 'index']);
+//        Route::post('/', [FavoriteController::class, 'store']);
+//        Route::delete('/{favorite}', [FavoriteController::class, 'destroy']);
+//    });*/
 
-
-    Route::prefix('/favorites')->group(function () {
-        Route::get('/', [FavoriteController::class, 'index']);
-        Route::post('/', [FavoriteController::class, 'store']);
-        Route::delete('/{favorite}', [FavoriteController::class, 'destroy']);
-    });
-
-    Route::post('store/{store}/follow', [FollowerController::class, 'follow'])->name('store.follow');
-    Route::delete('store/{store}/unfollow', [FollowerController::class, 'unfollow'])->name('store.unfollow');
-
-    Route::post('orders/{product}', [OrderController::class, 'store']);
-    Route::delete('orders/{order}', [OrderController::class, 'destroy']);
-    Route::get('orders/{order}', [OrderController::class, 'show']);
-    Route::get('orders', [OrderController::class, 'index']);
-
-    Route::post('/products/{product}/report', [ProductController::class, 'reportProduct']);
-    Route::post('/stores/{store}/report', [StoreController::class, 'reportStore']);
-
-    Route::apiResource('profiles', ProfileController::class);
-
-});
+//    /*
+//    Route::post('orders/{product}', [OrderController::class, 'store']);
+//    Route::delete('orders/{order}', [OrderController::class, 'destroy']);
+//    Route::get('orders/{order}', [OrderController::class, 'show']);
+//    Route::get('orders', [OrderController::class, 'index']);
+//*/
+////    Route::post('/products/{product}/report', [ProductController::class, 'reportProduct']);
+////    Route::post('/stores/{store}/report', [StoreController::class, 'reportStore']);
+//
+////    Route::apiResource('profiles', ProfileController::class);
+//
+//});
 
 Route::middleware(['api'])->group(function (){
     Route::apiResource('stores', StoreController::class);

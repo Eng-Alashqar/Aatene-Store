@@ -39,6 +39,16 @@ trait HasPhoto
         }
     }
 
+    public function deleteImageByType($type)
+    {
+        if($this->photo()->count() >= 1)
+        {
+            foreach($this->photo()->where('type',"%$type%")->get()??[] as $photo){
+                $photo->delete();
+            }
+        }
+    }
+
     public function getImageAttribute()
     {
         $photo = $this->photo;
@@ -48,5 +58,37 @@ trait HasPhoto
         }
         $url = Storage::disk('s3')->temporaryUrl($photo->src,now()->minutes(120));
         return $url;
+    }
+
+    public function getImagesAttribute()
+    {
+        $photo = $this->photo()->get();
+        if(!$photo)
+        {
+            return 'https://t4.ftcdn.net/jpg/04/70/29/97/240_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
+        }
+        $url = [];
+        foreach ($photo as $image) {
+            $url[] = Storage::disk('s3')->temporaryUrl($image->src, now()->minutes(120));
+        }
+        return $url;
+    }
+
+    public function getImagesWithTypeAttribute(): array|string
+    {
+        $photo = $this->photo()->get();
+        if(!$photo)
+        {
+            return 'https://t4.ftcdn.net/jpg/04/70/29/97/240_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
+        }
+        $images = [];
+        foreach ($photo as $image) {
+            $images[] =
+                [
+                'url'=>Storage::disk('s3')->temporaryUrl($image->src, now()->minutes(120)),
+                'type'=>$image->type
+                 ];
+        }
+        return $images;
     }
 }

@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\Store;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\FavoriteResource;
 use App\Models\Store\Favorite;
 use App\Models\Users\User;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class FavoriteController extends Controller
 {
@@ -15,12 +16,9 @@ class FavoriteController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
-        // $favorites = $user->favorites()->get();
-        // $user = User::find(11);
-        $favorites = $user->favorites;
-
-        return response()->json(FavoriteResource::collection($favorites));
+        $user = auth()->guard('user')->user();
+        $favorites = $user->favorites()->get();
+        return response()->json($favorites);
     }
 
     /**
@@ -28,25 +26,36 @@ class FavoriteController extends Controller
      */
     public function store(Request $request)
     {
-        $user = $request->user();
-        $favorite = new Favorite([
-            'user_id' => ($user && $user instanceof User) ? $user->id : $request->input('user_id'),
-            'product_id' => $request->input('product_id'),
+        $request->validate([
+            'product_id'=>['int','exists:products,id']
         ]);
-        $favorite->save();
-        return response()->json(['message' => 'Product added to favorites']);
+        $user = auth()->guard('user')->user();
+        $favorite = Favorite::firstOrcreate([
+            'user_id' => $user->id,
+            'product_id' => $request->product_id,
+        ]);
+        return response()->json(['status'=>(bool)$favorite,'message' => (bool)$favorite ? 'Product added to favorites' :  'Sorry, something went wrong, please try again!'],(bool)$favorite ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, Favorite $favorite)
+    public function destroy(Request $request,  $id)
     {
-        // $user = $request->user();
+         $user = $request->user();
+        try {
+            $favorite = Favorite::findOrFail($id);
 
-        // if ($favorite->user_id !== $user->id) {
-        //     return response()->json(['message' => 'Unauthorized'], 403);
-        // }
+            if ($favorite->user_id !== $user->id) {
+                return response()->json(['message' => 'Unauthorized'], Response::HTTP_FORBIDDEN);
+            }
+            $favorite->delete();
+            return response()->json( ['status'=>true,'message' => 'The product deleted successfully'],Response::HTTP_OK);
+
+        }catch (\Throwable $ex){
+            return response()->json(['status'=>false,'message'=>'Sorry, something went wrong, please try again!'], Response::HTTP_BAD_REQUEST);
+        }
+
 
         $favorite->delete();
 

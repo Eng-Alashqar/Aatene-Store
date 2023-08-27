@@ -3,26 +3,29 @@
 namespace App\Http\Controllers\API\Store;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Store\StoreRequest;
-use App\Http\Resources\StoreResourse;
+use App\Http\Requests\Api\StoreRequest;
 use App\Models\Store\Store;
 use App\Models\Users\Admin;
 use App\Notifications\ReportStoreNotification;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class StoreController extends Controller
 {
     public function __construct() {
-        $this->middleware('auth:user')->except('index');
+        $this->middleware('auth:seller')->except('index','store','show');
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $stores = Store::paginate();
-        return response()->json($stores);
+
+        $filters = request()->query();
+        $stores = Store::with(['seller','regions' ,'followers'])->filter($filters)->paginate();
+        return response()->json(['status'=>(bool)$stores,'data'=>$stores], Response::HTTP_OK);
+
     }
 
     /**
@@ -30,10 +33,9 @@ class StoreController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $store = new StoreResourse(Store::create($request->all()));
-        return response()->json($store, 201, [
-            "Location" => route('stores.show', $store->id),
-        ]);
+        $store = Store::create($request->validated());
+        $store->regions()->sync($request->post('regions'));
+        return response()->json(['status'=>true,'data'=>$store->load('regions')], Response::HTTP_CREATED);
     }
 
     /**
@@ -41,7 +43,7 @@ class StoreController extends Controller
      */
     public function show(Store $store)
     {
-        return new StoreResourse($store);
+        return $store->load(['seller','regions' ,'followers']);
     }
 
     /**
@@ -49,19 +51,14 @@ class StoreController extends Controller
      */
     public function update(StoreRequest $request, Store $store)
     {
-        $store->update($request->all());
-        return response()->json($store, 201, [
-            "Location" => route('stores.show', $store->id),
-        ]);
+        if($store->id !== auth()->guard('seller')->user()->store_id){
+            return  response()->json(['status'=>false,'message'=>'this store belong to anther seller send right store'],Response::HTTP_BAD_REQUEST);
+        }
+        $store->update($request->validated());
+        return response()->json(['status'=>true,'data'=>$store->load('regions')], Response::HTTP_OK);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        return;
-    }
+
 
     public function reportStore(Store $store, Request $request)
     {

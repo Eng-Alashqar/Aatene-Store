@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Store\Products;
+namespace App\Http\Requests\Store;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -42,25 +42,25 @@ class ProductRequest extends FormRequest
             ];
         } else {
             return [
-                'image' => ['required', 'image', 'mimes:jpeg,jpg,png', 'max:2048'],
+                'image' => ['required', 'image', 'mimes:jpeg,jpg,png,gif', 'max:2048'],
                 'name' => ['required', 'string', 'max:255'],
                 'description' => ['required','string'],
                 'files'=>['required','string'],
                 'price' => ['required', 'numeric', 'min:0'],
-                'compare_price' => ['required', 'numeric', 'min:0'],
                 'quantity' => ['required', 'integer', 'min:0'],
                 'is_available' => ['nullable','boolean'],
                 'status' => ['required', 'in:active,draft,archived'],
                 'category_id' => ['required', 'exists:categories,id'],
-                'tags' => ['nullable'],
+                'tags' => ['nullable','string'],
                 'featured'=>['nullable','boolean'],
-                'options'=>['nullable'],
+                'options.*.attribute'=>['required','in:color,size,style,material'],
+                'options.*.options_value.*.options_value_photo'=>['required','image', 'mimes:jpeg,jpg,png,gif', 'max:102485'],
+                'options.*.options_value.*.options_value_value'=>['required','string',  'max:100'],
+                'options.*.options_value.*.options_value_price'=>['required','numeric', 'min:0'],
                 'region_id_.*'=>['required','exists:regions,id'],
                 'region_price_.*'=>['required']
-
             ];
         }
-
     }
 
     /**
@@ -83,6 +83,18 @@ class ProductRequest extends FormRequest
             'quantity.integer' => 'كمية المنتج يجب ان يكون رقما',
             'quantity.min' => 'يجب ان تكون الكمية على الأقل :min',
             'status.required' => 'مطلوب ادخال حالة المنتج',
+            'options.*.attribute.required'=>'يرجى اختيار قيمة للخصائص',
+            'options.*.attribute.in'=>' يرجى اختيار قيمة الخصائص واحدة من القيم الاتية إما لون او حجم او مادة او تنسيق ',
+            'options.*.options_value.*.options_value_photo.required'=>'صورة خاصية المنتج مطلوبة',
+            'options.*.options_value.*.options_value_photo.image'=>'صورة خاصية المنتج يجب ان تكون صورة',
+            'options.*.options_value.*.options_value_photo.mimes'=>'صورة خاصية المنتج يجب ان تكون احد الانواع الاتية:jpeg,jpg,png,gif',
+            'options.*.options_value.*.options_value_photo.max'=>'صورة خاصية المنتج لا يجب ان يزيد حجمها عن 1 ميجا',
+            'options.*.options_value.*.options_value_value.required'=>'قيمة خاصية المنتج مطلوب ',
+            'options.*.options_value.*.options_value_value.string'=>'قيمة خاصية المنتج يجب ان تكون نص ',
+            'options.*.options_value.*.options_value_value.max'=>'قيمة خاصية المنتج يجب ان تكون نص لايزيد عن 100 خانة  ',
+            'options.*.options_value.*.options_value_price.required'=>'سعر خاصية المنتج مطلوب ',
+            'options.*.options_value.*.options_value_price.numeric'=>'سعر خاصية المنتج يجب ان يكون قيمة عددية ',
+            'options.*.options_value.*.options_value_price.min'=>'سعر خاصية المنتج لا يجب ان يقل عن 0',
 
         ];
     }

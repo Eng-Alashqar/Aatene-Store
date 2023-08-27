@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\Store;
 
 use App\Http\Controllers\Controller;
 use App\Models\Loyalty\Follower;
@@ -10,8 +10,7 @@ class FollowerController extends Controller
 {
     public function follow(Store $store)
     {
-        $user = auth()->user;
-        // $user = User::find(1);
+        $user = auth()->guard('user')->user();
 
         // Check if the user is not already following the store
         if (!$user->followers()->where('store_id', $store->id)->exists()) {
@@ -20,7 +19,7 @@ class FollowerController extends Controller
                 'store_id' => $store->id
             ]);
             $follower->save();
-            return response()->json(['message' => 'You are now following the store.']);
+            return response()->json(['status'=>true,'message' => 'You are now following the store.']);
         }
 
         return response()->json(['message' => 'You are already following the store.']);
@@ -28,8 +27,7 @@ class FollowerController extends Controller
 
     public function unfollow(Store $store)
     {
-        $user = auth()->user;
-        // $user = User::find(1);
+        $user = auth()->guard('user')->user();
 
         // Find the follower entry and delete it if it exists
         $follower = $user->followers()->where('store_id', $store->id)->first();
@@ -42,9 +40,9 @@ class FollowerController extends Controller
         return response()->json(['message' => 'You were not following the store.']);
     }
 
-    public function followersList(Store $store)
+    public function followersList()
     {
-        $followers = $store->followers;
+        $followers = auth()->guard('seller')->user()->followers;
 
         return response()->json(['followers' => $followers]);
     }

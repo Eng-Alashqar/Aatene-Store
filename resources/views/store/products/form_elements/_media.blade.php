@@ -2,7 +2,7 @@
 <div class="card card-flush py-4">
     <!--begin::Card header-->
     <div class="card-header">
-        <div class="card-title">
+        <div class="card-title required">
             <h2>الوسائط</h2>
         </div>
     </div>

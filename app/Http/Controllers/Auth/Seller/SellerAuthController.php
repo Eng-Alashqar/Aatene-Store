@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth\Seller;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\RegisterRequest;
 use App\Http\Resources\Api\Seller\SellerResource;
 use App\Models\Users\Seller;
 use App\Services\Store\StoreService;
@@ -38,9 +39,9 @@ class SellerAuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function register(Request $request)
+    public function register(RegisterRequest $request): \Illuminate\Http\JsonResponse
     {
-        return (new RegisterService(new Seller,SellerResource::class))->register($request);
+        return (new RegisterService(new Seller,SellerResource::class))->register($request->validated());
     }
     /**
      * Log the user out (Invalidate the token).

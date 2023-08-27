@@ -10,7 +10,7 @@ class Variant extends Model
 {
     use HasFactory, HasPhoto;
 
-    protected $fillable = ['name','price','product_id'];
+    protected $fillable = ['name','price','product_id', 'is_available'];
 
     public function products()
     {
@@ -19,8 +19,6 @@ class Variant extends Model
 
     public function attributes()
     {
-        return $this->belongsToMany(Attribute::class, 'attributes_variants')
-            ->withPivot(['value'])
-            ->as('option');
+        return $this->belongsToMany(Attribute::class, 'attributes_variants');
     }
 }

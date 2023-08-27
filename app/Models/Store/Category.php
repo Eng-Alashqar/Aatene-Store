@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method static whereNull(string $string)
+ */
 class Category extends Model
 {
     use HasFactory, HasPhoto;
@@ -59,6 +62,10 @@ class Category extends Model
     public function ancestors()
     {
         return $this->parent()->with('children');
+    }
+    public function all_children()
+    {
+        return $this->children()->with('children');
     }
 
     public function products()

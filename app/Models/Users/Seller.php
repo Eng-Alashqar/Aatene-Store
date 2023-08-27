@@ -17,7 +17,8 @@ class Seller extends User implements JWTSubject
 {
     use HasFactory , Notifiable , HasApiTokens , HasPhoto;
 
-   
+
+
 
     public function initiatorConversations()
     {
@@ -50,7 +51,7 @@ class Seller extends User implements JWTSubject
         'status',
         'phone_number',
         'gold_coins',
-
+        'store_id'
     ];
 
     /**
@@ -75,7 +76,7 @@ class Seller extends User implements JWTSubject
 
     public function store()
     {
-        return $this->belongsTo(Store::class);
+        return $this->hasOne(Store::class);
     }
 
       /**

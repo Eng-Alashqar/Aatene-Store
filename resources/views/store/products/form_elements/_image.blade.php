@@ -11,7 +11,7 @@
     <!--end::Card header-->
     <!--begin::Card body-->
     <div class="card-body text-center pt-0">
-        <x-elements.logo-image-input name="image" />
+        <x-elements.logo-image-input name="image"  />
     </div>
     <!--end::Card body-->
 </div>

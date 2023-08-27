@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class ProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,20 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required','string', 'between:2,100'],
+            'first_name' => ['required','string', 'between:2,100'],
+            'last_name' => ['required','string', 'between:2,100'],
             'email' => ['required','string','email','max:100','unique:sellers,email','unique:users,email'],
             'password' => 'required|string|confirmed|min:6',
             'phone_number'=>['required','numeric'],
-            'store_id'=>['required','exists:stores,id','unique:sellers,store_id']
-       ];
+            'birthday'=>['nullable','date', 'before:today'],
+            'gender'=>['required','in:male,female'],
+            'country'=>['required','string', 'size:2'],
+            'street_address' => ['required','string', 'between:2,100'],
+            'city' => ['required','string', 'between:2,50'],
+            'state'=>['required','string', 'between:2,50'],
+            'postal_code'=>['required','string', 'between:2,20'],
+            'locale'=>['required','string', 'between:2,10'],
+        ];
     }
 
 

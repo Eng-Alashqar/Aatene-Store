@@ -3,6 +3,7 @@
 namespace App\Models\Store;
 
 use App\Models\MultimediaHub\Tag;
+use App\Models\Region;
 use App\Models\Scopes\StoreScope;
 use App\Models\Store\Comment;
 use App\Models\Store\Product\Order;
@@ -20,9 +21,11 @@ class Product extends Model
 {
     use HasFactory, HasPhoto;
 
+    protected $appends = ['images_with_type'];
     protected $fillable = [
         'store_id', 'category_id', 'name', 'slug', 'description',
-        'featured','visits_count','is_available','quantity', 'price', 'compare_price', 'rating', 'status'
+        'featured','visits_count','is_available','quantity',
+        'price', 'compare_price', 'rating', 'status'
         ];
 
 
@@ -41,13 +44,13 @@ class Product extends Model
         ], $filters);
 
         $builder->when($params['search'], function ($builder, $value) {
-            $category_id = Category::query()->where('name', 'like', "%$value%")->first()->id;
+//            $category_id = Category::query()->where('name', 'like', "%$value%")->first()?->id;
             $builder->where('name', 'like', "%$value%")
                 ->orWhere('description', 'like', "%$value%")
                 ->orWhere('rating', 'like', "%$value%")
                 ->orWhere('quantity', 'like', "%$value%")
-                ->orWhere('price', 'like', "%$value%")
-                ->orWhere('category_id', $category_id);
+                ->orWhere('price', 'like', "%$value%");
+//                ->orWhere('category_id', $category_id);
         });
 
         $builder->when($params['status'], function ($builder, $value) {
@@ -76,19 +79,22 @@ class Product extends Model
         return $this->belongsToMany(Tag::class, 'product_tag', 'product_id', 'tag_id', 'id', 'id');
     }
 
-    public function getImagesAttribute()
-    {
-        $photo = $this->photo()->get();
-        if(!$photo)
+    /*
+        public function getImagesAttribute()
         {
-            return 'https://t4.ftcdn.net/jpg/04/70/29/97/240_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
+            $photo = $this->photo()->get();
+            if(!$photo)
+            {
+                return 'https://t4.ftcdn.net/jpg/04/70/29/97/240_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
+            }
+            $url = [];
+            foreach ($photo as $image) {
+                $url[] = Storage::disk('s3')->temporaryUrl($image->src, now()->minutes(120));
+            }
+            return $url;
         }
-        $url = [];
-        foreach ($photo as $image) {
-            $url[] = Storage::disk('s3')->temporaryUrl($image->src, now()->minutes(120));
-        }
-        return $url;
-    }
+    */
+
 
     public function ratings() : MorphMany
     {
@@ -132,7 +138,15 @@ class Product extends Model
 
     public function variants()
     {
-        return $this->hasMany(Variant::class);
+        return $this->hasMany(Variant::class,'product_id','id');
     }
+
+
+    public function shippingAddressCost(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Region::class, 'shipping_region', 'product_id', 'region_id', 'id', 'id');
+    }
+
+
 }
 

@@ -3,12 +3,12 @@
 namespace App\Services\Store;
 
 use App\Helpers\PhotoUpload;
-use App\Models\MultimediaHub\Tag;
+
 use App\Models\Store\Product;
-use App\Models\Store\Variant;
+use App\Services\Store\Product\OptionsService;
+use App\Services\Store\Product\TagsService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 
 class ProductService
@@ -33,56 +33,25 @@ class ProductService
 
     public function store($params)
     {
-        $product =  $this->product->create($params);
-        foreach (json_decode($params['files']) as $file) {
-            $product->storeImage($file->photo, $file->photo_slug, 'cover');
-        }
+        DB::beginTransaction();
 
-        if (array_key_exists('options', $params) && $params['options']) {
-            foreach ($params['options'] as $option) {
-             $attribute =   DB::table('attributes')->where('name',$option['attribute'])->first();
-             foreach($option['options_value'] as $variant){
-               $variant =  $product->variant()->create([
-                    'name'=>$variant['value'],
-                    'price'=>$variant['price']
-                ]);
-                $variant->attribute()->sync();
-             }
+        try {
+            $product =  $this->product->create($params);
+            foreach (json_decode($params['files']) as $file) {
+                $product->storeImage($file->photo, $file->photo_slug, 'cover');
             }
+            TagsService::createTags($params,$product);
+            $this->storeMainImage($params,$product);
+            OptionsService::createOptions($params, $product);
+            // $product->shippingAddressCost()->sync();
+            DB::commit();
+            return $product;
+        } catch (\Throwable $th) {
+            DB::rollBack();
         }
-
-        if (array_key_exists('image', $params) && is_file($params['image'])) {
-            $file = $params['image'];
-            $photo_obj['photo_slug'] = $file->getClientOriginalName();
-            $photo_obj['photo'] = PhotoUpload::upload($file);
-            $product->storeImage($photo_obj['photo'],  $photo_obj['photo_slug'], 'main');
-        }
-
-        if (array_key_exists('tags', $params) && $params['tags']) {
-            $tags_ids = $this->createTags($params['tags']);
-            $product->tags()->sync($tags_ids);
-        }
-        return $product;
+        return false;
     }
 
-    public function createTags($params): array
-    {
-        $tags = json_decode($params);
-        $tags_ids = [];
-        $saved_tags = Tag::all();
-        foreach ($tags as $i) {
-            $slug = Str::slug($i->value, '-', 'ar');
-            $tag = $saved_tags->where('slug', $slug)->first();
-            if (!$tag) {
-                $tag = Tag::create([
-                    'name' => $i->value,
-                    'slug' => $slug
-                ]);
-            }
-            $tags_ids[] = $tag->id;
-        }
-        return $tags_ids;
-    }
 
 
     public function getById($id)
@@ -94,29 +63,16 @@ class ProductService
     {
         $product  = $this->getById($id);
         if (array_key_exists('files', $params)) {
-            if ($product->photo()->count() >= 1) {
-                foreach ($product->photo()->get() as $photo) {
-                    $photo->delete();
-                }
-            }
+            $product->deleteImage();
             foreach (json_decode($params['files']) as $file) {
                 $product->storeImage($file->photo, $file->photo_slug, 'cover');
             }
         }
+        $this->storeMainImage($params,$product);
 
-        if (array_key_exists('options', $params) && $params['options']) {
-            foreach ($product->options()->get() as $option) {
-                $option->delete();
-            }
-            foreach ($params['options'] as $option) {
-                $product->options()->create($option);
-            }
-        }
+        OptionsService::editOptions($params, $product);
+        TagsService::createTags($params,$product);
 
-        if (array_key_exists('tags', $params) && $params['tags']) {
-            $tags_ids = $this->createTags($params['tags']);
-            $product->tags()->sync($tags_ids);
-        }
         $product->update($params);
         return $product;
     }
@@ -135,4 +91,18 @@ class ProductService
         $photo_obj['photo'] = PhotoUpload::upload($file);
         return $photo_obj;
     }
+
+
+
+    public function storeMainImage($params,$product){
+        if (array_key_exists('image', $params) && is_file($params['image'])) {
+            $file = $params['image'];
+            $photo_obj['photo_slug'] = $file->getClientOriginalName();
+            $photo_obj['photo'] = PhotoUpload::upload($file);
+            $product->deleteImageByType('main');
+            $product->storeImage($photo_obj['photo'],  $photo_obj['photo_slug'], 'main');
+        }
+    }
+
+
 }

@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers\Store;
 
-use App\Helpers\PhotoUpload;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Store\Products\ProductRequest;
-use App\Models\Store\Product;
+use App\Http\Requests\Store\ProductRequest;
 use App\Services\Store\CategoryService;
 use App\Services\Store\ProductService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -50,8 +47,8 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         // dd($request->validated());
-        $this->productService->store($request->validated());
-        return redirect()->back()->with(['notification' => 'تم اضافة منتج جديد']);
+        $result = $this->productService->store($request->validated());
+        return redirect()->back()->with(['notification' => $result ? 'تم اضافة منتج جديد' : 'حدث خلل ما في عملية الاضافة يرجى المحاولة مرة اخرى']);
     }
 
     /**

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('variants', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
-            $table->unsignedDouble('name');
+            $table->string('name');
             $table->unsignedDouble('price');
             $table->boolean('is_available')->default(true);
             $table->timestamps();

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Store;
+namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -31,17 +31,18 @@ class StoreRequest extends FormRequest
                 'description' => ['required', 'string', 'max:64000'],
                 'location' => ['required', 'string', 'max:64000'],
                 'status' => ['sometimes', 'in:active,inactive'],
-                'is_accepted' => ['sometimes', 'boolean'],
-                'seller_id'=> ['required', 'exists:sellers,id'],
                 'regions'=> ['required', 'exists:regions,id'],
             ];
-        } elseif ($this->method() === 'PUT' || $this->method() === 'PATCH') {
+        } else {
             $rules = [
-                'status' => ['required', 'in:active,blocked,inactive'],
-                'block_reason' => ['nullable', 'string','max:255'],
+                'logo' => ['sometimes', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
+                'cover' => ['sometimes', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
+                'name' => ['sometimes', 'string', 'max:100', 'unique:stores,name'],
+                'description' => ['sometimes', 'string', 'max:64000'],
+                'location' => ['sometimes', 'string', 'max:64000'],
+                'status' => ['sometimes', 'in:active,inactive'],
+                'regions'=> ['sometimes', 'exists:regions,id'],
             ];
-        } elseif ($this->method() === 'DELETE') {
-            # code...
         }
 
         return $rules;
