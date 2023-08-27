@@ -11,7 +11,7 @@ class CategoryController extends Controller
        /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request)
+    public function index(Request $request)
     {
         return response()->json(Category::whereNull('parent_id')->latest()->with(['all_children'])->get());
     }

@@ -33,5 +33,5 @@ Route::middleware('auth:user')->prefix('user')->group(function () {
     Route::apiResource('stores', StoreController::class)->except('destroy');
 });
 
-Route::get('categories', CategoryController::class);
+Route::get('categories', [CategoryController::class,'index']);
 
