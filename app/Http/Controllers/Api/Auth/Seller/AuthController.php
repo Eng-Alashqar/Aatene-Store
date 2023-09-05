@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Auth\Seller;
+namespace App\Http\Controllers\Api\Auth\Seller;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\RegisterRequest;
 use App\Http\Resources\Api\Seller\SellerResource;
 use App\Models\Users\Seller;
-use App\Services\Store\StoreService;
 use App\Services\Api\Auth\LoginService;
 use App\Services\Api\Auth\RegisterService;
+use App\Services\Store\StoreService;
 use Illuminate\Http\Request;
 
 
-class SellerAuthController extends Controller
+class AuthController extends Controller
 {
     /**
      * Create a new AuthController instance.
@@ -60,7 +60,7 @@ class SellerAuthController extends Controller
      */
     public function userProfile()
     {
-        return response()->json(auth('seller')->user()->profile);
+        return response()->json(auth('seller')->user());
     }
 
     /**

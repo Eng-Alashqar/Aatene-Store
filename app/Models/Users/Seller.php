@@ -76,7 +76,7 @@ class Seller extends User implements JWTSubject
 
     public function store()
     {
-        return $this->belongsTo(Store::class);
+        return $this->belongsTo(Store::class)->withDefault(['name'=>'لا يوجد حاليا']);
     }
 
       /**

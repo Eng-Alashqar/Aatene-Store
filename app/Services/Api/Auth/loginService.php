@@ -23,8 +23,8 @@ class LoginService
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => 120,
-            'user' => new SellerResource($user)
+            'expires_in' => 10000*9000000,
+            'user' => ($user)
         ]);
     }
 
@@ -42,4 +42,12 @@ class LoginService
         }
         return $this->createNewToken($token);
     }
+
+
+    public function refresh() {
+        return $this->createNewToken(auth()->guard($this->guard)->refresh());
+    }
+
+
+
 }

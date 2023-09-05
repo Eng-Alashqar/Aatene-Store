@@ -5,6 +5,9 @@ use App\Http\Controllers\API\FavoriteController;
 use App\Http\Controllers\API\FollowerController;
 use App\Http\Controllers\API\Store\ProductController;
 use App\Http\Controllers\API\Store\StoreController;
+use App\Http\Controllers\Api\Store\TagsController;
+use App\Http\Controllers\Api\Store\VariantsController;
+use App\Http\Controllers\Api\Users\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,17 +47,28 @@ use Illuminate\Support\Facades\Route;
 //
 //});
 
-Route::middleware(['api'])->group(function (){
-    Route::apiResource('stores', StoreController::class);
-    Route::apiResource('/products', ProductController::class);
-    Route::get('/categories', [CategoryController::class,'index']);
+Route::middleware(['api'])->group(function () {
+    Route::apiResource('stores', StoreController::class)->middleware('auth:seller');
+    Route::apiResource('/products', ProductController::class)->middleware('auth:seller');
+    Route::get('/categories', [CategoryController::class, 'index']);
+
+    Route::prefix('/profile')->middleware('auth:seller,user,admin')->controller(ProfileController::class)->group(function () {
+        Route::get('/', 'show');
+        Route::post('/create', 'store');
+        Route::put('/update', 'update');
+        Route::delete('/delete', 'destroy');
+    });
+
+    Route::apiResource('/variants', VariantsController::class)->middleware('auth:seller');
+    Route::apiResource('/tags', TagsController::class)->middleware('auth:seller');
+
 });
 
 
-require __DIR__.'/api/auth.php';
-require __DIR__.'/api/seller.php';
-require __DIR__.'/api/user.php';
-require __DIR__.'/api/chat.php';
+require __DIR__ . '/api/auth.php';
+require __DIR__ . '/api/seller.php';
+require __DIR__ . '/api/user.php';
+require __DIR__ . '/api/chat.php';
 
 
 

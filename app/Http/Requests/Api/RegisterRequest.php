@@ -26,7 +26,7 @@ class RegisterRequest extends FormRequest
             'email' => ['required','string','email','max:100','unique:sellers,email','unique:users,email'],
             'password' => 'required|string|confirmed|min:6',
             'phone_number'=>['required','numeric'],
-            'store_id'=>['required','exists:stores,id','unique:sellers,store_id']
+            'store_id'=>['sometimes','exists:stores,id','unique:sellers,store_id']
        ];
     }
 

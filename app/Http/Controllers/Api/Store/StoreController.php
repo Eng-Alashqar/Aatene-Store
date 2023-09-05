@@ -13,9 +13,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class StoreController extends Controller
 {
-    public function __construct() {
-        $this->middleware('auth:seller')->except('index','store','show');
+    public function __construct()
+    {
+        $this->middleware('auth:seller')->except('index', 'store', 'show');
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -23,8 +25,8 @@ class StoreController extends Controller
     {
 
         $filters = request()->query();
-        $stores = Store::with(['seller','regions' ,'followers'])->filter($filters)->paginate();
-        return response()->json(['status'=>(bool)$stores,'data'=>$stores], Response::HTTP_OK);
+        $stores = Store::with(['seller', 'regions', 'followers'])->filter($filters)->paginate();
+        return response()->json(['status' => (bool)$stores, 'data' => $stores], Response::HTTP_OK);
 
     }
 
@@ -35,7 +37,7 @@ class StoreController extends Controller
     {
         $store = Store::create($request->validated());
         $store->regions()->sync($request->post('regions'));
-        return response()->json(['status'=>true,'data'=>$store->load('regions')], Response::HTTP_CREATED);
+        return response()->json(['status' => true, 'data' => $store->load('regions')], Response::HTTP_CREATED);
     }
 
     /**
@@ -43,7 +45,7 @@ class StoreController extends Controller
      */
     public function show(Store $store)
     {
-        return $store->load(['seller','regions' ,'followers']);
+        return $store->load(['seller', 'regions', 'followers']);
     }
 
     /**
@@ -51,13 +53,12 @@ class StoreController extends Controller
      */
     public function update(StoreRequest $request, Store $store)
     {
-        if($store->id !== auth()->guard('seller')->user()->store_id){
-            return  response()->json(['status'=>false,'message'=>'this store belong to anther seller send right store'],Response::HTTP_BAD_REQUEST);
+        if ($store->id !== auth()->guard('seller')->user()->store_id) {
+            return response()->json(['status' => false, 'message' => 'this store belong to anther seller send right store'], Response::HTTP_BAD_REQUEST);
         }
         $store->update($request->validated());
-        return response()->json(['status'=>true,'data'=>$store->load('regions')], Response::HTTP_OK);
+        return response()->json(['status' => true, 'data' => $store->load('regions')], Response::HTTP_OK);
     }
-
 
 
     public function reportStore(Store $store, Request $request)

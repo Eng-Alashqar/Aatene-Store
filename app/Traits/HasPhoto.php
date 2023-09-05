@@ -6,6 +6,24 @@ use Illuminate\Support\Facades\Storage;
 
 trait HasPhoto
 {
+
+
+    protected function getArrayableAppends()
+    {
+        $this->appends = array_unique(array_merge($this->appends, ['ImagesWithType', 'images' ,'image']));
+
+        return parent::getArrayableAppends();
+    }
+
+
+    protected function getArrayableItems(array $values)
+    {
+        if(!in_array('photo', $this->hidden)){
+            $this->hidden[] = 'photo';
+        }
+        return parent::getArrayableItems($values);
+    }
+
     public static function bootHasPhoto()
     {
         static::deleted(function ($model){

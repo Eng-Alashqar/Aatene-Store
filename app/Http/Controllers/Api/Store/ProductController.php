@@ -13,9 +13,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
 {
-    public function __construct() {
-        $this->middleware('auth:seller')->except('index','show');
+    public function __construct()
+    {
+        $this->middleware('auth:seller')->except('index', 'show');
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -24,8 +26,8 @@ class ProductController extends Controller
     public function index()
     {
         $filters = request()->query();
-        $products = Product::with(['store' ,'category','tags','options','favorites','variants','shippingAddressCost'])->filter($filters)->paginate();
-        return response()->json(['status'=>(bool)$products,'data'=>$products], Response::HTTP_OK);
+        $products = Product::with(['store', 'category', 'tags', 'options', 'favorites', 'variants', 'shippingAddressCost'])->filter($filters)->paginate();
+        return response()->json(['status' => (bool)$products, 'data' => $products], Response::HTTP_OK);
     }
 
     /**
@@ -38,11 +40,11 @@ class ProductController extends Controller
             $product = Product::create($request->validated());
             $this->saveFiles($request, $product);
             DB::commit();
-        }catch (\Throwable $e){
+        } catch (\Throwable $e) {
             DB::rollBack();
-            return response()->json(['status'=>false,'message'=>'Sorry, something went wrong, please try again!'], Response::HTTP_BAD_REQUEST);
+            return response()->json(['status' => false, 'message' => 'Sorry, something went wrong, please try again!'], Response::HTTP_BAD_REQUEST);
         }
-        return response()->json(['status'=>true,'data'=>$product], Response::HTTP_CREATED);
+        return response()->json(['status' => true, 'data' => $product], Response::HTTP_CREATED);
 
     }
 
@@ -51,13 +53,12 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        try{
+        try {
             $product = Product::findOrFail($id);
+        } catch (\Throwable $ex) {
+            return response()->json(['status' => false, 'message' => 'Sorry, something went wrong,this product dose not exist.'], Response::HTTP_BAD_REQUEST);
         }
-        catch (\Throwable $ex){
-            return response()->json(['status'=>false,'message'=>'Sorry, something went wrong,this product dose not exist.'], Response::HTTP_BAD_REQUEST);
-        }
-        return response()->json(['status'=>true,'data'=>$product->load(['store' ,'category','tags','options','favorites','variants','shippingAddressCost'])], Response::HTTP_CREATED);
+        return response()->json(['status' => true, 'data' => $product->load(['store', 'category', 'tags', 'options', 'favorites', 'variants', 'shippingAddressCost'])], Response::HTTP_CREATED);
     }
 
     /**
@@ -70,13 +71,13 @@ class ProductController extends Controller
             $product = Product::findOrFail($id);
 
             $product->update($request->validated());
-            $this->saveFiles($request, $product,true);
+            $this->saveFiles($request, $product, true);
             DB::commit();
 
-        }catch (\Throwable $e){
-            return response()->json(['status'=>false,'message'=>'Sorry, something went wrong, please try again!'], Response::HTTP_CREATED);
+        } catch (\Throwable $e) {
+            return response()->json(['status' => false, 'message' => 'Sorry, something went wrong, please try again!'], Response::HTTP_CREATED);
         }
-        return response()->json(['status'=>true,'data'=>$product], Response::HTTP_CREATED);
+        return response()->json(['status' => true, 'data' => $product], Response::HTTP_CREATED);
 
     }
 
@@ -88,10 +89,10 @@ class ProductController extends Controller
         try {
             $product = Product::findOrFail($id);
             $product->delete();
-            return response()->json( ['status'=>true,'message' => 'The product deleted successfully'],Response::HTTP_OK);
+            return response()->json(['status' => true, 'message' => 'The product deleted successfully'], Response::HTTP_OK);
 
-        }catch (\Throwable $ex){
-            return response()->json(['status'=>false,'message'=>'Sorry, something went wrong, please try again!'], Response::HTTP_BAD_REQUEST);
+        } catch (\Throwable $ex) {
+            return response()->json(['status' => false, 'message' => 'Sorry, something went wrong, please try again!'], Response::HTTP_BAD_REQUEST);
         }
     }
 
@@ -110,9 +111,9 @@ class ProductController extends Controller
      * @param Product $product
      * @return void
      */
-    public function saveFiles(ProductRequest $request, Product $product,$isUpdate =false): void
+    public function saveFiles(ProductRequest $request, Product $product, $isUpdate = false): void
     {
-        if($isUpdate){
+        if ($isUpdate) {
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
                 $slug = $file->getClientOriginalName();
@@ -128,7 +129,7 @@ class ProductController extends Controller
                     $product->storeImage($path, $slug, 'photo');
                 }
             }
-        }else{
+        } else {
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
                 $slug = $file->getClientOriginalName();

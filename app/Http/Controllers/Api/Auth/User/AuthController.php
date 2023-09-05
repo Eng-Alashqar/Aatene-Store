@@ -1,7 +1,8 @@
 <?php
-namespace App\Http\Controllers\Auth\User;
+namespace App\Http\Controllers\Api\Auth\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\RegisterRequest;
 use App\Http\Resources\Api\User\UserResource;
 use App\Models\Users\User;
 use App\Services\Api\Auth\LoginService;
@@ -9,7 +10,7 @@ use App\Services\Api\Auth\RegisterService;
 use Illuminate\Http\Request;
 
 
-class UserAuthController extends Controller
+class AuthController extends Controller
 {
     /**
      * Create a new AuthController instance.
@@ -28,14 +29,24 @@ class UserAuthController extends Controller
     {
         return  (new LoginService('user'))->login($request);
     }
+
+    /**
+     * Refresh a token.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function refresh() {
+        return (new LoginService('user'))->refresh();
+    }
+
     /**
      * Register a User.
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-        return  (new RegisterService(new User,UserResource::class))->register($request);
+        return  (new RegisterService(new User,UserResource::class))->register($request->validated());
     }
 
     /**
@@ -55,7 +66,7 @@ class UserAuthController extends Controller
      */
     public function userProfile()
     {
-        return response()->json(auth('user')->user()->profile);
+        return response()->json(auth('user')->user());
     }
 
 }

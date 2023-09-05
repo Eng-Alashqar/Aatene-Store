@@ -1,8 +1,8 @@
 <?php
 
 
+use App\Http\Controllers\API\ProfileController;
 use App\Http\Controllers\API\Store\CategoryController;
-use App\Http\Controllers\API\OrderController;
 use App\Http\Controllers\API\Store\FollowerController;
 use App\Http\Controllers\API\Store\StoreController;
 use App\Http\Controllers\API\Store\FavoriteController;
@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:user')->prefix('user')->group(function () {
 
-//    Route::apiResource('profiles', ProfileController::class);
 //
 //    Route::prefix('orders')->group(function () {
 //        Route::post('/', [OrderController::class, 'create']);
@@ -33,5 +32,4 @@ Route::middleware('auth:user')->prefix('user')->group(function () {
     Route::apiResource('stores', StoreController::class)->except('destroy');
 });
 
-Route::get('categories', [CategoryController::class,'index']);
 

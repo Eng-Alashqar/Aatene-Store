@@ -65,22 +65,22 @@ class Store extends Model
     }
 
 
-    public function seller()
+    public function seller(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(Seller::class)->withDefault(['name' => 'لايوجد حاليا']);
     }
 
-    public function products()
+    public function products(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Product::class, 'store_id', 'id');
     }
 
-    public function regions()
+    public function regions(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Region::class, 'store_region', 'store_id', 'region_id', 'id', 'id');
     }
 
-    public function followers()
+    public function followers(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Follower::class, 'store_id');
     }
