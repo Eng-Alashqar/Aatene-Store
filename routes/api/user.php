@@ -1,11 +1,11 @@
 <?php
 
 
-use App\Http\Controllers\API\ProfileController;
-use App\Http\Controllers\API\Store\CategoryController;
-use App\Http\Controllers\API\Store\FollowerController;
-use App\Http\Controllers\API\Store\StoreController;
-use App\Http\Controllers\API\Store\FavoriteController;
+use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\Store\CategoryController;
+use App\Http\Controllers\Api\Store\FollowerController;
+use App\Http\Controllers\Api\Store\StoreController;
+use App\Http\Controllers\Api\Store\FavoriteController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:user')->prefix('user')->group(function () {

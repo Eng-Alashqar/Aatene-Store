@@ -1,7 +1,7 @@
 <?php
 
 
-use App\Http\Controllers\API\Store\CategoryController;
+use App\Http\Controllers\Api\Store\CategoryController;
 use App\Http\Controllers\Api\Store\Options\AttributeController;
 use App\Http\Controllers\Api\Store\Options\AttributeVariantController;
 use App\Http\Controllers\Api\Store\Options\VariantsController;

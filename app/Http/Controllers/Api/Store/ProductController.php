@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Store;
+namespace App\Http\Controllers\Api\Store;
 
 use App\Helpers\PhotoUpload;
 use App\Http\Controllers\Controller;

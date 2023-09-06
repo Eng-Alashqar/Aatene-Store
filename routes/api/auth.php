@@ -11,7 +11,6 @@ Route::middleware('api')->prefix('auth')->group(function () {
         Route::post('/register', 'register');
         Route::post('/logout', 'logout');
         Route::post('/refresh', 'refresh');
-        Route::get('/user-profile', 'userProfile');
     });
 
     Route::controller(AuthController::class)->prefix('seller')->group(function () {
@@ -19,7 +18,6 @@ Route::middleware('api')->prefix('auth')->group(function () {
         Route::post('/register', 'register');
         Route::post('/logout', 'logout');
         Route::post('/refresh', 'refresh');
-        Route::get('/user-profile', 'userProfile');
     });
 
     Route::controller(AdminAuthController::class)->prefix('admin')->group(function () {
