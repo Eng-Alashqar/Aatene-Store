@@ -36,18 +36,18 @@ trait HasPhoto
         return $this->morphOne(Photo::class,'photoable');
     }
 
-    public function storeImage($src,$slug,$type = 'photo')
+    public function storeImage($src,$slug,$type = 'photo'): \Illuminate\Database\Eloquent\Model
     {
         return $this->photo()->create(['src'=>$src,'slug'=>$slug,'type'=>$type]);
     }
 
-    public function updateImage($src,$slug,$type = 'photo')
+    public function updateImage($src,$slug,$type = 'photo'): void
     {
         $this->deleteImage();
         $this->storeImage($src,$slug,$type);
     }
 
-    public function deleteImage()
+    public function deleteImage(): void
     {
         if($this->photo()->count() >= 1)
         {
@@ -57,11 +57,11 @@ trait HasPhoto
         }
     }
 
-    public function deleteImageByType($type)
+    public function deleteImageByType($type): void
     {
         if($this->photo()->count() >= 1)
         {
-            foreach($this->photo()->where('type',"%$type%")->get()??[] as $photo){
+            foreach($this->photo()->where('type',$type)->get()??[] as $photo){
                 $photo->delete();
             }
         }

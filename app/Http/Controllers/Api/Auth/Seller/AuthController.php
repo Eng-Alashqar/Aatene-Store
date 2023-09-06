@@ -9,6 +9,7 @@ use App\Models\Users\Seller;
 use App\Services\Api\Auth\LoginService;
 use App\Services\Api\Auth\RegisterService;
 use App\Services\Store\StoreService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 
@@ -28,48 +29,41 @@ class AuthController extends Controller
     /**
      * Get a JWT via given credentials.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
         return (new LoginService('seller'))->login($request);
     }
     /**
      * Register a User.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function register(RegisterRequest $request): \Illuminate\Http\JsonResponse
+    public function register(RegisterRequest $request): JsonResponse
     {
         return (new RegisterService(new Seller,SellerResource::class))->register($request->validated());
     }
     /**
      * Log the user out (Invalidate the token).
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function logout()
+    public function logout(): JsonResponse
     {
         auth()->guard('seller')->logout();
         return response()->json(['message' => 'تسجيل خروج المستخدم بنجاح']);
     }
-    /**
-     * Get the authenticated User.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function userProfile()
-    {
-        return response()->json(auth('seller')->user());
-    }
 
     /**
-     * Get the authenticated User.
+     * Refresh a token.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function userStore()
+    public function refresh(): JsonResponse
     {
-        return response()->json(auth('seller')->user()->store);
+        return (new LoginService('seller'))->refresh();
     }
+
+
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\Store;
 
+use App\Helpers\PhotoUpload;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\StoreRequest;
 use App\Models\Store\Store;
@@ -35,7 +36,9 @@ class StoreController extends Controller
      */
     public function store(StoreRequest $request)
     {
+
         $store = Store::create($request->validated());
+        $this->uploadFiles($request, $store);
         $store->regions()->sync($request->post('regions'));
         return response()->json(['status' => true, 'data' => $store->load('regions')], Response::HTTP_CREATED);
     }
@@ -56,6 +59,7 @@ class StoreController extends Controller
         if ($store->id !== auth()->guard('seller')->user()->store_id) {
             return response()->json(['status' => false, 'message' => 'this store belong to anther seller send right store'], Response::HTTP_BAD_REQUEST);
         }
+        $this->uploadFiles($request, $store);
         $store->update($request->validated());
         return response()->json(['status' => true, 'data' => $store->load('regions')], Response::HTTP_OK);
     }
@@ -69,5 +73,28 @@ class StoreController extends Controller
         $admin->notify(new ReportStoreNotification("Reported Store: {$store->name}", $reportMessage));
 
         return response()->json(['message' => 'Store reported successfully']);
+    }
+
+    /**
+     * @param  $request
+     * @param $store
+     * @return void
+     */
+    public function uploadFiles($request, $store): void
+    {
+        if ($request->hasFile('logo')) {
+            $file = $request->file('logo');
+            $slug = $file->getClientOriginalName();
+            $path = PhotoUpload::upload($file);
+            $store->deleteImageByType('logo');
+            $store->storeImage($path, $slug, 'logo');
+        }
+        if ($request->hasFile('cover')) {
+            $file = $request->file('cover');
+            $slug = $file->getClientOriginalName();
+            $path = PhotoUpload::upload($file);
+            $store->deleteImageByType('cover');
+            $store->storeImage($path, $slug, 'cover');
+        }
     }
 }

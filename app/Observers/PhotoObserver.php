@@ -32,7 +32,6 @@ class PhotoObserver
         if($is_exist){
             Storage::disk('s3')->delete($photo->src);
         }
-
     }
 
 

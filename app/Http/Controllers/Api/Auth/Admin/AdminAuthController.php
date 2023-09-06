@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Auth\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Services\Api\Auth\LoginService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 
@@ -22,9 +23,9 @@ class AdminAuthController extends Controller
     /**
      * Get a JWT via given credentials.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
         return (new LoginService('admin'))->login($request);
     }
@@ -32,11 +33,21 @@ class AdminAuthController extends Controller
     /**
      * Log the user out (Invalidate the token).
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function logout()
+    public function logout(): JsonResponse
     {
         auth()->guard('admin')->logout();
         return response()->json(['message' => 'تسجيل خروج المستخدم بنجاح']);
+    }
+
+    /**
+     * Refresh a token.
+     *
+     * @return JsonResponse
+     */
+    public function refresh(): JsonResponse
+    {
+        return (new LoginService('admin'))->refresh();
     }
 }

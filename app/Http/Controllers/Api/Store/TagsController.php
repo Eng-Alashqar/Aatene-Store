@@ -33,7 +33,7 @@ class TagsController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:20'],
-            'product_id.*' => ['required', 'int', 'exists:products,id']
+            'product_id' => ['required', 'int', 'exists:products,id']
         ]);
         try {
             $product = Product::findOrFail($request->product_id);

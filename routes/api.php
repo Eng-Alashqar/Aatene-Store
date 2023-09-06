@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\API\CategoryController;
-use App\Http\Controllers\API\FavoriteController;
-use App\Http\Controllers\API\FollowerController;
+
+use App\Http\Controllers\API\Store\CategoryController;
+use App\Http\Controllers\Api\Store\Options\AttributeController;
+use App\Http\Controllers\Api\Store\Options\AttributeVariantController;
+use App\Http\Controllers\Api\Store\Options\VariantsController;
 use App\Http\Controllers\API\Store\ProductController;
 use App\Http\Controllers\API\Store\StoreController;
 use App\Http\Controllers\Api\Store\TagsController;
-use App\Http\Controllers\Api\Store\VariantsController;
 use App\Http\Controllers\Api\Users\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,7 +49,7 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::middleware(['api'])->group(function () {
-    Route::apiResource('stores', StoreController::class)->middleware('auth:seller');
+    Route::apiResource('stores', StoreController::class);
     Route::apiResource('/products', ProductController::class)->middleware('auth:seller');
     Route::get('/categories', [CategoryController::class, 'index']);
 
@@ -59,7 +60,21 @@ Route::middleware(['api'])->group(function () {
         Route::delete('/delete', 'destroy');
     });
 
-    Route::apiResource('/variants', VariantsController::class)->middleware('auth:seller');
+    Route::prefix('/variants')->middleware('auth:seller')->controller(VariantsController::class)->group(function () {
+        Route::post('/', 'store');
+        Route::get('/{id}', 'show');
+        Route::put('/{id}', 'update');
+        Route::delete('/{id}', 'destroy');
+    });
+
+    Route::prefix('/attributes')->middleware('auth:seller')->controller(AttributeController::class)->group(function () {
+        Route::get('/', 'index');
+    });
+
+    Route::prefix('/attribute-variant')->middleware('auth:seller')->controller(AttributeVariantController::class)->group(function () {
+        Route::post('/', 'store');
+    });
+
     Route::apiResource('/tags', TagsController::class)->middleware('auth:seller');
 
 });

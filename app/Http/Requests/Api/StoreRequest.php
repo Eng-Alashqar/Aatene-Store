@@ -28,10 +28,10 @@ class StoreRequest extends FormRequest
                 'logo' => ['required', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
                 'cover' => ['required', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
                 'name' => ['required', 'string', 'max:100', 'unique:stores,name'],
-                'description' => ['required', 'string', 'max:64000'],
+                'description' => ['required', 'string', 'max:640000'],
                 'location' => ['required', 'string', 'max:64000'],
                 'status' => ['sometimes', 'in:active,inactive'],
-                'regions'=> ['required', 'exists:regions,id'],
+                'regions.*'=> ['required', 'exists:regions,id'],
             ];
         } else {
             $rules = [
@@ -41,7 +41,7 @@ class StoreRequest extends FormRequest
                 'description' => ['sometimes', 'string', 'max:64000'],
                 'location' => ['sometimes', 'string', 'max:64000'],
                 'status' => ['sometimes', 'in:active,inactive'],
-                'regions'=> ['sometimes', 'exists:regions,id'],
+                'regions.*'=> ['sometimes', 'exists:regions,id'],
             ];
         }
 

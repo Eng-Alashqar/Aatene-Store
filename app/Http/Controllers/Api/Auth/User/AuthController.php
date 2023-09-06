@@ -59,14 +59,6 @@ class AuthController extends Controller
         auth()->guard('user')->logout();
         return response()->json(['message' => 'تسجيل خروج المستخدم بنجاح']);
     }
-    /**
-     * Get the authenticated User.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function userProfile()
-    {
-        return response()->json(auth('user')->user());
-    }
+
 
 }
