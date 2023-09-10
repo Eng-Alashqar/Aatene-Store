@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Helpers\UniqueSlug;
 use App\Models\MultimediaHub\Service;
 use Illuminate\Support\Str;
 
@@ -12,7 +13,9 @@ class ServiceObserver
      */
     public function creating(Service $service): void
     {
-        $service->slug = Str::slug($service->name);
+        $service->slug =UniqueSlug::generateUniqueSlug($service->name);
+        $service->store_id = auth()->guard()->user()->store_id;
+
     }
 
     /**
@@ -20,7 +23,9 @@ class ServiceObserver
      */
     public function updating(Service $service): void
     {
-        $service->slug = Str::slug($service->name);
+        $service->slug = UniqueSlug::generateUniqueSlug($service->name);
+        $service->store_id = auth()->guard()->user()->store_id;
+
     }
 
     /**

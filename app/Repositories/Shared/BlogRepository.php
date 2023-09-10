@@ -34,9 +34,9 @@ class BlogRepository implements RepositoryInterface
     }
 
     public function delete($id)
-    {
-        $blog = $this->getById($id);
-        return $blog->delete();
+        {
+            $blog = $this->getById($id);
+            return $blog->delete();
     }
 }
 

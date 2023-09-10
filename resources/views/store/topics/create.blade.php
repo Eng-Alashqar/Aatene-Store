@@ -12,9 +12,9 @@
             <div id="kt_app_content" class="app-content flex-column-fluid">
                 <!--begin::Content container-->
                 <div id="kt_app_content_container" class="app-container container-xxl">
-                    <form action="{{ route('dashboard.topics.store') }}" method="POST">
+                    <form action="{{ route('dashboard.topics.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        @include('store.topics._form', ['   ' => 'اضافة موضوع'])
+                        @include('store.topics._form')
                     </form>
                 </div>
                 <!--end::Content container-->

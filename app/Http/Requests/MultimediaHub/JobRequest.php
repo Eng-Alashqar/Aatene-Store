@@ -21,17 +21,32 @@ class JobRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'title' => ['required', 'string', 'max:255'],
-            'description' => ['nullable'],
-            'company_logo' => ['nullable', 'image', 'mimes:jpeg,jpg,png', 'max:2048'],
-            'location' => ['required'],
-            'salary' => ['nullable', 'numeric'],
-            'company' => ['required'],
-            'type' => ['required', 'in:full-time,part-time,piece'],
-            'place' => ['required', 'in:office,remotly'],
-            'deadline' => ['required', 'date'],
-        ];
+        if ($this->method() === 'PUT' || $this->method() === 'PATCH'){
+            return [
+                'title' => ['sometimes', 'string', 'max:255'],
+                'description' => ['sometimes','string'],
+                'company_logo' => ['sometimes', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
+                'location' => ['sometimes'],
+                'salary' => ['sometimes', 'numeric'],
+                'company' => ['sometimes'],
+                'type' => ['sometimes', 'in:full-time,part-time,piece'],
+                'place' => ['sometimes', 'in:office,remotly'],
+                'deadline' => ['sometimes', 'date'],
+            ];
+
+        }else{
+            return [
+                'title' => ['required', 'string', 'max:255'],
+                'description' => ['required','string'],
+                'company_logo' => ['required', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
+                'location' => ['required'],
+                'salary' => ['required', 'numeric'],
+                'company' => ['required'],
+                'type' => ['required', 'in:full-time,part-time,piece'],
+                'place' => ['required', 'in:office,remotly'],
+                'deadline' => ['required', 'date'],
+            ];
+        }
     }
 
     /**

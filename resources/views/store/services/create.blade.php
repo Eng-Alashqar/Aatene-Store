@@ -16,7 +16,7 @@
                     <form action="{{ route('dashboard.services.store') }}" method="POST" enctype="multipart/form-data"
                         id="my-form">
                         @csrf
-                        @include('store.services._form', ['button_label' => 'اضافة الخدمة'])
+                        @include('store.services._form')
                     </form>
                 </div>
                 <!--end::Content container-->

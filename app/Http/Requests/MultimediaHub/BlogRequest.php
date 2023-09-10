@@ -21,11 +21,20 @@ class BlogRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'title' => ['required', 'string'],
-            'content' => ['nullable'],
-            'is_published' => ['boolean'],
-            'image' => ['required', 'image']
-        ];
+        if ($this->method() === 'PUT' || $this->method() === 'PATCH'){
+            return [
+                'title' => ['sometimes', 'string','max:255'],
+                'content' => ['sometimes','string','max:640000'],
+                'is_published' => ['sometimes','boolean'],
+                'image' => ['sometimes', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
+            ];
+        }else{
+            return [
+                'title' => ['required', 'string','max:255'],
+                'content' => ['required','string','max:640000'],
+                'is_published' => ['sometimes','boolean'],
+                'image' => ['required', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
+            ];
+        }
     }
 }

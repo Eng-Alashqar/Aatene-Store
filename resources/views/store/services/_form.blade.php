@@ -14,49 +14,12 @@
             <!--end::Card header-->
             <!--begin::Card body-->
             <div class="card-body text-center pt-0">
-                <x-elements.logo-image-input name="image" />
+                <x-elements.logo-image-input name="image"/>
             </div>
             <!--end::Card body-->
         </div>
         <!--end::banner for store-->
-        <!--begin::Category & tags-->
-        <div class="card card-flush py-4">
-            <!--begin::Card header-->
-            <div class="card-header">
-                <!--begin::Card title-->
-                <div class="card-title">
-                    <h2>تفاصيل الخدمة</h2>
-                </div>
-                <!--end::Card title-->
-            </div>
-            <!--end::Card header-->
-            <!--begin::Card body-->
-            <div class="card-body pt-0">
-                <!--begin::Input group-->
-                <div class="mb-5">
-                    <label class="required form-label">تصنيف الخدمة</label>
-                    <select name="category_id" class="form-select" data-control="select2"
-                        data-placeholder="اضافة قسم">
-                        <option></option>
-                        @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" @selected(old('category_id', $service->category_id) === $category->id)>{{ $category->name }}
-                                    </option>
-                        @endforeach
-                    </select>
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <!--begin::Label-->
-                <label class="form-label d-block">كلمات البحث</label>
-                <!--end::Label-->
-                <!--begin::Input-->
-                <input id="kt_ecommerce_add_product_tags" name="tag" class="form-control mb-2" value="" />
-                <!--end::Input-->
-                <!--end::Input group-->
-            </div>
-            <!--end::Card body-->
-        </div>
-        <!--end::Category & tags-->
+
     </div>
     <!--end::Aside column-->
     <!--begin::Main column-->
@@ -74,14 +37,15 @@
                 <div class="mb-5">
                     <label for="name" class="required form-label">اسم الخدمة</label>
                     <input type="text" name="name" id="name"
-                        class="form-control form-control-solid @error('name')
+                           class="form-control form-control-solid @error('name')
                             is-invalid
                             @enderror"
-                        placeholder="ادخل اسم للمتجر" value="{{ old('name', $service->name) }}" />
+                           placeholder="ادخل اسم للمتجر" value="{{ old('name', $service->name) }}"/>
                 </div>
                 <div class="mb-5">
                     <label for="description" class="required form-label">وصف الخدمة</label>
-                    <textarea  name="description" class="form-control form-control-solid">{{ old('description', $service->description) }}</textarea>
+                    <textarea name="description"
+                              class="form-control form-control-solid">{{ old('description', $service->description) }}</textarea>
                 </div>
             </div>
             <!--begin::Body-->
@@ -102,7 +66,7 @@
                         <label for="name" class="required form-label">الحالة</label>
                         <div class="form-check form-switch form-check-custom form-check-success form-check-solid ">
                             <input class="form-check-input" name="active" type="checkbox" value="1"
-                                checked id="active" />
+                                   checked id="active"/>
                             <label class="form-check-label" for="active">
                                 متوفر
                             </label>
@@ -111,18 +75,18 @@
                     <div class="mb-5">
                         <label for="duration" class="required form-label">المدة الزمنية</label>
                         <input type="number" name="duration" id="duration"
-                            class="form-control form-control-solid @error('duration')
+                               class="form-control form-control-solid @error('duration')
                                     is-invalid
                                 @enderror"
-                            placeholder="المدة الزمنية" value="{{ old('duration', $service->duration) }}" />
+                               placeholder="المدة الزمنية" value="{{ old('duration', $service->duration) }}"/>
                     </div>
                     <div class="mb-5">
                         <label for="price" class="required form-label">السعر</label>
                         <input type="text" name="price" id="price"
-                            class="form-control form-control-solid @error('price')
+                               class="form-control form-control-solid @error('price')
                                     is-invalid
                                 @enderror"
-                            placeholder="السعر" value="{{ old('price', $service->price) }}" />
+                               placeholder="السعر" value="{{ old('price', $service->price) }}"/>
                     </div>
                 </div>
             </div>
@@ -132,14 +96,14 @@
         <div class="d-flex justify-content-start gap-6">
             <!--begin::Button-->
             <button type="submit" id="kt_ecommerce_add_product_submit" class="btn btn-primary">
-                <span class="indicator-label">{{ $button_label ?? 'حفظ التغيرات' }} </span>
+                <span class="indicator-label">حفظ التغيرات </span>
                 <span class="indicator-progress">Please wait...
                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
             </button>
             <!--end::Button-->
             <!--begin::Button-->
-            <a href="{{ route('dashboard.products.index') }}" id="kt_ecommerce_add_product_cancel"
-                class="btn btn-light me-5">رجوع</a>
+            <a href="{{ route('dashboard.services.index') }}" id="kt_ecommerce_add_product_cancel"
+               class="btn btn-light me-5">رجوع</a>
             <!--end::Button-->
         </div>
     </div>

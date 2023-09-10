@@ -35,10 +35,10 @@
             <!--begin::Navbar-->
             <div class="app-navbar flex-shrink-0">
                 <!--begin::Theme mode-->
-                @include('admin.layouts.theme-mode')
+                @include('store.layouts.theme-mode')
                 <!--end::Theme mode-->
                 <!--begin::User menu-->
-                @include('admin.layouts.user-menu')
+                @include('store.layouts.user-menu')
                 <!--end::User menu-->
                 <!--begin::Header menu toggle-->
                 <div class="app-navbar-item d-lg-none ms-2 me-n2" title="Show header menu">

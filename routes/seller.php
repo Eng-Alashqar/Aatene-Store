@@ -5,6 +5,7 @@ use App\Http\Controllers\MultimediaHub\JobController;
 use App\Http\Controllers\MultimediaHub\ServiceController;
 use App\Http\Controllers\MultimediaHub\TopicController;
 use App\Http\Controllers\Store\ProductController;
+use App\Http\Controllers\Store\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -20,6 +21,10 @@ Route::prefix('/dashboard')->name('dashboard.')->middleware(['auth:seller'])->gr
     Route::prefix('/topics')->name('topics.')->group(function () {
         Route::get('/create', [TopicController::class, 'create'])->name('create');
         Route::post('', [TopicController::class, 'store'])->name('store');
+    });
+
+    Route::prefix('/profile')->name('profile.')->group(function () {
+        Route::get('/', [ProfileController::class, 'index'])->name('index');
     });
     Route::resource('jobs', JobController::class);
     Route::resource('services', ServiceController::class);

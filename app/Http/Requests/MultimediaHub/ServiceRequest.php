@@ -21,17 +21,29 @@ class ServiceRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'name' => ['required', 'string', 'max:255'],
-            'description' => ['string'],
-            'price' => ['required', 'numeric', 'min:0'],
-            'duration' => ['required', 'integer', 'min:0'],
-            'location' => ['required', 'string', 'max:255'],
-            'active' => ['boolean'],
-            'category_id' => ['required', 'exists:categories,id'],
-            'store_id' => ['exists:stores,id'],
-            'image' => ['required', 'image', 'mimes:jpeg,jpg,png', 'max:2048'],
-        ];
+
+
+        if ($this->method() === 'PUT' || $this->method() === 'PATCH'){
+            return [
+                'name' => ['sometimes', 'string','max:255'],
+                'duration' => ['sometimes', 'integer', 'min:0'],
+                'price' => ['sometimes', 'numeric', 'min:0'],
+                'location' => ['sometimes', 'string', 'max:255'],
+                'description' => ['sometimes','string','max:640000'],
+                'active' => ['sometimes','boolean'],
+                'image' => ['sometimes', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
+            ];
+        }else{
+            return [
+                'name' => ['required', 'string','max:255'],
+                'duration' => ['required', 'integer', 'min:0'],
+                'price' => ['required', 'numeric', 'min:0'],
+                'location' => ['sometimes', 'string', 'max:255'],
+                'description' => ['required','string','max:640000'],
+                'active' => ['required','boolean'],
+                'image' => ['required', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
+            ];
+        }
     }
 
     /**

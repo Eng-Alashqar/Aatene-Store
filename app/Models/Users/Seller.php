@@ -4,6 +4,7 @@ namespace App\Models\Users;
 
 use App\Models\Chat\Conversation;
 use App\Models\Message;
+use App\Models\MultimediaHub\Topic;
 use App\Models\Store\Store;
 use App\Models\Profile;
 use App\Traits\HasPhoto;
@@ -100,6 +101,11 @@ class Seller extends User implements JWTSubject
     public function profile()
     {
         return $this->morphOne(Profile::class,'userable');
+    }
+
+    public function topics()
+    {
+        return $this->morphMany(Topic::class,'userable');
     }
 
 }

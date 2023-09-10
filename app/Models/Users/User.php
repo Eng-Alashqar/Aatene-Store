@@ -7,6 +7,7 @@ namespace App\Models\Users;
 use App\Models\Chat\Conversation;
 use App\Models\Chat\Message;
 use App\Models\Loyalty\Follower;
+use App\Models\MultimediaHub\Topic;
 use App\Models\Store\Favorite;
 use App\Models\Profile;
 use App\Traits\HasPhoto;
@@ -107,6 +108,11 @@ class User extends Authenticatable implements JWTSubject
 
     public function getJWTCustomClaims() {
         return [];
+    }
+
+    public function topics()
+    {
+        return $this->morphMany(Topic::class,'userable');
     }
 
 }

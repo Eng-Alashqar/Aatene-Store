@@ -14,15 +14,11 @@
                     <div class="card mb-5 mb-xl-8">
                         <!--begin::Header-->
                         <div class="card-header border-0 pt-5">
-                            <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bold fs-3 mb-1">قائمة الوظائف</span>
-                                <span class="text-muted mt-1 fw-semibold fs-7">اكثر من {{ $jobs->total() }}
-                                    وظيفة</span>
-                            </h3>
+                            @include('store.jobs._filters')
                             <div class="card-toolbar">
                                 <a href="{{ route('dashboard.jobs.create') }}"
-                                    class="btn btn-sm btn-light-primary fs-3">
-                                    <i class="ki-duotone ki-plus "></i>اضافة وظيفة </a>
+                                   class="btn btn-sm btn-light-primary fs-3">
+                                    <i class="ki-duotone ki-plus "></i>إضافة</a>
                             </div>
                         </div>
                         <!--end::Header-->
@@ -60,7 +56,7 @@
                                                     <div class="d-flex align-items-center">
                                                         <div class="symbol symbol-50px me-5">
                                                             <img src="{{ asset('assets/media/misc/spinner.gif') }}"
-                                                                data-src="{{ $job->company_logo }}"
+                                                                data-src="{{ $job->image }}"
                                                                 class="lozad rounded mw-100" alt="" />
                                                         </div>
                                                         <div class="d-flex justify-content-start flex-column">
@@ -124,7 +120,7 @@
                                             </td>
                                         @endforelse
                                         <tr>
-                                            <td colspan="8"> {{ $jobs->links() }}</td>
+                                            <td colspan="8"> {{ $jobs->withQueryString()->links() }}</td>
                                         </tr>
                                     </tbody>
                                     <!--end::Table body-->

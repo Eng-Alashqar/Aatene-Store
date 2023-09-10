@@ -3,22 +3,22 @@
 namespace App\Services\MultimediaHub;
 
 use App\Helpers\PhotoUpload;
+use App\Models\MultimediaHub\Job;
 use App\Repositories\Shared\JobRepository;
 
 class JobService
 {
-    public function __construct(private JobRepository $jobRebo) {}
-
-    public function get()
+    public function __construct(private Job $job)
     {
-        return $this->jobRebo->getWithPaginate();
     }
+
 
     public function store($params)
     {
         if ($params['company_logo']) {
             $params['image_slug'] = $params['company_logo']->getClientOriginalName();
             $params['company_logo'] = PhotoUpload::upload($params['company_logo']);
+
         }
         return $this->jobRebo->store($params);
     }

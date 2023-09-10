@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('topics', function (Blueprint $table) {
             $table->id();
+            $table->morphs('userable');
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('content')->nullable();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->enum('status', ['searchable', '']);
             $table->timestamps();
         });
     }

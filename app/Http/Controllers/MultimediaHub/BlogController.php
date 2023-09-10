@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\MultimediaHub;
 
+use App\Helpers\PhotoUpload;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MultimediaHub\BlogRequest;
 use App\Models\MultimediaHub\Blog;
@@ -9,13 +10,16 @@ use App\Services\MultimediaHub\BlogService;
 
 class BlogController extends Controller
 {
-    public function __construct(private BlogService $blogService) {}
+    public function __construct(private Blog $model){}
     /**
      * Display a listing of the resource.
+     * @noinspection PhpUndefinedMethodInspection
      */
     public function index()
     {
-        $blogs = $this->blogService->get($count??7);
+        $filters = request()->query();
+        $count = (int)request()->query('count') == 0 ? 7 : (int)request()->query('count') ;
+        $blogs = $this->model->latest()->filter($filters)->paginate($count);
         return view('store.blogs.index', compact('blogs'));
     }
 
@@ -34,8 +38,15 @@ class BlogController extends Controller
      */
     public function store(BlogRequest $request)
     {
-        $this->blogService->store($request->validated());
-        return redirect()->back()->with(['notification' => 'تم إنشاء مدونة بنجاح']);
+        $jop = $this->model->create($request->validated());
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $slug = $file->getClientOriginalName();
+            $path = PhotoUpload::upload($file);
+            $jop->deleteImage();
+            $jop->storeImage($path, $slug, 'cover');
+        }
+        return back()->with(['notification' => 'تم إنشاء مدونة بنجاح']);
     }
 
     /**
@@ -44,7 +55,7 @@ class BlogController extends Controller
     public function show($id)
     {
         return view('store.blogs.show', [
-            'category' => $this->blogService->getById($id)
+            'blog' => $this->model->findOrFail($id)
         ]);
     }
 
@@ -53,8 +64,8 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.blogs.edit', [
-            'blog' => $this->blogService->getById($id),
+        return view('store.blogs.edit', [
+            'blog' =>  $this->model->findOrFail($id),
         ]);
     }
 
@@ -63,8 +74,16 @@ class BlogController extends Controller
      */
     public function update(BlogRequest $request, $id)
     {
-        $this->blogService->update($id, $request->validated());
-        return redirect()->route('admin.blogs.index')->with(['notification' => 'تم تحديث المدونة']);
+        $blog = $this->model->findOrFail($id);
+        $blog->update($request->validated());
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $slug = $file->getClientOriginalName();
+            $path = PhotoUpload::upload($file);
+            $blog->deleteImage();
+            $blog->storeImage($path, $slug, 'cover');
+        }
+        return to_route('dashboard.blogs.index')->with(['notification' => 'تمت العملية بنجاح']);
     }
 
     /**
@@ -72,7 +91,8 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
-        $isDeleted = $this->blogService->delete($id);
-        return  $this->deleteAjaxResponse($isDeleted);
+        $blog = $this->model->findOrFail($id);
+        $isDeleted = $blog->delete();
+        return $this->deleteAjaxResponse($isDeleted);
     }
 }

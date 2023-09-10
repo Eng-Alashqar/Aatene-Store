@@ -13,9 +13,8 @@
         </div>
         <div class="mb-5">
             <label for="description" class="required form-label">وصف المنتج</label>
-            <div id="kt_docs_quill_basic" name="description" class="form-control form-control-solid">
-                {!! old('description') !!}</div>
-            <textarea name="description" id="description" style="display: none"></textarea>
+
+            <textarea name="description" id="description"  class="form-control form-control-solid">  {{old('description')}} </textarea>
         </div>
         <div class="mb-5">
             <!--begin::Label-->
@@ -34,63 +33,5 @@
 @push('scripts')
     <script>
         new Tagify(document.querySelector('[data-tagify="tagify"]'));
-
-        $(document).ready(
-            function() {
-                var toolbarOptions = [
-                    ['bold', 'italic', 'underline', 'strike'], // toggled buttons
-                    ['blockquote'],
-
-                    [{
-                        'header': 1
-                    }, {
-                        'header': 2
-                    }], // custom button values
-                    [{
-                        'list': 'ordered'
-                    }, {
-                        'list': 'bullet'
-                    }],
-                    [{
-                        'direction': 'rtl'
-                    }], // text direction
-
-                    [{
-                        'size': ['small', false, 'large', 'huge']
-                    }], // custom dropdown
-                    [{
-                        'header': [1, 2, 3, 4, 5, 6, false]
-                    }],
-
-                    [{
-                        'color': []
-                    }, {
-                        'background': []
-                    }], // dropdown with defaults from theme
-                    [{
-                        'font': []
-                    }],
-                    [{
-                        'align': []
-                    }],
-
-                ];
-                var quill = new Quill('#kt_docs_quill_basic', {
-                    modules: {
-                        toolbar: toolbarOptions
-                    },
-                    theme: 'snow'
-                });
-                quill.format('align', 'right');
-                quill.format('direction', 'rtl');
-                let formSubmitHandler = document.getElementById('form-create');
-                let textarea = document.getElementById('description');
-                formSubmitHandler.addEventListener("submit", (event) => {
-                    event.preventDefault();
-                    textarea.value = quill.root.innerHTML;
-                    formSubmitHandler.submit();
-                });
-            }
-        );
     </script>
 @endpush

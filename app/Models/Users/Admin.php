@@ -4,6 +4,7 @@ namespace App\Models\Users;
 
 use App\Models\Chat\Conversation;
 use App\Models\Chat\Message;
+use App\Models\MultimediaHub\Topic;
 use App\Traits\HasPhoto;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -110,6 +111,11 @@ class Admin extends User implements JWTSubject
                 return 'مستخدم في اجازة ';
                 break;
         }
+    }
+
+    public function topics()
+    {
+        return $this->morphMany(Topic::class,'userable');
     }
 
 }
