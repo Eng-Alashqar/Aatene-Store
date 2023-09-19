@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
             'last_active_at' => now(),
             'status' => 'active',
-            'phone_number' => '0598518618',
+            'phone_number' => '123123123',
             'role_name' => [$role->name ?? 'Admin']
         ]);
         // $user->assignRole([$role->id]);

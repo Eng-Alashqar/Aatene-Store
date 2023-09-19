@@ -6,10 +6,9 @@ namespace App\Models\Users;
 
 use App\Models\Chat\Conversation;
 use App\Models\Chat\Message;
-use App\Models\Loyalty\Follower;
-use App\Models\MultimediaHub\Topic;
 use App\Models\Store\Favorite;
 use App\Models\Profile;
+use App\Models\Store\Store;
 use App\Traits\HasPhoto;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -19,7 +18,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable, HasPhoto;
+    use HasApiTokens, HasFactory, Notifiable, HasPhoto , Notifiable;
 
 
     public function initiatorConversations()
@@ -55,6 +54,7 @@ class User extends Authenticatable implements JWTSubject
         'email',
         'password',
         'last_active_at',
+        'token_notify',
         'status',
         'phone_number',
 
@@ -65,10 +65,7 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Favorite::class);
     }
 
-    public function followers()
-    {
-        return $this->hasMany(Follower::class, 'user_id');
-    }
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -110,9 +107,8 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function topics()
+    public function following()
     {
-        return $this->morphMany(Topic::class,'userable');
+        return $this->belongsToMany(Store::class, 'followers'  , 'user_id' , 'store_id');
     }
-
 }

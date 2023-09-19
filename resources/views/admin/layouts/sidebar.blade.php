@@ -285,7 +285,7 @@
                 <!--begin:Menu item-->
                 <div class="menu-item">
                     <!--begin:Menu link-->
-                    <a class="menu-link" href="https://preview.keenthemes.com/metronic8/demo1/layout-builder.html">
+                    <a class="menu-link" href="{{route('admin.notification')}}">
                         <span class="menu-icon">
                             <i class="ki-duotone ki-notification fs-2">
                                 <i class="path1"></i>
