@@ -43,7 +43,7 @@ class AdminNotifyController extends Controller
     public function markAsRead($id)
     {
         $admin = Admin::find(1)->unreadNotifications->where('id', $id)->first()->update(['read_at'=> now()]);
-        return redirect()->route('admin.notification');
+        return redirect()->route('admin.notification')->with('notification' , 'تم التمييز كمقروءة');
 
     }
 
@@ -53,6 +53,6 @@ class AdminNotifyController extends Controller
         foreach ($admin->readNotifications as $notification) {
             $notification->update(['read_at' => now()]);
         }
-        return redirect()->route('admin.notification');
+        return redirect()->route('admin.notification')->with('notification' , 'تم تمييز الجميع كمقروءة');
     }
 }

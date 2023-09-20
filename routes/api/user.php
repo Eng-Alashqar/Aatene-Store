@@ -34,7 +34,9 @@ Route::middleware('auth:user')->prefix('user')->group(function () {
 
 //    http://127.0.0.1:8000/api/v1/user/user-noti
     Route::get("user-noti" , [NotificationController::class , 'userNotifications']);
-
+    Route::get("user-noti" , [NotificationController::class , 'userNotifications']);
+//    http://127.0.0.1:8000/api/v1/user/set-token
+    Route::post('set-token' , [NotificationController::class , 'setToken']);
 });
 
 

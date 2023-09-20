@@ -15,9 +15,10 @@
                         <!--begin::Header-->
                         <div class="card-header border-0 pt-5">
                             <div class="card-title align-items-start flex-column">
-                                <a class="btn btn-primary" href="{{route('admin.notification' , ['type' => 'create-store'])}}">الاشعارات انشاء متجر</a>
-                                <a class="btn btn-primary" href="{{route('admin.notification' , ['type' => 'create-product'])}}">الاشعارات انشاء منتج</a>
-                                <a class="btn btn-primary" href="{{route('admin.notification' , ['type' => 'update-product'])}}">الاشعارات تعديل منتج</a>
+
+                                <a class="" href="{{route('admin.notification' , ['type' => 'create-store'])}}">الاشعارات انشاء متجر</a>
+                                <a class="" href="{{route('admin.notification' , ['type' => 'create-product'])}}">الاشعارات انشاء منتج</a>
+                                <a class="" href="{{route('admin.notification' , ['type' => 'update-product'])}}">الاشعارات تعديل منتج</a>
                             </div>
                             <div class="card-toolbar">
                                 <form action="{{ route('admin.notification.mark.all.read') }}" method="post" >
@@ -67,7 +68,7 @@
                                                         <img src="https://t4.ftcdn.net/jpg/04/70/29/97/240_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg" data-src="https://t4.ftcdn.net/jpg/04/70/29/97/240_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg" class="lozad rounded mw-100" alt="" data-loaded="true">
                                                     </div>
                                                     <div class="d-flex justify-content-start flex-column">
-                                                        <a href="http://127.0.0.1:8000/administrator/stores/11" class="text-dark fw-bold text-hover-primary mb-1 fs-6">{{explode("\\" , $notification->type)[2]}}
+                                                        <a href="" class="text-dark fw-bold text-hover-primary mb-1 fs-6">{{explode("\\" , $notification->type)[2]}}
 
                                                         </a>
                                                         <span class="text-muted fw-semibold text-muted d-block fs-7">@if(is_null($notification->read_at)){{"غيرمقروءة"}} @else {{'مقروءة'}} @endif</span>

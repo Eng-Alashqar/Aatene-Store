@@ -107,6 +107,12 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
+    public function setToken($token){
+        $this->token_notify = $token;
+        $saved = $this->save();
+        return $saved ;
+    }
+
     public function following()
     {
         return $this->belongsToMany(Store::class, 'followers'  , 'user_id' , 'store_id');

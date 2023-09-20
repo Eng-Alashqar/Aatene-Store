@@ -24,6 +24,7 @@ class NotificationsService
 
 
 
+//        $SERVER_API_KEY = "AAAAs_lttBc:APA91bFDXUSmPptSPVzUj4CbeCDSiDHSBvw1DJGgOsWh3XysFZpBEFFHDkh4sCYncoror7OPlH160RFtUYJ9ldFtJg1533HtfOxqfREGPphRrKIExA5O-PtNLCqRo5wrRvhvJvE3sttz";
         $SERVER_API_KEY = "AAAA7xWDcnc:APA91bHFRZq2KA9-SrLtctrqJnSNUmIqVKa6wxZ1DlG7mkse9J_ym064xcryjvn1--I1n8HyUA480SygPiroDLywAUX_usKeK77dPFPNvnGaDUDNfcJ7ed5mXINFyFhSTbi4kBd8WBLd	";
 
         $token_1 = 'ekeE2lmETB6X0OT_Y-KyJl:APA91bH4K4DwuS3qP0ezJz9xvnRiTE9jbHzwXZIjmp8iN6V3GzDtJjw6xVK4lENTPnO18K7vBaGnWf9ZjL0oXbzrkTLPCItIiKAWydm-QUUvLAB3uXZMxztz_E_ougPBljmB2vkTznaG';
