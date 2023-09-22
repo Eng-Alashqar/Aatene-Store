@@ -2,14 +2,15 @@
 
 namespace App\Models\Store;
 
+use App\Models\Feedback\Comment;
+use App\Models\Feedback\Rating;
 use App\Models\MultimediaHub\Tag;
 use App\Models\Region;
 use App\Models\Scopes\StoreScope;
-use App\Models\Store\Comment;
-use App\Models\Store\Product\Order;
-use App\Models\Store\Rating;
+use App\Models\Users\User;
 use App\Observers\Store\ProductObserver;
 use App\Traits\HasPhoto;
+use App\Traits\PushNotify;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
-    use HasFactory, HasPhoto;
+    use HasFactory, HasPhoto ;
 
     protected $appends = ['images_with_type'];
     protected $fillable = [
@@ -29,10 +30,11 @@ class Product extends Model
         ];
 
 
+
     public static function booted()
     {
         static::addGlobalScope('store' , new StoreScope());
-        static::observe(ProductObserver::class);
+//        static::observe(ProductObserver::class);
     }
 
     public function scopeFilter(Builder $builder, $filters)
@@ -145,6 +147,53 @@ class Product extends Model
     public function shippingAddressCost(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Region::class, 'shipping_region', 'product_id', 'region_id', 'id', 'id');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::created(function ($_product){
+
+
+
+//        $users = $_product->store->followers->pluck('id')->toArray();
+//        $tokens = User::find($users)->whereNotNull('token_notify')->pluck('token_notify')->toArray();
+
+//            $product = Product::find($_product->id);
+//            $users = User::whereHas('following', function ($query) use ($product) {
+//                     $query->where('store_id', $product->store->id); })->pluck('token_notify')->toArray();
+
+//            $tokens=[];
+
+
+//             $this->pushNotify($users,  $title= "new-title"  , $body ='new-body');
+
+
+
+//            $title = "منتج جديد تمت اضافته " ;
+//            $name = $_product->name ;
+//            $body  = "تصفح واعرف المزيد عن المنتج ($name)" ;
+            // push real time notification
+//        $this->pushNotify($tokens , " $title" , "$body");
+
+//        $ids = $product->store->followers()->pluck('user_id') ;
+//        foreach ($ids as $id) {
+//            $user = User::find($id);
+//            $user->notify(new UserNotify($product));
+//        }
+
+
+
+
+
+
+
+
+
+
+
+
+        });
     }
 
 

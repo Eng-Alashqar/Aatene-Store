@@ -28,7 +28,7 @@ return new class extends Migration
                 ->nullable()
                 ->constrained('categories')
                 ->nullOnDelete();
-            $table->foreignId('store_id')
+            $table->foreignId('store_id')->nullable()
                 ->constrained('stores')
                 ->cascadeOnDelete();
             $table->timestamps();

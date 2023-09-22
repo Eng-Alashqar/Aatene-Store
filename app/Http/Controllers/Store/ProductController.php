@@ -4,17 +4,23 @@ namespace App\Http\Controllers\Store;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Store\ProductRequest;
+use App\Jobs\UserProductNotify;
+use App\Models\Store\Product;
+use App\Models\Users\User;
+use App\Services\NotificationsService;
 use App\Services\Store\CategoryService;
 use App\Services\Store\ProductService;
+use App\Traits\PushNotify;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
 {
+    use PushNotify ;
     private  $productService;
     private  $categoryService;
-    public function __construct()
+    public function __construct(public NotificationsService $notificationsService)
     {
         $this->productService = new ProductService;
         $this->categoryService = new CategoryService;
@@ -46,8 +52,18 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        // dd($request->validated());
         $result = $this->productService->store($request->validated());
+
+
+        if ($result){
+            $product = Product::find($result->id);
+            $users = User::whereHas('following', function ($query) use ($product) {
+                            $query->where('store_id', $product->store->id); })->get();
+
+            $this->notificationsService->createNotficatoin($users ,$product);
+
+        }
+
         return redirect()->back()->with(['notification' => $result ? 'تم اضافة منتج جديد' : 'حدث خلل ما في عملية الاضافة يرجى المحاولة مرة اخرى']);
     }
 

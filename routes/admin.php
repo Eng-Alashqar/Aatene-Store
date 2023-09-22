@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Chat\ConversationController;
+use App\Http\Controllers\Notification\AdminNotifyController;
+use App\Http\Controllers\SmsController;
 use App\Http\Controllers\Store\CategoryController;
 use App\Http\Controllers\Store\FaqsController;
 use App\Http\Controllers\Store\RegionController;
@@ -28,4 +30,15 @@ Route::prefix('/administrator')->name('admin.')->middleware(['auth:admin'])->gro
     Route::get('chat',[ConversationController::class,'index'])->name('chat.index');
     Route::post('chat/search',[ConversationController::class,'search'])->name('chat.search');
     Route::get('chat/show/{id}',[ConversationController::class,'show'])->name('chat.show');
+
+    Route::get("notification/{type?}" , [AdminNotifyController::class , 'index'])->name('notification');
+    Route::post("notification/mark-all-read" , [AdminNotifyController::class , 'markAllAsRead'])->name('notification.mark.all.read');
+    Route::post("notification/mark-read{id}" , [AdminNotifyController::class , 'markAsRead'])->name('notification.mark.read');
+
+
+    Route::post("send-sms" ,[SmsController::class , 'sendSms'])->name('send.sms');
+    Route::get("send-sms" ,[SmsController::class , 'sms'])->name('sms');
+
+
 });
+
