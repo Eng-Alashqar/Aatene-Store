@@ -1,13 +1,13 @@
 <!--begin::Sidebar-->
 <div id="kt_app_sidebar" class="app-sidebar flex-column" data-kt-drawer="true" data-kt-drawer-name="app-sidebar"
-    data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="225px"
-    data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
+     data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="225px"
+     data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
     <!--begin::Logo-->
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
         <!--begin::Logo image-->
         <a href="{{ url('/') }}">
-            <x-images.logo-light-lg />
-            <x-images.logo-light />
+            <x-images.logo-light-lg/>
+            <x-images.logo-light/>
         </a>
         <!--end::Logo image-->
         <!--begin::Sidebar toggle-->
@@ -20,9 +20,9 @@
             }
         -->
         <div id="kt_app_sidebar_toggle"
-            class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary body-bg h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"
-            data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"
-            data-kt-toggle-name="app-sidebar-minimize">
+             class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary body-bg h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"
+             data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"
+             data-kt-toggle-name="app-sidebar-minimize">
             <i class="ki-duotone ki-double-left fs-2 rotate-180">
                 <span class="path1"></span>
                 <span class="path2"></span>
@@ -35,12 +35,13 @@
     <div class="app-sidebar-menu overflow-hidden flex-column-fluid">
         <!--begin::Menu wrapper-->
         <div id="kt_app_sidebar_menu_wrapper" class="app-sidebar-wrapper hover-scroll-overlay-y my-5"
-            data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-height="auto"
-            data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer"
-            data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px" data-kt-scroll-save-state="true">
+             data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-height="auto"
+             data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer"
+             data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px"
+             data-kt-scroll-save-state="true">
             <!--begin::Menu-->
             <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu"
-                data-kt-menu="true" data-kt-menu-expand="false">
+                 data-kt-menu="true" data-kt-menu-expand="false">
                 <!--begin:Menu item-->
                 <div data-kt-menu-trigger="click" class="menu-item ">
                     <!--begin:Menu link-->
@@ -75,8 +76,8 @@
                             <!--end:Menu link-->
                         </div>
                         <!--end:Menu item-->
-                        <x-elements.sidebar-li-sub-menu route="admin.stores.index"
-                            title=" متابعة الإحصائيات والزيارت" />
+                        {{--                        <x-elements.sidebar-li-sub-menu route="admin.stores.index"--}}
+                        {{--                                                        title=" متابعة الإحصائيات والزيارت"/>--}}
                     </div>
                     <!--end:Menu sub-->
                 </div>
@@ -95,7 +96,7 @@
 
                 <!--begin:Menu item-->
                 <x-elements.sidebar-menu-item lable="إدارة المتاجر " index="admin.stores.index"
-                    create="admin.stores.create">
+                                              create="admin.stores.create">
                     <x-slot name="icon">
                         <i class="ki-duotone ki-shop fs-2">
                             <i class="path1"></i>
@@ -105,14 +106,13 @@
                             <i class="path5"></i>
                         </i>
                     </x-slot>
-                    <x-elements.sidebar-li-sub-menu route="admin.stores.index" title="قائمة المتاجر" />
-                    <x-elements.sidebar-li-sub-menu route="admin.stores.create" title="إضافة متجر " />
-                    <x-elements.sidebar-li-sub-menu route="admin.stores.pending" title="طلبات فتح متجر" />
+                    <x-elements.sidebar-li-sub-menu route="admin.stores.index" title="قائمة المتاجر"/>
+                    <x-elements.sidebar-li-sub-menu route="admin.stores.pending" title="طلبات فتح متجر"/>
                 </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
                 <!--begin:Menu item-->
                 <x-elements.sidebar-menu-item lable="إدارة المستخدمين " index="admin.users.index"
-                    create="admin.users.create">
+                                              create="admin.users.create">
                     <x-slot name="icon">
                         <i class="ki-duotone ki-people fs-2">
                             <i class="path1"></i>
@@ -122,27 +122,27 @@
                             <i class="path5"></i>
                         </i>
                     </x-slot>
-                    <x-elements.sidebar-li-sub-menu route="admin.users.index" title="قائمة المستخدمين" />
-                    <x-elements.sidebar-li-sub-menu route="admin.users.create" title="إضافة مستخدم " />
+                    <x-elements.sidebar-li-sub-menu route="admin.users.index" title="قائمة المستخدمين"/>
+                    <x-elements.sidebar-li-sub-menu route="admin.users.create" title="إضافة مستخدم "/>
 
                 </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
-                     <!--begin:Menu item-->
-                     <x-elements.sidebar-menu-item lable="إدارة المحادثات " index="admin.users.index"
-                     create="admin.users.create">
-                     <x-slot name="icon">
-                         <i class="ki-duotone ki-people fs-2">
-                             <i class="path1"></i>
-                             <i class="path2"></i>
-                             <i class="path3"></i>
-                             <i class="path4"></i>
-                             <i class="path5"></i>
-                         </i>
-                     </x-slot>
-                     <x-elements.sidebar-li-sub-menu route="admin.chat.index" title="قائمة المستخدمين" />
+                <!--begin:Menu item-->
+                <x-elements.sidebar-menu-item lable="إدارة المحادثات " index="admin.chat.index"
+                                              create="admin.chat.search">
+                    <x-slot name="icon">
+                        <i class="ki-duotone ki-people fs-2">
+                            <i class="path1"></i>
+                            <i class="path2"></i>
+                            <i class="path3"></i>
+                            <i class="path4"></i>
+                            <i class="path5"></i>
+                        </i>
+                    </x-slot>
+                    <x-elements.sidebar-li-sub-menu route="admin.chat.index" title="تصفح المحادثات"/>
 
-                 </x-elements.sidebar-menu-item>
-                 <!--end:Menu item-->
+                </x-elements.sidebar-menu-item>
+                <!--end:Menu item-->
                 <!--begin:Menu item-->
                 <div class="menu-item pt-5">
                     <!--begin:Menu content-->
@@ -157,7 +157,7 @@
 
                 <!--begin:Menu item-->
                 <x-elements.sidebar-menu-item lable="إدارة المناطق " index="admin.regions.index"
-                    create="admin.regions.create">
+                                              create="admin.regions.create">
                     <x-slot name="icon">
                         <i class="ki-duotone ki-map fs-2">
                             <i class="path1"></i>
@@ -165,14 +165,14 @@
                             <i class="path3"></i>
                         </i>
                     </x-slot>
-                    <x-elements.sidebar-li-sub-menu route="admin.regions.index" title="قائمة المناطق" />
-                    <x-elements.sidebar-li-sub-menu route="admin.regions.create" title="إضافة منطقة" />
+                    <x-elements.sidebar-li-sub-menu route="admin.regions.index" title="قائمة المناطق"/>
+                    <x-elements.sidebar-li-sub-menu route="admin.regions.create" title="إضافة منطقة"/>
 
                 </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
                 <!--begin:Menu item-->
                 <x-elements.sidebar-menu-item lable="إدارة الأقسام " index="admin.categories.index"
-                    create="admin.categories.create">
+                                              create="admin.categories.create">
                     <x-slot name="icon">
                         <i class="ki-duotone ki-category fs-2">
                             <i class="path1"></i>
@@ -181,8 +181,8 @@
                             <i class="path4"></i>
                         </i>
                     </x-slot>
-                    <x-elements.sidebar-li-sub-menu route="admin.categories.index" title="قائمة الأقسام" />
-                    <x-elements.sidebar-li-sub-menu route="admin.categories.create" title="إضافة قسم" />
+                    <x-elements.sidebar-li-sub-menu route="admin.categories.index" title="قائمة الأقسام"/>
+                    <x-elements.sidebar-li-sub-menu route="admin.categories.create" title="إضافة قسم"/>
                 </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
                 <!--begin:Menu item-->
@@ -198,7 +198,7 @@
 
                 <!--begin:Menu item-->
                 <x-elements.sidebar-menu-item lable="إدارة اعلانات الوظائف  " index="admin.stores.index"
-                    create="admin.stores.create">
+                                              create="admin.stores.create">
                     <x-slot name="icon">
                         <i class="ki-duotone ki-call fs-2">
                             <i class="path1"></i>
@@ -211,25 +211,25 @@
                             <i class="path8"></i>
                         </i>
                     </x-slot>
-                    <x-elements.sidebar-li-sub-menu route="admin.stores.index" title="متابعة الوظائف " />
-                    <x-elements.sidebar-li-sub-menu route="admin.stores.create" title="إضافة وظيفة " />
+                    <x-elements.sidebar-li-sub-menu route="admin.stores.index" title="متابعة الوظائف "/>
+                    <x-elements.sidebar-li-sub-menu route="admin.stores.create" title="إضافة وظيفة "/>
                 </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
 
-                <!--begin:Menu item-->
-                <x-elements.sidebar-menu-item lable="إدارة اعلانات الموقع  " index="admin.stores.index"
-                    create="admin.stores.create">
-                    <x-slot name="icon">
-                        <i class="ki-duotone ki-chart-line-star fs-2">
-                            <i class="path1"></i>
-                            <i class="path2"></i>
-                            <i class="path3"></i>
-                        </i>
-                    </x-slot>
-                    <x-elements.sidebar-li-sub-menu route="admin.stores.index" title="متابعة الاعلانات " />
-                    <x-elements.sidebar-li-sub-menu route="admin.stores.create" title="إضافة اعلان " />
-                </x-elements.sidebar-menu-item>
-                <!--end:Menu item-->
+                {{--                <!--begin:Menu item-->--}}
+                {{--                <x-elements.sidebar-menu-item lable="إدارة اعلانات الموقع  " index="admin.stores.index"--}}
+                {{--                                              create="admin.stores.create">--}}
+                {{--                    <x-slot name="icon">--}}
+                {{--                        <i class="ki-duotone ki-chart-line-star fs-2">--}}
+                {{--                            <i class="path1"></i>--}}
+                {{--                            <i class="path2"></i>--}}
+                {{--                            <i class="path3"></i>--}}
+                {{--                        </i>--}}
+                {{--                    </x-slot>--}}
+                {{--                    <x-elements.sidebar-li-sub-menu route="admin.stores.index" title="متابعة الاعلانات "/>--}}
+                {{--                    <x-elements.sidebar-li-sub-menu route="admin.stores.create" title="إضافة اعلان "/>--}}
+                {{--                </x-elements.sidebar-menu-item>--}}
+                {{--                <!--end:Menu item-->--}}
 
                 <!--begin:Menu item-->
                 <div class="menu-item pt-5">
@@ -245,29 +245,29 @@
 
                 <!--begin:Menu item-->
                 <x-elements.sidebar-menu-item lable="إدارة الموظفين " index="admin.admins.index"
-                    create="admin.admins.create">
+                                              create="admin.admins.create">
                     <x-slot name="icon">
                         <i class="ki-duotone ki-security-user fs-2">
                             <i class="path1"></i>
                             <i class="path2"></i>
                         </i>
                     </x-slot>
-                    <x-elements.sidebar-li-sub-menu route="admin.admins.index" title="قائمة الموظفين" />
-                    <x-elements.sidebar-li-sub-menu route="admin.admins.create" title="إضافة موظف" />
+                    <x-elements.sidebar-li-sub-menu route="admin.admins.index" title="قائمة الموظفين"/>
+                    <x-elements.sidebar-li-sub-menu route="admin.admins.create" title="إضافة موظف"/>
                 </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
 
                 <!--begin:Menu item-->
                 <x-elements.sidebar-menu-item lable="إدارة الأدوار " index="admin.roles.index"
-                    create="admin.roles.create">
+                                              create="admin.roles.create">
                     <x-slot name="icon">
                         <i class="ki-duotone ki-key-square fs-2">
                             <i class="path1"></i>
                             <i class="path2"></i>
                         </i>
                     </x-slot>
-                    <x-elements.sidebar-li-sub-menu route="admin.roles.index" title="قائمة الأدوار" />
-                    <x-elements.sidebar-li-sub-menu route="admin.roles.create" title="إضافة دور" />
+                    <x-elements.sidebar-li-sub-menu route="admin.roles.index" title="قائمة الأدوار"/>
+                    <x-elements.sidebar-li-sub-menu route="admin.roles.create" title="إضافة دور"/>
                 </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
 
@@ -327,7 +327,7 @@
 
                 <!--begin:Menu item-->
                 <x-elements.sidebar-menu-item lable=" الدعم الفني " index="admin.categories.index"
-                    create="admin.categories.create">
+                                              create="admin.categories.create">
                     <x-slot name="icon">
                         <i class="ki-duotone ki-support-24 fs-2">
                             <i class="path1"></i>
@@ -335,10 +335,10 @@
                             <i class="path3"></i>
                         </i>
                     </x-slot>
-                    <x-elements.sidebar-li-sub-menu route="admin.categories.index" title="قائمة طلبات الدعم" />
+                    <x-elements.sidebar-li-sub-menu route="admin.categories.index" title="قائمة طلبات الدعم"/>
                     <x-elements.sidebar-li-sub-menu route="admin.categories.create"
-                        title="قائمة الابلاغات والتقارير" />
-                    <x-elements.sidebar-li-sub-menu route="admin.faqs.index" title=" اسئلة شائعة" />
+                                                    title="قائمة الابلاغات والتقارير"/>
+                    <x-elements.sidebar-li-sub-menu route="admin.faqs.index" title=" اسئلة شائعة"/>
                 </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
                 <!--begin:Menu item-->
@@ -365,9 +365,9 @@
     <!--begin::Footer-->
     <div class="app-sidebar-footer flex-column-auto pt-2 pb-6 px-6" id="kt_app_sidebar_footer">
         <a href="https://preview.keenthemes.com/html/metronic/docs"
-            class="btn btn-flex flex-center btn-custom btn-primary overflow-hidden text-nowrap px-0 h-40px w-100"
-            data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click"
-            title="200+ in-house components and 3rd-party plugins">
+           class="btn btn-flex flex-center btn-custom btn-primary overflow-hidden text-nowrap px-0 h-40px w-100"
+           data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click"
+           title="200+ in-house components and 3rd-party plugins">
             <span class="btn-label ">الدعم الفني</span>
             <i class="ki-duotone ki-document btn-icon fs-2 m-0">
                 <span class="path1"></span>
