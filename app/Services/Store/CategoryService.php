@@ -7,7 +7,7 @@ use App\Models\Store\Category;
 use App\Repositories\Admin\CategoryRepository;
 use App\Services\ServiceInterface;
 
-class CategoryService implements ServiceInterface
+class CategoryService
 {
     private $category;
     public function __construct()
@@ -16,11 +16,11 @@ class CategoryService implements ServiceInterface
     }
 
 
-    public function get($count,$filters)
+    public function get()
     {
         $filters = request()->query();
-        $count = (int) request()->query('count') ?? 7;
-        return $this->category->latest()->with(['parent','children','ancestors'])->filter($filters)->paginate($count);
+        $count = (int) request()->query('count') ;
+        return $this->category->latest()->with(['parent','children','ancestors'])->filter($filters)->paginate($count == 0 ? 7 : $count);
     }
 
     public function getAllCategories()
@@ -52,12 +52,13 @@ class CategoryService implements ServiceInterface
 
     public function update($id, $params)
     {
-        if($params['image'] && is_file($params['image'])){
+
+        $category = $this->getById($id);
+        if(array_key_exists('image',$params) && is_file($params['image'])){
             $params['slug'] = $params['image']->getClientOriginalName();
             $params['image'] = PhotoUpload::upload($params['image']);
+            $category->storeImage($params['image'],$params['slug'],'photo');
         }
-        $category = $this->getById($id);
-        $category->storeImage($params['image'],$params['slug'],'photo');
         return  $category->update($params);    }
 
     public function delete($id)

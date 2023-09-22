@@ -55,8 +55,7 @@ class CategoryController extends Controller
     {
         return view('admin.categories.edit', [
             'category' => $this->categoryService->getById($id),
-            'categories' => $this->categoryService->getParentCategories()
-
+            'categories' => $this->categoryService->getParentCategories()->where('id','<>',$id)
         ]);
     }
 
