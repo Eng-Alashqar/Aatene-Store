@@ -3,7 +3,6 @@
 use App\Http\Controllers\Chat\ConversationController;
 use App\Http\Controllers\Notification\AdminNotifyController;
 use App\Http\Controllers\Notification\NotificationController;
-use App\Http\Controllers\SmsController;
 use App\Http\Controllers\Store\CategoryController;
 use App\Http\Controllers\Store\FaqsController;
 use App\Http\Controllers\Store\RegionController;

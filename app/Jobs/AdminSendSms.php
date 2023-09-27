@@ -3,7 +3,6 @@
 namespace App\Jobs;
 
 use App\Models\Users\Seller;
-use App\Traits\SendSms;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -16,7 +15,7 @@ use Vonage\SMS\Message\SMS;
 
 class AdminSendSms implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels , SendSms;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels ;
 
     /**
      * Create a new job instance.
