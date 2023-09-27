@@ -89,18 +89,14 @@ class NotificationController extends Controller
     }
 
     public function forceDelete($id){
-        $not = PushingNotification::find($id);
-        $del = $not->forceDelete();
+        $not = PushingNotification::where('id', $id)->forceDelete();
         return redirect()->back()->with('notification' , 'تم الحذف بنجاح');
     }
 
     public function restore($id)
     {
         $not = PushingNotification::where('id', $id)->restore();
-
-
-        return redirect()->back()->with('notification' , 'تم اعادة الانطلاق');
-
+        return redirect()->back()->with('notification', 'تم اعادة الانطلاق');
 
     }
 
