@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Chat\ConversationController;
 use App\Http\Controllers\Notification\AdminNotifyController;
+use App\Http\Controllers\Notification\NotificationController;
 use App\Http\Controllers\SmsController;
 use App\Http\Controllers\Store\CategoryController;
 use App\Http\Controllers\Store\FaqsController;
@@ -13,7 +14,7 @@ use App\Models\Chat\Conversation;
 use Illuminate\Support\Facades\Route;
 
 
-Route::prefix('/administrator')->name('admin.')->middleware(['auth:admin'])->group(function(){
+Route::prefix('/administrator')->name('admin.')->middleware(['auth:admin'])->group(callback: function(){
     Route::get('/home',function(){
         return view('admin.index');
         })->name('home');
@@ -36,9 +37,12 @@ Route::prefix('/administrator')->name('admin.')->middleware(['auth:admin'])->gro
     Route::post("notification/mark-read{id}" , [AdminNotifyController::class , 'markAsRead'])->name('notification.mark.read');
 
 
-    Route::post("send-sms" ,[SmsController::class , 'sendSms'])->name('send.sms');
-    Route::get("send-sms" ,[SmsController::class , 'sms'])->name('sms');
 
+    Route::get("index-noti", [NotificationController::class, 'index'])->name('index.noti');
+    Route::get("create-noti", [NotificationController::class , 'create'])->name('create.noti');
+    Route::post('store-noti' , [NotificationController::class , 'store'])->name('store.noti');
+    Route::post('restore-noti/{id}' , [NotificationController::class , 'restore'])->name('restore.noti');
+    Route::post('delete-noti/{id}' , [NotificationController::class , 'forceDelete'])->name('delete.noti');
 
 });
 

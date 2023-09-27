@@ -12,7 +12,7 @@
                 <div id="kt_app_content_container" class="app-container container-xxl">
 
                     @if(session('message'))
-                       <div class="text-danger"> {{session('message')}} </div>
+                        <div class="text-danger"> {{session('message')}} </div>
                     @endif
                     <form class="form d-flex flex-column flex-lg-row" action="{{route('admin.send.sms')}}" method="POST" enctype="multipart/form-data">
 

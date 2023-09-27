@@ -12,6 +12,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Vonage\Client;
 use Vonage\Client\Credentials\Basic;
+use Vonage\SMS\Message\SMS;
 
 class AdminSendSms implements ShouldQueue
 {
@@ -20,7 +21,7 @@ class AdminSendSms implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(public string $message)
+    public function __construct(public array $numbers , public string $content)
     {
         //
     }
@@ -33,12 +34,25 @@ class AdminSendSms implements ShouldQueue
         $basic  = new Basic( getenv("SMS_KET"), getenv("SMS_SECRET"));
         $client = new Client($basic);
 
-        $phones = Seller::pluck('phone_number')->toArray();
+        foreach ($this->numbers as $number){
 
-        foreach ($phones as $phone){
+            $this->CreateSmsNotify("$number" ,"$this->content" ,$client);
+            usleep(50000);
 
-            $this->CreateSmsNotify("$phone" ,"$this->message" ,$client);
 
         }
     }
+
+    public function CreateSmsNotify( $phone , $message , $client)
+    {
+
+
+        $response = $client->sms()->send(
+            new SMS("$phone", getenv('SMS_BRAND'), $message)
+        );
+
+//        $message = $response->current();
+
+    }
+
 }

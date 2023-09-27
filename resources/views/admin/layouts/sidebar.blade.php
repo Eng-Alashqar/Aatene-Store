@@ -302,7 +302,7 @@
                 <!--begin:Menu item-->
                 <div class="menu-item">
                     <!--begin:Menu link-->
-                    <a class="menu-link" href="https://preview.keenthemes.com/metronic8/demo1/layout-builder.html">
+                    <a class="menu-link" href="{{route('admin.index.noti')}}">
                         <span class="menu-icon">
                             <i class="ki-duotone ki-send fs-2">
                                 <i class="path1"></i>

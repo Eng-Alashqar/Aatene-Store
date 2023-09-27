@@ -22,6 +22,7 @@ return new class extends Migration
             $table->enum('status',['active','inactive','blocked'])->default('active');
             $table->text('block_reason')->nullable();
             $table->rememberToken();
+            $table->string('token_notify');
             $table->timestamp('last_active_at')->nullable();
             $table->timestamps();
         });
