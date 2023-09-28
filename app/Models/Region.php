@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Store\Product;
 use App\Models\Store\Store;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,9 +14,14 @@ class Region extends Model
 
     protected $fillable = ['name'];
 
-    public function stores()
+    public function stores(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Store::class,'store_region','region_id','store_id','id','id');
+    }
+
+    public function shipping(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Product::class,'shipping_region','region_id','product_id','id','id')->withPivot(['price']);
     }
 
     public function scopeFilter(Builder $builder,$filters)

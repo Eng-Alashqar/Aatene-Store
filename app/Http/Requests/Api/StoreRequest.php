@@ -22,7 +22,7 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         $rules = [];
-
+        $id = auth()->user()?->store?->id;
         if ($this->method() === 'POST') {
             $rules = [
                 'logo' => ['required', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
@@ -37,7 +37,7 @@ class StoreRequest extends FormRequest
             $rules = [
                 'logo' => ['sometimes', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
                 'cover' => ['sometimes', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
-                'name' => ['sometimes', 'string', 'max:100', 'unique:stores,name'],
+                'name' => ['sometimes', 'string', 'max:100', "unique:stores,name,$id"],
                 'description' => ['sometimes', 'string', 'max:64000'],
                 'location' => ['sometimes', 'string', 'max:64000'],
                 'status' => ['sometimes', 'in:active,inactive'],

@@ -6,6 +6,7 @@ use App\Http\Controllers\MultimediaHub\ServiceController;
 use App\Http\Controllers\MultimediaHub\TopicController;
 use App\Http\Controllers\Store\ProductController;
 use App\Http\Controllers\Store\ProfileController;
+use App\Http\Controllers\Store\StoreSettingsController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -25,7 +26,16 @@ Route::prefix('/dashboard')->name('dashboard.')->middleware(['auth:seller'])->gr
 
     Route::prefix('/profile')->name('profile.')->group(function () {
         Route::get('/', [ProfileController::class, 'index'])->name('index');
+        Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');
+        Route::put('/edit', [ProfileController::class, 'update'])->name('update');
+
     });
+
+    Route::prefix('/store-settings')->name('store-settings.')->group(function () {
+        Route::get('/edit', [StoreSettingsController::class, 'edit'])->name('edit');
+        Route::put('/edit', [StoreSettingsController::class, 'update'])->name('update');
+    });
+//    Route::resource('profile',ProfileController::class);
     Route::resource('jobs', JobController::class);
     Route::resource('services', ServiceController::class);
     Route::resource('blogs', BlogController::class);

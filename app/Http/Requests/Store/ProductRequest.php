@@ -23,22 +23,23 @@ class ProductRequest extends FormRequest
     {
         if ($this->method() === 'PUT') {
             return [
-                'image' => ['sometimes', 'required', 'image', 'mimes:jpeg,jpg,png', 'max:2048'],
-                'name' => ['required', 'string', 'max:255'],
-                'description' => ['required','string'],
+                'image' => ['sometimes', 'image', 'mimes:jpeg,jpg,png,gif', 'max:2048'],
+                'name' => ['sometimes', 'string', 'max:255'],
+                'description' => ['sometimes','string'],
                 'files'=>['nullable','string'],
-                'price' => ['required', 'numeric', 'min:0'],
-                'compare_price' => ['required', 'numeric', 'min:0'],
-                'quantity' => ['required', 'integer', 'min:0'],
+                'price' => ['sometimes', 'numeric', 'min:0'],
+                'quantity' => ['sometimes', 'integer', 'min:0'],
                 'is_available' => ['nullable','boolean'],
-                'status' => ['required', 'in:active,draft,archived'],
-                'category_id' => ['required', 'exists:categories,id'],
-                'tags' => ['nullable'],
+                'status' => ['sometimes', 'in:active,draft,archived'],
+                'category_id' => ['sometimes', 'exists:categories,id'],
+                'tags' => ['nullable','string'],
                 'featured'=>['nullable','boolean'],
-                'options'=>['nullable'],
-                'region_id_.*'=>['required','exists:regions,id'],
-                'region_price_.*'=>['required']
-
+                'options.*.attribute'=>['sometimes','in:color,size,style,material'],
+                'options.*.options_value.*.options_value_photo'=>['sometimes','image', 'mimes:jpeg,jpg,png,gif', 'max:102485'],
+                'options.*.options_value.*.options_value_value'=>['sometimes','string',  'max:100'],
+                'options.*.options_value.*.options_value_price'=>['sometimes','numeric', 'min:0'],
+                'region'=>['nullable'],
+                'region.*'=>['sometimes','numeric'],
             ];
         } else {
             return [
@@ -57,8 +58,8 @@ class ProductRequest extends FormRequest
                 'options.*.options_value.*.options_value_photo'=>['required','image', 'mimes:jpeg,jpg,png,gif', 'max:102485'],
                 'options.*.options_value.*.options_value_value'=>['required','string',  'max:100'],
                 'options.*.options_value.*.options_value_price'=>['required','numeric', 'min:0'],
-                'region_id_.*'=>['required','exists:regions,id'],
-                'region_price_.*'=>['required']
+                'region'=>['nullable'],
+                'region.*'=>['required','numeric'],
             ];
         }
     }

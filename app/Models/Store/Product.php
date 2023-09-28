@@ -22,7 +22,6 @@ class Product extends Model
 {
     use HasFactory, HasPhoto ;
 
-    protected $appends = ['images_with_type'];
     protected $fillable = [
         'store_id', 'category_id', 'name', 'slug', 'description',
         'featured','visits_count','is_available','quantity',
@@ -34,7 +33,7 @@ class Product extends Model
     public static function booted()
     {
         static::addGlobalScope('store' , new StoreScope());
-//        static::observe(ProductObserver::class);
+        static::observe(ProductObserver::class);
     }
 
     public function scopeFilter(Builder $builder, $filters)
@@ -146,9 +145,17 @@ class Product extends Model
 
     public function shippingAddressCost(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Region::class, 'shipping_region', 'product_id', 'region_id', 'id', 'id');
+        return $this->belongsToMany(Region::class, 'shipping_region', 'product_id', 'region_id', 'id', 'id')->withPivot(['price']);
     }
-
+    public function getMainImageAttribute()
+    {
+        $photo = $this->photo()->where('type','main')->first();
+        if (!$photo) {
+            return 'https://t4.ftcdn.net/jpg/04/70/29/97/240_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
+        }
+        $url = Storage::disk('s3')->temporaryUrl($photo->src, now()->minutes(120));
+        return $url;
+    }
     protected static function boot()
     {
         parent::boot();
@@ -168,8 +175,6 @@ class Product extends Model
 
 //             $this->pushNotify($users,  $title= "new-title"  , $body ='new-body');
 
-
-
 //            $title = "منتج جديد تمت اضافته " ;
 //            $name = $_product->name ;
 //            $body  = "تصفح واعرف المزيد عن المنتج ($name)" ;
@@ -181,17 +186,6 @@ class Product extends Model
 //            $user = User::find($id);
 //            $user->notify(new UserNotify($product));
 //        }
-
-
-
-
-
-
-
-
-
-
-
 
         });
     }

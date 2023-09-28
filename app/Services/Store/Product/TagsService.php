@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 class TagsService
 {
 
-    public static function createTags($params, $product): array
+    public static function createTags($params, $product): void
     {
         if (array_key_exists('tags', $params) && $params['tags']) {
             $tags = json_decode($params['tags']);
@@ -25,8 +25,6 @@ class TagsService
                 }
                 $tags_ids[] = $tag->id;
             }
-            return $tags_ids;
-
             $product->tags()->sync($tags_ids);
         }
     }

@@ -55,7 +55,13 @@
                                             <!--end::Info-->
                                         </div>
                                         <!--end::User-->
+                                        <div class="d-flex my-4">
 
+
+                                            <a href="{{route('dashboard.profile.edit',$user->id)}}" class="btn btn-sm btn-primary me-3"
+                                               >تعديل</a>
+
+                                        </div>
                                     </div>
                                     <!--end::Title-->
 
@@ -77,8 +83,8 @@
                             </div>
                             <!--end::Card title-->
                             <!--begin::Action-->
-{{--                            <a href="#"--}}
-{{--                               class="btn btn-sm btn-primary align-self-center">تعديل الملف الشخضي</a>--}}
+                            {{--                            <a href="#"--}}
+                            {{--                               class="btn btn-sm btn-primary align-self-center">تعديل الملف الشخضي</a>--}}
                             <!--end::Action-->
 
                         </div>

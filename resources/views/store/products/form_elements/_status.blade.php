@@ -7,8 +7,8 @@
         @enderror"
         data-control="select2" data-hide-search="true" data-placeholder="اختر خيار">
         <option></option>
-        <option value="active" @selected(old('status') === 'active')>فعال</option>
-        <option value="draft" @selected(old('status') === 'draft')>مسودة</option>
-        <option value="archived" @selected(old('status') === 'archived')>مؤرشف</option>
+        <option value="active" @selected(old('status',$product->status) === 'active')>فعال</option>
+        <option value="draft" @selected(old('status',$product->status) === 'draft')>مسودة</option>
+        <option value="archived" @selected(old('status',$product->status) === 'archived')>مؤرشف</option>
     </select>
 </div>

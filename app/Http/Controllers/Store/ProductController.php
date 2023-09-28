@@ -17,9 +17,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
 {
-    use PushNotify ;
-    private  $productService;
-    private  $categoryService;
+    use PushNotify;
+
+    private $productService;
+    private $categoryService;
+
     public function __construct(public NotificationsService $notificationsService)
     {
         $this->productService = new ProductService;
@@ -43,7 +45,9 @@ class ProductController extends Controller
     public function create()
     {
         return view('store.products.create', [
-            'categories' => $this->categoryService->getParentCategories(), 'regions' => $this->productService->getStoreRegions()
+            'product' => new Product(),
+            'categories' => $this->categoryService->getParentCategories(),
+            'regions' => $this->productService->getStoreRegions()
         ]);
     }
 
@@ -53,15 +57,12 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $result = $this->productService->store($request->validated());
-
-
-        if ($result){
+        if ($result) {
             $product = Product::find($result->id);
             $users = User::whereHas('following', function ($query) use ($product) {
-                            $query->where('store_id', $product->store->id); })->get();
-
-            $this->notificationsService->createNotficatoin($users ,$product);
-
+                $query->where('store_id', $product->store->id);
+            })->get();
+            $this->notificationsService->createNotficatoin($users, $product);
         }
 
         return redirect()->back()->with(['notification' => $result ? 'تم اضافة منتج جديد' : 'حدث خلل ما في عملية الاضافة يرجى المحاولة مرة اخرى']);
@@ -80,10 +81,32 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+        $attributes = ['color', 'size', 'material', 'style'];
+        $product = $this->productService->getById($id);
+        $variants = $product->variants()->get();
+        $options = [];
+
+        foreach ($variants as $variant) {
+            $attribute = $variant->attributes()->first();
+
+            $item = ["attribute" => $attribute->name,
+                "options_value" => [
+                    'options_value_value' => $variant->name,
+                    'options_value_price' => $variant->price,
+                    'options_value_available' => $variant->is_available,
+                ]];
+            $options[] = $item;
+        }
+
+
         return view('store.products.edit', [
-            'categories' => $this->categoryService->getAllCategories(),
-            'product' => $this->productService->getById($id)
-        ]);
+                'categories' => $this->categoryService->getParentCategories(),
+                'product' => $product,
+                'regions' => $this->productService->getStoreRegions(),
+                'options' => $options
+            ]
+
+        );
     }
 
     /**

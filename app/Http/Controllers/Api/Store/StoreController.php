@@ -24,7 +24,6 @@ class StoreController extends Controller
      */
     public function index()
     {
-
         $filters = request()->query();
         $stores = Store::with(['seller', 'regions', 'followers'])->filter($filters)->paginate();
         return response()->json(['status' => (bool)$stores, 'data' => $stores], Response::HTTP_OK);

@@ -154,5 +154,5 @@
         <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
         <!--end::Vendors Javascript-->
         <x-elements.delete-script name="products" dashboard="dashboard"/>
-        @endpush
+    @endpush
 </x-store.master>

@@ -9,12 +9,12 @@
     <!--begin::Body-->
     <div class="card-body py-3">
         <div class="mb-5">
-            <x-form.input-with-lable lable="اسم المنتج" name="name" placeholder="ادخل اسم المنتج" />
+            <x-form.input-with-lable lable="اسم المنتج" name="name" placeholder="ادخل اسم المنتج" value=" {{old('name',$product->name)}}"/>
         </div>
         <div class="mb-5">
             <label for="description" class="required form-label">وصف المنتج</label>
 
-            <textarea name="description" id="description"  class="form-control form-control-solid">  {{old('description')}} </textarea>
+            <textarea name="description" id="description"  class="form-control form-control-solid">  {{old('description',$product->description)}} </textarea>
         </div>
         <div class="mb-5">
             <!--begin::Label-->
@@ -22,7 +22,7 @@
             <!--end::Label-->
             <!--begin::Input-->
             <input id="tags" name="tags" data-tagify="tagify"
-                class="form-control @error('tag') is-invalid @enderror mb-2" value="{{ old('tags') }}" />
+                class="form-control @error('tag') is-invalid @enderror mb-2" value="{{ old('tags',implode(',',$product->tags()->pluck('name')->toArray()))}}" />
             <!--end::Input-->
         </div>
     </div>

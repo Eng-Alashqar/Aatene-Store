@@ -9,6 +9,7 @@ use App\Http\Controllers\API\Store\ProductController;
 use App\Http\Controllers\API\Store\StoreController;
 use App\Http\Controllers\Api\Store\TagsController;
 use App\Http\Controllers\Api\Users\ProfileController;
+use App\Http\Controllers\Api\Users\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,7 +51,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['api'])->group(function () {
     Route::apiResource('stores', StoreController::class);
-    Route::apiResource('/products', ProductController::class)->middleware('auth:seller');
+    Route::apiResource('/products', ProductController::class);
     Route::get('/categories', [CategoryController::class, 'index']);
 
     Route::prefix('/profile')->middleware('auth:seller,user,admin')->controller(ProfileController::class)->group(function () {
@@ -76,6 +77,9 @@ Route::middleware(['api'])->group(function () {
     });
 
     Route::apiResource('/tags', TagsController::class)->middleware('auth:seller');
+    Route::prefix('/users')->controller(UsersController::class)->group(function () {
+        Route::get('/', 'index');
+    });
 
 });
 

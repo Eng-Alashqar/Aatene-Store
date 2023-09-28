@@ -8,8 +8,10 @@ use App\Models\Chat\Conversation;
 use App\Models\Chat\Message;
 use App\Models\Store\Favorite;
 use App\Models\Profile;
+use App\Models\Store\Order;
 use App\Models\Store\Store;
 use App\Traits\HasPhoto;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -18,31 +20,45 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable, HasPhoto , Notifiable;
-
+    use HasApiTokens, HasFactory, Notifiable, HasPhoto, Notifiable;
 
     public function initiatorConversations()
     {
-        return $this->morphMany(Conversation::class,'initiator');
+        return $this->morphMany(Conversation::class, 'initiator');
     }
 
     public function ParticipantConversations()
     {
-        return $this->morphMany(Conversation::class,'participant');
+        return $this->morphMany(Conversation::class, 'participant');
     }
 
-    public function getConversationsAttribute(){
+    public function getConversationsAttribute()
+    {
         $conversations1 = $this->initiatorConversations;
         $conversations2 = $this->ParticipantConversations;
-        $conversations = array($conversations1,$conversations2);
+        $conversations = array($conversations1, $conversations2);
         return $conversations;
     }
 
     public function profile()
     {
-        return $this->morphOne(Profile::class,'userable');
+        return $this->morphOne(Profile::class, 'userable');
     }
 
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function following()
+    {
+        return $this->belongsToMany(Store::class, 'followers', 'user_id', 'store_id');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -59,13 +75,6 @@ class User extends Authenticatable implements JWTSubject
         'phone_number',
 
     ];
-
-    public function favorites()
-    {
-        return $this->hasMany(Favorite::class);
-    }
-
-
 
     /**
      * The attributes that should be hidden for serialization.
@@ -103,18 +112,32 @@ class User extends Authenticatable implements JWTSubject
      * @return array
      */
 
-    public function getJWTCustomClaims() {
+    public function getJWTCustomClaims()
+    {
         return [];
     }
 
-    public function setToken($token){
+    public function setToken($token)
+    {
         $this->token_notify = $token;
         $saved = $this->save();
-        return $saved ;
+        return $saved;
     }
 
-    public function following()
+    public function ScopeFilters(Builder $builder, $filters)
     {
-        return $this->belongsToMany(Store::class, 'followers'  , 'user_id' , 'store_id');
+        $params = array_merge([
+            'search' => null,
+            'status' => null
+        ], $filters);
+        $builder->when($params['search'], function ($builder, $value) {
+            $builder->where('name', 'like', "%$value%")
+                ->orWhere('email', 'like', "%$value%")
+                ->orWhere('phone_number', 'like', "%$value%");
+        });
+        $builder->when($params['status'], function ($builder, $value) {
+            $builder->where('status', '=', $value);
+        });
     }
+
 }

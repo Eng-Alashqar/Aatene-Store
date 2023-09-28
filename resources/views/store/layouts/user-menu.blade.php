@@ -43,7 +43,7 @@
 
         <!--begin::Menu item-->
         <div class="menu-item px-5 my-1">
-            <a href="../../demo1/dist/account/settings.html" class="menu-link px-5">إعدادات المتجر</a>
+            <a href="{{route('dashboard.store-settings.edit')}}" class="menu-link px-5">إعدادات المتجر</a>
         </div>
         <!--end::Menu item-->
         <!--begin::Menu item-->
