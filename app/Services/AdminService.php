@@ -21,7 +21,7 @@ class AdminService
     {
         $filters = request()->query();
         $count = (int) request()->query('count') ?? 7;
-        return $this->model->exceptAuthUser()->latest()->paginate($count);
+        return $this->model->exceptAuthUser()->latest()->with(['permissions','roles','photo'])->paginate($count);
     }
 
 
@@ -36,7 +36,7 @@ class AdminService
             $names[] = $this->roleService->getById($id)->name;
             $params['role_name'] = $names;
         }
-        $admin =  $this->admin->create($params);
+        $admin =  $this->model->create($params);
         $admin->storeImage($params['avatar'],$params['avatar_slug'],'avatar');
         foreach($params['role_name'] as $role){
             $admin->assignRole($role);

@@ -1,4 +1,4 @@
-<form action="{{ route('admin.admins.index') }}">
+<form action="{{ route('admin.users.index') }}">
     <div class="card-toolbar d-flex align-items-center">
         <!--begin::Input group-->
         <div class="position-relative w-lg-300px w-md-150px me-md-2">
@@ -20,14 +20,7 @@
                     </option>
                 </select>
                 <!--end::Select-->
-            <!--begin::Select-->
-            <select name="role_name" data-control="select2" data-hide-search="true" data-placeholder="التصنيف"
-                class="form-select form-select-sm border-body bg-body w-100px">
-                @foreach ($roles as $role)
-                    <option value="{{ $role->name }}" @selected(request()->query('role_name') == $role->name)>{{ $role->name }}</option>
-                @endforeach
-            </select>
-            <!--end::Select-->
+
             <!--begin::Select-->
             <select name="count" data-control="select2" data-hide-search="true" data-placeholder="العدد"
                 class="form-select form-select-sm border-body bg-body  me-5">
@@ -48,7 +41,7 @@
                     <i class="path2"></i>
                     <i class="path3"></i>
                 </i>فلترة</button>
-            <a href="{{ route('admin.admins.index') }}" class="btn btn-sm btn-light-primary btn-icon fs-3 me-5"><i
+            <a href="{{ route('admin.users.index') }}" class="btn btn-sm btn-light-primary btn-icon fs-3 me-5"><i
                     class="ki-duotone ki-cross-circle fs-2">
                     <i class="path1"></i>
                     <i class="path2"></i>

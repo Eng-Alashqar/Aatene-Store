@@ -12,22 +12,56 @@
             <div id="kt_app_content" class="app-content flex-column-fluid">
                 <!--begin::Content container-->
                 <div id="kt_app_content_container" class="app-container container-xxl">
-                    <form class="form d-flex flex-column flex-lg-row" action="{{ route('admin.admins.update',$admin->id) }}"
+                    <form class="form d-flex flex-column flex-lg-row" action="{{ route('admin.admins.store') }}"
                         method="POST" enctype="multipart/form-data">
                         @csrf
-                        @method('put')
+                        <!--begin::Aside column-->
+                        <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
+                            <!--begin::logo for store-->
+                            <div class="card card-flush py-4">
+                                <!--begin::Card header-->
+                                <div class="card-header">
+                                    <!--begin::Card title-->
+                                    <div class="required card-title">
+                                        <h2>ارفع صورة للموظف</h2>
+                                    </div>
+                                    <!--end::Card title-->
+                                </div>
+                                <!--end::Card header-->
+                                <!--begin::Card body-->
+                                <div class="card-body text-center pt-0">
+                                    <x-elements.logo-image-input name="avatar" />
+                                </div>
+                                <!--end::Card body-->
+                            </div>
+                            <!--end::logo for store-->
+
+                        </div>
+                        <!--end::Aside column-->
                         <!--begin::Main column-->
                         <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
                             <div class="card card-flush py-4 ">
                                 <!--begin::Header-->
                                 <div class="card-header border-0 ">
                                     <h3 class="card-title align-items-start flex-column">
-                                        <span class="card-label fw-bold fs-3 mb-1"> تعديل موظف</span>
+                                        <span class="card-label fw-bold fs-3 mb-1"> إضافة موظف</span>
                                     </h3>
                                 </div>
                                 <!--end::Header-->
                                 <!--begin::Body-->
                                 <div class="card-body py-3">
+                                    <div class="mb-5">
+                                        <x-form.input-with-lable lable="اسم الموظف" name="name"
+                                            placeholder="ادخل اسم للموظف" />
+                                    </div>
+                                    <div class="mb-5">
+                                        <x-form.input-with-lable lable="ايميل الموظف" name="email"
+                                            placeholder="ادخل ايميل للموظف" />
+                                    </div>
+                                    <div class="mb-5">
+                                        <x-form.input-with-lable lable="رقم هاتف الموظف" type="tel" name="phone_number"
+                                            placeholder="ادخل رقم هاتف للموظف" />
+                                    </div>
                                     <div class="mb-5">
                                         <x-form.input-with-lable lable=" كلمة السر " name="password"
                                             placeholder="ادخل كلمة السر " autocomplete="off" type="password" />
@@ -58,7 +92,7 @@
                                         ])
                                             multiple placeholder="اختر دور هذا الموظف">
                                             @foreach ($roles as $role)
-                                                <option value="{{ $role->id }}" @if (in_array($role->name , $admin->role_name??[])) selected @endif>
+                                                <option value="{{ $role->id }}" @if (old('role_ids') && in_array($role->id, old('role_ids'))) selected @endif>
                                                     {{ $role->name }}</option>
                                             @endforeach
                                         </select>

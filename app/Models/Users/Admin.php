@@ -17,6 +17,16 @@ class Admin extends User implements JWTSubject
 {
     use HasFactory, HasApiTokens, HasPhoto, HasRoles , Notifiable;
 
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'super_admin',
+        'role_name',
+        'last_active_at',
+        'status',
+        'phone_number',
+    ];
     public function initiatorConversations()
     {
         return $this->morphMany(Conversation::class,'initiator');
@@ -46,16 +56,6 @@ class Admin extends User implements JWTSubject
         $builder->where('id', '<>', $id);
     }
 
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'super_admin',
-        'role_name',
-        'last_active_at',
-        'status',
-        'phone_number',
-    ];
 
     /**
      * The attributes that should be hidden for serialization.

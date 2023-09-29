@@ -5,14 +5,14 @@
         <!--begin::Content wrapper-->
         <div class="d-flex flex-column flex-column-fluid">
             <!--begin::Toolbar-->
-            <x-elements.toolbar  back_url="admin.admins.index" previews="قائمة الموظفين"
-                current="إضافة موظف" />
+            <x-elements.toolbar  back_url="admin.users.index" previews="قائمة المستخدمين"
+                current="إضافة مستخدم" />
             <!--end::Toolbar-->
             <!--begin::Content-->
             <div id="kt_app_content" class="app-content flex-column-fluid">
                 <!--begin::Content container-->
                 <div id="kt_app_content_container" class="app-container container-xxl">
-                    <form class="form d-flex flex-column flex-lg-row" action="{{ route('admin.admins.update',$admin->id) }}"
+                    <form class="form d-flex flex-column flex-lg-row" action="{{ route('admin.users.update',$user->id) }}"
                         method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('put')
@@ -22,7 +22,7 @@
                                 <!--begin::Header-->
                                 <div class="card-header border-0 ">
                                     <h3 class="card-title align-items-start flex-column">
-                                        <span class="card-label fw-bold fs-3 mb-1"> تعديل موظف</span>
+                                        <span class="card-label fw-bold fs-3 mb-1"> تعديل مستخدم</span>
                                     </h3>
                                 </div>
                                 <!--end::Header-->
@@ -37,39 +37,26 @@
                                             placeholder="ادخل تاكيد كلمة السر " autocomplete="off" type="password" />
                                     </div>
                                     <div class="mb-5">
-                                        <x-form.lable lable="حالة الموظف" />
+                                        <x-form.lable lable="حالة المستخدم" />
 
                                         <select data-control="select2" name="status" @class([
                                             'form-select',
                                             'form-select-solid ',
                                             'is-invalid' => $errors->has('status'),
                                         ])
-                                            placeholder="اختر حالة هذا الموظف">
-                                            <option value="active" @selected(old('status') == 'active')>موظف نشط</option>
-                                            <option value="blocked" @selected(old('status') == 'blocked')>موظف محظور</option>
+                                            placeholder="اختر حالة هذا المستخدم">
+                                            <option value="active" @selected(old('status') == 'active')>مستخدم نشط</option>
+                                            <option value="blocked" @selected(old('status') == 'blocked')>مستخدم محظور</option>
                                         </select>
                                     </div>
-                                    <div class="mb-5">
-                                        <x-form.lable lable="دور الموظف" />
-                                        <select data-control="select2" name="role_ids[]" @class([
-                                            'form-select',
-                                            'form-select-solid ',
-                                            'is-invalid' => $errors->has('role_ids'),
-                                        ])
-                                            multiple placeholder="اختر دور هذا الموظف">
-                                            @foreach ($roles as $role)
-                                                <option value="{{ $role->id }}" @if (in_array($role->name , $admin->role_name??[])) selected @endif>
-                                                    {{ $role->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+
 
                                 </div>
                                 <!--begin::Body-->
                                 <!--begin::Footer-->
                                 <div class="card-footer py-3">
                                     <button class="btn btn-primary  btn-sm w-150px">حفظ</button>
-                                    <a href="{{ route('admin.admins.index') }}"
+                                    <a href="{{ route('admin.users.index') }}"
                                         class="btn btn-danger  btn-sm  w-150px">عودة</a>
                                 </div>
                                 <!--begin::Footer-->
