@@ -146,6 +146,7 @@
     </script>
     <!--end::Custom Javascript-->
     @stack('scripts')
+    @yield('scripts')
     <!--end::Javascript-->
 </body>
 <!--end::Body-->
