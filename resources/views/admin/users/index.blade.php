@@ -4,7 +4,7 @@
         <!--begin::Content wrapper-->
         <div class="d-flex flex-column flex-column-fluid">
             <!--begin::Toolbar-->
-            <x-elements.toolbar back_url="admin.home" previews="الرئيسية" current="قائمة الموظفين" />
+            <x-elements.toolbar back_url="admin.home" previews="الرئيسية" current="قائمة المستخدمين" />
             <!--end::Toolbar-->
             <!--begin::Content-->
             <div id="kt_app_content" class="app-content flex-column-fluid">

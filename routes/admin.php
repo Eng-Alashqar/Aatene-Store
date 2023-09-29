@@ -23,7 +23,7 @@ Route::prefix('/administrator')->name('admin.')->middleware(['auth:admin'])->gro
     Route::get('stores-pending',[StoreController::class,'pending'])->name('stores.pending');
     Route::post('stores-accept/{id}',[StoreController::class,'accept'])->name('stores.accept');
     Route::resource('categories',CategoryController::class);
-    Route::resource('users',StoreController::class);
+    Route::resource('users',UserController::class);
     Route::resource('regions',RegionController::class);
     Route::resource('roles',RoleController::class);
     Route::resource('permissions',RegionController::class);
@@ -38,8 +38,7 @@ Route::prefix('/administrator')->name('admin.')->middleware(['auth:admin'])->gro
     Route::post("notification/mark-read{id}" , [AdminNotifyController::class , 'markAsRead'])->name('notification.mark.read');
 
 
-    Route::post("send-sms" ,[SmsController::class , 'sendSms'])->name('send.sms');
-    Route::get("send-sms" ,[SmsController::class , 'sms'])->name('sms');
+
 
     Route::get("index-noti", [NotificationController::class, 'index'])->name('index.noti');
     Route::get("create-noti", [NotificationController::class , 'create'])->name('create.noti');
