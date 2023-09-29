@@ -77,7 +77,7 @@
 
                                     <div class="mb-5">
                                         <x-form.input-with-lable lable="launch_at" name="launch_at" value="2023-09-14 19:26:28"
-                                                                 placeholder="2023-09-14 19:26:28" />
+                                                             type="datetime-local"    placeholder="2023-09-14 19:26:28" />
                                     </div>
 
                                     <div class="mb-5">

@@ -28,7 +28,7 @@ class NotificatoinRequest extends FormRequest
             'followers' =>'nullable|array',
             'users' =>'nullable|array',
             'sellers' =>'nullable|array',
-
+            'launch_at'=>'required|date',
             "users.*" =>'nullable|exists:users,id',
             "sellers.*" =>'nullable|exists:sellers,id',
             "followers.*" =>'nullable|exists:stores,id',

@@ -20,36 +20,36 @@ class AdminNotifyController extends Controller
         if ($type == null )
         {
             $current = 'جميع الاشعارات' ;
-            $notifications = Admin::find(1)->unreadNotifications()->paginate(7);
+            $notifications = Admin::find(11)->unreadNotifications()->paginate(7);
         return view('admin.notifications.index' , compact('notifications' , 'current'));
         }elseif ($type->value == 'create-product')
         {
             $current = 'اشعارات اضافة المنتجات' ;
-            $notifications = Admin::find(1)->unreadNotifications->where('type', 'App\Notifications\CreateProduct');
+            $notifications = Admin::find(11)->unreadNotifications->where('type', 'App\Notifications\CreateProduct');
             return view('admin.notifications.index' , compact('notifications' , 'current'));
         }elseif ($type->value == 'create-store')
         {
             $current = 'اشعارات اضافة متجر' ;
-            $notifications = Admin::find(1)->unreadNotifications->where('type', 'App\Notifications\CreateStore');
+            $notifications = Admin::find(11)->unreadNotifications->where('type', 'App\Notifications\CreateStore');
             return view('admin.notifications.index' , compact('notifications' , 'current'));
         }elseif ($type->value == 'update-product')
         {
             $current = 'اشعارات تعديل المنتج' ;
-            $notifications = Admin::find(1)->unreadNotifications->where('type', 'App\Notifications\UpdateProduct');
+            $notifications = Admin::find(11)->unreadNotifications->where('type', 'App\Notifications\UpdateProduct');
             return view('admin.notifications.index' , compact('notifications' , 'current'));
         }
     }
 
     public function markAsRead($id)
     {
-        $admin = Admin::find(1)->unreadNotifications->where('id', $id)->first()->update(['read_at'=> now()]);
+        $admin = Admin::find(11)->unreadNotifications->where('id', $id)->first()->update(['read_at'=> now()]);
         return redirect()->route('admin.notification')->with('notification' , 'تم التمييز كمقروءة');
 
     }
 
     public function markAllAsRead()
     {
-        $admin = Admin::find(1);
+        $admin = Admin::find(11);
         foreach ($admin->readNotifications as $notification) {
             $notification->update(['read_at' => now()]);
         }
