@@ -113,6 +113,7 @@ class ProductService
             $photo_obj['photo_slug'] = $file->getClientOriginalName();
             $photo_obj['photo'] = PhotoUpload::upload($file);
             $product->deleteImageByType('main');
+            dd($photo_obj);
             $product->storeImage($photo_obj['photo'], $photo_obj['photo_slug'], 'main');
         }
     }

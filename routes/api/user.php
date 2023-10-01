@@ -41,6 +41,9 @@ Route::middleware('auth:user')->prefix('user')->group(function () {
     Route::get("user-notify", [NotificationController::class, 'userNotifications']);
 //    http://127.0.0.1:8000/api/v1/user/set-token
     Route::post('set-token', [NotificationController::class, 'setToken']);
+
+    Route::get('followers', [FollowerController::class, 'followersListForUser']);
+
 });
 
 
