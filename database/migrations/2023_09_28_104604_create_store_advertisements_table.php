@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('start_at');
             $table->string('end_at');
             $table->string('price');
+            $table->string('total');
             $table->enum('status',['Active','InActive'])->default('InActive');
             $table->timestamps();
         });

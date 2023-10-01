@@ -55,8 +55,6 @@ Route::middleware(['api'])->group(function () {
     Route::apiResource('stores', StoreController::class);
     Route::apiResource('/products', ProductController::class)->middleware('auth:seller');
     Route::get('/categories', [CategoryController::class, 'index']);
-    Route::apiResource('store-advertisements',StoreAdvertisementController::class);
-
     Route::prefix('/profile')->middleware('auth:seller,user,admin')->controller(ProfileController::class)->group(function () {
         Route::get('/', 'show');
         Route::post('/create', 'store');
@@ -81,6 +79,14 @@ Route::middleware(['api'])->group(function () {
 
     Route::apiResource('/tags', TagsController::class)->middleware('auth:seller');
 
+    Route::middleware('auth:admin')->group(function (){
+
+    Route::apiResource('store-advertisements',StoreAdvertisementController::class);
+    Route::get('store-advertisements-orders',[StoreAdvertisementController::class,'indexOrder'])->name('store-advertisements-orders');
+    Route::post('store-advertisements-accepted/{id}',[StoreAdvertisementController::class,'orderAccepted'])->name('advertisement-store.accepted');
+    Route::delete('store-advertisements-rejected/{id}',[StoreAdvertisementController::class,'orderRejected'])->name('advertisement-store.rejected');
+
+    });
 });
 
 

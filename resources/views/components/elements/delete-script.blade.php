@@ -1,5 +1,5 @@
 
-@props(['name','reload'=>false, 'dashboard'=>'administrator'])
+@props(['name','reload'=>false, 'dashboard'=>'administrator' || 'name','reload'=>false, 'dashboard'=>'dashboard'])
 
 <script>
     function confirmDestroy(id, reference) {

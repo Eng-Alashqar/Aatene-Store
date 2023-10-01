@@ -4,7 +4,7 @@
         <!--begin::Content wrapper-->
         <div class="d-flex flex-column flex-column-fluid">
             <!--begin::Toolbar-->
-            <x-elements.toolbar back_url="admin.home" previews="الرئيسية" current="قائمة اعلانات المتاجر"/>
+            <x-elements.toolbar back_url="admin.home" previews="الرئيسية" current="قائمة طلبات الاعلانات" />
             <!--end::Toolbar-->
             <!--begin::Content-->
             <div id="kt_app_content" class="app-content flex-column-fluid">
@@ -17,12 +17,6 @@
                             <div class="card-title align-items-start flex-column">
                                 @include('admin.advertisements.store._filters')
                             </div>
-                            <div class="card-toolbar">
-                                <a href="{{ route('admin.advertisements.create') }}"
-                                   class="btn btn-sm btn-light-primary fs-3">
-                                    <i class="ki-duotone ki-plus "></i>اضافة اعلان </a>
-                            </div>
-
                         </div>
                         <!--end::Header-->
                         <!--begin::Body-->
@@ -39,10 +33,9 @@
                                         <th class="min-w-200px">صاحب المتجر</th>
                                         <th class="min-w-50px"> تاريخ بدء الاعلان</th>
                                         <th class="min-w-50px"> تاريخ انتهاء الاعلان</th>
-                                        <th class="min-w-50px">سعر الاعلان</th>
-                                        <th class="min-w-50px">الإجمالي</th>
-                                        <th class="min-w-100px">حالة الاعلان</th>
-                                        <th class="min-w-100px text-end rounded-end px-5">العمليات</th>
+                                        <th class="min-w-50px">السعر</th>
+                                        <th class="min-w-50px">حالة الاعلان</th>
+                                        <th class="min-w-300px text-end rounded-end px-5">العمليات</th>
                                     </tr>
                                     </thead>
                                     <!--end::Table head-->
@@ -77,16 +70,12 @@
                                                     {{ $store_advertisement->start_at }}</div>
                                             </td>
                                             <td>
-                                                <span
-                                                    class="badge badge-light-primary fs-7 fw-bold"> {{ $store_advertisement->end_at }}</span>
+                                                <span class="badge badge-light-primary fs-7 fw-bold"> {{ $store_advertisement->end_at }}</span>
                                             </td>
                                             <td>
-                                                <span
-                                                    class="badge badge-light-info fs-7 fw-bold"> {{ $store_advertisement->price }}</span>
-                                            </td>
-                                            <td>
-                                                <span
-                                                    class="badge badge-light-info fs-7 fw-bold"> {{ $store_advertisement->total }}</span>
+                                                <div class="text-dark fw-bold text-hover-primary mb-1 fs-6">
+                                                    {{$store_advertisement->price}} {{'شيكل'}}
+                                                </div>
                                             </td>
                                             <td>
                                                 @if($store_advertisement->status == 'Active')
@@ -96,24 +85,19 @@
                                                 @endif
 
                                             </td>
-                                            <td class="text-end">
-                                                <a href="{{ route('admin.advertisements.edit',$store_advertisement->id) }}"
-                                                   class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                                    <i class="ki-duotone ki-pencil fs-2">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                    </i>
+                                            <td>
+                                                <a onclick="confirmDestroy({{ $store_advertisement->id }}, this)"
+                                                   class="btn btn-bg-danger text-white btn-sm me-1">
+                                                    حذف الاعلان (طلب مرفوض)
                                                 </a>
-                                                <a onclick="confirmDestroy({{$store_advertisement->id}}, this)"
-                                                   class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
-                                                    <i class="ki-duotone ki-trash fs-2">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                        <span class="path3"></span>
-                                                        <span class="path4"></span>
-                                                        <span class="path5"></span>
-                                                    </i>
-                                                </a>
+                                                <form action="{{ route('admin.advertisement-store.accept', $store_advertisement->id) }}"
+                                                      method="POST" class="d-inline ">
+                                                    @csrf
+                                                    <button type="submit"
+                                                            class="btn btn-bg-primary text-white btn-sm">
+                                                        قبول
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -147,6 +131,6 @@
         <!--begin::Vendors Javascript(used for this page only)-->
         <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
         <!--end::Vendors Javascript-->
-        <x-elements.delete-script name="advertisements"/>
+        <x-elements.delete-script name="advertisements" />
     @endpush
 </x-admin.master>

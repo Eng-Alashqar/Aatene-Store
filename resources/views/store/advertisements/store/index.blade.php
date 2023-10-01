@@ -1,10 +1,10 @@
-<x-admin.master>
+<x-store.master>
     <!--begin::Main-->
     <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
         <!--begin::Content wrapper-->
         <div class="d-flex flex-column flex-column-fluid">
             <!--begin::Toolbar-->
-            <x-elements.toolbar back_url="admin.home" previews="الرئيسية" current="قائمة اعلانات المتاجر"/>
+            <x-elements.toolbar back_url="dashboard.home" previews="الرئيسية" current="قائمة اعلانات المتاجر"/>
             <!--end::Toolbar-->
             <!--begin::Content-->
             <div id="kt_app_content" class="app-content flex-column-fluid">
@@ -15,10 +15,10 @@
                         <!--begin::Header-->
                         <div class="card-header border-0 pt-5">
                             <div class="card-title align-items-start flex-column">
-                                @include('admin.advertisements.store._filters')
+                                @include('store.advertisements.store._filters')
                             </div>
                             <div class="card-toolbar">
-                                <a href="{{ route('admin.advertisements.create') }}"
+                                <a href="{{ route('dashboard.advertisements.create') }}"
                                    class="btn btn-sm btn-light-primary fs-3">
                                     <i class="ki-duotone ki-plus "></i>اضافة اعلان </a>
                             </div>
@@ -97,7 +97,7 @@
 
                                             </td>
                                             <td class="text-end">
-                                                <a href="{{ route('admin.advertisements.edit',$store_advertisement->id) }}"
+                                                <a href="{{ route('dashboard.advertisements.edit',$store_advertisement->id) }}"
                                                    class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                                     <i class="ki-duotone ki-pencil fs-2">
                                                         <span class="path1"></span>
@@ -149,4 +149,4 @@
         <!--end::Vendors Javascript-->
         <x-elements.delete-script name="advertisements"/>
     @endpush
-</x-admin.master>
+</x-store.master>

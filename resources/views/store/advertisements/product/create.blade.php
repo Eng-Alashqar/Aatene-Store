@@ -1,19 +1,19 @@
-<x-admin.master>
+<x-store.master>
     <!--end::Image input placeholder-->
     <!--begin::Main-->
     <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
         <!--begin::Content wrapper-->
         <div class="d-flex flex-column flex-column-fluid">
             <!--begin::Toolbar-->
-            <x-elements.toolbar lable="ادارة اعلانات المتاجر" back_url="admin.advertisements.index" previews="قائمة اعلانات المتاجر"
-                                current="إضافة اعلان" />
+            <x-elements.toolbar lable="ادارة اعلانات المنتجات" back_url="dashboard.product-advertisements.index" previews="قائمة اعلانات المنتجات"
+                                current="إضافة اعلان المنتج" />
             <!--end::Toolbar-->
             <!--begin::Content-->
             <div id="kt_app_content" class="app-content flex-column-fluid">
                 <!--begin::Content container-->
                 <div id="kt_app_content_container" class="app-container container-xxl">
                     {{-- <x-error-show-list /> --}}
-                    <form class="form d-flex flex-column flex-lg-row" action="{{ route('admin.advertisements.store') }}"
+                    <form class="form d-flex flex-column flex-lg-row" action="{{ route('dashboard.product-advertisements.store') }}"
                           method="POST" enctype="multipart/form-data">
                         @csrf
                         <!--begin::Aside column-->
@@ -26,19 +26,19 @@
                                 <!--begin::Header-->
                                 <div class="card-header border-0 ">
                                     <h3 class="card-title align-items-start flex-column">
-                                        <span class="card-label fw-bold fs-3 mb-1"> إضافة إعلان للمتجر</span>
+                                        <span class="card-label fw-bold fs-3 mb-1"> إضافة إعلان للمنتج</span>
                                     </h3>
                                 </div>
                                 <!--end::Header-->
                                 <!--begin::Body-->
                                 <div class="row card-body py-3">
                                     <div class="mb-5">
-                                        <x-form.lable lable="اختار المتجر" />
-                                        <select name="store_id" dir="rtl" data-control="select2"
-                                                @class(['form-select','form-select-solid ',   'is-invalid' => $errors->has('store_id'),]) data-placeholder="اختار المتجر">
+                                        <x-form.lable lable="اختار المنتج" />
+                                        <select name="product_id" dir="rtl" data-control="select2"
+                                                @class(['form-select','form-select-solid ',   'is-invalid' => $errors->has('product_id'),]) data-placeholder="اختار المنتج">
                                             <option></option>
-                                            @foreach ($stores as $store)
-                                                <option value="{{ $store->id }}" @selected(old('store_id') == $store->id)>{{ $store->name }}</option>
+                                            @foreach ($products as $product)
+                                                <option value="{{ $product->id }}" @selected(old('product_id') == $product->id)>{{ $product->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -58,33 +58,33 @@
                                         <div class="col-md-6 d-flex flex-column mb-8 fv-row">
                                             <x-form.input-with-lable readonly lable="سعر الإعلان الإجمالي/شيكل" id="total_price"  name="total" />
                                         </div>
-                                        @else
-                                            <x-form.input-with-lable readonly lable="سعر الاعلان لليوم" value="لم يتم اضافة سعر الاعلان" name=""  />
+                                    @else
+                                        <x-form.input-with-lable readonly lable="سعر الاعلان لليوم" value="لم يتم اضافة سعر الاعلان" name=""  />
                                     @endif
 
 
 
-{{--                                    <div class="mb-5">--}}
-{{--                                        <x-form.lable lable="حالة الاعلان" />--}}
+                                    {{--                                    <div class="mb-5">--}}
+                                    {{--                                        <x-form.lable lable="حالة الاعلان" />--}}
 
-{{--                                        <select data-control="select2" name="status" @class([--}}
-{{--                                            'form-select',--}}
-{{--                                            'form-select-solid ',--}}
-{{--                                            'is-invalid' => $errors->has('status'),--}}
-{{--                                        ]) data-placeholder="اختر حالة هذا الاعلان">--}}
+                                    {{--                                        <select data-control="select2" name="status" @class([--}}
+                                    {{--                                            'form-select',--}}
+                                    {{--                                            'form-select-solid ',--}}
+                                    {{--                                            'is-invalid' => $errors->has('status'),--}}
+                                    {{--                                        ]) data-placeholder="اختر حالة هذا الاعلان">--}}
 
-{{--                                            <option value="Active" @selected(old('status') == 'Active')>اعلان فعال</option>--}}
-{{--                                            <option value="InActive" @selected(old('status') == 'InActive')> اعلان غير فعال</option>--}}
-{{--                                        </select>--}}
-{{--                                    </div>--}}
+                                    {{--                                            <option value="Active" @selected(old('status') == 'Active')>اعلان فعال</option>--}}
+                                    {{--                                            <option value="InActive" @selected(old('status') == 'InActive')> اعلان غير فعال</option>--}}
+                                    {{--                                        </select>--}}
+                                    {{--                                    </div>--}}
                                 </div>
                                 <!--begin::Body-->
                                 <!--begin::Footer-->
                                 <div class="card-footer py-3">
                                     @if($price)
-                                    <button class="btn btn-primary  btn-sm w-150px">حفظ</button>
+                                        <button class="btn btn-primary  btn-sm w-150px">حفظ</button>
                                     @endif
-                                    <a href="{{ route('admin.advertisements.index') }}"
+                                    <a href="{{ route('dashboard.product-advertisements.index') }}"
                                        class="btn btn-danger  btn-sm  w-150px">عودة</a>
                                 </div>
                                 <!--begin::Footer-->
@@ -138,4 +138,4 @@
         </script>
 
     @endpush
-</x-admin.master>
+</x-store.master>

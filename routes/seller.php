@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Advertisement\ProductAdvertisementController;
+use App\Http\Controllers\Advertisement\StoreAdvertisementController;
 use App\Http\Controllers\MultimediaHub\BlogController;
 use App\Http\Controllers\MultimediaHub\JobController;
 use App\Http\Controllers\MultimediaHub\ServiceController;
@@ -31,5 +33,9 @@ Route::prefix('/dashboard')->name('dashboard.')->middleware(['auth:seller'])->gr
     Route::resource('blogs', BlogController::class);
 
     Route::get('orders', [App\Http\Controllers\Store\OrderController::class, 'index'])->name('orders.index');
+
+    Route::resource('advertisements',StoreAdvertisementController::class);
+    Route::resource('product-advertisements',ProductAdvertisementController::class);
+
 
 });

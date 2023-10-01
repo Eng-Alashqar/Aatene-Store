@@ -1,11 +1,11 @@
-<x-admin.master>
+<x-store.master>
     <!--end::Image input placeholder-->
     <!--begin::Main-->
     <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
         <!--begin::Content wrapper-->
         <div class="d-flex flex-column flex-column-fluid">
             <!--begin::Toolbar-->
-            <x-elements.toolbar lable="ادارة اعلانات المتاجر" back_url="admin.advertisements.index" previews="قائمة اعلانات المتاجر"
+            <x-elements.toolbar lable="اعلانات المتجر" back_url="dashboard.advertisements.index" previews="قائمة اعلانات المتجر"
                                 current="إضافة اعلان" />
             <!--end::Toolbar-->
             <!--begin::Content-->
@@ -13,7 +13,7 @@
                 <!--begin::Content container-->
                 <div id="kt_app_content_container" class="app-container container-xxl">
                     {{-- <x-error-show-list /> --}}
-                    <form class="form d-flex flex-column flex-lg-row" action="{{ route('admin.advertisements.store') }}"
+                    <form class="form d-flex flex-column flex-lg-row" action="{{ route('dashboard.advertisements.store') }}"
                           method="POST" enctype="multipart/form-data">
                         @csrf
                         <!--begin::Aside column-->
@@ -33,14 +33,8 @@
                                 <!--begin::Body-->
                                 <div class="row card-body py-3">
                                     <div class="mb-5">
-                                        <x-form.lable lable="اختار المتجر" />
-                                        <select name="store_id" dir="rtl" data-control="select2"
-                                                @class(['form-select','form-select-solid ',   'is-invalid' => $errors->has('store_id'),]) data-placeholder="اختار المتجر">
-                                            <option></option>
-                                            @foreach ($stores as $store)
-                                                <option value="{{ $store->id }}" @selected(old('store_id') == $store->id)>{{ $store->name }}</option>
-                                            @endforeach
-                                        </select>
+                                        <x-form.input-with-lable lable="المتجر" readonly name=""  value="{{$store->name}}" />
+                                        <x-form.input-with-lable  readonly type="hidden" name="store_id" value="{{$store->id}}" />
                                     </div>
 
                                     <div class="mb-5">
@@ -62,8 +56,6 @@
                                             <x-form.input-with-lable readonly lable="سعر الاعلان لليوم" value="لم يتم اضافة سعر الاعلان" name=""  />
                                     @endif
 
-
-
 {{--                                    <div class="mb-5">--}}
 {{--                                        <x-form.lable lable="حالة الاعلان" />--}}
 
@@ -84,9 +76,9 @@
                                     @if($price)
                                     <button class="btn btn-primary  btn-sm w-150px">حفظ</button>
                                     @endif
-                                    <a href="{{ route('admin.advertisements.index') }}"
-                                       class="btn btn-danger  btn-sm  w-150px">عودة</a>
+                                    <a href="{{ route('dashboard.advertisements.index') }}" class="btn btn-danger  btn-sm  w-150px">عودة</a>
                                 </div>
+
                                 <!--begin::Footer-->
                             </div>
                         </div>
@@ -138,4 +130,4 @@
         </script>
 
     @endpush
-</x-admin.master>
+</x-store.master>

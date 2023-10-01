@@ -15,6 +15,7 @@ class StoreAdvertisementResource extends JsonResource
             'start_at' => $this->start_at,
             'end_at' => $this->end_at,
             'price' => $this->price,
+            'total' => $this->total,
             'status' => $this->status,
             'store' => StoreResourse::make($this->store),
 

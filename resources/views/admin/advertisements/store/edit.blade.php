@@ -32,7 +32,7 @@
                                 </div>
                                 <!--end::Header-->
                                 <!--begin::Body-->
-                                <div class="card-body py-3">
+                                <div class="row card-body py-3">
                                     <div class="mb-5">
                                         <x-form.lable lable="اختار المتجر" />
                                         <select name="store_id" dir="rtl" data-control="select2"
@@ -50,8 +50,12 @@
                                     <div class="mb-5">
                                         <x-form.input-with-lable lable="تاريخ انتهاء الاعلان" value="{{$store_advertisement->end_at}}" type="date" name="end_at"  />
                                     </div>
-                                    <div class="mb-5">
-                                        <x-form.input-with-lable readonly lable="سعر الاعلان لليوم"  name="price" value="{{$store_advertisement->price}}"  />
+                                    <div class="col-md-6 d-flex flex-column mb-8 fv-row">
+                                        <x-form.input-with-lable readonly lable="سعر الاعلان لليوم/شيكل" value="{{$store_advertisement->price}}" name="price" id="price"  />
+                                    </div>
+
+                                    <div class="col-md-6 d-flex flex-column mb-8 fv-row">
+                                        <x-form.input-with-lable readonly lable="سعر الإعلان الإجمالي/شيكل"  value="{{$store_advertisement->total}}"  name="total" />
                                     </div>
                                 </div>
                                 <!--begin::Body-->

@@ -180,6 +180,24 @@
                     <x-elements.sidebar-li-sub-menu route="dashboard.blogs.index" title="المدونات" />
                     <x-elements.sidebar-li-sub-menu route="dashboard.blogs.create" title="تدوين" />
                 </x-elements.sidebar-menu-item>
+
+                <x-elements.sidebar-menu-item lable="الاعلانات" customClass="menu-title fs-4"
+                                              index="dashboard.advertisements.index" create="dashboard.advertisements.create">
+                    <x-slot name="icon">
+                        <i class="ki-duotone ki-call fs-2">
+                            <i class="path1"></i>
+                            <i class="path2"></i>
+                            <i class="path3"></i>
+                            <i class="path4"></i>
+                            <i class="path5"></i>
+                            <i class="path6"></i>
+                            <i class="path7"></i>
+                            <i class="path8"></i>
+                        </i>
+                    </x-slot>
+                    <x-elements.sidebar-li-sub-menu route="dashboard.advertisements.index" title="اعلانات المتجر" />
+                    <x-elements.sidebar-li-sub-menu route="dashboard.product-advertisements.index" title="إعلانات المنتج" />
+                </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
 
                 {{--
