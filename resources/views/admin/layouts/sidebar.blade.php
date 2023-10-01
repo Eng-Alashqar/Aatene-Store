@@ -214,6 +214,57 @@
                     <x-elements.sidebar-li-sub-menu route="admin.stores.index" title="متابعة الوظائف "/>
                     <x-elements.sidebar-li-sub-menu route="admin.stores.create" title="إضافة وظيفة "/>
                 </x-elements.sidebar-menu-item>
+
+                <x-elements.sidebar-menu-item lable="إدارة اعلانات المتاجر  " index="admin.advertisements.index" create="admin.advertisements.create">
+                    <x-slot name="icon">
+                        <i class="ki-duotone ki-call fs-2">
+                            <i class="path1"></i>
+                            <i class="path2"></i>
+                            <i class="path3"></i>
+                            <i class="path4"></i>
+                            <i class="path5"></i>
+                            <i class="path6"></i>
+                            <i class="path7"></i>
+                            <i class="path8"></i>
+                        </i>
+                    </x-slot>
+                    <x-elements.sidebar-li-sub-menu route="admin.advertisements.index" title="متابعة اعلانات المتاجر "/>
+                    <x-elements.sidebar-li-sub-menu route="admin.advertisements.create" title="إضافة إعلان "/>
+                    <x-elements.sidebar-li-sub-menu route="admin.advertisements-orders" title="طلبات الاعلانات"/>
+                </x-elements.sidebar-menu-item>
+                <x-elements.sidebar-menu-item lable="إدارة اعلانات المنتجات  " index="admin.product-advertisements.index" create="admin.product-advertisements.create">
+                    <x-slot name="icon">
+                        <i class="ki-duotone ki-call fs-2">
+                            <i class="path1"></i>
+                            <i class="path2"></i>
+                            <i class="path3"></i>
+                            <i class="path4"></i>
+                            <i class="path5"></i>
+                            <i class="path6"></i>
+                            <i class="path7"></i>
+                            <i class="path8"></i>
+                        </i>
+                    </x-slot>
+                    <x-elements.sidebar-li-sub-menu route="admin.product-advertisements.index" title="متابعة اعلانات المنتجات "/>
+                    <x-elements.sidebar-li-sub-menu route="admin.product-advertisements.create" title="إضافة إعلان "/>
+                    <x-elements.sidebar-li-sub-menu route="admin.product-advertisements-orders" title="طلبات الاعلانات"/>
+                </x-elements.sidebar-menu-item>
+
+                <x-elements.sidebar-menu-item lable="اسعار الاعلانات" index="admin.prices.index" create="admin.prices.index">
+                    <x-slot name="icon">
+                        <i class="ki-duotone ki-call fs-2">
+                            <i class="path1"></i>
+                            <i class="path2"></i>
+                            <i class="path3"></i>
+                            <i class="path4"></i>
+                            <i class="path5"></i>
+                            <i class="path6"></i>
+                            <i class="path7"></i>
+                            <i class="path8"></i>
+                        </i>
+                    </x-slot>
+                    <x-elements.sidebar-li-sub-menu route="admin.prices.index" title="اسعار الاعلانات"/>
+                </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
 
                 {{--                <!--begin:Menu item-->--}}

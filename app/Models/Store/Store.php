@@ -2,6 +2,7 @@
 
 namespace App\Models\Store;
 
+use App\Models\Advertisement\StoreAdvertisement;
 use App\Models\Loyalty\Follower;
 use App\Models\Region;
 use App\Models\Users\Seller;
@@ -83,6 +84,10 @@ class Store extends Model
     public function followers(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Follower::class, 'store_id');
+    }
+
+    public function StoreAdvertisements(){
+        return $this->hasMany(StoreAdvertisement::class);
     }
 
     public function getStatusArAttribute()
