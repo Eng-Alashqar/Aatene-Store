@@ -32,7 +32,7 @@ class PriceController extends Controller
     {
         $request->validate([
             'amount' => 'required|numeric',
-            'ad_type' => 'required|in:store,product,main_banner,sub_banner',
+            'ad_type' => 'required|in:store,product,products_list,main_banner,sub_banner',
         ]);
         $data = $request->only([
             'amount', 'ad_type'
@@ -74,7 +74,7 @@ class PriceController extends Controller
         $request->validate([
             'id' => 'required|int|exists:prices',
             'amount' => 'required|numeric',
-            'ad_type' => 'required|in:store,product,main_banner,sub_banner',
+            'ad_type' => 'required|in:store,product,products_list,main_banner,sub_banner',
         ]);
         $data = $request->only([
             'amount', 'ad_type'

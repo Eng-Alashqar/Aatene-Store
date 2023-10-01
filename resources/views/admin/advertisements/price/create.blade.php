@@ -38,6 +38,7 @@
                                             <option></option>
                                             <option value="store" @selected(old('store') == 'store')>اعلان المتجر</option>
                                             <option value="product" @selected(old('product') == 'product')>اعلان المنتج</option>
+                                            <option value="products_list" @selected(old('products_list') == 'products_list')>اعلان قائمة منتجات</option>
                                             <option value="main_banner" @selected(old('main_banner') == 'main_banner')>اعلان البنر الرئيسي</option>
                                             <option value="sub_banner" @selected(old('sub_banner') == 'sub_banner')>اعلان البنر الفرعي</option>
                                         </select>

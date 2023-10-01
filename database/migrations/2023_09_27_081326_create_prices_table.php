@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('prices', function (Blueprint $table) {
             $table->id();
             $table->string('amount');
-            $table->enum('ad_type',['store','product','main_banner','sub_banner']);
+            $table->enum('ad_type',['store','product','products_list','main_banner','sub_banner']);
             $table->timestamps();
         });
     }

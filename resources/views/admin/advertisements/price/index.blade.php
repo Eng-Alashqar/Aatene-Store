@@ -65,6 +65,8 @@
                                                         {{'اعلان المتجر'}}
                                                     @elseif($price->ad_type == 'product')
                                                         {{'اعلان المنتج'}}
+                                                    @elseif($price->ad_type == 'products_list')
+                                                        {{'اعلان قائمة منتجات'}}
                                                     @elseif($price->ad_type == 'main_banner')
                                                         {{'اعلان البنر الرئيسي'}}
                                                     @elseif($price->ad_type == 'sub_banner')

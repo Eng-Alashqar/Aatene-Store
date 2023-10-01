@@ -39,6 +39,7 @@
                                             <option></option>
                                             <option value="store" @selected($price->ad_type == 'store')>اعلان المتجر</option>
                                             <option value="product" @selected($price->ad_type == 'product')>اعلان المنتج</option>
+                                            <option value="products_list" @selected($price->ad_type == 'products_list')>اعلان قائمة منتجات</option>
                                             <option value="main_banner" @selected($price->ad_type == 'main_banner')>اعلان البنر الرئيسي</option>
                                             <option value="sub_banner" @selected($price->ad_type == 'sub_banner')>اعلان البنر الفرعي</option>
                                         </select>
