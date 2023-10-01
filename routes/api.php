@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Api\Advertisement\StoreAdvertisementController;
 use App\Http\Controllers\Api\Store\CategoryController;
 use App\Http\Controllers\Api\Store\Options\AttributeController;
 use App\Http\Controllers\Api\Store\Options\AttributeVariantController;
@@ -48,10 +49,13 @@ use Illuminate\Support\Facades\Route;
 //
 //});
 
+
+
 Route::middleware(['api'])->group(function () {
     Route::apiResource('stores', StoreController::class);
     Route::apiResource('/products', ProductController::class)->middleware('auth:seller');
     Route::get('/categories', [CategoryController::class, 'index']);
+    Route::apiResource('store-advertisements',StoreAdvertisementController::class);
 
     Route::prefix('/profile')->middleware('auth:seller,user,admin')->controller(ProfileController::class)->group(function () {
         Route::get('/', 'show');
