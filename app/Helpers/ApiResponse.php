@@ -1,18 +1,15 @@
 <?php
 
-namespace App\Helpers;
+use Illuminate\Http\JsonResponse;
 
-class ApiResponse
-{
-    public static function sendResponse($code = 201, $msg = null, $data = [])
-    {
-        $response = [
-            'status' => $code,
-            'message' => $msg,
-            'data' => $data,
-        ];
+function sendResponse($status = true, $msg = null, $data = [], $code = 200): JsonResponse
+ {
+    $response = [
+        'status' => $status,
+        'message' => $msg,
+        'data' => $data,
+        'code' => $code,
+    ];
 
-        return response()->json($response, $code);
-    }
+    return response()->json($response);
 }
-
