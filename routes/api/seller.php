@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Advertisement\ProductAdvertisementController;
 use App\Http\Controllers\Api\Advertisement\StoreAdvertisementController;
 use App\Http\Controllers\Api\Store\FollowerController;
 use App\Http\Controllers\Store\StoreController;
@@ -12,6 +13,7 @@ Route::middleware('auth:seller')->prefix('seller')->group(function () {
     Route::apiResource('stores', StoreController::class);
     Route::get('followers', [FollowerController::class, 'followersList']);
     Route::apiResource('store-advertisements',StoreAdvertisementController::class);
+    Route::apiResource('product-advertisements',ProductAdvertisementController::class);
 
 
 });

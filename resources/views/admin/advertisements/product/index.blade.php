@@ -38,6 +38,8 @@
                                         <th class="min-w-200px">المنتج</th>
                                         <th class="min-w-50px"> تاريخ بدء الاعلان</th>
                                         <th class="min-w-50px"> تاريخ انتهاء الاعلان</th>
+                                        <th class="min-w-50px"> سعر الاعلان</th>
+                                        <th class="min-w-50px">الاجمالي</th>
                                         <th class="min-w-100px">حالة الاعلان</th>
                                         <th class="min-w-100px text-end rounded-end px-5">العمليات</th>
                                     </tr>
@@ -73,6 +75,16 @@
                                             <td>
                                                 <span
                                                     class="badge badge-light-primary fs-7 fw-bold"> {{ $product_ad->end_at }}</span>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-light-info fs-7 fw-bold">
+                                                    {{$product_ad->price}} {{'شيكل'}}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-light-info fs-7 fw-bold">
+                                                    {{$product_ad->total}} {{'شيكل'}}
+                                                </span>
                                             </td>
                                             <td>
                                                 @if($product_ad->status == 'Active')

@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Api\Advertisement\ProductAdvertisementController;
 use App\Http\Controllers\Api\Advertisement\StoreAdvertisementController;
 use App\Http\Controllers\Api\Store\CategoryController;
 use App\Http\Controllers\Api\Store\Options\AttributeController;
@@ -85,6 +86,11 @@ Route::middleware(['api'])->group(function () {
     Route::get('store-advertisements-orders',[StoreAdvertisementController::class,'indexOrder'])->name('store-advertisements-orders');
     Route::post('store-advertisements-accepted/{id}',[StoreAdvertisementController::class,'orderAccepted'])->name('advertisement-store.accepted');
     Route::delete('store-advertisements-rejected/{id}',[StoreAdvertisementController::class,'orderRejected'])->name('advertisement-store.rejected');
+
+    Route::apiResource('product-advertisements',ProductAdvertisementController::class);
+    Route::get('product-advertisements-orders',[ProductAdvertisementController::class,'indexOrder'])->name('product-advertisements-orders');
+    Route::post('product-advertisements-accepted/{id}',[ProductAdvertisementController::class,'orderAccepted'])->name('advertisement-product.accepted');
+    Route::delete('product-advertisements-rejected/{id}',[ProductAdvertisementController::class,'orderRejected'])->name('advertisement-product.rejected');
 
     });
 });
