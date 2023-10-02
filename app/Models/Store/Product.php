@@ -29,7 +29,7 @@ class Product extends Model
         ];
 
 
-
+    protected $appends =[];
     public static function booted()
     {
         static::addGlobalScope('store' , new StoreScope());

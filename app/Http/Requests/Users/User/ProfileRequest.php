@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Users\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Laravel\Fortify\Rules\Password;
 
 class ProfileRequest extends FormRequest
 {
@@ -21,13 +22,16 @@ class ProfileRequest extends FormRequest
      */
     public function rules(): array
     {
+        $user = auth()->user();
         if ($this->method() =='PUT' || $this->method() == 'PATCH' ){
             return [
                 'image' => ['sometimes', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
+                'files.*' => ['sometimes', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
                 'name' => ['sometimes','string', 'between:2,100'],
+                'password'=>['nullable',new Password(),'confirmed'],
                 'first_name' => ['sometimes','string', 'between:2,100'],
                 'last_name' => ['sometimes','string', 'between:2,100'],
-                'email' => ['sometimes','string','email','max:100','unique:sellers,email','unique:users,email'],
+                'email' => ['sometimes','string','email','max:100',"unique:sellers,email,$user->id","unique:users,email,$user->id"],
                 'phone_number'=>['sometimes','numeric'],
                 'birthday'=>['sometimes','date', 'before:today'],
                 'gender'=>['sometimes','in:male,female'],
@@ -37,10 +41,13 @@ class ProfileRequest extends FormRequest
                 'state'=>['sometimes','string', 'between:2,50'],
                 'postal_code'=>['sometimes','string', 'between:2,20'],
                 'locale'=>['sometimes','string', 'between:2,10'],
+                'info'=>['sometimes','string','max:940000']
             ];
         }else{
             return [
                 'image' => ['required', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
+                'files.*' => ['required', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
+                'password'=>['nullable',new Password(),'confirmed'],
                 'first_name' => ['required','string', 'between:2,100'],
                 'last_name' => ['required','string', 'between:2,100'],
                 'email' => ['required','string','email','max:100','unique:sellers,email','unique:users,email'],
@@ -53,6 +60,8 @@ class ProfileRequest extends FormRequest
                 'state'=>['required','string', 'between:2,50'],
                 'postal_code'=>['required','string', 'between:2,20'],
                 'locale'=>['required','string', 'between:2,10'],
+                'info'=>['required','string','max:940000']
+
             ];
 
         }

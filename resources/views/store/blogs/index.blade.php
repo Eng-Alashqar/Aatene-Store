@@ -68,7 +68,7 @@
                                             </td>
                                             <td>
                                                 <div class="text-dark fw-bold text-hover-primary d-block mb-1 fs-6">
-                                                    {{ Str::limit($blog->content) }}</div>
+                                                    {!!  Str::limit($blog->content) !!}</div>
                                             </td>
                                             <td>
                                                     <span

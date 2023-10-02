@@ -15,7 +15,7 @@ class Profile extends Model
         'userable_id'
     ];
 
-    protected $fillable = ['first_name','last_name','birthday','gender','street_address','city','state','postal_code','country','locale',
+    protected $fillable = ['info','first_name','last_name','birthday','gender','street_address','city','state','postal_code','country','locale',
     ];
 
     public function userable()

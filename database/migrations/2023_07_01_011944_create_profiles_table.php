@@ -16,6 +16,7 @@ return new class extends Migration
             $table->morphs('userable');
             $table->string('first_name');
             $table->string('last_name');
+            $table->longText('info')->nullable();
             $table->date('birthday')->nullable();
             $table->enum('gender',['male','female'])->nullable();
             $table->string('street_address')->nullable();
