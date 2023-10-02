@@ -197,6 +197,7 @@
                     </x-slot>
                     <x-elements.sidebar-li-sub-menu route="dashboard.advertisements.index" title="اعلانات المتجر" />
                     <x-elements.sidebar-li-sub-menu route="dashboard.product-advertisements.index" title="إعلانات المنتج" />
+                    <x-elements.sidebar-li-sub-menu route="dashboard.products-list.index" title="اعلانات قائمة المنتجات "/>
                 </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
 

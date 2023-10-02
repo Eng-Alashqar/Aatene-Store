@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Advertisement\ProductAdvertisementController;
+use App\Http\Controllers\Advertisement\ProductListController;
 use App\Http\Controllers\Advertisement\StoreAdvertisementController;
 use App\Http\Controllers\MultimediaHub\BlogController;
 use App\Http\Controllers\MultimediaHub\JobController;
@@ -46,6 +47,7 @@ Route::prefix('/dashboard')->name('dashboard.')->middleware(['auth:seller'])->gr
 
     Route::resource('advertisements',StoreAdvertisementController::class);
     Route::resource('product-advertisements',ProductAdvertisementController::class);
+    Route::resource('products-list',ProductListController::class);
 
 
 });

@@ -246,7 +246,10 @@
                     </x-slot>
                     <x-elements.sidebar-li-sub-menu route="admin.product-advertisements.index" title="متابعة اعلانات المنتجات "/>
                     <x-elements.sidebar-li-sub-menu route="admin.product-advertisements.create" title="إضافة إعلان "/>
-                    <x-elements.sidebar-li-sub-menu route="admin.product-advertisements-orders" title="طلبات الاعلانات"/>
+                    <x-elements.sidebar-li-sub-menu route="admin.product-advertisements-orders" title="طلبات اعلانات المنتجات"/>
+                    <x-elements.sidebar-li-sub-menu route="admin.products-list.index" title="متابعة اعلانات قائمة المنتجات "/>
+                    <x-elements.sidebar-li-sub-menu route="admin.products-list-orders" title="طلبات اعلانات قائمة المنتجات"/>
+
                 </x-elements.sidebar-menu-item>
 
                 <x-elements.sidebar-menu-item lable="اسعار الاعلانات" index="admin.prices.index" create="admin.prices.index">

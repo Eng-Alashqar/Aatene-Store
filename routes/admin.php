@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Advertisement\PriceController;
 use App\Http\Controllers\Advertisement\ProductAdvertisementController;
+use App\Http\Controllers\Advertisement\ProductListController;
 use App\Http\Controllers\Advertisement\StoreAdvertisementController;
 use App\Http\Controllers\Chat\ConversationController;
 use App\Http\Controllers\Notification\AdminNotifyController;
@@ -40,6 +41,10 @@ Route::prefix('/administrator')->name('admin.')->middleware(['auth:admin'])->gro
     Route::post('store-advertisements-accept/{id}',[StoreAdvertisementController::class,'orderAccepted'])->name('advertisement-store.accept');
     Route::post('product-advertisements-accept/{id}',[ProductAdvertisementController::class,'orderAccepted'])->name('product-advertisement.accept');
     Route::resource('prices',PriceController::class);
+    Route::resource('products-list',ProductListController::class);
+    Route::post('products-list-accept/{id}',[ProductListController::class,'orderAccepted'])->name('products-list.accept');
+    Route::get('products-list-orders',[ProductListController::class,'indexOrder'])->name('products-list-orders');
+
     Route::get('chat',[ConversationController::class,'index'])->name('chat.index');
     Route::post('chat/search',[ConversationController::class,'search'])->name('chat.search');
     Route::get('chat/show/{id}',[ConversationController::class,'show'])->name('chat.show');
