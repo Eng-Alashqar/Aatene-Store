@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductAdvertisementResource;
 use App\Models\Advertisement\Price;
 use App\Models\Advertisement\ProductAdvertisement;
-use App\Models\Advertisement\StoreAdvertisement;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
