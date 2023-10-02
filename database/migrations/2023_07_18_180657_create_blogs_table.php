@@ -19,7 +19,7 @@ return new class extends Migration
             $table->boolean('is_published')->default(false);
             $table->timestamps();
 
-            $table->foreignId('seller_id')->nullable()->constrained('sellers')->cascadeOnDelete();
+            $table->foreignId('store_id')->constrained('stores')->cascadeOnDelete();
         });
     }
 
