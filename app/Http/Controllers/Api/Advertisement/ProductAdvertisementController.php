@@ -51,7 +51,7 @@ class ProductAdvertisementController extends Controller
         $data = $request->only(['product_id', 'start_at', 'end_at']);
         $validator = Validator::make($data, $roles);
         if (!$validator->fails()) {
-            $price = Price::query()->where('ad_type', '=', 'store')->first();
+            $price = Price::query()->where('ad_type', '=', 'product')->first();
             $data['price'] = $price->amount;
             $start_at = Carbon::make($request->get('start_at'));
             $end_at = Carbon::make($request->get('end_at'));
@@ -89,7 +89,7 @@ class ProductAdvertisementController extends Controller
         $data = $request->only(['product_id', 'start_at', 'end_at']);
         $validator = Validator::make($data, $roles);
         if (!$validator->fails()) {
-            $price = Price::query()->where('ad_type', '=', 'store')->first();
+            $price = Price::query()->where('ad_type', '=', 'product')->first();
             $start_at = Carbon::make($request->get('start_at'));
             $end_at = Carbon::make($request->get('end_at'));
             $day_num = $end_at->diffInDays($start_at);
