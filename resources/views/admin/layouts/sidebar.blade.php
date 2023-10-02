@@ -123,7 +123,6 @@
                         </i>
                     </x-slot>
                     <x-elements.sidebar-li-sub-menu route="admin.users.index" title="قائمة المستخدمين"/>
-                    <x-elements.sidebar-li-sub-menu route="admin.users.create" title="إضافة مستخدم "/>
 
                 </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
@@ -336,7 +335,7 @@
                 <!--begin:Menu item-->
                 <div class="menu-item">
                     <!--begin:Menu link-->
-                    <a class="menu-link" href="https://preview.keenthemes.com/metronic8/demo1/layout-builder.html">
+                    <a class="menu-link" href="{{route('admin.notification')}}">
                         <span class="menu-icon">
                             <i class="ki-duotone ki-notification fs-2">
                                 <i class="path1"></i>
@@ -353,7 +352,7 @@
                 <!--begin:Menu item-->
                 <div class="menu-item">
                     <!--begin:Menu link-->
-                    <a class="menu-link" href="https://preview.keenthemes.com/metronic8/demo1/layout-builder.html">
+                    <a class="menu-link" href="{{route('admin.index.noti')}}">
                         <span class="menu-icon">
                             <i class="ki-duotone ki-send fs-2">
                                 <i class="path1"></i>
@@ -386,16 +385,16 @@
                             <i class="path3"></i>
                         </i>
                     </x-slot>
-                    <x-elements.sidebar-li-sub-menu route="admin.categories.index" title="قائمة طلبات الدعم"/>
-                    <x-elements.sidebar-li-sub-menu route="admin.categories.create"
-                                                    title="قائمة الابلاغات والتقارير"/>
+{{--                    <x-elements.sidebar-li-sub-menu route="admin.categories.index" title="قائمة طلبات الدعم"/>--}}
+{{--                    <x-elements.sidebar-li-sub-menu route="admin.categories.create"--}}
+{{--                                                    title="قائمة الابلاغات والتقارير"/>--}}
                     <x-elements.sidebar-li-sub-menu route="admin.faqs.index" title=" اسئلة شائعة"/>
                 </x-elements.sidebar-menu-item>
                 <!--end:Menu item-->
                 <!--begin:Menu item-->
                 <div class="menu-item">
                     <!--begin:Menu link-->
-                    <a class="menu-link" href="https://preview.keenthemes.com/metronic8/demo1/layout-builder.html">
+                    <a class="menu-link" href="{{route('admin.settings.index')}}">
                         <span class="menu-icon">
                             <i class="ki-duotone ki-setting-2 fs-2">
                                 <i class="path1"></i>

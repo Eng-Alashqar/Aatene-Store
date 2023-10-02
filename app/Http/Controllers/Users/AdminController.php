@@ -15,6 +15,7 @@ class AdminController extends Controller
         $this->adminService = new AdminService;
         $this->roleService = new RoleService;
     }
+
     public function index()
     {
         $admins = $this->adminService->get();

@@ -1,4 +1,4 @@
-<form action="{{ route('admin.stores.index') }}">
+<form action="{{ route('admin.admins.index') }}">
     <div class="card-toolbar d-flex align-items-center">
         <!--begin::Input group-->
         <div class="position-relative w-lg-300px w-md-150px me-md-2">
@@ -48,7 +48,7 @@
                     <i class="path2"></i>
                     <i class="path3"></i>
                 </i>فلترة</button>
-            <a href="{{ route('admin.stores.index') }}" class="btn btn-sm btn-light-primary btn-icon fs-3 me-5"><i
+            <a href="{{ route('admin.admins.index') }}" class="btn btn-sm btn-light-primary btn-icon fs-3 me-5"><i
                     class="ki-duotone ki-cross-circle fs-2">
                     <i class="path1"></i>
                     <i class="path2"></i>

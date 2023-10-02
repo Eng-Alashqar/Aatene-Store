@@ -55,12 +55,41 @@
                                             <!--end::Info-->
                                         </div>
                                         <!--end::User-->
+                                        <div class="d-flex my-4">
 
+
+                                            <a href="{{route('dashboard.profile.edit',$user->id)}}"
+                                               class="btn btn-sm btn-primary me-3"
+                                            >تعديل</a>
+
+                                        </div>
                                     </div>
                                     <!--end::Title-->
 
                                 </div>
                                 <!--end::Info-->
+                            </div>
+                            <!--end::Details-->
+
+                        </div>
+                    </div>
+                    <!--end::Navbar-->
+                    <!--begin::Navbar-->
+                    <div class="card mb-5 mb-xl-10">
+                        <div class="card-body pt-9 pb-0">
+                            <!--begin::Details-->
+                            <div class="d-flex flex-wrap flex-sm-nowrap">
+
+                                @foreach($user->images as $image)
+                                    <!--begin: Pic-->
+                                    <div class="me-7 mb-4">
+                                        <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
+                                            <img src="{{$image}}" alt="image"/>
+                                        </div>
+                                    </div>
+                                    <!--end::Pic-->
+                                @endforeach
+
                             </div>
                             <!--end::Details-->
 
@@ -77,8 +106,8 @@
                             </div>
                             <!--end::Card title-->
                             <!--begin::Action-->
-{{--                            <a href="#"--}}
-{{--                               class="btn btn-sm btn-primary align-self-center">تعديل الملف الشخضي</a>--}}
+                            {{--                            <a href="#"--}}
+                            {{--                               class="btn btn-sm btn-primary align-self-center">تعديل الملف الشخضي</a>--}}
                             <!--end::Action-->
 
                         </div>
@@ -93,6 +122,18 @@
                                 <!--begin::Col-->
                                 <div class="col-lg-8">
                                     <span class="fw-bold fs-6 text-gray-800">{{$user->name}}</span>
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Row-->
+                            <!--begin::Row-->
+                            <div class="row mb-7">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 fw-semibold text-muted">الوصف</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">{{$user->profile->info}}</span>
                                 </div>
                                 <!--end::Col-->
                             </div>

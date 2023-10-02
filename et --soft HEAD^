@@ -1,0 +1,320 @@
+[33mcommit d17be9df24d9dcdac41de4e4e353adab0da19d2b[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Eng-Alashqar <133218898+Eng-Alashqar@users.noreply.github.com>
+Date:   Sun Sep 10 06:41:28 2023 +0300
+
+    refatoring jops,blogs,services and topics  and add profile page and some other....
+
+[33mcommit 0bd43a249ba817f70f50c4f61d13c8d538a06e33[m
+Author: Eng-Alashqar <133218898+Eng-Alashqar@users.noreply.github.com>
+Date:   Wed Sep 6 23:30:34 2023 +0300
+
+    fix name space in class
+
+[33mcommit d1599b1c47e29c823bbd07863bf56d5efb6040b4[m
+Author: Eng-Alashqar <133218898+Eng-Alashqar@users.noreply.github.com>
+Date:   Wed Sep 6 23:09:45 2023 +0300
+
+    fix name space in class
+
+[33mcommit 620ee50044c372683173b94782f1e701b7a7d749[m
+Author: Eng-Alashqar <133218898+Eng-Alashqar@users.noreply.github.com>
+Date:   Wed Sep 6 11:17:22 2023 +0300
+
+    add refresh token and set variants with attribute for product api and fix some errors in photo trait
+
+[33mcommit 5f5c9cc97cd26815e760869376d836810f47f9e8[m
+Author: Eng-Alashqar <133218898+Eng-Alashqar@users.noreply.github.com>
+Date:   Tue Sep 5 13:10:30 2023 +0300
+
+    add unique slug helper function, modify authintication controllers for api, refactor products and tags, modfiy api routes, create profile api for all users and modify has photo trait by adding apends attribute and hidden other attribute
+
+[33mcommit f5ddffa8c892087d53f349b17c4338c1af49fea3[m
+Author: Eng-Alashqar <133218898+Eng-Alashqar@users.noreply.github.com>
+Date:   Sun Aug 27 11:08:15 2023 +0300
+
+    fix rlation in store and seller
+
+[33mcommit 4e57992c28dab63b0c10b013996625038192cf41[m
+Author: Eng-Alashqar <133218898+Eng-Alashqar@users.noreply.github.com>
+Date:   Sun Aug 27 11:03:07 2023 +0300
+
+    fix categories api route fun
+
+[33mcommit 9d71400412d06987b49d9ff246e306fc9d0d9753[m
+Author: Eng-Alashqar <133218898+Eng-Alashqar@users.noreply.github.com>
+Date:   Sun Aug 27 10:57:59 2023 +0300
+
+    api refactoring and product create
+
+[33mcommit f26469b0b7463db2ba1fbcb5681781bc4b4e25b5[m
+Author: Eng-Alashqar <133218898+Eng-Alashqar@users.noreply.github.com>
+Date:   Tue Aug 22 06:55:44 2023 +0300
+
+    modified product operations and category model and arrange create page blade
+
+[33mcommit 642651cb578fa43da912bcede350c150e414fd57[m
+Author: Eng-Alashqar <133218898+Eng-Alashqar@users.noreply.github.com>
+Date:   Mon Aug 14 14:48:31 2023 +0300
+
+    chat show in dashboard for admin and some edit in produtc pages
+
+[33mcommit 56807fdfa96d887dde5a1dfc028c18ff6ba67242[m
+Author: Eng-Alashqar <133218898+Eng-Alashqar@users.noreply.github.com>
+Date:   Sat Aug 12 20:53:38 2023 +0300
+
+    product show and product update images fix
+
+[33mcommit 28aa2578f8f815cb93979304efe2a88da1a99d7f[m
+Author: Eng-Alashqar <133218898+Eng-Alashqar@users.noreply.github.com>
+Date:   Sat Aug 12 14:31:48 2023 +0300
+
+    edit checkbox in product edit-create page
+
+[33mcommit d8932a1bfdb17a8e1644e499b3f579a29c8613e2[m
+Author: Eng-Alashqar <133218898+Eng-Alashqar@users.noreply.github.com>
+Date:   Sat Aug 12 14:02:55 2023 +0300
+
+    product create and update and delete
+
+[33mcommit aa78d2b58d2db024eee9f90fa884ae9e09aaef10[m
+Author: Eng-Alashqar <133218898+Eng-Alashqar@users.noreply.github.com>
+Date:   Fri Aug 11 18:11:05 2023 +0300
+
+    product-create-delete
+
+[33mcommit 1bb710bc5ce5a022768a1b3e235542b1fab973f4[m
+Author: Eng-Alashqar <133218898+Eng-Alashqar@users.noreply.github.com>
+Date:   Thu Aug 10 18:44:51 2023 +0300
+
+    refactor my code delete repositories
+
+[33mcommit 4f3a1bdf15bc0ed2319d089e093889464cdff7bb[m
+Author: Eng-Alashqar <133218898+Eng-Alashqar@users.noreply.github.com>
+Date:   Wed Aug 9 21:20:10 2023 +0300
+
+    mearge code manually
+
+[33mcommit 8b0393a729073f63df439ef7be10da0691b8600b[m
+Author: Mohammad Alashqar <alashqar2002@gmail.com>
+Date:   Tue Aug 8 18:30:45 2023 +0300
+
+    resolve some problems in code in my code
+
+[33mcommit 2b6ed8fd4d04aafb1c7d9a628030eeaf72866887[m
+Merge: 9b82f04 1449aeb
+Author: Eng-Alashqar <133218898+Eng-Alashqar@users.noreply.github.com>
+Date:   Tue Aug 1 15:59:49 2023 +0300
+
+    Merge pull request #3 from Eng-Alashqar/Product-Topics-Jobs
+    
+    api + service + blog
+
+[33mcommit 1449aeb7c595c789a8a92d3913a34f18c3f79069[m[33m ([m[1;31morigin/Product-Topics-Jobs[m[33m)[m
+Merge: a0cfb30 9b82f04
+Author: Eng-Alashqar <133218898+Eng-Alashqar@users.noreply.github.com>
+Date:   Tue Aug 1 15:58:34 2023 +0300
+
+    Merge branch 'main' into Product-Topics-Jobs
+
+[33mcommit a0cfb305332965dd8dff13e84b88bf30ad06bfa3[m
+Author: Ibrahim-2022 <ibrahimalashqar056@gmail.com>
+Date:   Mon Jul 31 19:16:54 2023 +0300
+
+    category api
+
+[33mcommit 9b82f043db332e1584850bca1b09d2e0b23f907e[m
+Author: Mohammad Alashqar <alashqar2002@gmail.com>
+Date:   Mon Jul 31 15:42:30 2023 +0300
+
+    chat and some changes and jwt config and api aut
+
+[33mcommit 71707bb6bc1422a20b31f66c9316e0927d74a5fe[m
+Author: Ibrahim-2022 <ibrahimalashqar056@gmail.com>
+Date:   Mon Jul 31 12:10:52 2023 +0300
+
+    API secret, Favorites and Followers
+
+[33mcommit 0ca509c91f280ecda281324de199cf2d2fd0603f[m
+Author: Ibrahim-2022 <ibrahimalashqar056@gmail.com>
+Date:   Mon Jul 24 15:52:06 2023 +0300
+
+    service and blogs
+
+[33mcommit e6c350c55be02c55bab352e35a984ad4a4b5d2b7[m
+Author: Mohammad Alashqar <alashqar2002@gmail.com>
+Date:   Mon Jul 24 12:03:34 2023 +0300
+
+    install jwt , create service layour for authintication create guards for api , steup login and register for usersand sellers
+
+[33mcommit eab32a36835c9b2bf7bea6846faf529281368e35[m
+Author: Mohammad Alashqar <alashqar2002@gmail.com>
+Date:   Mon Jul 17 14:27:31 2023 +0300
+
+    setup and fix somethings befour ubload
+
+[33mcommit 9eba74b79a2afef02a2cdf182d81e8089fba4df5[m
+Author: Mohammad Alashqar <alashqar2002@gmail.com>
+Date:   Mon Jul 17 14:16:15 2023 +0300
+
+    change store master
+
+[33mcommit 2ec10b0019d82c6fc6d0a1c24f7e7f0e976bd2fa[m
+Merge: e97497f 644d266
+Author: Mohammad Alashqar <alashqar2002@gmail.com>
+Date:   Mon Jul 17 14:15:29 2023 +0300
+
+    Merge branch 'main' into Product-Topics-Jobs
+
+[33mcommit 644d2666ffdea95a371bca0237864fc6ccfc4603[m
+Author: Mohammad Alashqar <alashqar2002@gmail.com>
+Date:   Mon Jul 17 13:37:04 2023 +0300
+
+    admins management , responsize of tables , stores fixed , roles and permissions complete and some changes on factorys
+
+[33mcommit 3be4875ec261d5639ce2538f26c3af871ae555b4[m
+Author: Mohammad Alashqar <alashqar2002@gmail.com>
+Date:   Fri Jul 14 15:33:59 2023 +0300
+
+    sepreate users to three guards admin , seller , user also change some features in database migration , and so more..
+
+[33mcommit e97497fab1d15f8860d44cad54f64d92ff1213b6[m
+Author: Ibrahim-2022 <ibrahimalashqar056@gmail.com>
+Date:   Thu Jul 13 02:35:51 2023 +0300
+
+    wysiwyg and product status
+
+[33mcommit c64bf059a9c2fb6b427e501849cafa6125098b2c[m
+Author: Ibrahim-2022 <ibrahimalashqar056@gmail.com>
+Date:   Tue Jul 11 02:02:07 2023 +0300
+
+    edit and update
+
+[33mcommit 545c52fe82a6225bfedf0fabba20c5329717b77f[m
+Author: Ibrahim-2022 <ibrahimalashqar056@gmail.com>
+Date:   Mon Jul 10 19:35:01 2023 +0300
+
+    job completed
+
+[33mcommit eed8212019576ca2a953e3118cb0160cb8bd138a[m
+Author: Ibrahim-2022 <ibrahimalashqar056@gmail.com>
+Date:   Mon Jul 10 08:38:58 2023 +0300
+
+    fixes some issues related with product-topics-tops branch
+
+[33mcommit 7dd3d122837f86d25ea3bdf514359ba594fa013c[m
+Author: Ibrahim-2022 <ibrahimalashqar056@gmail.com>
+Date:   Mon Jul 10 06:48:06 2023 +0300
+
+    stashed changes
+
+[33mcommit 0358d204e496408b89fca3f7b07df3a32ac720c6[m
+Author: Ibrahim-2022 <ibrahimalashqar056@gmail.com>
+Date:   Mon Jul 10 06:27:27 2023 +0300
+
+    first commite on this branch
+
+[33mcommit 492d554db2d7f2766b8c027e1694c776c6f4e42d[m
+Merge: ff40fbf 83d5534
+Author: Eng-Alashqar <133218898+Eng-Alashqar@users.noreply.github.com>
+Date:   Sun Jul 9 17:54:09 2023 +0300
+
+    Merge pull request #1 from Eng-Alashqar/product-related
+    
+    Product related
+
+[33mcommit 83d553403bac19f93b95701c7ab6af504f0eb004[m
+Merge: 409b343 ff40fbf
+Author: Eng-Alashqar <133218898+Eng-Alashqar@users.noreply.github.com>
+Date:   Sun Jul 9 17:53:54 2023 +0300
+
+    Merge branch 'main' into product-related
+
+[33mcommit 409b34314b18acb8c9011461639efcb3ea67c1a9[m
+Author: Ibrahim-2022 <ibrahimalashqar056@gmail.com>
+Date:   Thu Jul 6 07:07:11 2023 +0300
+
+    APIs for store, category and products
+
+[33mcommit edb66018b5949723ba14865295554a7d55e19786[m
+Author: Ibrahim-2022 <ibrahimalashqar056@gmail.com>
+Date:   Thu Jul 6 00:45:47 2023 +0300
+
+    Comment, Coupon, Orders migrations and models
+
+[33mcommit 35598bb0fdec0bd942844663e3d50b16c3c86d93[m
+Author: Ibrahim-2022 <ibrahimalashqar056@gmail.com>
+Date:   Wed Jul 5 23:51:11 2023 +0300
+
+    some changes
+
+[33mcommit ff40fbf5d804fb5c97509d6b7e1fbf60a4eae8c4[m
+Author: Mohammad Alashqar <alashqar2002@gmail.com>
+Date:   Wed Jul 5 20:01:40 2023 +0300
+
+    add roles crud , changge on factorys and seeders , and fix somethings other
+
+[33mcommit 388c6b4fe513a908563e52539e64124bdf2c4d56[m
+Author: Ibrahim-2022 <ibrahimalashqar056@gmail.com>
+Date:   Wed Jul 5 18:49:34 2023 +0300
+
+    products crud
+
+[33mcommit 3f76f0d575788ac0a56d81fadc7b1562c970b661[m
+Author: Mohammad Alashqar <alashqar2002@gmail.com>
+Date:   Tue Jul 4 19:42:14 2023 +0300
+
+    Add Spatie Laravel Permissions package
+
+[33mcommit 46628bee5d2892d6fc8b8538be225872f6f45760[m
+Author: Mohammad Alashqar <alashqar2002@gmail.com>
+Date:   Tue Jul 4 18:08:55 2023 +0300
+
+    add region crud and add anthor features like date
+
+[33mcommit 3487af6427774180dc5c7f80450b900a56cc531b[m
+Author: Mohammad Alashqar <alashqar2002@gmail.com>
+Date:   Tue Jul 4 13:20:12 2023 +0300
+
+    add filters for stores
+
+[33mcommit 8c2c5cbd0d359841b290aa96f7d8eabf2654cd5f[m
+Author: Mohammad Alashqar <alashqar2002@gmail.com>
+Date:   Tue Jul 4 13:14:32 2023 +0300
+
+    complete categories setup ,add filters for it ,fex error in photo trait and setup most my need for sidebar items
+
+[33mcommit bf08a5f2fed84468f7f8f1e3d0412c5b832eaabe[m
+Author: Mohammad Alashqar <alashqar2002@gmail.com>
+Date:   Sun Jul 2 14:55:48 2023 +0300
+
+    setup logout logic
+
+[33mcommit 9cec113779e0c0595207387ad1d1f29d40714f32[m
+Author: Mohammad Alashqar <alashqar2002@gmail.com>
+Date:   Sun Jul 2 14:48:18 2023 +0300
+
+    complete store managment account and change some column on db and difine scopes ,relations, fix error photo opserver and make trait delete multiple photo
+
+[33mcommit 46e9a8e9a5c433a6bc742b592e0844284c501b43[m
+Author: Mohammad Alashqar <alashqar2002@gmail.com>
+Date:   Sat Jul 1 11:34:31 2023 +0300
+
+    change some features in store crud and add database tables and factories and seeders for them
+
+[33mcommit 034786b60ed1babbda9e2af1edebafb6e9d41baa[m
+Author: Mohammad Alashqar <alashqar2002@gmail.com>
+Date:   Thu Jun 29 15:14:46 2023 +0300
+
+    prepare some errors in store logic and create page build
+
+[33mcommit 4629bf79ee39ea8f27271dc70636250a5d407481[m
+Author: Mohammad Alashqar <alashqar2002@gmail.com>
+Date:   Thu Jun 29 02:48:13 2023 +0300
+
+    change migrations file , setup main paterns , setup media logic with trait and helpers and just
+
+[33mcommit 0af71fd1e85116886cbffbf75085ccc951301e77[m
+Author: Mohammad Alashqar <alashqar2002@gmail.com>
+Date:   Sat Jun 24 19:39:00 2023 +0300
+
+    setup project ,config  users type ,setup dashboard ui and authintcation

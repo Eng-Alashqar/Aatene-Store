@@ -46,4 +46,11 @@ class FollowerController extends Controller
 
         return response()->json(['followers' => $followers]);
     }
+
+    public function followersListForUser()
+    {
+        $followers = auth()->guard('user')->user()->followers;
+
+        return response()->json(['followers' => $followers]);
+    }
 }

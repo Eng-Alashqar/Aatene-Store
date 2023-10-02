@@ -22,7 +22,7 @@
                                 <!--begin::Header-->
                                 <div class="card-header border-0 ">
                                     <h3 class="card-title align-items-start flex-column">
-                                        <span class="card-label fw-bold fs-3 mb-1"> إضافة موظف</span>
+                                        <span class="card-label fw-bold fs-3 mb-1"> تعديل موظف</span>
                                     </h3>
                                 </div>
                                 <!--end::Header-->

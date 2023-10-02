@@ -20,7 +20,7 @@
                             method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
-                            <input type="hidden" name="files" id="files-uploaded">
+                            <input type="hidden" name="files" id="files-uploaded" >
                             @include('store.products._form-edit')
                         </form>
 

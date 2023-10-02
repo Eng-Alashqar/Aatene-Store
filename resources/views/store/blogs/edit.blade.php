@@ -13,7 +13,7 @@
                 <!--begin::Content container-->
                 <div id="kt_app_content_container" class="app-container container-xxl">
                     <form action="{{ route('dashboard.blogs.update', $blog->id) }}" method="POST"
-                          enctype="multipart/form-data">
+                          enctype="multipart/form-data" id="form-create">
                         @csrf
                         @method('PUT')
                         @include('store.blogs._form')
@@ -29,3 +29,4 @@
 
 
 </x-store.master>
+

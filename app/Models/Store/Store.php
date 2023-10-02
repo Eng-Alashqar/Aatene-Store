@@ -5,7 +5,11 @@ namespace App\Models\Store;
 use App\Models\Advertisement\StoreAdvertisement;
 use App\Models\Loyalty\Follower;
 use App\Models\Region;
+use App\Models\Users\Admin;
 use App\Models\Users\Seller;
+use App\Models\Users\User;
+use App\Notifications\CreateStore;
+use App\Notifications\RegisterSeller;
 use App\Observers\Store\StoreObserver;
 use App\Traits\HasPhoto;
 use Illuminate\Database\Eloquent\Builder;
@@ -81,9 +85,9 @@ class Store extends Model
         return $this->belongsToMany(Region::class, 'store_region', 'store_id', 'region_id', 'id', 'id');
     }
 
-    public function followers(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function followers()
     {
-        return $this->hasMany(Follower::class, 'store_id');
+        return $this->belongsToMany(User::class, 'followers'  , 'store_id' , 'user_id');
     }
 
     public function StoreAdvertisements(){
@@ -124,5 +128,14 @@ class Store extends Model
                 return 'التاج ';
                 break;
         }
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::created(function ($store){
+            $admin = Admin::find(1);
+            $admin->notify(new CreateStore($store));
+        });
     }
 }

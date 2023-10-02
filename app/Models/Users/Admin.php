@@ -4,19 +4,29 @@ namespace App\Models\Users;
 
 use App\Models\Chat\Conversation;
 use App\Models\Chat\Message;
-use App\Models\MultimediaHub\Topic;
 use App\Traits\HasPhoto;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class Admin extends User implements JWTSubject
 {
-    use HasFactory, HasApiTokens, HasPhoto, HasRoles;
+    use HasFactory, HasApiTokens, HasPhoto, HasRoles , Notifiable;
 
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'super_admin',
+        'role_name',
+        'last_active_at',
+        'status',
+        'phone_number',
+    ];
     public function initiatorConversations()
     {
         return $this->morphMany(Conversation::class,'initiator');
@@ -46,16 +56,6 @@ class Admin extends User implements JWTSubject
         $builder->where('id', '<>', $id);
     }
 
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'super_admin',
-        'role_name',
-        'last_active_at',
-        'status',
-        'phone_number',
-    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -111,11 +111,6 @@ class Admin extends User implements JWTSubject
                 return 'مستخدم في اجازة ';
                 break;
         }
-    }
-
-    public function topics()
-    {
-        return $this->morphMany(Topic::class,'userable');
     }
 
 }

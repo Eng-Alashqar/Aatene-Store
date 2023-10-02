@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Users\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Laravel\Fortify\Rules\Password;
 
 class ProfileRequest extends FormRequest
 {
@@ -21,32 +22,48 @@ class ProfileRequest extends FormRequest
      */
     public function rules(): array
     {
-        if ($this->method() === 'POST') {
+        $user = auth()->user();
+        if ($this->method() =='PUT' || $this->method() == 'PATCH' ){
             return [
-                'first_name' => ['required', 'string'],
-                'last_name' => ['required', 'string'],
-                'birthday' => ['required', 'date'],
-                'gender' => ['required', 'in:male,female'],
-                'street_address' => ['required', 'string'],
-                'city' => ['required', 'string'],
-                'state' => ['nullable', 'string'],
-                'postal_code' => ['nullable'],
-                'country' => ['required'],
-                'locale' => ['nullable'],
+                'image' => ['sometimes', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
+                'files.*' => ['sometimes', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
+                'name' => ['sometimes','string', 'between:2,100'],
+                'password'=>['nullable',new Password(),'confirmed'],
+                'first_name' => ['sometimes','string', 'between:2,100'],
+                'last_name' => ['sometimes','string', 'between:2,100'],
+                'email' => ['sometimes','string','email','max:100',"unique:sellers,email,$user->id","unique:users,email,$user->id"],
+                'phone_number'=>['sometimes','numeric'],
+                'birthday'=>['sometimes','date', 'before:today'],
+                'gender'=>['sometimes','in:male,female'],
+                'country'=>['sometimes','string', 'size:2'],
+                'street_address' => ['sometimes','string', 'between:2,100'],
+                'city' => ['sometimes','string', 'between:2,50'],
+                'state'=>['sometimes','string', 'between:2,50'],
+                'postal_code'=>['sometimes','string', 'between:2,20'],
+                'locale'=>['sometimes','string', 'between:2,10'],
+                'info'=>['sometimes','string','max:940000']
             ];
-        } else {
+        }else{
             return [
-                'first_name' => ['sometimes', 'required', 'string'],
-                'last_name' => ['sometimes', 'required', 'string'],
-                'birthday' => ['sometimes', 'required', 'date'],
-                'gender' => ['sometimes', 'required', 'in:male,female'],
-                'street_address' => ['sometimes', 'required', 'string'],
-                'city' => ['sometimes', 'required', 'string'],
-                'state' => ['nullable', 'string'],
-                'postal_code' => ['nullable'],
-                'country' => ['sometimes', 'required'],
-                'locale' => ['nullable'],
+                'image' => ['required', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
+                'files.*' => ['required', 'image', 'mimes:png,jpg,webm,jpeg,webp','max:1024576'],
+                'password'=>['nullable',new Password(),'confirmed'],
+                'first_name' => ['required','string', 'between:2,100'],
+                'last_name' => ['required','string', 'between:2,100'],
+                'email' => ['required','string','email','max:100','unique:sellers,email','unique:users,email'],
+                'phone_number'=>['required','numeric'],
+                'birthday'=>['required','date', 'before:today'],
+                'gender'=>['required','in:male,female'],
+                'country'=>['required','string', 'size:2'],
+                'street_address' => ['required','string', 'between:2,100'],
+                'city' => ['required','string', 'between:2,50'],
+                'state'=>['required','string', 'between:2,50'],
+                'postal_code'=>['required','string', 'between:2,20'],
+                'locale'=>['required','string', 'between:2,10'],
+                'info'=>['required','string','max:940000']
+
             ];
+
         }
     }
 }

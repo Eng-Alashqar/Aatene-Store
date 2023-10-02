@@ -1,19 +1,19 @@
 <!--begin::Input group-->
 <div class="my-5 fv-row">
-    <x-form.input-with-lable type="number" lable=" الكمية" name="quantity" placeholder="ادخل  الكمية" />
+    <x-form.input-with-lable type="number" lable=" الكمية" name="quantity" placeholder="ادخل  الكمية" value="{{old('quantity',$product->quantity)}}"/>
 </div>
 <!--end::Input group-->
 
 <!--begin::Input group-->
 <div class="mb-10 fv-row">
-    <x-form.input-with-lable lable=" السعر" name="price" placeholder="سعر المنتج" />
+    <x-form.input-with-lable lable=" السعر" name="price" placeholder="سعر المنتج" value="{{old('price',$product->price)}}"/>
 </div>
 <!--end::Input group-->
 
 <div class="mb-5">
     <label for="name" class="required form-label">هل المنتج متوفر</label>
     <div class="form-check form-switch form-check-custom form-check-success form-check-solid ">
-        <input class="form-check-input" name="is_available" type="checkbox" value="1" @checked(old('is_available'))
+        <input class="form-check-input" name="is_available" type="checkbox" value="1" @checked(old('is_available',$product->is_available))
             id="is_available_checkbox" />
         <input type="hidden" name="is_available" id="is_available_input" value="0">
         <label class="form-check-label" for="is_available">
@@ -25,7 +25,7 @@
 <div class="mb-5">
     <label for="name" class="required form-label">هل المنتج مميز</label>
     <div class="form-check form-switch form-check-custom form-check-success form-check-solid ">
-        <input class="form-check-input" name="featured" type="checkbox" value="1" @checked(old('featured'))
+        <input class="form-check-input" name="featured" type="checkbox" value="1" @checked(old('featured',$product->featured))
             id="featured_checkbox" />
         <input type="hidden" name="featured" id="featured_input" value="0">
 
