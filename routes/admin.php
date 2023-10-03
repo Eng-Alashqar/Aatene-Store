@@ -5,6 +5,7 @@ use App\Http\Controllers\Advertisement\PriceController;
 use App\Http\Controllers\Advertisement\ProductAdvertisementController;
 use App\Http\Controllers\Advertisement\ProductListController;
 use App\Http\Controllers\Advertisement\StoreAdvertisementController;
+use App\Http\Controllers\Advertisement\SubBannerController;
 use App\Http\Controllers\Chat\ConversationController;
 use App\Http\Controllers\Notification\AdminNotifyController;
 use App\Http\Controllers\SmsController;
@@ -53,6 +54,11 @@ Route::prefix('/administrator')->name('admin.')->middleware(['auth:admin'])->gro
     Route::resource('main-banners',MainBannerController::class);
     Route::post('main-banner-accept/{id}',[MainBannerController::class,'orderAccepted'])->name('main-banner.accept');
     Route::get('main-banner-orders',[MainBannerController::class,'indexOrder'])->name('main-banner-orders');
+
+    Route::resource('sub-banners',SubBannerController::class);
+    Route::post('sub-banner-accept/{id}',[SubBannerController::class,'orderAccepted'])->name('sub-banner.accept');
+    Route::get('sub-banner-orders',[SubBannerController::class,'indexOrder'])->name('sub-banner-orders');
+
 //    Route::post('main-banner/images/upload', [MainBannerController::class,'uploadImages'])->name('main-banner_images');
 //    Route::post('main-banner/images/delete', [MainBannerController::class,'deleteImage'])->name('main-banner_images.delete');
 

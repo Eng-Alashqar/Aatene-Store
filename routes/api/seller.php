@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Advertisement\MainBannerAdsController;
 use App\Http\Controllers\Api\Advertisement\ProductAdvertisementController;
 use App\Http\Controllers\Api\Advertisement\ProductListController;
 use App\Http\Controllers\Api\Advertisement\StoreAdvertisementController;
+use App\Http\Controllers\Api\Advertisement\SubBannerAdsController;
 use App\Http\Controllers\Api\Store\FollowerController;
 use App\Http\Controllers\Store\StoreController;
 use App\Http\Controllers\Api\CategoryController;
@@ -18,7 +19,5 @@ Route::middleware('auth:seller')->prefix('seller')->group(function () {
     Route::apiResource('product-advertisements',ProductAdvertisementController::class);
     Route::apiResource('products-list-ads',ProductListController::class);
     Route::apiResource('main-banners',MainBannerAdsController::class);
-
-
-
+    Route::apiResource('sub-banners',SubBannerAdsController::class);
 });

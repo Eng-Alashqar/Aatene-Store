@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Advertisement\PriceController;
 use App\Http\Controllers\Api\Advertisement\ProductAdvertisementController;
 use App\Http\Controllers\Api\Advertisement\ProductListController;
 use App\Http\Controllers\Api\Advertisement\StoreAdvertisementController;
+use App\Http\Controllers\Api\Advertisement\SubBannerAdsController;
 use App\Http\Controllers\Api\Store\CategoryController;
 use App\Http\Controllers\Api\Store\Options\AttributeController;
 use App\Http\Controllers\Api\Store\Options\AttributeVariantController;
@@ -110,6 +111,11 @@ Route::middleware(['api'])->group(function () {
         Route::get('main-banners-orders',[MainBannerAdsController::class,'indexOrder'])->name('main-banners-orders');
         Route::post('main-banners-accepted/{id}',[MainBannerAdsController::class,'orderAccepted'])->name('main-banners.accepted');
         Route::delete('main-banners-rejected/{id}',[MainBannerAdsController::class,'orderRejected'])->name('main-banners.rejected');
+
+        Route::apiResource('sub-banners',SubBannerAdsController::class);
+        Route::get('sub-banners-orders',[SubBannerAdsController::class,'indexOrder'])->name('sub-banners-orders');
+        Route::post('sub-banners-accepted/{id}',[SubBannerAdsController::class,'orderAccepted'])->name('sub-banners.accepted');
+        Route::delete('sub-banners-rejected/{id}',[SubBannerAdsController::class,'orderRejected'])->name('sub-banners.rejected');
 
 
     });

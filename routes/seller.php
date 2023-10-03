@@ -4,6 +4,7 @@ use App\Http\Controllers\Advertisement\MainBannerController;
 use App\Http\Controllers\Advertisement\ProductAdvertisementController;
 use App\Http\Controllers\Advertisement\ProductListController;
 use App\Http\Controllers\Advertisement\StoreAdvertisementController;
+use App\Http\Controllers\Advertisement\SubBannerController;
 use App\Http\Controllers\MultimediaHub\BlogController;
 use App\Http\Controllers\MultimediaHub\JobController;
 use App\Http\Controllers\MultimediaHub\ServiceController;
@@ -50,6 +51,8 @@ Route::prefix('/dashboard')->name('dashboard.')->middleware(['auth:seller'])->gr
     Route::resource('product-advertisements',ProductAdvertisementController::class);
     Route::resource('products-list',ProductListController::class);
     Route::resource('main-banners',MainBannerController::class);
+    Route::resource('sub-banners',SubBannerController::class);
+
 
 
 });
