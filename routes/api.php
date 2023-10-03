@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Api\Advertisement\PriceController;
 use App\Http\Controllers\Api\Advertisement\ProductAdvertisementController;
+use App\Http\Controllers\Api\Advertisement\ProductListController;
 use App\Http\Controllers\Api\Advertisement\StoreAdvertisementController;
 use App\Http\Controllers\Api\Store\CategoryController;
 use App\Http\Controllers\Api\Store\Options\AttributeController;
@@ -98,6 +99,12 @@ Route::middleware(['api'])->group(function () {
         Route::get('product-advertisements-orders',[ProductAdvertisementController::class,'indexOrder'])->name('product-advertisements-orders');
         Route::post('product-advertisements-accepted/{id}',[ProductAdvertisementController::class,'orderAccepted'])->name('advertisement-product.accepted');
         Route::delete('product-advertisements-rejected/{id}',[ProductAdvertisementController::class,'orderRejected'])->name('advertisement-product.rejected');
+
+        Route::apiResource('products-list-ads',ProductListController::class);
+        Route::get('products-list-orders',[ProductListController::class,'indexOrder'])->name('products-list-orders');
+        Route::post('products-list-accepted/{id}',[ProductListController::class,'orderAccepted'])->name('products-list.accepted');
+        Route::delete('products-list-rejected/{id}',[ProductListController::class,'orderRejected'])->name('products-list.rejected');
+
 
     });
 });
