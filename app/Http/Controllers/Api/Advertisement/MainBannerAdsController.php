@@ -38,9 +38,15 @@ class MainBannerAdsController extends Controller
             'store_id' =>   'required|int|exists:stores,id',
             'start_at' =>   'required|date',
             'end_at'   =>   'required|date',
-            'image.*'    =>   'required|image',
+            'image.*'  =>   'required|image|array|between:1,5',
         ];
         $data   =   $request->only(['store_id','start_at','end_at']);
+        if ($request->hasFile('images')) {
+            $imageCount = count($request->file('images'));
+            if ($imageCount > 5) {
+                return sendResponse(false, 'يجب رفع 5 صور أو اقل  فقط.');
+            }
+        }
         $validator = Validator::make($data, $roles);
         if (!$validator->fails()) {
             $price  = Price::query()->where('ad_type','=','main_banner')->first();
@@ -80,9 +86,15 @@ class MainBannerAdsController extends Controller
             'store_id' =>   'required|int|exists:stores,id',
             'start_at' =>   'required|date',
             'end_at'   =>   'required|date',
-            'image'    =>   'required|image',
+            'image.*'    =>   'required|image',
         ];
         $data   =   $request->only(['store_id','start_at','end_at','total']);
+        if ($request->hasFile('images')) {
+            $imageCount = count($request->file('images'));
+            if ($imageCount > 5) {
+                return sendResponse(false, 'يجب رفع 5 صور أو اقل  فقط.');
+            }
+        }
         $validator = Validator::make($data, $roles);
         if (!$validator->fails()) {
             $price  = Price::query()->where('ad_type','=','main_banner')->first();
