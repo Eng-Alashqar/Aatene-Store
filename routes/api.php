@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Api\Advertisement\MainBannerAdsController;
 use App\Http\Controllers\Api\Advertisement\PriceController;
 use App\Http\Controllers\Api\Advertisement\ProductAdvertisementController;
 use App\Http\Controllers\Api\Advertisement\ProductListController;
@@ -104,6 +105,11 @@ Route::middleware(['api'])->group(function () {
         Route::get('products-list-orders',[ProductListController::class,'indexOrder'])->name('products-list-orders');
         Route::post('products-list-accepted/{id}',[ProductListController::class,'orderAccepted'])->name('products-list.accepted');
         Route::delete('products-list-rejected/{id}',[ProductListController::class,'orderRejected'])->name('products-list.rejected');
+
+        Route::apiResource('main-banners',MainBannerAdsController::class);
+        Route::get('main-banners-orders',[MainBannerAdsController::class,'indexOrder'])->name('main-banners-orders');
+        Route::post('main-banners-accepted/{id}',[MainBannerAdsController::class,'orderAccepted'])->name('main-banners.accepted');
+        Route::delete('main-banners-rejected/{id}',[MainBannerAdsController::class,'orderRejected'])->name('main-banners.rejected');
 
 
     });

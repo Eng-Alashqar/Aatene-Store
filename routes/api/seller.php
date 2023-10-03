@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Advertisement\MainBannerAdsController;
 use App\Http\Controllers\Api\Advertisement\ProductAdvertisementController;
 use App\Http\Controllers\Api\Advertisement\ProductListController;
 use App\Http\Controllers\Api\Advertisement\StoreAdvertisementController;
@@ -16,6 +17,7 @@ Route::middleware('auth:seller')->prefix('seller')->group(function () {
     Route::apiResource('store-advertisements',StoreAdvertisementController::class);
     Route::apiResource('product-advertisements',ProductAdvertisementController::class);
     Route::apiResource('products-list-ads',ProductListController::class);
+    Route::apiResource('main-banners',MainBannerAdsController::class);
 
 
 
