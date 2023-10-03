@@ -62,7 +62,7 @@ class ProductAdvertisementController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'product_id' =>   'required|int|exists:stores,id',
+            'product_id' =>   'required|int|exists:products,id',
             'start_at' =>   'required|date',
             'end_at'   =>   'required|date',
         ]);
@@ -114,7 +114,7 @@ class ProductAdvertisementController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'product_id' => 'required|int|exists:stores,id',
+            'product_id' => 'required|int|exists:products,id',
             'start_at' => 'required|date',
             'end_at' => 'required|date',
         ]);
