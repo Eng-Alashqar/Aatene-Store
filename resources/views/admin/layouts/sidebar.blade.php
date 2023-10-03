@@ -229,7 +229,9 @@
                     </x-slot>
                     <x-elements.sidebar-li-sub-menu route="admin.advertisements.index" title="متابعة اعلانات المتاجر "/>
                     <x-elements.sidebar-li-sub-menu route="admin.advertisements.create" title="إضافة إعلان "/>
-                    <x-elements.sidebar-li-sub-menu route="admin.advertisements-orders" title="طلبات الاعلانات"/>
+                    <x-elements.sidebar-li-sub-menu route="admin.advertisements-orders" title="طلبات اعلانات المتاجر"/>
+                    <x-elements.sidebar-li-sub-menu route="admin.main-banners.index" title="متابعة اعلانات البنر الرئيسي "/>
+                    <x-elements.sidebar-li-sub-menu route="admin.main-banner-orders" title="طلبات اعلانات البنر الرئيسي"/>
                 </x-elements.sidebar-menu-item>
                 <x-elements.sidebar-menu-item lable="إدارة اعلانات المنتجات  " index="admin.product-advertisements.index" create="admin.product-advertisements.create">
                     <x-slot name="icon">

@@ -139,9 +139,13 @@
             toastr.error("{{ $error }}");
             @endforeach
     </script>
-      <script>
+    <script>
         @if (session()->has('notification'))
-            toastr.success("{{ session('notification') }}");
+        toastr.success("{{ session('notification') }}");
+        @endif
+
+        @if (session()->has('notification-error'))
+        toastr.error("{{ session('notification-error') }}");
         @endif
     </script>
     <!--end::Custom Javascript-->

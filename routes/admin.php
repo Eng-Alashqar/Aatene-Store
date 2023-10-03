@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Advertisement\MainBannerController;
 use App\Http\Controllers\Advertisement\PriceController;
 use App\Http\Controllers\Advertisement\ProductAdvertisementController;
 use App\Http\Controllers\Advertisement\ProductListController;
@@ -34,16 +35,28 @@ Route::prefix('/administrator')->name('admin.')->middleware(['auth:admin'])->gro
     Route::resource('permissions',RegionController::class);
     Route::resource('faqs',FaqsController::class);
     Route::resource('admins',AdminController::class);
+
     Route::resource('advertisements',StoreAdvertisementController::class);
-    Route::resource('product-advertisements',ProductAdvertisementController::class);
-    Route::get('advertisements-orders',[StoreAdvertisementController::class,'indexOrder'])->name('advertisements-orders');
-    Route::get('product-advertisements-orders',[ProductAdvertisementController::class,'indexOrder'])->name('product-advertisements-orders');
     Route::post('store-advertisements-accept/{id}',[StoreAdvertisementController::class,'orderAccepted'])->name('advertisement-store.accept');
+    Route::get('advertisements-orders',[StoreAdvertisementController::class,'indexOrder'])->name('advertisements-orders');
+
+    Route::resource('product-advertisements',ProductAdvertisementController::class);
+    Route::get('product-advertisements-orders',[ProductAdvertisementController::class,'indexOrder'])->name('product-advertisements-orders');
     Route::post('product-advertisements-accept/{id}',[ProductAdvertisementController::class,'orderAccepted'])->name('product-advertisement.accept');
+
     Route::resource('prices',PriceController::class);
+
     Route::resource('products-list',ProductListController::class);
     Route::post('products-list-accept/{id}',[ProductListController::class,'orderAccepted'])->name('products-list.accept');
     Route::get('products-list-orders',[ProductListController::class,'indexOrder'])->name('products-list-orders');
+
+    Route::resource('main-banners',MainBannerController::class);
+    Route::post('main-banner-accept/{id}',[MainBannerController::class,'orderAccepted'])->name('main-banner.accept');
+    Route::get('main-banner-orders',[MainBannerController::class,'indexOrder'])->name('main-banner-orders');
+//    Route::post('main-banner/images/upload', [MainBannerController::class,'uploadImages'])->name('main-banner_images');
+//    Route::post('main-banner/images/delete', [MainBannerController::class,'deleteImage'])->name('main-banner_images.delete');
+
+
 
     Route::get('chat',[ConversationController::class,'index'])->name('chat.index');
     Route::post('chat/search',[ConversationController::class,'search'])->name('chat.search');
