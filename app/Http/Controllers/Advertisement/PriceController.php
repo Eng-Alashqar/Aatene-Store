@@ -45,7 +45,7 @@ class PriceController extends Controller
         if ($price) {
             return redirect()->back()->with(['notification' => 'تمت العملية بنجاح']);
         } else {
-            return redirect()->back()->with(['notification' => 'فشلت العملية !']);
+            return redirect()->back()->with(['notification-error' => 'فشلت العملية !']);
         }
     }
 
@@ -87,7 +87,7 @@ class PriceController extends Controller
         if ($price) {
             return redirect()->back()->with(['notification' => 'تمت العملية بنجاح']);
         } else {
-            return redirect()->back()->with(['notification' => 'فشلت العملية !']);
+            return redirect()->back()->with(['notification-error' => 'فشلت العملية !']);
         }
     }
 
