@@ -22,11 +22,12 @@ class StoreAdvertisementController extends Controller
     public function index()
     {
         if (Auth::guard('admin')->check()){
-            $store_advertisement = StoreAdvertisement::query()->latest()->get();
+            $store_advertisement = StoreAdvertisement::query()->with('store')->latest()->get();
             return sendResponse(true, 'success',StoreAdvertisementResource::collection($store_advertisement));
 
         }elseif (Auth::guard('seller')->check()){
             $store_advertisement = StoreAdvertisement::query()
+                ->with('store')
                 ->where('store_id',auth()->user()->store_id)
                 ->where('status','=','Active')
                 ->latest()
@@ -38,7 +39,7 @@ class StoreAdvertisementController extends Controller
 
     public function indexOrder()
     {
-        $store_advertisement = StoreAdvertisement::query()->where('status','=','InActive')->latest()->get();
+        $store_advertisement = StoreAdvertisement::query()->with('store')->where('status','=','InActive')->latest()->get();
 
         return sendResponse(true, 'success',StoreAdvertisementResource::collection($store_advertisement));
     }
