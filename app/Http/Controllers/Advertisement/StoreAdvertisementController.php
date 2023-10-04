@@ -19,12 +19,12 @@ class StoreAdvertisementController extends Controller
     {
         if (Auth::guard('admin')->check()){
             $count = (int) request()->query('count') ?? 7;
-            $store_advertisements=StoreAdvertisement::query()->latest()->paginate($count);
+            $store_advertisements=StoreAdvertisement::query()->with('store')->latest()->paginate($count);
             return view('admin.advertisements.store.index',compact('store_advertisements','count'));
 
         }elseif (Auth::guard('seller')->check()){
             $count = (int) request()->query('count') ?? 7;
-            $store_advertisements=StoreAdvertisement::query()->where('store_id', auth()->user()->store_id)->latest()->paginate($count);
+            $store_advertisements=StoreAdvertisement::query()->with('store')->where('store_id', auth()->user()->store_id)->latest()->paginate($count);
             return view('store.advertisements.store.index',compact('store_advertisements','count'));
         }
 
@@ -32,7 +32,7 @@ class StoreAdvertisementController extends Controller
     public function indexOrder()
     {
         $count = (int) request()->query('count') ?? 7;
-        $store_advertisements=StoreAdvertisement::query()->where('status','=','InActive')->latest()->paginate($count);
+        $store_advertisements=StoreAdvertisement::query()->with('store')->where('status','=','InActive')->latest()->paginate($count);
         return view('admin.advertisements.orders.index',compact('store_advertisements','count'));
     }
     /**
