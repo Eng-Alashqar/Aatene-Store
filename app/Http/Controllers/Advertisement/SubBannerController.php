@@ -17,13 +17,13 @@ class SubBannerController extends Controller
         if (Auth::guard('admin')->check()) {
 
             $count = (int)request()->query('count') ?? 7;
-            $sub_banner_ads = SubBanner::query()->latest()->paginate($count);
+            $sub_banner_ads = SubBanner::query()->with('store')->latest()->paginate($count);
             return view('admin.advertisements.banners.sub.index', compact('sub_banner_ads'));
 
         } elseif (Auth::guard('seller')->check()) {
 
             $count = (int)request()->query('count') ?? 7;
-            $sub_banner_ads = SubBanner::query()->where('store_id',auth()->user()->store_id)->latest()->paginate($count);
+            $sub_banner_ads = SubBanner::query()->with('store')->where('store_id',auth()->user()->store_id)->latest()->paginate($count);
             return view('store.advertisements.banners.sub.index', compact('sub_banner_ads'));
         }
 
@@ -32,7 +32,7 @@ class SubBannerController extends Controller
     public function indexOrder()
     {
         $count = (int) request()->query('count') ?? 7;
-        $sub_banner_ads=SubBanner::query()->where('status','=','InActive')->latest()->paginate($count);
+        $sub_banner_ads=SubBanner::query()->with('store')->where('status','=','InActive')->latest()->paginate($count);
         return view('admin.advertisements.banners.sub.orders.index',compact('sub_banner_ads'));
     }
 
