@@ -16,19 +16,19 @@ class SubBannerAdsController extends Controller
     public function index()
     {
         if (Auth::guard('admin')->check()) {
-            $sub_banner_ads = SubBanner::query()->latest()->get();
+            $sub_banner_ads = SubBanner::query()->with('store')->latest()->get();
             return sendResponse(true,'success',SubBannerResource::collection($sub_banner_ads));
 
         } elseif (Auth::guard('seller')->check()) {
 
-            $sub_banner_ads = SubBanner::query()->where('store_id',auth()->user()->store_id)->latest()->get();
+            $sub_banner_ads = SubBanner::query()->with('store')->where('store_id',auth()->user()->store_id)->latest()->get();
             return sendResponse(true,'success',SubBannerResource::collection($sub_banner_ads));
         }
 
     }
     public function indexOrder()
     {
-        $sub_banner_ads=SubBanner::query()->where('status','=','InActive')->latest()->get();
+        $sub_banner_ads=SubBanner::query()->with('store')->where('status','=','InActive')->latest()->get();
         return sendResponse(true,'success',SubBannerResource::collection($sub_banner_ads));
     }
 
