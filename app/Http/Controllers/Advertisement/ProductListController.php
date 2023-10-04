@@ -16,7 +16,7 @@ class ProductListController extends Controller
     {
         if (Auth::guard('admin')->check()) {
             $count = (int)request()->query('count') ?? 7;
-            $products_list_ads = ProductListAds::query()->latest()->paginate($count);
+            $products_list_ads = ProductListAds::query()->with('category')->latest()->paginate($count);
             return view('admin.advertisements.product.products-list.index', compact('products_list_ads'));
 
         } elseif (Auth::guard('seller')->check()) {
@@ -34,7 +34,7 @@ class ProductListController extends Controller
     public function indexOrder()
     {
         $count = (int) request()->query('count') ?? 7;
-        $products_list_ads=ProductListAds::query()->where('status','=','InActive')->latest()->paginate($count);
+        $products_list_ads=ProductListAds::query()->with('category')->where('status','=','InActive')->latest()->paginate($count);
         return view('admin.advertisements.product.products-list.orders.index',compact('products_list_ads'));
     }
 
