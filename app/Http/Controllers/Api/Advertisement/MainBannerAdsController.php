@@ -16,19 +16,19 @@ class MainBannerAdsController extends Controller
     public function index()
     {
         if (Auth::guard('admin')->check()) {
-            $main_banner_ads = MainBanner::query()->latest()->get();
+            $main_banner_ads = MainBanner::query()->with('store')->latest()->get();
          return sendResponse(true,'success',MainBannerResource::collection($main_banner_ads));
 
         } elseif (Auth::guard('seller')->check()) {
 
-            $main_banner_ads = MainBanner::query()->where('store_id',auth()->user()->store_id)->latest()->get();
+            $main_banner_ads = MainBanner::query()->with('store')->where('store_id',auth()->user()->store_id)->latest()->get();
             return sendResponse(true,'success',MainBannerResource::collection($main_banner_ads));
         }
 
     }
     public function indexOrder()
     {
-        $main_banner_ads=MainBanner::query()->where('status','=','InActive')->latest()->get();
+        $main_banner_ads=MainBanner::query()->with('store')->where('status','=','InActive')->latest()->get();
         return sendResponse(true,'success',MainBannerResource::collection($main_banner_ads));
     }
 
