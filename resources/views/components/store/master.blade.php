@@ -143,6 +143,9 @@
         @if (session()->has('notification'))
             toastr.success("{{ session('notification') }}");
         @endif
+        @if (session()->has('notification-error'))
+        toastr.error("{{ session('notification-error') }}");
+          @endif
     </script>
     @stack('scripts')
     <!--end::Javascript-->
