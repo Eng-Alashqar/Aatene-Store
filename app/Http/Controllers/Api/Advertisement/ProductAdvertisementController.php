@@ -20,11 +20,11 @@ class ProductAdvertisementController extends Controller
     {
         if (Auth::guard('admin')->check()) {
 
-            $product_adv = ProductAdvertisement::query()->latest()->get();
+            $product_adv = ProductAdvertisement::query()->with('product')->latest()->get();
             return sendResponse(true, 'success', ProductAdvertisementResource::collection($product_adv));
 
         } elseif (Auth::guard('seller')->check()) {
-            $product_adv = ProductAdvertisement::query()->where('status', '=', 'Active')->latest()->get();
+            $product_adv = ProductAdvertisement::query()->with('product')->where('status', '=', 'Active')->latest()->get();
             return sendResponse(true, 'success', ProductAdvertisementResource::collection($product_adv));
         }
 
@@ -32,7 +32,7 @@ class ProductAdvertisementController extends Controller
 
     public function indexOrder()
     {
-        $product_adv = ProductAdvertisement::query()->where('status', '=', 'InActive')->latest()->get();
+        $product_adv = ProductAdvertisement::query()->with('product')->where('status', '=', 'InActive')->latest()->get();
         return sendResponse(true, 'success', ProductAdvertisementResource::collection($product_adv));
 
 
