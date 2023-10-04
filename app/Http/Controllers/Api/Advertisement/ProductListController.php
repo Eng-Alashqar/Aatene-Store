@@ -16,7 +16,7 @@ class ProductListController extends Controller
     public function index()
     {
         if (Auth::guard('admin')->check()) {
-            $products_list_ads = ProductListAds::query()->latest()->get();
+            $products_list_ads = ProductListAds::query()->with('category')->latest()->get();
           return sendResponse(true,'success',ProductListAdsResource::collection($products_list_ads));
 
         } elseif (Auth::guard('seller')->check()) {
@@ -31,7 +31,7 @@ class ProductListController extends Controller
 
     public function indexOrder()
     {
-        $products_list_ads = ProductListAds::query()->where('status', '=', 'InActive')->latest()->get();
+        $products_list_ads = ProductListAds::query()->with('category')->where('status', '=', 'InActive')->latest()->get();
         return sendResponse(true, 'success', ProductListAdsResource::collection($products_list_ads));
     }
 
