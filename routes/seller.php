@@ -4,6 +4,7 @@ use App\Http\Controllers\MultimediaHub\BlogController;
 use App\Http\Controllers\MultimediaHub\JobController;
 use App\Http\Controllers\MultimediaHub\ServiceController;
 use App\Http\Controllers\MultimediaHub\TopicController;
+use App\Http\Controllers\Notification\SellerNotificationController;
 use App\Http\Controllers\Store\ProductController;
 use App\Http\Controllers\Store\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -31,5 +32,14 @@ Route::prefix('/dashboard')->name('dashboard.')->middleware(['auth:seller'])->gr
     Route::resource('blogs', BlogController::class);
 
     Route::get('orders', [App\Http\Controllers\Store\OrderController::class, 'index'])->name('orders.index');
+
+
+    Route::get("index-noti", [SellerNotificationController::class, 'index'])->name('index.noti');
+    Route::get("create-noti", [SellerNotificationController::class , 'create'])->name('create.noti');
+    Route::post('store-noti' , [SellerNotificationController::class , 'store'])->name('store.noti');
+    Route::post('restore-noti/{id}' , [SellerNotificationController::class , 'restore'])->name('restore.noti');
+    Route::post('delete-noti/{id}' , [SellerNotificationController::class , 'forceDelete'])->name('delete.noti');
+
+
 
 });

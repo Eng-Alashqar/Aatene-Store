@@ -2,6 +2,7 @@
 
 namespace App\Models\Feedback;
 
+use App\Models\Report;
 use App\Models\Store\Product;
 use App\Models\Users\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,5 +20,15 @@ class Comment extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function reports()
+    {
+        return $this->morphMany(Report::class , 'reportable');
+    }
+
+    public function report()
+    {
+        return $this->morphOne(Report::class , 'reportable');
     }
 }

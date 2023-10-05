@@ -4,6 +4,7 @@ namespace App\Models\Store;
 
 use App\Models\Loyalty\Follower;
 use App\Models\Region;
+use App\Models\Report;
 use App\Models\Users\Admin;
 use App\Models\Users\Seller;
 use App\Models\Users\User;
@@ -132,5 +133,14 @@ class Store extends Model
             $admin = Admin::find(1);
             $admin->notify(new CreateStore($store));
         });
+    }
+
+    public function reports()
+    {
+        return $this->morphMany(Report::class , 'reportable');
+    }
+    public function report()
+    {
+        return $this->morphOne(Report::class , 'reportable');
     }
 }

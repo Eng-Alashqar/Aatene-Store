@@ -2,6 +2,7 @@
 
 namespace App\Models\MultimediaHub;
 
+use App\Models\Report;
 use App\Traits\HasPhoto;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -29,5 +30,15 @@ class Job extends Model
                 ->orWhere('deadline','like',"%$value%");
 
         });
+    }
+
+    public function reports()
+    {
+        return $this->morphMany(Report::class , 'reportable');
+    }
+
+    public function report()
+    {
+        return $this->morphOne(Report::class , 'reportable');
     }
 }

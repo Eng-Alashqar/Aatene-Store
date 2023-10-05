@@ -6,6 +6,7 @@ namespace App\Models\Users;
 
 use App\Models\Chat\Conversation;
 use App\Models\Chat\Message;
+use App\Models\Report;
 use App\Models\Store\Favorite;
 use App\Models\Profile;
 use App\Models\Store\Store;
@@ -117,4 +118,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->belongsToMany(Store::class, 'followers'  , 'user_id' , 'store_id');
     }
+
+    public function reports(){
+        return $this->hasMany(Report::class);
+    }
+
 }

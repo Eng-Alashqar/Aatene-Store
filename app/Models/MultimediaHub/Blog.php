@@ -2,6 +2,7 @@
 
 namespace App\Models\MultimediaHub;
 
+use App\Models\Report;
 use App\Traits\HasPhoto;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,4 +23,15 @@ class Blog extends Model
                 ->orWhere('content','like',"%$value%");
         });
     }
+
+    public function reports()
+    {
+        $this->morphMany(Report::class , 'reportable');
+    }
+
+    public function report()
+    {
+        $this->morphOne(Report::class , 'reportable');
+    }
+
 }

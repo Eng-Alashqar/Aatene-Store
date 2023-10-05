@@ -2,6 +2,7 @@
 
 namespace App\Models\MultimediaHub;
 
+use App\Models\Report;
 use App\Models\Store\Category;
 use App\Models\Scopes\StoreScope;
 use App\Models\Store\Store;
@@ -50,4 +51,15 @@ class Service extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function reports()
+    {
+        return $this->morphMany(Report::class , 'reportable');
+    }
+
+    public function report()
+    {
+        return $this->morphOne(Report::class , 'reportable');
+    }
+
 }

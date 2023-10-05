@@ -1,4 +1,4 @@
-<x-admin.master>
+<x-store.master>
     <!--end::Image input placeholder-->
     <!--begin::Main-->
     <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
@@ -13,7 +13,7 @@
                 <!--begin::Content container-->
                 <div id="kt_app_content_container" class="app-container container-xxl">
                     {{-- <x-error-show-list /> --}}
-                    <form class="form d-flex flex-column flex-lg-row" id="my-form" action="{{ route('admin.store.noti') }}"
+                    <form class="form d-flex flex-column flex-lg-row" id="my-form" action="{{ route('dashboard.store.noti') }}"
                           method="POST" enctype="multipart/form-data">
                         @csrf
                         <!--begin::Aside column-->
@@ -91,53 +91,16 @@
                                         placeholder="اختر نوع الاشعار">
                                             <option disabled selected value="#">اختار العميل :</option>
 
-                                        @foreach($users as $user)
-                                            <option value="{{$user->id}}">{{$user->name}}</option>
+                                        @foreach($users as $id => $name)
+                                            <option value="{{$id}}">{{$name}}</option>
                                             @endforeach
                                         </select>
                                         <p id="users-select"> تم اختيار :  </p>
                                         <button class="badge badge-circle badge-light text-danger border-transparent" onclick="disSelect('users')" type="button">x</button>
+                                        <button class="badge badge-circle badge-light text-success border-transparent" onclick="selectAll('users')" type="button">الكل</button>
                                     </div>
 
 
-
-                                    <div class="mb-5">
-                                        <x-form.lable lable="ارسال لمتابعين المتجر" />
-
-                                        <select data-control="select2" id="followers" onchange="selecting('followers')" @class([
-                                            'form-select',
-                                            'form-select-solid ',
-                                            'is-invalid' => $errors->has('type'),
-                                        ])
-                                        placeholder="اختر نوع الاشعار">.
-                                            <option disabled selected value="#">اختار من متابعين :</option>
-                                        @foreach($stores as $store)
-                                                <option id="f-{{$store->id}}" value="{{$store->id}}">{{$store->name}}</option>
-                                        @endforeach
-                                        </select>
-                                        <p id="followers-select"> تم اختيار :  </p>
-                                        <button class="badge badge-circle badge-light text-danger border-transparent" onclick="disSelect('followers')"  type="button">x</button>
-                                    </div>
-
-
-                                    <div class="mb-5">
-                                        <x-form.lable lable="ارسال للتاجر " />
-
-                                        <select data-control="select2" id="sellers" onchange="selecting('sellers')" @class([
-                                            'form-select',
-                                            'form-select-solid ',
-                                            'is-invalid' => $errors->has('type'),
-                                        ])
-                                        placeholder="اختر نوع الاشعار">
-                                            <option disabled selected value="#">اختار التاجر  :</option>
-                                        @foreach($sellers as $seller)
-                                                <option value="{{$seller->id}}">{{$seller->name}}</option>
-                                            @endforeach
-                                        </select>
-                                        <p id="sellers-select"> تم اختيار :  </p>
-                                        <button class="badge badge-circle badge-light text-danger border-transparent" onclick="disSelect('sellers')" type="button">x</button>
-
-                                    </div>
 
 
                                 </div>
@@ -161,23 +124,16 @@
         </div>
         <!--end::Content wrapper-->
 
-    </div>
-    <!--end:::Main-->
-    @section('scripts')
-        <!--begin::Vendors Javascript(used for this page only)-->
-        <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-        <!--end::Vendors Javascript-->
-        {{-- <script>
-            @if (session()->has('notification'))
-                toastr.success("{{ session('notification') }}");
-            @endif
-        </script> --}}
+
+
+
+
+
+
 
         <script>
 
             function selecting(type) {
-
-                console.log(type);
 
                 var selectElement = document.getElementById(type);
 
@@ -188,9 +144,7 @@
                 var selectedValue = selectedOption.value;
                 var selectedText = selectedOption.text;
 
-                console.log("Selected Value: " + selectedValue);
-                console.log("Selected Text: " + selectedText);
-
+                console.log(selectedValue);
 
                 var hiddenInput = document.createElement("input");
 
@@ -206,11 +160,12 @@
 
 
                 var selected = document.getElementById(`${type}-select`);
-                selected.textContent = selected.innerText + " " + selectedText + " ,"
+                selected.textContent = selected.innerText + " " + selectedText + " ," ;
 
 
 
-                        }
+
+            }
 
             function disSelect(type) {
                 var elements = document.getElementsByName(`${type}[]`);
@@ -219,13 +174,68 @@
                     var element = elements[i];
                     element.parentNode.removeChild(element);
                 }
+
+
+
                 var selected = document.getElementById(`${type}-select`);
                 selected.textContent = "تم اختيار : "
             }
 
+            function selectAll(type) {
+
+                disSelect(type)
+                var selectElement = document.getElementById(type);
+
+
+
+
+                var hiddenInput = document.createElement("input");
+
+                hiddenInput.setAttribute("type", "hidden");
+
+                hiddenInput.setAttribute("name", `${type}[all]`);
+
+                hiddenInput.setAttribute("value", '@php echo   implode(',', array_keys((array)$users)) @endphp');
+
+
+                var form = document.getElementById("my-form");
+                form.appendChild(hiddenInput);
+
+
+                var selected = document.getElementById(`${type}-select`);
+                selected.textContent = "تم اختيار الكل"
+
+
+            }
         </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    <!--end:::Main-->
+    @section('scripts')
+        <!--begin::Vendors Javascript(used for this page only)-->
+        <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+        <!--end::Vendors Javascript-->
+        {{-- <script>
+            @if (session()->has('notification'))
+                toastr.success("{{ session('notification') }}");
+            @endif
+        </script> --}}
+
 
     @endsection
 
 
-</x-admin.master>
+</x-store.master>

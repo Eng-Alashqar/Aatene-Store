@@ -6,6 +6,7 @@ use App\Models\Feedback\Comment;
 use App\Models\Feedback\Rating;
 use App\Models\MultimediaHub\Tag;
 use App\Models\Region;
+use App\Models\Report;
 use App\Models\Scopes\StoreScope;
 use App\Models\Users\User;
 use App\Observers\Store\ProductObserver;
@@ -156,44 +157,17 @@ class Product extends Model
 
 
 
-//        $users = $_product->store->followers->pluck('id')->toArray();
-//        $tokens = User::find($users)->whereNotNull('token_notify')->pluck('token_notify')->toArray();
-
-//            $product = Product::find($_product->id);
-//            $users = User::whereHas('following', function ($query) use ($product) {
-//                     $query->where('store_id', $product->store->id); })->pluck('token_notify')->toArray();
-
-//            $tokens=[];
-
-
-//             $this->pushNotify($users,  $title= "new-title"  , $body ='new-body');
-
-
-
-//            $title = "منتج جديد تمت اضافته " ;
-//            $name = $_product->name ;
-//            $body  = "تصفح واعرف المزيد عن المنتج ($name)" ;
-            // push real time notification
-//        $this->pushNotify($tokens , " $title" , "$body");
-
-//        $ids = $product->store->followers()->pluck('user_id') ;
-//        foreach ($ids as $id) {
-//            $user = User::find($id);
-//            $user->notify(new UserNotify($product));
-//        }
-
-
-
-
-
-
-
-
-
-
-
-
         });
+    }
+
+    public function reports()
+    {
+        return $this->morphMany(Report::class , 'reportable');
+    }
+
+    public function report()
+    {
+        return $this->morphOne(Report::class , 'reportable');
     }
 
 
