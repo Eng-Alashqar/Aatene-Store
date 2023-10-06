@@ -15,10 +15,10 @@ class NotificationController extends Controller
     public function userNotifications()
     {
 
-        $notificatoins =   auth()->guard('user')->user()->unreadNotifications()->get() ;
+        $notifications =   auth()->guard('user')->user()->unreadNotifications()->get() ;
 
-        if ($notificatoins){
-        return \response()->json(['data'=>$notificatoins , 'status' => 200 ] , '200');
+        if ($notifications){
+        return \response()->json(['data'=>$notifications , 'status' => 200 ] , '200');
         }
         return \response()->json(['data'=>'no data found' , 'status' => 200 ] , '200');
     }
