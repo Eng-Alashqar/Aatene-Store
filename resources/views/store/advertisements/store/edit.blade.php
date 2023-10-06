@@ -5,15 +5,17 @@
         <!--begin::Content wrapper-->
         <div class="d-flex flex-column flex-column-fluid">
             <!--begin::Toolbar-->
-            <x-elements.toolbar lable="اعلانات المتجر" back_url="dashboard.advertisements.index" previews="قائمة اعلانات المتجر"
-                                current="تعديل الاعلان" />
+            <x-elements.toolbar lable="اعلانات المتجر" back_url="dashboard.advertisements.index"
+                                previews="قائمة اعلانات المتجر"
+                                current="تعديل الاعلان"/>
             <!--end::Toolbar-->
             <!--begin::Content-->
             <div id="kt_app_content" class="app-content flex-column-fluid">
                 <!--begin::Content container-->
                 <div id="kt_app_content_container" class="app-container container-xxl">
                     {{-- <x-error-show-list /> --}}
-                    <form class="form d-flex flex-column flex-lg-row" action="{{ route('dashboard.advertisements.update',$store_advertisement->id) }}"
+                    <form class="form d-flex flex-column flex-lg-row"
+                          action="{{ route('dashboard.advertisements.update',$store_advertisement->id) }}"
                           method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -34,21 +36,30 @@
                                 <!--begin::Body-->
                                 <div class="row card-body py-3">
                                     <div class="mb-5">
-                                        <x-form.input-with-lable lable="المتجر" readonly name=""  value="{{$store_advertisement->store->name}}" />
+                                        <x-form.input-with-lable lable="المتجر" readonly name=""
+                                                                 value="{{$store_advertisement->store->name}}"/>
                                     </div>
 
                                     <div class="mb-5">
-                                        <x-form.input-with-lable lable="تاريخ بدء الاعلان" type="date" value="{{$store_advertisement->start_at}}" name="start_at"  />
+                                        <x-form.input-with-lable lable="تاريخ بدء الاعلان" type="date"
+                                                                 value="{{$store_advertisement->start_at}}"
+                                                                 name="start_at"/>
                                     </div>
                                     <div class="mb-5">
-                                        <x-form.input-with-lable lable="تاريخ انتهاء الاعلان" value="{{$store_advertisement->end_at}}" type="date" name="end_at"  />
+                                        <x-form.input-with-lable lable="تاريخ انتهاء الاعلان"
+                                                                 value="{{$store_advertisement->end_at}}" type="date"
+                                                                 name="end_at"/>
                                     </div>
                                     <div class="col-md-6 d-flex flex-column mb-8 fv-row">
-                                        <x-form.input-with-lable readonly lable="سعر الاعلان لليوم/شيكل" value="{{$store_advertisement->price}}" name="price" id="price"  />
+                                        <x-form.input-with-lable readonly lable="سعر الاعلان لليوم/شيكل"
+                                                                 value="{{$store_advertisement->price}}" name="price"
+                                                                 id="price"/>
                                     </div>
 
                                     <div class="col-md-6 d-flex flex-column mb-8 fv-row">
-                                        <x-form.input-with-lable readonly lable="سعر الإعلان الإجمالي/شيكل"  value="{{$store_advertisement->total}}" id="total_price"  name="total" />
+                                        <x-form.input-with-lable readonly lable="سعر الإعلان الإجمالي/شيكل"
+                                                                 value="{{$store_advertisement->total}}"
+                                                                 id="total_price" name="total"/>
                                     </div>
                                 </div>
                                 <!--begin::Body-->

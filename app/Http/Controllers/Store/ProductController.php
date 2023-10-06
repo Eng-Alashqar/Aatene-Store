@@ -33,7 +33,6 @@ class ProductController extends Controller
      */
     public function index()
     {
-
         return view('store.products.index', [
             'products' => $this->productService->get()
         ]);
@@ -59,7 +58,7 @@ class ProductController extends Controller
         $result = $this->productService->store($request->validated());
         if ($result) {
             $product = Product::find($result->id);
-            $users = User::whereHas('following', function ($query) use ($product) {
+            $users = User::whereHas('followers', function ($query) use ($product) {
                 $query->where('store_id', $product->store->id);
             })->get();
             $this->notificationsService->createNotficatoin($users, $product);

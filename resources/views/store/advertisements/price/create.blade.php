@@ -1,4 +1,4 @@
-<x-admin.master>
+<x-store.master>
     <!--end::Image input placeholder-->
     <!--begin::Main-->
     <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
@@ -71,4 +71,4 @@
         <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
         <!--end::Vendors Javascript-->
     @endpush
-</x-admin.master>
+</x-store.master>

@@ -37,9 +37,9 @@ class ProductService
     public function store($params)
     {
 
-        DB::beginTransaction();
+//        DB::beginTransaction();
 
-        try {
+//        try {
             $product = $this->product->create($params);
             foreach (json_decode($params['files']) as $file) {
                 $product->storeImage($file->photo, $file->photo_slug, 'cover');
@@ -50,11 +50,11 @@ class ProductService
             foreach ($params['region'] as $key => $value) {
                 $product->shippingAddressCost()->attach([$key => ['price' => $value]]);
             }
-            DB::commit();
+//            DB::commit();
             return $product;
-        } catch (\Throwable $th) {
-            DB::rollBack();
-        }
+//        } catch (\Throwable $th) {
+//            DB::rollBack();
+//        }
         return false;
     }
 
@@ -113,7 +113,6 @@ class ProductService
             $photo_obj['photo_slug'] = $file->getClientOriginalName();
             $photo_obj['photo'] = PhotoUpload::upload($file);
             $product->deleteImageByType('main');
-            dd($photo_obj);
             $product->storeImage($photo_obj['photo'], $photo_obj['photo_slug'], 'main');
         }
     }

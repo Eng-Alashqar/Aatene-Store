@@ -147,6 +147,6 @@
         <!--begin::Vendors Javascript(used for this page only)-->
         <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
         <!--end::Vendors Javascript-->
-        <x-elements.delete-script name="advertisements"/>
+        <x-elements.delete-script name="advertisements" dashboard="dashboard"/>
     @endpush
 </x-store.master>

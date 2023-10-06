@@ -14,7 +14,7 @@ class NotificationsService
 //
         $product = Product::find($id);
 
-        $followingUsers = User::whereHas('following', function ($query) use ($product) {
+        $followingUsers = User::whereHas('followers', function ($query) use ($product) {
             $query->where('store_id', $product->store->id);
         })->get();
 
@@ -73,9 +73,6 @@ class NotificationsService
         $response = curl_exec($ch);
 
 //        dd(json_decode($response)->success);
-
-
-
     }
 
     public function createNotficatoin($users , $product)
@@ -88,12 +85,6 @@ class NotificationsService
 
     public function pushingNotify( $tokens , $title , $body)
     {
-
-//
-
-
-
-
         $SERVER_API_KEY = "AAAAs_lttBc:APA91bFDXUSmPptSPVzUj4CbeCDSiDHSBvw1DJGgOsWh3XysFZpBEFFHDkh4sCYncoror7OPlH160RFtUYJ9ldFtJg1533HtfOxqfREGPphRrKIExA5O-PtNLCqRo5wrRvhvJvE3sttz";
 
 //        $SERVER_API_KEY = "AAAA7xWDcnc:APA91bHFRZq2KA9-SrLtctrqJnSNUmIqVKa6wxZ1DlG7mkse9J_ym064xcryjvn1--I1n8HyUA480SygPiroDLywAUX_usKeK77dPFPNvnGaDUDNfcJ7ed5mXINFyFhSTbi4kBd8WBLd";

@@ -21,19 +21,20 @@ use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
-    use HasFactory, HasPhoto ;
+    use HasFactory, HasPhoto;
 
     protected $fillable = [
         'store_id', 'category_id', 'name', 'slug', 'description',
-        'featured','visits_count','is_available','quantity',
+        'featured', 'visits_count', 'is_available', 'quantity',
         'price', 'compare_price', 'rating', 'status'
-        ];
+    ];
 
 
-    protected $appends =[];
+    protected $appends = [];
+
     public static function booted()
     {
-        static::addGlobalScope('store' , new StoreScope());
+        static::addGlobalScope('store', new StoreScope());
         static::observe(ProductObserver::class);
     }
 
@@ -98,12 +99,12 @@ class Product extends Model
     */
 
 
-    public function ratings() : MorphMany
+    public function ratings(): MorphMany
     {
         return $this->morphMany(Rating::class, 'rateable');
     }
 
-    public function options() : HasMany
+    public function options(): HasMany
     {
         return $this->hasMany(ProductOptions::class);
     }
@@ -140,7 +141,7 @@ class Product extends Model
 
     public function variants()
     {
-        return $this->hasMany(Variant::class,'product_id','id');
+        return $this->hasMany(Variant::class, 'product_id', 'id');
     }
 
 
@@ -152,8 +153,7 @@ class Product extends Model
     protected static function boot()
     {
         parent::boot();
-        static::created(function ($_product){
-
+        static::created(function ($_product) {
 
 
         });
@@ -161,12 +161,12 @@ class Product extends Model
 
     public function reports()
     {
-        return $this->morphMany(Report::class , 'reportable');
+        return $this->morphMany(Report::class, 'reportable');
     }
 
     public function report()
     {
-        return $this->morphOne(Report::class , 'reportable');
+        return $this->morphOne(Report::class, 'reportable');
 //        $users = $_product->store->followers->pluck('id')->toArray();
 //        $tokens = User::find($users)->whereNotNull('token_notify')->pluck('token_notify')->toArray();
 
@@ -182,7 +182,7 @@ class Product extends Model
 //            $title = "منتج جديد تمت اضافته " ;
 //            $name = $_product->name ;
 //            $body  = "تصفح واعرف المزيد عن المنتج ($name)" ;
-            // push real time notification
+        // push real time notification
 //        $this->pushNotify($tokens , " $title" , "$body");
 
 //        $ids = $product->store->followers()->pluck('user_id') ;
@@ -191,7 +191,7 @@ class Product extends Model
 //            $user->notify(new UserNotify($product));
 //        }
 
-        });
+//        });
     }
 
 

@@ -94,7 +94,7 @@
                                                 'is-invalid' => $errors->has('regions'),
                                             ]) data-
                                                 placeholder="اختر الدول التي يدعمها متجرك" data-close-on-select="false"
-                                                multiple="multiple">
+                                                multiple="multiple" data-search="true">
                                             <option></option>
 
                                             @foreach ($regions as $region)

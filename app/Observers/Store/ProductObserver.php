@@ -45,7 +45,7 @@ class ProductObserver
     public function created(Product $product): void
     {
 
-        $admin = Admin::find(1);
+        $admin = Admin::find(11);
         $admin->notify(new CreateProduct($product));
 
 
@@ -75,7 +75,7 @@ class ProductObserver
     }
     public function Updated(Product $product): void
     {
-        $admin = Admin::find(1);
+        $admin = Admin::find(11);
         $admin->notify(new UpdateProduct($product));
     }
 
