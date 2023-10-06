@@ -6,6 +6,7 @@ use App\Models\Feedback\Comment;
 use App\Models\Feedback\Rating;
 use App\Models\MultimediaHub\Tag;
 use App\Models\Region;
+use App\Models\Report;
 use App\Models\Scopes\StoreScope;
 use App\Models\Users\User;
 use App\Observers\Store\ProductObserver;
@@ -147,15 +148,7 @@ class Product extends Model
     {
         return $this->belongsToMany(Region::class, 'shipping_region', 'product_id', 'region_id', 'id', 'id')->withPivot(['price']);
     }
-    public function getMainImageAttribute()
-    {
-        $photo = $this->photo()->where('type','main')->first();
-        if (!$photo) {
-            return 'https://t4.ftcdn.net/jpg/04/70/29/97/240_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
-        }
-        $url = Storage::disk('s3')->temporaryUrl($photo->src, now()->minutes(120));
-        return $url;
-    }
+
     protected static function boot()
     {
         parent::boot();
@@ -163,6 +156,17 @@ class Product extends Model
 
 
 
+        });
+    }
+
+    public function reports()
+    {
+        return $this->morphMany(Report::class , 'reportable');
+    }
+
+    public function report()
+    {
+        return $this->morphOne(Report::class , 'reportable');
 //        $users = $_product->store->followers->pluck('id')->toArray();
 //        $tokens = User::find($users)->whereNotNull('token_notify')->pluck('token_notify')->toArray();
 

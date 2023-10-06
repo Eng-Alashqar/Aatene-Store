@@ -4,6 +4,7 @@ namespace App\Models\Users;
 
 use App\Models\Chat\Conversation;
 use App\Models\Message;
+use App\Models\SellerPushingNotification;
 use App\Models\Store\Store;
 use App\Models\Profile;
 use App\Traits\HasPhoto;
@@ -102,4 +103,8 @@ class Seller extends User implements JWTSubject
         return $this->morphOne(Profile::class,'userable');
     }
 
+    public function pushingNotifications(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(SellerPushingNotification::class);
+    }
 }

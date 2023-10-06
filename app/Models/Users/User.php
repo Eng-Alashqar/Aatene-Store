@@ -6,6 +6,7 @@ namespace App\Models\Users;
 
 use App\Models\Chat\Conversation;
 use App\Models\Chat\Message;
+use App\Models\Report;
 use App\Models\Store\Favorite;
 use App\Models\Profile;
 use App\Models\Store\Order;
@@ -140,5 +141,10 @@ class User extends Authenticatable implements JWTSubject
             $builder->where('status', '=', $value);
         });
     }
+
+    public function reports(){
+        return $this->hasMany(Report::class);
+    }
+
 
 }

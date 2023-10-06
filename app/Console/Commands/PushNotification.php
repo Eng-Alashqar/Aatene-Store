@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Jobs\AdminSendSms;
 use App\Mail\TemplateMail;
 use App\Models\PushingNotification;
+use App\Models\SellerPushingNotification;
 use App\Services\NotificationsService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
@@ -41,13 +42,21 @@ class PushNotification extends Command
     public function handle()
     {
         $tasks = PushingNotification::where('launch_at' ,'<=' , now() )->get();
+        $tasks2 = SellerPushingNotification::where('launch_at' ,'<=' , now() )->get();
+
+        $this->apply($tasks);
+        $this->apply($tasks2);
+
+    }
+    function apply($tasks): void
+    {
 
         foreach ($tasks as $task){
             $connections  =  explode(',' , $task->connection) ;
             if ($task->type === "email"){
                 foreach ($connections as $connection){
                     Mail::to($connection)->send(new TemplateMail(['title'=>$task->title , 'content'=>$task->content]));
-                usleep(50000);
+                    usleep(50000);
                 }
             }elseif ($task->type === "sms"){
 
