@@ -77,7 +77,7 @@ class SellerNotificationController extends Controller
 
     public function forceDelete($id){
         $not = SellerPushingNotification::where('id', $id)->delete();
-        return redirect()->back()->with('notification' , 'تم الحذف بنجاح');
+        return redirect()->back()->with('notification' , ' تم الحذف بنجاح');
     }
 
     public function restore($id)
