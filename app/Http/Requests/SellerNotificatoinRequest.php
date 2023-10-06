@@ -23,7 +23,7 @@ class SellerNotificatoinRequest extends FormRequest
     {
         return [
             'title'=>'required|string|min:3|max:250',
-            'content'=>'required|string|min:3|max:2500',
+            'content'=>'required|string|min:3|max:2555',
             'type'=>'required|in:app,email,sms',
 
             'users' =>'nullable|array',
